@@ -1,7 +1,7 @@
 ---
 title: "Glossary"
 sidebarTitle: "Glossary"
-description: "Music industry + Patchline-specific terminology. ISRC, ISWC, DSP, MCP, Bedrock, sonic features, smart link, project anchor, fan graph, and the rest."
+description: "Music industry + Patchline-specific terminology. ISRC, ISWC, DSP, MCP, sonic features, smart link, project anchor, fan graph, and the rest."
 icon: "book"
 keywords:
   - patchline glossary
@@ -18,13 +18,9 @@ alphabetically.
 ## A
 
 **AGENTS.md** — A markdown file with rules of engagement for AI
-agents using a product. Patchline ships two: one at
-[www.patchline.ai/AGENTS.md](https://www.patchline.ai/AGENTS.md) (for
-the product MCP) and one at [docs.patchline.ai/AGENTS.md](https://docs.patchline.ai/AGENTS.md)
-(for the docs). See [AGENTS.md explained](/for-agents/agents-md-explained).
-
-**AOSS** — Amazon OpenSearch Serverless. The search engine powering
-Patchline's [catalog search](/catalog/search).
+agents. The docs-site version lives at
+[docs.patchline.ai/AGENTS.md](https://docs.patchline.ai/AGENTS.md).
+See [AGENTS.md explained](/for-agents/agents-md-explained).
 
 **AI credit** — Patchline's unit of metered AI consumption. See
 [Plans & credits](/account/plans-credits).
@@ -33,9 +29,6 @@ Patchline's [catalog search](/catalog/search).
 performance rights organization (PRO).
 
 ## B
-
-**Bedrock** — AWS's hosted LLM service. Patchline's Aria agents run
-on Bedrock with Claude Sonnet 4.
 
 **BMI** — Broadcast Music, Inc. US PRO (peer to ASCAP).
 
@@ -46,12 +39,8 @@ on Bedrock with Claude Sonnet 4.
 **Catalog** — The set of tracks (yours + your roster's) Patchline holds
 metadata + intelligence for. See [Catalog](/catalog/import).
 
-**Composio** — Third-party tool orchestrator that exposes hundreds of
-SaaS tools via a single layer. Patchline integrates Composio
-server-side; operator-only in v1.
-
-**Cynite** — Specialist audio-analysis SaaS that powers part of
-Patchline's [sonic analysis](/catalog/sonic-analysis).
+**Catalog search** — User-scoped search across your Patchline catalog by
+title, artist, ISRC, mood, genre, BPM, key, and similarity signals.
 
 **Curator** — A person who runs a Spotify (or other DSP) playlist.
 Patchline ranks curators by "responsiveness score" — see
@@ -95,8 +84,8 @@ extractors understand page content. See [AGENTS.md explained](/for-agents/agents
 ## L
 
 **llms.txt** — A markdown file convention from [llmstxt.org](https://llmstxt.org)
-that serves as a site index for AI crawlers. Patchline ships two:
-marketing + docs.
+that serves as a site index for AI crawlers. These docs publish one at
+[docs.patchline.ai/llms.txt](https://docs.patchline.ai/llms.txt).
 
 ## M
 
@@ -126,9 +115,6 @@ PRS, etc.). Collects performance royalties.
 
 ## R
 
-**RIP** — Patchline's own audio-analysis pipeline. Runs alongside
-Cynite. See [Sonic analysis](/catalog/sonic-analysis).
-
 ## S
 
 **S4A** — Spotify for Artists. Spotify's artist-facing dashboard.
@@ -139,9 +125,6 @@ via the `create_smart_link` MCP tool.
 
 **Sonic features** — The audio characteristics (BPM, key, mood, energy,
 valence, etc.) that Patchline extracts via [sonic analysis](/catalog/sonic-analysis).
-
-**Soundcharts** — Music intelligence data provider. Powers Patchline's
-artist intelligence, audience, royalty trend, and scout features.
 
 **Storefront** — A branded artist page on Patchline at `patchline.ai/store/<slug>`
 where fans buy music direct. See [Storefront](/storefront/overview).

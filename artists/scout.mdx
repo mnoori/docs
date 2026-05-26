@@ -1,7 +1,7 @@
 ---
 title: "Scout agent (A&R discovery)"
 sidebarTitle: "Scout (A&R)"
-description: "AI talent scout that discovers and analyzes promising artists using Soundcharts data. Find collaborators, identify rising acts in your genre, build a watchlist of artists worth signing or pitching."
+description: "AI talent scout that discovers and analyzes promising artists using licensed music, audience, and audio-analysis signals. Find collaborators, identify rising acts in your genre, build a watchlist of artists worth signing or pitching."
 icon: "binoculars"
 keywords:
   - patchline scout
@@ -18,8 +18,8 @@ import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
 
 The Scout agent is Patchline's AI A&R — it surfaces artists who match
 your sound, are rising in your genre, or could be collaborators. Built
-on Soundcharts data and Patchline's sonic embeddings, scoped to your
-roster's positioning.
+on licensed music intelligence and Patchline audio-analysis signals,
+scoped to your roster's positioning.
 
 <TierBadge tier="pro" /> &nbsp; Pro+ unlocks the Scout agent. 2 credits per similar-artist search.
 
@@ -29,7 +29,7 @@ roster's positioning.
 |---|---|
 | **Similar to my roster** | Artists who sound like (and grow like) artists already in your roster |
 | **Emerging in my genre** | Artists rising fast in genres your roster occupies |
-| **Trending — broad** | Soundcharts top artists (optional genre filter, listener range) |
+| **Trending — broad** | Rising artists with optional genre and listener-range filters |
 | **Potential collaborators** | Artists with adjacent sound + similar audience overlap with your roster |
 | **Sub-tier filter** | Filter by monthly listener band (e.g., "find dreampop artists 5k-50k listeners") |
 
@@ -83,9 +83,9 @@ Why surfaced: Strong sonic match to Mira (0.81 cosine), growing
 
 The composite Scout score weighs:
 
-- **Sonic similarity** (40%) — cosine similarity over RIP audio embeddings
+- **Sonic similarity** (40%) — similarity based on completed audio analysis
 - **Growth trajectory match** (25%) — similar growth pattern to your roster
-- **Genre overlap** (20%) — Soundcharts genre tag overlap
+- **Genre overlap** (20%) — genre and sub-genre overlap
 - **Audience overlap potential** (15%) — projected fan overlap based on similar artists' actual overlap
 
 Scores above 75 are typically worth a closer look. Below 50 are noise.
@@ -145,7 +145,7 @@ Aria: 10 artists similar to Adele (non-roster):
 
 - **Scout is roster-anchored.** Empty roster = no anchor = generic
   results.
-- **Soundcharts coverage varies.** Niche genres or very-new artists
+- **Data coverage varies.** Niche genres or very-new artists
   may have sparse data.
 - **Sonic embeddings need analyzed tracks.** Scout's "sound like" is
   most accurate when your roster artists have completed sonic analysis.
@@ -195,8 +195,8 @@ Aria: 10 artists similar to Adele (non-roster):
     Daily synthesizer surfaces big changes in watchlisted artists.
   </Accordion>
   <Accordion title="How fresh are the results?">
-    Soundcharts data refreshes daily. Scout queries are typically
-    based on 24-hour-old data.
+    Data refreshes daily where provider coverage is available. Scout
+    queries are typically based on data less than 24 hours old.
   </Accordion>
 </AccordionGroup>
 

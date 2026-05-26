@@ -1,7 +1,7 @@
 ---
 title: "Google Calendar integration"
 sidebarTitle: "Calendar"
-description: "Connect Google Calendar so Aria can schedule release milestones, fan emails, tour dates, and content drops on your calendar. Aria respects existing events when proposing new ones."
+description: "Google Calendar support is planned for release scheduling, content drops, and task reminders. This page describes the intended workflow and current status."
 icon: "calendar-days"
 keywords:
   - patchline google calendar
@@ -14,42 +14,38 @@ import { AICallout } from "/snippets/ai-callout.mdx"
 import { TierBadge } from "/snippets/tier-badge.mdx"
 import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 
-Connect Google Calendar so Aria can schedule release campaigns, content
-drops, fan emails, and tour dates directly on your calendar. Release
-plans auto-populate calendar events when committed as project anchors.
+Google Calendar support is planned for release campaigns, content drops,
+fan emails, and tour-date reminders. The goal is to let Aria propose
+calendar events from release plans while still requiring your approval
+before anything is written.
 
-<TierBadge tier="all" /> &nbsp; Free to connect.
+<TierBadge tier="all" /> &nbsp; Coming soon. Calendar connection is not a public self-serve integration yet.
 
 ## What Aria can do
 
 | Action | Default behavior |
 |---|---|
-| Read your calendar | Yes |
-| Propose new events around existing ones | Yes |
-| Add a single event | Asks for confirmation |
-| Add a release-plan task bundle | Asks for batch confirmation |
-| Move / reschedule events | Asks for confirmation per move |
-| Delete events | Asks for confirmation, with undo window |
-| Read attendee responses | Yes (for meeting scheduling) |
+| Read your calendar | Planned |
+| Propose new events around existing ones | Planned |
+| Add a single event | Planned, with confirmation |
+| Add a release-plan task bundle | Planned, with batch confirmation |
+| Move / reschedule events | Planned, with confirmation |
+| Delete events | Not planned for v1 |
+| Read attendee responses | Planned for scheduling workflows |
 
 ## Connecting
 
 <Steps>
   <Step title="Settings → Connected Platforms → Google Calendar">
-    Or use the direct OAuth callback:
-
-    ```text
-    https://patchline.ai/api/auth/connect/google
-    ```
+    Calendar is not self-serve yet. When it ships, it will appear in
+    Settings → Connected Platforms.
   </Step>
   <Step title="Approve scopes">
-    Patchline requests:
-    - `calendar` (read + write)
-    - `userinfo.email`
-    - `userinfo.profile`
+    Patchline will request the minimum calendar scopes needed for the
+    actions you enable.
   </Step>
   <Step title="Confirm">
-    Connection shows in Connected Platforms.
+    The connection will show in Connected Platforms when OAuth completes.
   </Step>
 </Steps>
 
@@ -91,17 +87,17 @@ Want me to send a meeting proposal to Mira's manager with these times?
 ## Privacy
 
 - OAuth tokens stored encrypted, per-user.
-- Calendar events are read only when you ask.
+- Calendar events will be read only when you ask.
 - New events are created only with your explicit confirmation.
 
 ## Pricing
 
 | Action | Credit cost |
 |---|---|
-| Read calendar | 0 (cached for the conversation) |
-| Add a single event | 1 (counted as Aria chat) |
-| Bulk-add release plan | 1 per Aria interaction (the events are free) |
-| Move / delete | 1 per Aria interaction |
+| Read calendar | To be announced |
+| Add a single event | To be announced |
+| Bulk-add release plan | To be announced |
+| Move / delete | To be announced |
 
 ## Related pages
 
@@ -118,8 +114,9 @@ Want me to send a meeting proposal to Mira's manager with these times?
     prompts.
   </Accordion>
   <Accordion title="Can I use Outlook / Apple Calendar?">
-    Google Calendar only in v1. Outlook is on the roadmap. Apple
-    Calendar via CalDAV is not currently planned.
+    Google Calendar is the first planned calendar integration. Outlook
+    is on the roadmap after that. Apple Calendar via CalDAV is not
+    currently planned.
   </Accordion>
   <Accordion title="What calendar does Aria use if I have multiple?">
     Your primary calendar by default. Multi-calendar support

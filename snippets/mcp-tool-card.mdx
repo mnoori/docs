@@ -10,7 +10,7 @@ export const MCP_TOOLS = {
   },
   catalog_search: {
     category: "Catalog",
-    summary: "Semantic search across the user catalog via OpenSearch. Relevance-ranked results.",
+    summary: "Search across the user catalog by title, artist, ISRC, genre, mood, and similar-track signals. Relevance-ranked results.",
   },
   get_asset: {
     category: "Catalog",
@@ -26,11 +26,11 @@ export const MCP_TOOLS = {
   },
   get_trending_artists: {
     category: "Artists",
-    summary: "Soundcharts top artists. Optional genre filter and listener range. Not market-specific.",
+    summary: "Trending artists from Patchline music intelligence. Optional genre filter and listener range.",
   },
   add_artist: {
     category: "Roster",
-    summary: "Add an artist to the user roster. REQUIRES a platform URL (Spotify, YouTube, TikTok, SoundCloud, Apple Music, or Instagram). Name-only is rejected. Triggers background Soundcharts enrichment.",
+    summary: "Add an artist to the user roster. REQUIRES a platform URL (Spotify, YouTube, TikTok, SoundCloud, Apple Music, or Instagram). Name-only is rejected. Triggers background artist-intelligence refresh.",
   },
   remove_artist: {
     category: "Roster",
@@ -58,7 +58,7 @@ export const MCP_TOOLS = {
   },
   get_song_intelligence: {
     category: "Music Data",
-    summary: "Full track intelligence: ISRC, Cynite audio analysis, playlist matches, streaming stats, collaborators. Accepts a Spotify track URL.",
+    summary: "Full track intelligence: ISRC, audio analysis, playlist matches, streaming stats, collaborators. Accepts a Spotify track URL.",
   },
   get_work_metadata: {
     category: "Music Data",

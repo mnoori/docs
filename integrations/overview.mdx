@@ -1,7 +1,7 @@
 ---
 title: "Integrations"
 sidebarTitle: "Overview"
-description: "Patchline connects to your existing tools — Gmail, Google Calendar, Stripe, Spotify, YouTube, Telegram. Some are live today, some coming soon. Composio powers the long-tail of third-party tool access."
+description: "Patchline connects to your existing tools — Gmail, Google Calendar, Stripe, Spotify, YouTube, Telegram. Some are live today and some are coming soon."
 icon: "plug"
 keywords:
   - patchline integrations
@@ -14,9 +14,9 @@ import { AICallout } from "/snippets/ai-callout.mdx"
 import { TierBadge } from "/snippets/tier-badge.mdx"
 
 Patchline integrates with the tools you already use. Some are first-party
-OAuth connections (Gmail, Calendar, Stripe). Others come through
-**Composio** — a third-party tool orchestrator that gives Aria access to
-hundreds of services via a single layer.
+OAuth connections (Gmail, Calendar, Stripe). Others are read-only data
+connections used for catalog import, artist intelligence, and release
+planning.
 
 <TierBadge tier="all" /> &nbsp; Integrations are free to connect. Underlying actions consume AI credits.
 
@@ -25,23 +25,20 @@ hundreds of services via a single layer.
 | Integration | Status | Read | Write | Notes |
 |---|---|---|---|---|
 | [**Gmail**](/integrations/gmail) | ✅ Live | ✓ | ✓ (drafts) | Aria reads + drafts email; sending optional |
-| [**Google Calendar**](/integrations/calendar) | ✅ Live | ✓ | ✓ | Schedule releases, events, tour dates |
+| [**Google Calendar**](/integrations/calendar) | 🔵 Coming soon | — | — | Release scheduling and task reminders |
 | **Stripe** (Connect + Billing) | ✅ Live | ✓ | ✓ | Powers storefront + subscription billing |
 | **Telegram** | ✅ Live | ✓ | ✓ | @AriaMusicBizBot is the user-facing surface |
 | **Spotify** (public API) | ✅ Live (read-only) | ✓ | — | URL imports, playlist intel |
 | **Apple Music** (public API) | ✅ Live (read-only) | ✓ | — | URL imports |
 | **YouTube** (public API) | ✅ Live (read-only) | ✓ | — | URL imports, channel intel |
-| **Soundcharts** | ⚪ Backend only | — | — | Powers artist intelligence; not user-installable |
-| **Cynite** | ⚪ Backend only | — | — | Powers sonic analysis; not user-installable |
-| **Discogs / Genius** | ⚪ Backend only | — | — | Enrichment during catalog/artist import |
-| **Google Drive** | 🔵 Coming soon | — | — | OAuth scaffold exists; UI not yet live |
-| **Spotify for Artists (OAuth)** | 🔵 Coming soon | — | — | Read-only public API works today; OAuth in flight |
-| **Instagram** | 🔵 Coming soon | — | — | OAuth scaffold exists; UI not yet live |
+| **Discogs / Genius** | ⚪ Built-in enrichment | — | — | Adds context during catalog/artist import where available |
+| **Google Drive** | 🔵 Coming soon | — | — | File import and document workflows |
+| **Spotify for Artists (OAuth)** | 🔵 Coming soon | — | — | Deeper artist-owned analytics |
+| **Instagram** | 🔵 Coming soon | — | — | Profile and campaign workflows |
 | **YouTube (OAuth, writes)** | 🔵 Coming soon | — | — | Public API works today; channel writes in flight |
 | **SoundCloud (OAuth)** | 🔵 Coming soon | — | — | |
 | **TikTok (OAuth)** | 🔵 Coming soon | — | — | |
 | **Twitter / X (OAuth)** | 🔵 Coming soon | — | — | |
-| **Composio toolkits** (ClickUp, Notion, Slack, etc.) | ⚪ Operator-only in v1 | — | — | Backend infrastructure; per-user proxy planned |
 
 ## How OAuth connections work
 
@@ -49,8 +46,8 @@ For first-party OAuth integrations (Gmail, Calendar):
 
 <Steps>
   <Step title="Go to Settings → Connected Platforms">
-    Some platforms surfaces are temporarily hidden in the dashboard
-    while we finalize the UI — connections still work via OAuth callback.
+    Available connections appear in the dashboard. Coming-soon
+    integrations stay hidden until they are ready for self-serve use.
   </Step>
   <Step title="Click Connect on the integration">
     Browser redirects to the platform's OAuth screen.
@@ -68,17 +65,13 @@ For first-party OAuth integrations (Gmail, Calendar):
 Disconnect: Settings → **Connected Platforms** → revoke. Patchline
 deletes the access token within seconds.
 
-## Composio — what it is
+## Built-in data connections
 
-[Composio](https://composio.dev) is a third-party tool orchestrator that
-exposes hundreds of SaaS tools (ClickUp, Notion, Slack, Discord,
-Instagram, etc.) through a single MCP-like layer. Patchline integrates
-Composio so Aria can act on those tools without us building per-platform
-OAuth.
-
-In v1, Composio is **operator-only** — only Patchline staff configure
-Composio toolkits manually. Per-user Composio proxy is planned but not
-shipped.
+Some data sources power Patchline features without requiring a user
+OAuth flow. For example, catalog imports use public platform metadata
+where available, while artist intelligence uses licensed music and
+audience data providers. These built-in connections are not something
+you install; they are part of the product.
 
 ## Per-integration pricing
 

@@ -1,7 +1,7 @@
 ---
 title: "Upload a track"
 sidebarTitle: "Upload"
-description: "Upload MP3, WAV, or FLAC files directly to your Patchline catalog. Auto-extracts ID3 metadata, runs sonic analysis, stores the master in versioned S3. Best for unreleased work or when you want the master in Patchline."
+description: "Upload MP3, WAV, or FLAC files directly to your Patchline catalog. Auto-extracts ID3 metadata, runs sonic analysis, and stores the master securely. Best for unreleased work or when you want the master in Patchline."
 icon: "upload"
 keywords:
   - upload track patchline
@@ -21,7 +21,7 @@ import { TierBadge } from "/snippets/tier-badge.mdx"
 import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 
 Upload a finished audio file directly into your Patchline catalog.
-Patchline stores it in versioned S3, extracts ID3 metadata, queues
+Patchline stores it securely, extracts ID3 metadata, queues
 [sonic analysis](/catalog/sonic-analysis), and makes it searchable.
 Best for **unreleased work** or when you want your master to live in
 Patchline alongside the catalog metadata.
@@ -33,7 +33,7 @@ Patchline alongside the catalog metadata.
 | | Upload (this page) | [Import](/catalog/import) |
 |---|---|---|
 | Use when | Track is **unreleased** or you want the master in Patchline | Track is **already released** on a streaming platform |
-| Audio file in Patchline | **Yes** (versioned S3) | No |
+| Audio file in Patchline | **Yes** (secure, versioned storage) | No |
 | Sonic analysis runs | Yes, on your master | Yes, via the streaming source |
 | Storage cost | Counts against your storage limit | None |
 | Use-case fit | Demos, rough cuts, masters, stems | Released catalog from Distrokid/Tunecore/labels |
@@ -133,14 +133,12 @@ edit, A/B testing storefront versions.
 
 ## Privacy & security
 
-- Files are stored in S3 bucket `patchline-files-us-east-1`, server-side
-  encrypted, versioned, with object-level access logging.
-- Only you can access your upload's signed URL.
-- [Cynite](/catalog/sonic-analysis) receives the audio for analysis but
-  does not retain it for training (per the
-  [no-Cynite-training audit](/reference/glossary), ratified 2026-05-16).
-- The Patchline RIP audio pipeline runs entirely in our `us-east-1` AWS
-  region.
+- Files are stored in encrypted, access-controlled cloud storage with
+  version history.
+- Only authorized users in your workspace can access playback or
+  download links.
+- Short-lived signed URLs are used for playback, analysis, and uploads.
+- Patchline does not use your uploaded audio to train models.
 
 ## Pricing
 

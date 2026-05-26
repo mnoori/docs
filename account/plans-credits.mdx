@@ -57,7 +57,7 @@ not roll over**.
 | AI campaign planner | **10 credits / plan** | Each new release plan generation |
 | Similar artist discovery | **2 credits / search** | A&R Scout queries |
 | MCP tool call (read) | **0–1 credit** | Most read tools are 0 — they hit cache. `get_song_intelligence` and similar enrichment tools are 1. |
-| MCP tool call (write / enrichment) | **1–5 credits** | `add_artist` (Soundcharts enrichment) = 2; `create_smart_link` = 1; `generate_pitch` = 2 |
+| MCP tool call (write / enrichment) | **1–5 credits** | `add_artist` (artist-intelligence refresh) = 2; `create_smart_link` = 1; `generate_pitch` = 2 |
 | Royalty PDF parse | **5 credits / statement** | One per uploaded PDF, regardless of size |
 | Background-job synthesis (daily / weekly) | **0 credits** | Runs server-side, not metered |
 
@@ -70,7 +70,7 @@ A few notes:
   when sonic analysis has already run = 0 credits (cached lookup) + 1
   credit (the chat conversation). Net: 1 credit.
 - **Stem separation** (when surfaced in UI) is metered as a multi-step
-  Cynite operation — typically 10–15 credits per track.
+  audio operation — typically 10–15 credits per track.
 
 ## Monthly allocation by tier
 
@@ -214,16 +214,16 @@ Higher tiers get **more credits per dollar** — the volume discount.
   </Accordion>
   <Accordion title="Does an MCP tool call cost the same as Aria chat?">
     Almost. Most read tools are 0 credits (cached). Tools that fetch
-    fresh data (Soundcharts, Cynite) are 1–5 credits. The Aria chat
+    fresh provider-backed data or run analysis are 1–5 credits. The Aria chat
     that wraps a tool call adds 1 credit on top, but only for the chat
     itself — not per tool call within it.
   </Accordion>
   <Accordion title="If I run sonic analysis twice on the same track, do I pay twice?">
     Yes — re-analysis is 5 credits each time. The features may have
-    changed (Cynite model improvements) so re-running is metered as a
+    changed as analysis models improve, so re-running is metered as a
     full analysis, not a cache hit.
   </Accordion>
-  <Accordion title="Are background jobs (daily synthesizer, RIP pipeline) metered?">
+  <Accordion title="Are background jobs metered?">
     No. Server-side background work is included in the tier — not
     metered against your credit pool. Only AI actions you trigger are
     metered.

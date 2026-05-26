@@ -7,15 +7,15 @@ keywords:
   - sonic analysis
   - audio features patchline
   - bpm key detection
-  - cynite patchline
-  - rip audio analysis
+  - catalog audio analysis
+  - similar track discovery
   - music ai features
 schema:
   - "@context": "https://schema.org"
     "@type": "SoftwareApplication"
     "name": "Patchline Sonic Analysis"
     "applicationCategory": "MultimediaApplication"
-    "description": "Deep audio analysis pipeline: BPM, key, mood, energy, valence, danceability, sonic genres, instruments. Runs on Cynite + Patchline's RIP pipeline."
+    "description": "Deep audio analysis: BPM, key, mood, energy, valence, danceability, sonic genres, instruments, and similarity features."
 ---
 
 import { AICallout } from "/snippets/ai-callout.mdx"
@@ -26,8 +26,7 @@ import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
 Every track in your Patchline catalog gets **deep audio analysis** —
 BPM, key, mood, energy, valence, danceability, sonic genres, and
 instruments. This isn't LLM-vibes-based-on-the-title. Patchline runs real
-audio analysis through two complementary pipelines and writes the
-features back to your catalog.
+audio analysis and writes the features back to your catalog.
 
 <TierBadge tier="all" /> &nbsp; **5 AI credits per track.** Runs automatically on
 [import](/catalog/import) and [upload](/catalog/upload).
@@ -92,36 +91,33 @@ feature:
 You don't need to start it manually. Sonic analysis is queued the moment
 a track lands in your catalog.
 
-## Two pipelines, complementary
+## Two analysis layers
 
-Patchline runs **two** audio-analysis pipelines:
+Patchline combines two complementary analysis layers:
 
-### Cynite
+### Track features
 
-The default pipeline for most user-facing features. Cynite is a
-specialist audio-analysis SaaS optimized for music industry features —
-mood tags, sonic genre taxonomies, vocal detection, instrument tagging.
+The first layer extracts the music features you see in the catalog UI:
+BPM, key, mood, genre, instruments, vocal presence, energy, valence,
+danceability, and confidence signals.
 
-- Triggers via `cynite-integration-handler.py`
-- Results land via `cynite-webhook-handler.py`
-- Cached in DynamoDB, surfaced in catalog UI within seconds of webhook
-- 5 credits per track
+- Used by catalog filters, pitch generation, playlist matching, and Aria.
+- Usually completes in 30-90 seconds for a standard track.
+- Costs 5 credits per track when analysis runs.
 
-### RIP (Patchline's audio-analysis pipeline)
+### Similarity features
 
-Patchline's own multi-stage audio-analysis pipeline for the features we
-want to own end-to-end — primarily the embeddings used by similar-track
-search and the A&R scout, plus a deeper key/chord progression analysis
-(`keychord`).
+The second layer creates similarity features that help Patchline answer
+questions like "what else sounds like this?" and "which artists are
+sonically close to this track?"
 
-- 7 stages (`rip_stage5_keychord.py`, `rip_stage7_aggregate.py`,
-  `rip_embedding_indexer.py`, `rip_scorecard_aggregator.py`, …)
-- Coordinated by `rip_batch_dispatcher.py`
-- Outputs ride alongside Cynite results in the same catalog row
+- Used by similar-track discovery, Scout, and playlist fit.
+- Returned only when the track has enough audio context for a reliable
+  comparison.
+- Combined with metadata and audience context when ranking matches.
 
-You don't pick. Both pipelines run on every analyzable track. The catalog
-UI surfaces the union of features. AI tools and MCP calls return the
-union.
+You don't pick between layers. Patchline uses the best available analysis
+for each track and surfaces the combined result.
 
 ## How to view a track's analysis
 
@@ -208,12 +204,11 @@ A Pro user with active import flow might run 20–50/mo (~100–250 credits).
 
 ## Privacy
 
-- Your audio files are stored in S3 (`patchline-files-us-east-1`,
-  versioned, server-side encrypted).
-- Cynite receives the audio for analysis but does not retain it for
-  training (per the [Cynite no-training audit](/reference/glossary)
-  ratified 2026-05-16).
-- Patchline's RIP pipeline runs entirely in your AWS region.
+- Uploaded audio is stored in encrypted, access-controlled cloud storage.
+- Analysis runs only to provide Patchline features for your workspace.
+- Patchline does not use your audio to train models.
+- Short-lived access is used for analysis and playback; implementation
+  details are intentionally kept out of public docs.
 
 ## Related features
 
@@ -226,12 +221,11 @@ A Pro user with active import flow might run 20–50/mo (~100–250 credits).
 ## FAQ
 
 <AccordionGroup>
-  <Accordion title="Why two pipelines (Cynite + RIP)?">
-    Cynite gives us best-in-class tag taxonomies and battle-tested
-    feature extraction. RIP gives us embeddings for similar-track search
-    plus features we want to own end-to-end (deep chord/key analysis).
-    Running both costs the same and we keep optionality if either side
-    has an outage.
+  <Accordion title="Why do results include both tags and similarity?">
+    Tags explain the track in human terms: mood, genre, instruments,
+    energy, and vocal presence. Similarity features compare the track to
+    other tracks and artists. Patchline combines both because pitches,
+    playlists, and A&R workflows need explanation and comparison.
   </Accordion>
   <Accordion title="Can I trust the BPM/key on every track?">
     Mostly yes. BPM is reliable above ~85% accuracy on standard musical
@@ -240,24 +234,21 @@ A Pro user with active import flow might run 20–50/mo (~100–250 credits).
     a ?? icon when confidence is below threshold.
   </Accordion>
   <Accordion title="Are sonic genres standardized?">
-    Cynite uses a multi-label taxonomy aligned with major DSP genre
-    taxonomies (Spotify "every noise at once" subset). RIP adds a few
-    Patchline-internal tags. Both ride together in the catalog row.
+    Patchline uses a multi-label taxonomy aligned with common DSP and
+    music-industry genre language. Some tracks receive multiple genres or
+    sub-genres because that is more useful than forcing one label.
   </Accordion>
   <Accordion title="How long does analysis take?">
-    30–90 seconds for a typical 3-minute song. Longer for 10-minute+
-    tracks. Cynite is async via webhook so the catalog UI updates the
-    moment results land.
+    30–90 seconds for a typical 3-minute song. Longer tracks and large
+    batches can take more time. The catalog UI updates when results land.
   </Accordion>
   <Accordion title="Can I export the features as CSV?">
     Yes for individual tracks (catalog row → ⋯ → Export). Bulk CSV
     export is Enterprise-only via the REST API.
   </Accordion>
   <Accordion title="Does Patchline train AI models on my audio?">
-    No. Audio is used for the analysis pipelines (Cynite + RIP) only,
-    not for model training. Patchline has a hard rule against
-    Cynite-supervised training — see the
-    [no-Cynite-training audit](/reference/glossary).
+    No. Audio is used to provide analysis features for your workspace,
+    not to train models.
   </Accordion>
 </AccordionGroup>
 

@@ -38,7 +38,7 @@ All under [`snippets/`](snippets/):
 
 - `<TierBadge tier="pro" />` — consistent tier-gating badges.
 - `<AICallout />` — bottom-of-page block for AI agents (links to .md twin,
-  AGENTS.md, live tools manifest).
+  AGENTS.md, and the product MCP source of truth).
 - `<AriaPromptCard prompt="..." />` — render an example Aria prompt with
   copy + "open in dashboard" buttons.
 - `<MCPToolCard name="analyze_url" />` — reference an MCP tool by name.
@@ -61,10 +61,9 @@ get first-class support:
 ## Cross-references with the product site
 
 The marketing/product site at [www.patchline.ai](https://www.patchline.ai)
-ships its own `AGENTS.md`, `llms.txt`, and live tool manifest at
-`/api/agents/discovery`. Those describe the **product MCP** (tools that act
-on user data) — this docs site describes the **documentation**. Both files
-cross-link.
+ships its own `AGENTS.md`, `llms.txt`, and product MCP endpoint at
+`/api/mcp/v1`. Those describe tools that act on user data; this docs
+site describes the documentation. Both sites cross-link.
 
 ## License
 

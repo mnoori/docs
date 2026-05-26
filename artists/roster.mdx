@@ -1,12 +1,12 @@
 ---
 title: "Artist roster"
 sidebarTitle: "Roster"
-description: "Add artists to your Patchline roster by platform URL — Spotify, YouTube, TikTok, SoundCloud, Apple Music, or Instagram. Soundcharts enrichment runs in the background to build the full intelligence profile."
+description: "Add artists to your Patchline roster by platform URL — Spotify, YouTube, TikTok, SoundCloud, Apple Music, or Instagram. Artist intelligence refreshes in the background to build the full profile."
 icon: "users"
 keywords:
   - artist roster patchline
   - add artist patchline
-  - soundcharts enrichment
+  - artist intelligence
   - manage artists music
   - roster management
 schema:
@@ -26,7 +26,7 @@ Your roster is the set of artists Patchline tracks intelligence for —
 yours, your label's, your roster as a manager, or artists you're
 scouting. Each roster artist gets a full
 [intelligence profile](/artists/intelligence-profile) built from
-Soundcharts data and refreshed automatically.
+licensed music and audience data, then refreshed automatically.
 
 <TierBadge tier="all" /> &nbsp; Connected-artist limits: Free 1 · Starter 1 · Pro 5 · Scale 20 · Enterprise unlimited.
 
@@ -68,14 +68,14 @@ Programmatic adds work the same — URL required, name-only rejected.
 
 1. **Immediate**: artist row appears in `/dashboard/artists` with the
    platform-supplied basics (name, profile pic, URL).
-2. **Background (10–60 seconds)**: Soundcharts enrichment runs via
-   `artist-enrichment-handler.py`. Streaming stats, social audience,
-   genre tags, top tracks all populate.
+2. **Background (10–60 seconds)**: artist intelligence refreshes.
+   Streaming stats, social audience, genre tags, and top tracks populate
+   when available.
 3. **Background (1–5 minutes)**: AI bio generation — `get_bio` populates
    the bio cache for fast lookups later (no live LLM call needed for
    future bio queries).
-4. **Background (~daily)**: ongoing intelligence refresh via
-   `roster-sync-handler.py`.
+4. **Background (~daily)**: ongoing intelligence refresh keeps the
+   profile current.
 
 You can use the artist (search, link to releases, query intel) before
 the background enrichment completes. The profile just gets richer over
@@ -127,21 +127,21 @@ message.
 <AccordionGroup>
   <Accordion title="Why does add_artist reject 'Beyoncé' (a name)?">
     Many artists share names. Even unique-sounding names ("Mira",
-    "Tessa") have hundreds of artists per Soundcharts. Platform URL
+    "Tessa") can map to many artists across platforms. Platform URL
     is the only safe identifier.
   </Accordion>
-  <Accordion title="What if my artist isn't on Soundcharts?">
+  <Accordion title="What if my artist has limited data coverage?">
     Enrichment returns partial data — name, profile pic from the
     platform, no streaming stats. The artist still appears in the
     roster and can be referenced in releases, just with limited intel.
   </Accordion>
-  <Accordion title="How fresh is the Soundcharts data?">
-    Initial enrichment uses current Soundcharts cache (typically less than 24h
-    fresh). Background refresh runs daily.
+  <Accordion title="How fresh is the artist data?">
+    Initial enrichment uses current provider-backed data when available.
+    Background refresh runs daily.
   </Accordion>
   <Accordion title="Can two users add the same artist?">
     Yes — each workspace has its own roster. Cross-workspace artists
-    are tracked uniquely in Soundcharts.
+    are tracked separately by workspace.
   </Accordion>
   <Accordion title="Does adding an artist import their catalog?">
     No — that's a separate flow ([catalog import](/catalog/import)).

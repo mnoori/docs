@@ -58,5 +58,5 @@ Sitemap: https://docs.patchline.ai/sitemap.xml
 # https://docs.patchline.ai/llms-full.txt
 # Rules of engagement for the docs site:
 # https://docs.patchline.ai/AGENTS.md
-# Rules of engagement for the product MCP (catalog, releases, etc.):
-# https://www.patchline.ai/AGENTS.md
+# Product MCP endpoint for action-taking tools:
+# https://www.patchline.ai/api/mcp/v1

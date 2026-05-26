@@ -11,13 +11,12 @@ Patchline ships **two** MCP servers. Pick the right one for the task:
 
 | Server | URL | Purpose |
 |---|---|---|
-| **Patchline product MCP** | `https://www.patchline.ai/api/mcp/v1` | Tools that act on a user's **product data** — catalog, artists, releases, playlists, smart links. 18 tools. OAuth 2.0 with PKCE. |
+| **Patchline product MCP** | `https://www.patchline.ai/api/mcp/v1` | Tools that act on a user's **product data** — catalog, artists, releases, playlists, smart links. OAuth 2.0 with PKCE. |
 | **Patchline docs MCP** | `https://docs.patchline.ai/mcp` | Tools that search this **documentation site** — `search` + `query_filesystem`. Public, unauthenticated. Hosted by Mintlify. |
 
-The rules of engagement for the **product MCP** are at
-[https://www.patchline.ai/AGENTS.md](https://www.patchline.ai/AGENTS.md) —
-ALWAYS/NEVER/DISCOURAGED rules for which tool to call, in what order, with
-what arguments. **Read that file first if you're acting on user data.**
+For the **product MCP**, connect to the endpoint and call `tools/list`
+for the live tool schemas. Use the docs reference here for workflow
+guidance, but let the MCP server define exact arguments.
 
 This file (`docs.patchline.ai/AGENTS.md`) is about navigating the **docs**.
 
@@ -86,7 +85,7 @@ This file (`docs.patchline.ai/AGENTS.md`) is about navigating the **docs**.
 | Stripe Connect, payouts | [Checkout & payouts](https://docs.patchline.ai/storefront/checkout-payouts) |
 | Integrations, OAuth platforms | [Integrations overview](https://docs.patchline.ai/integrations/overview) |
 | Connecting Gmail | [Gmail](https://docs.patchline.ai/integrations/gmail) |
-| Connecting Google Calendar | [Google Calendar](https://docs.patchline.ai/integrations/calendar) |
+| Connecting Google Calendar | [Google Calendar](https://docs.patchline.ai/integrations/calendar) — coming soon |
 | MCP server, how does Patchline expose tools | [MCP overview](https://docs.patchline.ai/for-agents/mcp-overview), [MCP install](https://docs.patchline.ai/for-agents/mcp-install) |
 | List of MCP tools | [MCP tools reference](https://docs.patchline.ai/for-agents/mcp-tools-reference) |
 | Claude plugin, /plugin install | [Claude plugin](https://docs.patchline.ai/for-agents/claude-plugin) |
@@ -104,7 +103,6 @@ This file (`docs.patchline.ai/AGENTS.md`) is about navigating the **docs**.
   [docs.patchline.ai/llms.txt](https://docs.patchline.ai/llms.txt).
 - The full-content dump for one-shot reads is at
   [docs.patchline.ai/llms-full.txt](https://docs.patchline.ai/llms-full.txt).
-- The product-side rules of engagement are at
-  [www.patchline.ai/AGENTS.md](https://www.patchline.ai/AGENTS.md) — the
-  product MCP changes more often than the docs, so consult that file before
-  acting on product data.
+- The product MCP changes more often than the docs. Before acting on
+  product data, consult the live `tools/list` schema from
+  `https://www.patchline.ai/api/mcp/v1`.

@@ -15,9 +15,7 @@ import { TierBadge } from "/snippets/tier-badge.mdx"
 import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 
 Connect Gmail so Aria can read your inbox, draft replies, summarize
-threads, and (with explicit approval per send) send messages. Backed by
-the Gmail specialist agent (`gmail-action-handler.py` Lambda + Bedrock
-agent `PatchlineEmailAgent`).
+threads, and (with explicit approval per send) send messages.
 
 <TierBadge tier="all" /> &nbsp; Free to connect. Drafts are 1 credit; sends require your explicit approval per message.
 
@@ -37,12 +35,8 @@ agent `PatchlineEmailAgent`).
 
 <Steps>
   <Step title="Settings → Connected Platforms">
-    UI is being finalized — for now, contact support to enable Gmail in
-    your account, or use the OAuth callback URL directly:
-
-    ```text
-    https://patchline.ai/api/auth/connect/gmail
-    ```
+    Open Settings → Connected Platforms. If Gmail is not visible on
+    your account yet, contact support and we will enable the connection.
   </Step>
   <Step title="Approve Gmail scopes">
     Patchline requests:

@@ -64,10 +64,9 @@
       {
         "header": "For AI agents",
         "items": [
-          { "label": "AGENTS.md", "href": "https://www.patchline.ai/AGENTS.md" },
-          { "label": "llms.txt (marketing)", "href": "https://www.patchline.ai/llms.txt" },
-          { "label": "llms.txt (docs)", "href": "https://docs.patchline.ai/llms.txt" },
-          { "label": "Live tools manifest", "href": "https://www.patchline.ai/api/agents/discovery" }
+          { "label": "Docs AGENTS.md", "href": "https://docs.patchline.ai/AGENTS.md" },
+          { "label": "Docs llms.txt", "href": "https://docs.patchline.ai/llms.txt" },
+          { "label": "Product MCP", "href": "https://www.patchline.ai/mcp" }
         ]
       },
       {

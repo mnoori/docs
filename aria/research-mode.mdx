@@ -33,26 +33,24 @@ Both feed into the **Aria chat hero** on `/dashboard` — the first thing
 you see when you log in. If something interesting happened, Aria leads
 with it.
 
-## How it works under the hood
+## How it works
 
-Three background Lambdas (see `backend/lambda/`):
+Research mode has three product-level layers:
 
-- **`aria_daily_synthesizer.py`** — runs at ~6 AM in your timezone (best
-  guess from your last-active hour). Reads the previous 24h of catalog
-  activity, streaming deltas (Soundcharts), storefront events, and
-  outstanding release-plan tasks. Synthesizes into ≤5 bullet points.
+- **Daily synthesis** — runs around the start of your workday. Reads the
+  previous 24 hours of catalog activity, streaming and audience deltas,
+  storefront events, and outstanding release-plan tasks. Synthesizes the
+  most important changes into a short briefing.
 
-- **`aria_weekly_synthesizer.py`** — runs Monday morning. Week-over-week
-  comparison across all surfaces. Identifies top + bottom performers,
-  anomalies (e.g., royalty discrepancies), and 1–3 recommended actions.
+- **Weekly synthesis** — runs Monday morning. Compares week-over-week
+  performance across surfaces, identifies top and bottom performers,
+  flags anomalies, and recommends 1-3 actions.
 
-- **`aria_daily_insights.py`** — the surfacing layer. Reads the
-  synthesizer outputs from S3, formats for the dashboard hero, and
-  renders.
+- **Insight surfacing** — formats the current briefing for the dashboard
+  hero and makes it available when you ask Aria "what's new?"
 
-The synthesizer outputs are JSON files in
-`s3://patchline-aria-synth/{userId}/{date}.json` and feed the Aria
-chat directly when you ask "what's new?"
+The outputs are user-scoped and feed Aria chat directly when you ask for
+the latest changes.
 
 ## Example outputs
 
@@ -116,7 +114,7 @@ The "fresh synthesis" prompt re-runs the synthesizer on demand (counts
 ## Privacy & data handling
 
 - Synthesizer outputs are user-scoped — no cross-user inference.
-- Outputs are stored in your S3 prefix, retention 90 days.
+- Outputs are retained for 90 days.
 - The synthesizers read your data but never write to it.
 
 ## Related pages

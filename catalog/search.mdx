@@ -1,14 +1,14 @@
 ---
 title: "Catalog search"
 sidebarTitle: "Search"
-description: "Semantic search across your Patchline catalog using OpenSearch Serverless (AOSS). Free-text queries, mood/genre filters, ISRC lookup, similar-track discovery. Powers Aria's catalog tools."
+description: "Search across your Patchline catalog by title, artist, ISRC, mood, genre, BPM, key, and similar-track signals. Powers Aria's catalog tools."
 icon: "magnifying-glass"
 keywords:
   - catalog search patchline
-  - opensearch music
+  - music catalog search
   - semantic music search
   - similar track search
-  - patchline aoss
+  - patchline catalog
 ---
 
 import { AICallout } from "/snippets/ai-callout.mdx"
@@ -16,10 +16,10 @@ import { TierBadge } from "/snippets/tier-badge.mdx"
 import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
 
-Patchline indexes your catalog into **OpenSearch Serverless (AOSS)** so
-you can search by free-text query, mood, genre, BPM range, ISRC, or
-sonic similarity. This powers Aria's catalog tools and the dashboard
-search bar.
+Patchline builds a user-scoped search view of your catalog so you can
+search by free-text query, mood, genre, BPM range, ISRC, or sonic
+similarity. This powers Aria's catalog tools and the dashboard search
+bar.
 
 <TierBadge tier="all" /> &nbsp; All tiers can search. Sonic-similarity ranking improves with catalog size and runs across the full catalog regardless of tier.
 
@@ -75,19 +75,18 @@ The semantic layer means natural language works — *"slow sad ballads
 for late night"* returns the right tracks even if those exact words
 aren't in any tag.
 
-## Under the hood
+## How search works
 
-- Catalog metadata is indexed in **AOSS** via `catalog-search-indexer.py`
-  on every catalog write.
-- Sonic features (from [sonic analysis](/catalog/sonic-analysis)) ride
-  alongside metadata in the same index.
-- RIP embeddings (audio fingerprints) are stored as
-  `dense_vector` fields for similarity search.
-- Patchline uses `POST /_doc` without explicit `_id` (per AOSS convention) and
-  deduplicates by `docId`.
+- Catalog metadata is normalized on every catalog write.
+- Sonic features from [sonic analysis](/catalog/sonic-analysis) ride
+  alongside title, artist, ISRC, release date, and platform metadata.
+- Similarity features are available for tracks with completed audio
+  analysis.
+- Results are scoped to your workspace and ranked by field match,
+  freshness, audio similarity, and requested filters.
 
-When you query, AOSS returns relevance-ranked hits; Patchline merges
-in fresh streaming counts and presentation metadata before rendering.
+When you query, Patchline returns relevance-ranked results and merges in
+fresh presentation metadata before rendering.
 
 ## Examples
 
@@ -168,19 +167,19 @@ the search counts as 1 credit.
 
 <AccordionGroup>
   <Accordion title="Can I search across other users' catalogs?">
-    No. Search is user-scoped. Each user has their own AOSS index.
-    Cross-roster search (e.g., for label workspaces) on Pro+ shares one
-    index across the team's catalog only.
+    No. Search is user-scoped. Team and label workspaces can search
+    across the shared workspace catalog, but not other customers'
+    catalogs.
   </Accordion>
   <Accordion title="Why didn't my just-imported track show up?">
-    AOSS indexing has a ~30 second lag. Wait a moment and refresh.
+    Search can have a ~30 second lag after import. Wait a moment and refresh.
     If still missing after 5 minutes, the import may have failed —
     check the catalog UI for an error state.
   </Accordion>
   <Accordion title="How are similar-track results ranked?">
-    Cosine similarity over RIP audio embeddings (256-dim dense vector
-    per track). Threshold defaults to 0.65 — tracks below that aren't
-    surfaced.
+    Patchline compares audio-similarity features from completed sonic
+    analysis and filters out weak matches. Metadata, genre, and audience
+    context can also affect the ranking.
   </Accordion>
   <Accordion title="Can I save searches?">
     Saved searches / smart playlists are on the roadmap. v1 you re-run

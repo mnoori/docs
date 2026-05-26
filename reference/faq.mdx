@@ -87,9 +87,9 @@ feature page (e.g., catalog questions at
 
 <AccordionGroup>
   <Accordion title="What model powers Aria?">
-    Aria is a multi-agent system on AWS Bedrock. Most specialist agents
-    run on Claude Sonnet 4 (`anthropic.claude-sonnet-4-20250514-v1:0`).
-    Legal and Documents specialists use Claude 3.7 Sonnet.
+    Aria uses a mix of hosted frontier models and specialist Patchline
+    tools. Exact providers and model versions may change as quality,
+    latency, and safety improve.
   </Accordion>
   <Accordion title="Does Aria train on my data?">
     No. Patchline does not use your catalog, royalty statements, or
@@ -168,12 +168,15 @@ feature page (e.g., catalog questions at
 
 <AccordionGroup>
   <Accordion title="Where is my data stored?">
-    AWS `us-east-1`. DynamoDB for metadata, S3 for audio/PDFs (encrypted
-    + versioned), OpenSearch Serverless for catalog search.
+    Patchline stores data in encrypted, access-controlled cloud systems.
+    Audio, documents, catalog metadata, and search data are scoped to
+    your workspace and protected by authentication and authorization
+    checks.
   </Accordion>
   <Accordion title="Does Patchline train on user data?">
-    No. Hard rule. Includes audio (no Cynite-supervised training per
-    the 2026-05-16 audit), catalog metadata, royalty PDFs, chat history.
+    No. This includes audio, catalog metadata, royalty PDFs, and chat
+    history. Your data is used to provide Patchline features for your
+    workspace, not to train models.
   </Accordion>
   <Accordion title="Are you SOC 2 compliant?">
     Patchline implements SOC 2 Type II-aligned controls. Formal

@@ -34,7 +34,7 @@ the most common first action for new users with already-released music.
 | Mode | Use when | Audio file in Patchline? |
 |---|---|---|
 | **Import** (this page) | Track is **already released** on a streaming platform | **No** — Patchline references the canonical streaming version, runs sonic analysis from that |
-| **[Upload](/catalog/upload)** | Track is **unreleased** or you want the master in Patchline | **Yes** — your file is stored in S3, sonic analysis runs on your master |
+| **[Upload](/catalog/upload)** | Track is **unreleased** or you want the master in Patchline | **Yes** — your file is stored in encrypted cloud storage, sonic analysis runs on your master |
 
 If you've released through Distrokid, Tunecore, or a label, **import is
 faster and cheaper** — no upload time, no storage cost, sonic analysis
@@ -99,13 +99,13 @@ For an album/EP URL, Patchline imports **every track** in the release
 | Instagram | ⚠️ artist-only | — | ✅ | — |
 
 **Artist URLs** add the artist to your [roster](/artists/roster) and
-trigger a Soundcharts enrichment pass — they don't import all of the
+trigger an artist-intelligence refresh — they don't import all of the
 artist's catalog automatically (that would blow through your import limit).
 
 ## Deduplication
 
-Patchline deduplicates by **ISRC** first, then by **`docId`** in
-OpenSearch. If you import the same track twice — once via Spotify URL,
+Patchline deduplicates by **ISRC** first, then by its internal catalog
+identity. If you import the same track twice — once via Spotify URL,
 once via Apple URL — Patchline merges them into a single catalog entry
 and updates the metadata with whatever was missing.
 
@@ -178,25 +178,21 @@ lifetime. Want me to:
   3. Import just the most recent 12 singles (uses 12/500)
 ```
 
-## How it works under the hood
+## How it works
 
 1. Aria's `analyze_url` tool inspects the URL pattern and resolves it
    against the right platform API (Spotify Web API for `open.spotify.com`,
    Apple Music API for `music.apple.com`, etc.).
 2. Track metadata is fetched, normalized to Patchline's schema, and
-   written to DynamoDB `Assets-staging` via the asset service.
-3. AOSS (OpenSearch Serverless) indexes the metadata for
-   [catalog search](/catalog/search). Deduplication runs at index time.
-4. A message lands on the Cynite queue; the
-   [sonic analysis](/catalog/sonic-analysis) pipeline picks it up,
-   downloads audio from the streaming source via the analysis provider,
-   and writes back BPM/key/mood/etc.
+   saved to your workspace catalog.
+3. Patchline updates the user-scoped search view used by
+   [catalog search](/catalog/search). Deduplication runs before the
+   track appears in your catalog.
+4. [Sonic analysis](/catalog/sonic-analysis) is queued when the track can
+   be analyzed. Results such as BPM, key, mood, and genre are written
+   back to the catalog row.
 5. The catalog UI polls for updates and renders the feature panel once
    analysis completes.
-
-If DynamoDB is unavailable (extremely rare), Patchline falls back to S3
-at `s3://patchline-files-us-east-1/user-data/{userId}/imported-assets.json`
-and the catalog list merges both sources.
 
 ## Related features
 

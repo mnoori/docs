@@ -1,7 +1,7 @@
 ---
 title: "MCP tools reference"
 sidebarTitle: "Tools reference"
-description: "Complete reference for all 18 Patchline MCP tools — schema, arguments, return shape, tier gating, examples per tool. The canonical machine-readable manifest is at www.patchline.ai/api/agents/discovery."
+description: "Human-readable reference for Patchline's stable public MCP tool families — behavior, common arguments, tier gating, and examples. Use MCP tools/list for the exact current schema."
 icon: "list-tree"
 keywords:
   - patchline mcp tools
@@ -14,10 +14,10 @@ import { AICallout } from "/snippets/ai-callout.mdx"
 import { TierBadge } from "/snippets/tier-badge.mdx"
 import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
 
-Complete reference for all 18 Patchline MCP tools. For the
-machine-readable canonical manifest, fetch
-[`www.patchline.ai/api/agents/discovery`](https://www.patchline.ai/api/agents/discovery)
-— that's the always-current source of truth.
+Human-readable reference for Patchline's stable public MCP tools. For
+the exact current schema, connect an MCP client to
+`https://www.patchline.ai/api/mcp/v1` and run `tools/list`. That MCP
+response is the machine-readable source of truth.
 
 <TierBadge tier="all" /> &nbsp; All tools are accessible on every tier; some are gated by tier limits (see per-tool notes).
 
@@ -67,7 +67,7 @@ argument values.
 
 <MCPToolCard name="browse_catalog" />
 
-**Arguments:** `limit: int` (default 25), `cursor: string` (optional pagination token).
+**Common arguments:** `page: int` (default 1), `pageSize: int` (default 20, max 50).
 
 <MCPToolCard name="catalog_search" />
 
@@ -75,13 +75,13 @@ argument values.
 
 <MCPToolCard name="get_asset" />
 
-**Arguments:** `asset_id: string` (the Patchline assetId).
+**Common arguments:** `assetId: string` (the Patchline asset ID), `mode: "summary" | "full"`.
 
 ## Artists & roster
 
 <MCPToolCard name="get_artist_intelligence" />
 
-**Arguments:** `patchline_artist_id: string` (required).
+**Common arguments:** `artist_name: string` (required), `mode: "summary" | "full"`.
 
 <MCPToolCard name="search_artists" />
 
@@ -89,17 +89,17 @@ argument values.
 
 <MCPToolCard name="get_trending_artists" />
 
-**Arguments:** `genre: string` (optional), `listener_min: int` (optional), `listener_max: int` (optional), `limit: int` (default 25).
+**Common arguments:** `genre: string` (optional), `min_monthly_listeners: int`, `max_monthly_listeners: int`, `limit: int`.
 
 <MCPToolCard name="add_artist" />
 
-**Arguments:** `url: string` (REQUIRED — Spotify, YouTube, TikTok, SoundCloud, Apple Music, or Instagram).
+**Common arguments:** `artist_url: string` (required — Spotify, YouTube, TikTok, SoundCloud, Apple Music, or Instagram), `artist_name: string` (optional display hint).
 
 **Gated by:** roster tier limit (Free 1 / Starter 1 / Pro 5 / Scale 20 / Enterprise unlimited).
 
 <MCPToolCard name="remove_artist" />
 
-**Arguments:** `patchline_artist_id: string`.
+**Common arguments:** `artist_id: string`.
 
 ## Releases
 
@@ -111,13 +111,13 @@ argument values.
 
 <MCPToolCard name="find_playlists" />
 
-**Arguments:** `asset_id: string` (the track to find matches for), `limit: int` (default 10).
+**Common arguments:** `assetId: string` (preferred catalog track), `spotifyUrl: string` (optional), `limit: int`.
 
 **Gated by:** <TierBadge tier="pro" /> required.
 
 <MCPToolCard name="inspect_playlist" />
 
-**Arguments:** `playlist_id: string` (Spotify playlist ID or URL).
+**Common arguments:** `playlist_url: string` (Spotify playlist ID or URL), `include_tracks: bool`, `include_curator_network: bool`.
 
 **Gated by:** <TierBadge tier="pro" /> required.
 
@@ -125,33 +125,33 @@ argument values.
 
 <MCPToolCard name="create_smart_link" />
 
-**Arguments:** `asset_id: string`, `mode: string` (`smart_link` or `pre_save`), `release_date: string` (required if pre-save, ISO 8601), `capture_email: bool` (default false).
+**Common arguments:** `assetId: string`, `title: string` (optional), `enabledSections` (optional section toggles).
 
 ## Music Data
 
 <MCPToolCard name="get_audio_features" />
 
-**Arguments:** `asset_id: string` OR `isrc: string` (one required).
+**Common arguments:** `assetId: string` (preferred), `isrc: string`, or `spotifyTrackUrl: string`.
 
 <MCPToolCard name="get_song_intelligence" />
 
-**Arguments:** `spotify_url: string` (required).
+**Common arguments:** `assetId: string`, `isrc: string`, or `spotifyTrackUrl: string`; optional `mode: "summary" | "full"`.
 
 <MCPToolCard name="get_work_metadata" />
 
-**Arguments:** `iswc: string` OR `asset_id: string`.
+**Common arguments:** `spotifyId`, `spotifyTrackUrl`, `isrc`, `songName`, or `artistName`.
 
 ## AI Generation
 
 <MCPToolCard name="get_bio" />
 
-**Arguments:** `patchline_artist_id: string`, `variant: string` (`one_line` / `paragraph` / `long`, default `paragraph`).
+**Common arguments:** `artist_name: string`.
 
 **Note:** Returns cached bio from intelligence enrichment. No live LLM call. Free.
 
 <MCPToolCard name="generate_pitch" />
 
-**Arguments:** `asset_id: string`, `target: string` (optional — playlist ID, curator name, or general), `length: string` (`short` / `medium` / `long`, default `medium`).
+**Common arguments:** `artist_name: string`, `track_name: string` (optional), `target_playlist: string` (optional).
 
 ## Common patterns
 
@@ -192,13 +192,12 @@ In practice, you'll hit AI-credit limits before MCP rate limits. The
 server enforces sane per-user limits to prevent abuse but doesn't
 publish hard rate-limit numbers.
 
-## Where this list lives
+## Source of truth
 
-- This page (human-readable).
-- [`www.patchline.ai/api/agents/discovery`](https://www.patchline.ai/api/agents/discovery) (machine-readable JSON).
-- `lib/agent-discovery/tool-manifest.ts` (source in the Patchline repo).
-
-All three must stay in sync. The JSON manifest is canonical.
+- This page is the human-readable guide for stable public behavior.
+- The MCP server's `tools/list` response is the exact current
+  machine-readable schema.
+- Client implementations should avoid caching schemas permanently.
 
 ## Related pages
 

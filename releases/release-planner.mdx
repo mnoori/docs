@@ -41,7 +41,7 @@ edit, approve, and mark off tasks as you ship them. Every plan includes:
 | **Pre-release timeline** (Week -6 to Week 0) | Artwork, pitch copy, DSP submissions, smart link, pre-save, teasers |
 | **Release day** | DM list, post copy, storefront update, fan-facing announcement |
 | **Post-release** (Week +1 to +4) | TikTok/ads, follow-up pitches, performance review, momentum capture |
-| **Project anchor** | The persistent row in DynamoDB that holds your project state, trackList, and concurrent-safe edits |
+| **Project anchor** | The persistent project record that holds your campaign state, track list, and conflict-safe edits |
 | **Tasks** | Discrete checkable items, each tied to a date and (optionally) an Aria action |
 
 ## When to use it
@@ -151,21 +151,20 @@ the pitch, assemble the DM list, schedule the smart link — when you ask.
 - (Optional) A [smart link](/storefront/smart-links) plan if you want
   Aria to wire the pre-save automatically.
 
-## How it works under the hood
+## How it works
 
-1. The release-planner UI calls Aria with a structured payload: track ID,
-   target date, optional constraints.
-2. The supervisor agent routes to the campaign planner specialist
-   (Lambda: `campaign-generator.py`) which assembles the rollout from:
+1. The release-planner UI calls Aria with the track, target date, and
+   optional constraints.
+2. Aria assembles the rollout from:
    - The track's [sonic features](/catalog/sonic-analysis) (genre cluster, energy profile).
-   - Your historical release performance (campaign history table).
-   - Your roster's audience data ([Soundcharts](/artists/audience)).
+   - Your historical release performance.
+   - Your roster's audience data ([Audience](/artists/audience)).
    - A baseline 6-week template that adjusts based on tier (Pro/Scale unlock more granular timelines).
 3. The plan is rendered in markdown in the chat. If you commit it, the
-   `ProjectService.upsertCampaign` writes to DynamoDB `Releases-staging`
-   using the concurrent-safe `UpdateCommand` pattern (see [project anchors](/releases/project-anchors)).
-4. Once committed, `release-strategy-optimizer.py` runs nightly to adjust
-   the plan based on early signal — playlist adds, social engagement, etc.
+   project anchor saves the campaign state with conflict-safe updates
+   (see [project anchors](/releases/project-anchors)).
+4. Once committed, Aria can adjust the plan based on early signals such
+   as playlist adds, social engagement, and missed tasks.
 
 The MCP tool for programmatic access:
 

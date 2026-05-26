@@ -8,7 +8,7 @@ keywords:
   - ai music assistant
   - music business ai
   - patchline aria
-  - multi-agent music
+  - music business agent
 schema:
   - "@context": "https://schema.org"
     "@type": "SoftwareApplication"
@@ -59,8 +59,8 @@ Aria is one assistant with multiple front doors. <TierBadge tier="all" />
     a forecast in under a minute.
   </Card>
   <Card title="Manage your roster" icon="users" href="/artists/roster">
-    Add artists by URL. Background Soundcharts enrichment populates the
-    intelligence profile automatically.
+    Add artists by URL. Background artist intelligence populates the
+    profile automatically.
   </Card>
 </CardGroup>
 
@@ -92,8 +92,8 @@ Pick whichever fits the workflow you're already in.
   <Accordion title="Patchline dashboard (web)" icon="browser">
     Sign in at [patchline.ai](https://patchline.ai). Aria is the home
     screen at `/dashboard`. Full surface area: catalog import, project
-    anchors, all 18 tools, file uploads. **This is the canonical surface
-    — everything else is a subset.**
+    anchors, MCP-backed tools, and file uploads. **This is the canonical
+    surface — everything else is a subset.**
 
     [Open the dashboard →](https://patchline.ai/dashboard)
   </Accordion>
@@ -115,7 +115,7 @@ Pick whichever fits the workflow you're already in.
     [Install the Claude plugin →](/for-agents/claude-plugin)
   </Accordion>
   <Accordion title="Cursor, Codex, VS Code (MCP)" icon="code">
-    Patchline exposes 18 MCP tools at
+    Patchline exposes its product MCP server at
     `https://www.patchline.ai/api/mcp/v1`. OAuth 2.0 with PKCE — your
     credentials never touch the AI client.
 
@@ -163,24 +163,21 @@ Pick whichever fits the workflow you're already in.
 - For the [MCP server](/for-agents/mcp-install): Cursor, Codex, VS Code,
   or any MCP-compatible client.
 
-## How Aria works under the hood
+## How Aria works
 
-Aria is a **multi-agent system**. The supervisor agent reads your message,
-decides which specialist agent (Artist Intelligence, Scout, Pitch,
-Royalty, Metrics, Gmail, Legal, Documents) should handle it, and routes
-the work. Each specialist agent runs on AWS Bedrock with Claude Sonnet 4,
-calls real tools against your catalog and integrations, and returns a
-grounded answer.
+Aria routes your request to the right Patchline capability: artist
+intelligence, Scout, pitch writing, royalty review, metrics, Gmail,
+Legal, Documents, catalog, or release planning. Each capability works
+against user-scoped Patchline data and connected integrations, then
+returns a grounded answer.
 
 You don't see the routing — you see one assistant. But it means Aria can
-do work that any single-agent system can't: read your royalty PDF, query
-Soundcharts for the artist on it, draft a follow-up email about a
-discrepancy, all in one conversation.
+do work that simple chatbots can't: read your royalty PDF, check the
+artist and catalog context, draft a follow-up email about a discrepancy,
+and keep the release plan up to date in one conversation.
 
-The supervisor itself runs on ECS Fargate (Patchline's strands-supervisor
-service). The specialist agents run on AWS Bedrock. The product MCP at
-[www.patchline.ai/api/mcp/v1](/for-agents/mcp-overview) exposes the same
-tools to external AI clients.
+The product MCP at [www.patchline.ai/api/mcp/v1](/for-agents/mcp-overview)
+exposes the same core capabilities to external AI clients.
 
 <Note>
   Every tool call is grounded in your data. Aria never invents an ISRC, a
@@ -266,10 +263,10 @@ See [Pricing & plans](/get-started/pricing) for the full breakdown.
     in the current conversation only.
   </Accordion>
   <Accordion title="What model does Aria use?">
-    Aria is a multi-agent system on AWS Bedrock. The supervisor and most
-    specialist agents run on Claude Sonnet 4
-    (`anthropic.claude-sonnet-4-20250514-v1:0`). The Legal and Documents
-    specialist agents use Claude 3.7 Sonnet for contract reasoning.
+    Aria uses a mix of hosted frontier models and specialist Patchline
+    tools. Exact providers and model versions may change as quality,
+    latency, and safety improve. Patchline does not use your catalog,
+    statements, or chat history to train models.
   </Accordion>
   <Accordion title="Can Aria send emails or post to social media?">
     Aria can draft emails through the Gmail specialist agent (requires
@@ -284,8 +281,8 @@ See [Pricing & plans](/get-started/pricing) for the full breakdown.
   </Accordion>
   <Accordion title="Is there an API I can call directly?">
     Yes — for AI agents. Patchline's product MCP server at
-    [`www.patchline.ai/api/mcp/v1`](/for-agents/mcp-overview) exposes 18
-    tools. A direct REST API is Enterprise-only today.
+    [`www.patchline.ai/api/mcp/v1`](/for-agents/mcp-overview) exposes the
+    public tool surface. A direct REST API is Enterprise-only today.
   </Accordion>
   <Accordion title="What happens if Aria gets it wrong?">
     Send feedback via the thumbs-down on any chat message. The signal

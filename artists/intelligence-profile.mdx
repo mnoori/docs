@@ -1,7 +1,7 @@
 ---
 title: "Artist intelligence profile"
 sidebarTitle: "Intelligence profile"
-description: "Each roster artist gets a living intelligence profile — streaming, social audience, genres, top markets, recent activity, auto-generated bio, EPK. Updated automatically from Soundcharts + Genius."
+description: "Each roster artist gets a living intelligence profile — streaming, social audience, genres, top markets, recent activity, auto-generated bio, EPK. Updated automatically from licensed music data and connected sources."
 icon: "id-badge"
 keywords:
   - artist intelligence profile
@@ -28,14 +28,14 @@ refreshed automatically.
 | Section | What it contains | Source |
 |---|---|---|
 | **Identity** | Name, profile pic, primary URL | Platform metadata |
-| **Streaming** | Monthly listeners (current + 30-day trend), top tracks, top playlists | Soundcharts |
-| **Social audience** | IG, TikTok, YouTube, Twitter, SoundCloud — followers + 30-day trend | Soundcharts |
-| **Genre tags** | Top 5 genres, sub-genres | Soundcharts |
-| **Top markets** | Top 5 cities + 5 countries by listener share | Soundcharts |
-| **Recent activity** | Recent releases, recent playlist adds, recent press | Soundcharts + crawlers |
-| **Similar artists** | Sonically-similar peers in the same listener tier | Soundcharts + RIP embeddings |
+| **Streaming** | Monthly listeners (current + 30-day trend), top tracks, top playlists | Licensed music data |
+| **Social audience** | IG, TikTok, YouTube, Twitter, SoundCloud — followers + 30-day trend | Licensed audience data |
+| **Genre tags** | Top 5 genres, sub-genres | Licensed music data |
+| **Top markets** | Top 5 cities + 5 countries by listener share | Licensed music data |
+| **Recent activity** | Recent releases, recent playlist adds, recent press | Platform and web context |
+| **Similar artists** | Sonically-similar peers in the same listener tier | Music data + audio analysis |
 | **Bio (AI-generated)** | 1-paragraph + 3-paragraph + 1-line variants | Aria, cached |
-| **EPK material** | Quotes, press images, press history | Soundcharts + Genius |
+| **EPK material** | Quotes, press images, press history | Platform and web context |
 
 ## Where to find it
 
@@ -49,8 +49,8 @@ refreshed automatically.
 
 <Steps>
   <Step title="Add an artist">
-    [Add to roster](/artists/roster) by Spotify (or other) URL. Soundcharts
-    enrichment kicks off automatically.
+    [Add to roster](/artists/roster) by Spotify (or other) URL. Artist
+    intelligence refresh kicks off automatically.
   </Step>
   <Step title="Wait for enrichment (~1 minute)">
     The basic identity appears immediately. Streaming + social audience
@@ -99,7 +99,7 @@ Generate a downloadable PDF EPK from the artist profile → **EPK** tab →
 
 ## Refresh cadence
 
-- **Daily**: Soundcharts streaming + social audience numbers
+- **Daily**: streaming + social audience numbers where available
 - **Weekly**: full intelligence refresh (genre re-classification, top markets, etc.)
 - **On-demand**: any time, via "Refresh intel" button (1 credit)
 
@@ -165,14 +165,15 @@ Aria: Q2 growth (Apr-Jun):
     Enrichment runs async. Most data populates within 1 minute; bio
     takes 3 minutes; full intelligence refresh takes ~5 minutes.
     If after 10 minutes the profile is still sparse, the artist may
-    not be well-covered by Soundcharts.
+    have limited provider coverage.
   </Accordion>
   <Accordion title="Can I edit the AI bio?">
     Yes. Edit any variant in the profile UI. Edits persist across
     refreshes unless you click "regenerate from scratch."
   </Accordion>
   <Accordion title="How current are the streaming numbers?">
-    Soundcharts updates ~daily. Numbers are typically less than 24h fresh.
+    Data providers refresh on their own cadence; numbers are typically
+    less than 24 hours fresh where coverage is available.
   </Accordion>
   <Accordion title="Can I export the EPK as a PDF?">
     Yes — Pro+ tier. EPK tab → Export → PDF or HTML.

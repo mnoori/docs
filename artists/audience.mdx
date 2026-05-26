@@ -37,12 +37,12 @@ What you see for one artist:
 
 | Section | What it contains | Source |
 |---|---|---|
-| **Demographics** | Age (binned), gender (estimated), language | Soundcharts |
-| **Geography** | Top cities, top countries, geographic share | Soundcharts |
+| **Demographics** | Age (binned), gender (estimated), language | Licensed audience data |
+| **Geography** | Top cities, top countries, geographic share | Licensed audience data |
 | **Listener tier** | Casual / engaged / fan classification | Patchline-derived from listening behavior |
-| **Social audience** | IG, TikTok, YouTube, X overlap and growth | Soundcharts |
-| **Fan momentum** | 30-day growth across streaming + social | Soundcharts |
-| **Streaming behavior** | Repeat-listen %, playlist save %, completion rate | Soundcharts (top track only) |
+| **Social audience** | IG, TikTok, YouTube, X overlap and growth | Licensed audience data |
+| **Fan momentum** | 30-day growth across streaming + social | Licensed audience data |
+| **Streaming behavior** | Repeat-listen %, playlist save %, completion rate | Aggregated platform signals where available |
 
 ### Where to find it
 
@@ -183,15 +183,16 @@ Queries are cached for 24h. Force-refreshing costs 2 credits per query.
     cluster identification, and bridge artists.
   </Accordion>
   <Accordion title="Why is my Pro audience incomplete?">
-    Soundcharts data quality varies by artist. Smaller artists (under
-    ~5k monthly listeners) often have limited demographic data.
+    Data quality varies by artist. Smaller artists (under ~5k monthly
+    listeners) often have limited demographic data.
   </Accordion>
   <Accordion title="Can I export audience data?">
     Yes for individual artists (CSV via audience tab). Cross-roster
     fan-graph export is Enterprise-only.
   </Accordion>
   <Accordion title="How fresh is the data?">
-    Daily refresh from Soundcharts. Force-refresh on demand (2 credits).
+    Daily refresh where provider coverage is available. Force-refresh on
+    demand (2 credits).
   </Accordion>
   <Accordion title="Does this work for unsigned artists I'm scouting?">
     Yes — any artist you've added to roster gets audience data.

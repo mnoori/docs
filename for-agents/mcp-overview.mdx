@@ -1,7 +1,7 @@
 ---
 title: "MCP server overview"
 sidebarTitle: "MCP overview"
-description: "Patchline exposes 18 music-business tools via the Model Context Protocol (MCP) at www.patchline.ai/api/mcp/v1. Connect any MCP client — Cursor, Codex, Claude Desktop, Claude Code, VS Code — and your AI gains catalog, artist intelligence, playlist matching, and smart link tools."
+description: "Patchline exposes music-business tools via the Model Context Protocol (MCP) at www.patchline.ai/api/mcp/v1. Connect any MCP client — Cursor, Codex, Claude Desktop, Claude Code, VS Code — and your AI gains catalog, artist intelligence, playlist matching, and smart link tools."
 icon: "code"
 keywords:
   - patchline mcp
@@ -16,7 +16,7 @@ schema:
     "name": "Patchline MCP Server"
     "applicationCategory": "DeveloperApplication"
     "operatingSystem": "MCP-compatible clients (Cursor, Codex, Claude, VS Code)"
-    "description": "18-tool MCP server for music industry workflows. OAuth 2.0 with PKCE."
+    "description": "MCP server for music industry workflows. OAuth 2.0 with PKCE."
     "offers":
       "@type": "Offer"
       "price": "0"
@@ -42,7 +42,7 @@ This is the most-important distinction on this page. Don't conflate them.
 | | **Product MCP** | **Docs MCP** |
 |---|---|---|
 | **URL** | `https://www.patchline.ai/api/mcp/v1` | `https://docs.patchline.ai/mcp` |
-| **What it exposes** | 18 tools that act on your music data | 2 tools that search & read these docs |
+| **What it exposes** | Product tools that act on your music data | 2 tools that search & read these docs |
 | **Auth** | OAuth 2.0 with PKCE (user-scoped) | Public, no auth |
 | **Built by** | Patchline | Mintlify (auto-generated) |
 | **Use it when** | You want the AI to *do* something with your catalog / roster / releases | You want the AI to *learn* about how Patchline works |
@@ -68,10 +68,11 @@ Why this matters: Patchline isn't a chatbot you have to switch to. It's
 a set of tools your existing AI gains. Ask Cursor "find playlists for
 my new track" and Cursor calls Patchline directly. No copy-paste.
 
-## The 18 product tools
+## Core product tools
 
-Grouped by category. Full schemas at
-[MCP tools reference](/for-agents/mcp-tools-reference).
+Grouped by category. This page documents the stable public tool families.
+For the exact current tool list, connect an MCP client and run
+`tools/list`.
 
 ### Dispatch (1)
 
@@ -197,9 +198,8 @@ Total time: ~5 seconds + first-run OAuth (~30 seconds).
 
 ## Rules of engagement for AI agents
 
-If you're an AI agent reading this page programmatically, the
-authoritative rules of engagement are at
-[`www.patchline.ai/AGENTS.md`](https://www.patchline.ai/AGENTS.md):
+If you're an AI agent reading this page programmatically, use these
+rules of engagement and confirm exact schemas with MCP `tools/list`:
 
 - **ALWAYS call `analyze_url` first** when a user pastes a streaming URL.
 - **NEVER call `add_artist` name-only** — always include a platform URL.
@@ -209,9 +209,9 @@ authoritative rules of engagement are at
 
 ## Performance
 
-- **Latency:** Most tools return in under 500ms. Tools that hit upstream APIs
-  (Soundcharts, Cynite) can take 2–5s for cold-cache calls. Cached
-  results are under 200ms.
+- **Latency:** Most tools return in under 500ms. Tools that refresh
+  provider-backed data or run analysis can take 2–5s for cold-cache
+  calls. Cached results are under 200ms.
 - **Rate limits:** None published; in practice you'll hit your AI credit
   budget before you hit rate limits.
 - **Idempotency:** Read tools are idempotent. Write tools (`add_artist`,

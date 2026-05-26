@@ -1,13 +1,13 @@
 ---
 title: "Streaming insights"
 sidebarTitle: "Streaming insights"
-description: "Aggregate streaming metrics across your catalog and roster — monthly listeners, top tracks, playlist features, momentum, and per-artist comparisons. Powered by Soundcharts."
+description: "Aggregate streaming metrics across your catalog and roster — monthly listeners, top tracks, playlist features, momentum, and per-artist comparisons."
 icon: "chart-line"
 keywords:
   - streaming insights
   - patchline streaming analytics
   - monthly listeners
-  - soundcharts patchline
+  - music streaming analytics
   - music momentum
 ---
 
@@ -17,8 +17,8 @@ import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 
 Streaming insights aggregates everything that's happening on the
 streaming side — monthly listeners, top tracks, playlist features,
-momentum — across your catalog and roster. The Metrics agent
-(`metrics-action-handler.py`) surfaces it.
+momentum — across your catalog and roster. Aria surfaces the summary
+when you ask for roster or release performance.
 
 <TierBadge tier="pro" /> &nbsp; Pro+ for full streaming insights. Free/Starter see basic per-artist numbers in the [intelligence profile](/artists/intelligence-profile).
 
@@ -90,7 +90,7 @@ Aria: ROSTER MAY 2026
 
 ## Refresh cadence
 
-- **Soundcharts data**: refreshes ~daily.
+- **Provider-backed data**: refreshes ~daily where available.
 - **Aria's daily synthesizer**: runs every morning, surfaces deltas.
 - **On-demand refresh**: any time, 1 credit.
 
@@ -114,20 +114,20 @@ Aria: ROSTER MAY 2026
 
 <AccordionGroup>
   <Accordion title="Where do the numbers come from?">
-    Soundcharts is the primary source. Spotify Web API supplements for
-    a few specific signals. Apple Music for Artists data isn't
-    accessible via API — those numbers come through Soundcharts'
-    estimate.
+    Patchline uses licensed music data providers and platform APIs where
+    available. Apple Music for Artists private dashboard data is not
+    directly accessible unless you connect or import a supported source.
   </Accordion>
   <Accordion title="How accurate are the numbers?">
-    Monthly listeners are exact (Spotify-supplied via Soundcharts).
-    Daily stream counts are estimates. Growth percentages are reliable
-    for established artists, noisier for very-new artists.
+    Monthly-listener and public platform metrics are provider-backed.
+    Some daily stream counts and private-platform metrics are estimates.
+    Growth percentages are reliable for established artists and noisier
+    for very-new artists.
   </Accordion>
   <Accordion title="Can I get TikTok / YouTube Music data?">
-    YouTube Music numbers come through Soundcharts. TikTok music
-    discovery data is partial — TikTok doesn't expose track-level
-    play counts publicly.
+    Some YouTube and TikTok signals are available, but coverage varies.
+    TikTok does not expose every track-level play count publicly, so
+    those views can be partial.
   </Accordion>
 </AccordionGroup>
 
