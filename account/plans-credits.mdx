@@ -59,7 +59,7 @@ not roll over**.
 | MCP tool call (read) | **0–1 credit** | Most read tools are 0 — they hit cache. `get_song_intelligence` and similar enrichment tools are 1. |
 | MCP tool call (write / enrichment) | **1–5 credits** | `add_artist` (artist-intelligence refresh) = 2; `create_smart_link` = 1; `generate_pitch` = 2 |
 | Royalty PDF parse | **5 credits / statement** | One per uploaded PDF, regardless of size |
-| Background-job synthesis (daily / weekly) | **0 credits** | Runs server-side, not metered |
+| Background data refresh | **0 credits** | Runs server-side, not metered |
 
 A few notes:
 

@@ -74,17 +74,17 @@ Grouped by category. This page documents the stable public tool families.
 For the exact current tool list, connect an MCP client and run
 `tools/list`.
 
-### Dispatch (1)
+### Dispatch
 
 <MCPToolCard name="analyze_url" />
 
-### Catalog (3)
+### Catalog
 
 <MCPToolCard name="browse_catalog" />
 <MCPToolCard name="catalog_search" />
 <MCPToolCard name="get_asset" />
 
-### Artists & roster (5)
+### Artists & roster
 
 <MCPToolCard name="get_artist_intelligence" />
 <MCPToolCard name="search_artists" />
@@ -92,29 +92,47 @@ For the exact current tool list, connect an MCP client and run
 <MCPToolCard name="add_artist" />
 <MCPToolCard name="remove_artist" />
 
-### Releases (1)
+### Releases
 
 <MCPToolCard name="get_releases" />
 
-### Playlists (2)
+### Playlists
 
 <MCPToolCard name="find_playlists" />
 <MCPToolCard name="inspect_playlist" />
 
-### Smart links (1)
+### Smart links
 
 <MCPToolCard name="create_smart_link" />
 
-### Music data (3)
+### Music data
 
 <MCPToolCard name="get_audio_features" />
 <MCPToolCard name="get_song_intelligence" />
 <MCPToolCard name="get_work_metadata" />
 
-### AI generation (2)
+### AI generation
 
 <MCPToolCard name="get_bio" />
 <MCPToolCard name="generate_pitch" />
+
+### Additional tool families
+
+The tools above are the stable, most-used surface. The MCP server also
+exposes additional tool families that evolve with the product:
+
+- **Projects & campaigns** — create release projects, build campaign
+  plans, fetch artist context.
+- **Public surface links** — generate drop links, pitch links, media
+  kits, briefings, and shareable asset links.
+- **Catalog upload** — get signed upload URLs and confirm finished
+  uploads from agents that fetch audio.
+- **Similarity** — find tracks with similar audio characteristics to a
+  given catalog asset.
+
+For the exact, current list with full schemas, **connect an MCP client
+and run `tools/list`**. That response is the canonical source of truth
+and updates without a docs release.
 
 ## How auth works
 

@@ -1,127 +1,73 @@
 ---
-title: "Aria's research mode"
-sidebarTitle: "Research mode"
-description: "Aria runs background research on your catalog and roster — daily and weekly synthesizers that surface what changed, what's working, and what needs attention. Insights appear in your dashboard when you open it."
+title: "Asking Aria for updates"
+sidebarTitle: "Asking for updates"
+description: "Aria reads across your catalog, roster, releases, royalties, and storefront on demand. Ask 'what's new' or 'any anomalies' and Aria pulls a synthesis from your real data."
 icon: "magnifying-glass-chart"
 keywords:
-  - aria research
-  - daily synthesizer
-  - weekly insights
+  - aria updates
   - patchline insights
-  - automated music intelligence
+  - ask aria what changed
+  - patchline summary
 ---
 
 import { AICallout } from "/snippets/ai-callout.mdx"
 import { TierBadge } from "/snippets/tier-badge.mdx"
 import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 
-Aria does work even when you're not chatting with it. Behind the scenes,
-two background synthesizers — daily and weekly — read your catalog,
-roster, streaming data, royalties, and storefront. They produce
-insights that surface in the dashboard when you next open it.
+Aria is grounded in your real data. When you ask "what's new?" or
+"summarize the week," Aria reads across your catalog, roster, releases,
+royalties, and storefront — then returns a short, synthesized briefing.
 
-<TierBadge tier="all" /> &nbsp; Background research is included in every tier. It doesn't consume your AI credit pool.
+<TierBadge tier="all" /> &nbsp; Summary chats count against your AI credit pool just like any other Aria conversation.
 
-## What it does
-
-| Synthesizer | Cadence | What it surfaces |
-|---|---|---|
-| **Daily** | Every morning | What changed in the last 24h — new playlist adds, follower jumps, storefront sales, overdue release tasks |
-| **Weekly** | Every Monday | Trend analysis — week-over-week growth, top performers, anomalies, recommended actions |
-
-Both feed into the **Aria chat hero** on `/dashboard` — the first thing
-you see when you log in. If something interesting happened, Aria leads
-with it.
-
-## How it works
-
-Research mode has three product-level layers:
-
-- **Daily synthesis** — runs around the start of your workday. Reads the
-  previous 24 hours of catalog activity, streaming and audience deltas,
-  storefront events, and outstanding release-plan tasks. Synthesizes the
-  most important changes into a short briefing.
-
-- **Weekly synthesis** — runs Monday morning. Compares week-over-week
-  performance across surfaces, identifies top and bottom performers,
-  flags anomalies, and recommends 1-3 actions.
-
-- **Insight surfacing** — formats the current briefing for the dashboard
-  hero and makes it available when you ask Aria "what's new?"
-
-The outputs are user-scoped and feed Aria chat directly when you ask for
-the latest changes.
-
-## Example outputs
-
-### Example: a Monday weekly synthesis
-
-```text
-Good morning. Here's last week across your roster:
-
-▲  +18% streams on "Late Bloom" — your dreampop run is working
-▲  Tessa hit 12k monthly listeners (+2.1% wk/wk)
-▼  Run Hot's release is 2 days from launch, 3 tasks still open
-▼  Storefront earnings -8% wk/wk (lower traffic from Telegram)
-
-Highest-priority action: close out Run Hot's tasks today. Want me to
-walk them?
-```
-
-### Example: a daily morning briefing
-
-```text
-Yesterday:
-• Lush Sounds added Tessa's "Long Way" (your pitch from 12 days ago worked)
-• 4 new storefront sales totaling $42
-• Mira's roster intel refresh completed — no notable changes
-
-Today: Mira's release prep deadline (artwork). 1 task overdue.
-```
-
-## How to use research mode
-
-You don't need to do anything — the synthesizers run automatically. But
-you can interact with them:
+## What you can ask
 
 <AriaPromptCard prompt="What's new since yesterday?" />
-<AriaPromptCard prompt="What's the week's recap?" />
-<AriaPromptCard prompt="What anomalies did you find this week?" />
-<AriaPromptCard prompt="Run a fresh synthesis right now." />
+<AriaPromptCard prompt="Summarize the last 7 days across all my artists." />
+<AriaPromptCard prompt="Any anomalies in my recent royalty statements?" />
+<AriaPromptCard prompt="What's overdue across my active release projects?" />
+<AriaPromptCard prompt="Which track had the biggest growth this month?" />
 
-The "fresh synthesis" prompt re-runs the synthesizer on demand (counts
-1 credit + the underlying tool calls).
+The synthesis is built fresh each time you ask, so the answer reflects
+your **current** data — not a stale snapshot.
+
+## What Aria looks at
+
+Depending on the question, Aria can pull from:
+
+- Your catalog and audio features
+- Your roster and artist intelligence
+- Your active release projects and task list
+- Streaming and audience deltas
+- Royalty statements you've uploaded
+- Storefront activity and fan stats
+
+Aria only references data you own. If you ask about an artist or track
+that isn't in your account, Aria says so and offers to import.
+
+## When it shines
+
+- **End-of-week recap.** "How did the roster do this week?" returns a
+  ranked summary of top performers and notable changes.
+- **Pre-meeting briefing.** Before a manager / label call, ask Aria for
+  the headline numbers + open items per artist.
+- **Anomaly check.** Aria flags things that look off — a sudden stream
+  drop, a royalty discrepancy, an overdue release task — without you
+  having to dig.
 
 ## What it doesn't do
 
-- **It doesn't send emails or post to socials.** Insights surface in the
-  app and via [Telegram](/aria/telegram) only.
-- **It doesn't make autonomous decisions.** Insights include recommended
-  actions, but you act.
-- **It doesn't replace your manager or label.** Synthesizers spot
-  patterns; strategy is yours.
-
-## Tier behavior
-
-| Tier | Daily synthesizer | Weekly synthesizer |
-|---|---|---|
-| <TierBadge tier="free" /> | ✓ (3 bullets max) | ✓ (basic) |
-| <TierBadge tier="starter" /> | ✓ (5 bullets) | ✓ (full) |
-| <TierBadge tier="pro" /> | ✓ + roster-level | ✓ + roster-level + recommendations |
-| <TierBadge tier="scale" /> | ✓ + label-level | ✓ + label-level + roster trend analysis |
-| <TierBadge tier="enterprise" /> | ✓ + custom queries | ✓ + custom queries |
-
-## Privacy & data handling
-
-- Synthesizer outputs are user-scoped — no cross-user inference.
-- Outputs are retained for 90 days.
-- The synthesizers read your data but never write to it.
+- **It doesn't send notifications.** You ask Aria for updates; Aria
+  doesn't push them to you. (Notification surfaces are on the roadmap.)
+- **It doesn't make autonomous decisions.** Aria recommends; you act.
+- **It doesn't replace your own dashboards.** Numbers Aria cites are
+  always verifiable in the corresponding Patchline dashboard view.
 
 ## Related pages
 
-- [Aria overview](/aria/overview)
-- [Streaming insights](/intelligence/streaming-insights) — the underlying data
-- [Royalty analysis](/intelligence/royalty) — feeds anomaly detection
-- [Release planner](/releases/release-planner) — overdue-task detection
+- [Aria overview](/aria/overview) — the whole assistant
+- [Talking to Aria — prompts that work](/aria/prompts) — pattern library
+- [Streaming insights](/intelligence/streaming-insights) — the underlying numbers
+- [Royalty analysis](/intelligence/royalty) — what anomalies look like
 
 <AICallout page="/aria/research-mode" />
