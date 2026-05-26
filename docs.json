@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
   "name": "Patchline",
-  "description": "Patchline is the AI command center for the modern music business — your catalog, artists, streaming intelligence, releases, storefront, and royalties wired into AI tools you already use.",
+  "description": "Patchline is the AI command center for the modern music business — your catalog, releases, audience, store, and AI-discoverable tracks wired into AI tools you already use.",
   "colors": {
     "primary": "#0068FF",
     "light": "#00E6E2",
@@ -121,58 +121,64 @@
             "icon": "sparkles",
             "pages": [
               "aria/overview",
-              "aria/telegram",
               "aria/prompts",
-              "aria/research-mode"
+              "aria/telegram"
             ]
           },
           {
-            "group": "Catalog",
-            "icon": "music",
-            "pages": [
-              "catalog/import",
-              "catalog/upload",
-              "catalog/sonic-analysis",
-              "catalog/search"
-            ]
-          },
-          {
-            "group": "Releases & campaigns",
-            "icon": "calendar-days",
-            "pages": [
-              "releases/release-planner",
-              "releases/project-anchors",
-              "releases/campaign-planner",
-              "releases/pitch-kit",
-              "releases/playlist-matching"
-            ]
-          },
-          {
-            "group": "Artists & intelligence",
+            "group": "Roster",
             "icon": "users",
             "pages": [
               "artists/roster",
-              "artists/intelligence-profile",
-              "artists/audience",
-              "artists/scout"
+              "artists/intelligence-profile"
             ]
           },
           {
-            "group": "Royalty & insights",
-            "icon": "chart-line",
-            "pages": [
-              "intelligence/royalty",
-              "intelligence/streaming-insights"
-            ]
-          },
-          {
-            "group": "Storefront",
+            "group": "Music Store",
             "icon": "store",
             "pages": [
               "storefront/overview",
               "storefront/setup",
               "storefront/smart-links",
               "storefront/checkout-payouts"
+            ]
+          },
+          {
+            "group": "Campaign Planner",
+            "icon": "calendar-days",
+            "pages": [
+              "releases/release-planner"
+            ]
+          },
+          {
+            "group": "Visual Library",
+            "icon": "palette",
+            "pages": [
+              "visual-library/overview"
+            ]
+          },
+          {
+            "group": "Catalog",
+            "icon": "music",
+            "pages": [
+              "catalog/sonic-analysis",
+              "catalog/import",
+              "catalog/upload",
+              "catalog/search"
+            ]
+          },
+          {
+            "group": "Audience",
+            "icon": "chart-network",
+            "pages": [
+              "artists/audience"
+            ]
+          },
+          {
+            "group": "Launchpad",
+            "icon": "rocket-launch",
+            "pages": [
+              "launchpad/overview"
             ]
           },
           {

@@ -32,25 +32,22 @@ performance rights organization (PRO).
 
 **BMI** — Broadcast Music, Inc. US PRO (peer to ASCAP).
 
-**BPM** — Beats per minute. Tempo measure from [sonic analysis](/catalog/sonic-analysis).
-
 ## C
 
 **Catalog** — The set of tracks (yours + your roster's) Patchline holds
 metadata + intelligence for. See [Catalog](/catalog/import).
 
 **Catalog search** — User-scoped search across your Patchline catalog by
-title, artist, ISRC, mood, genre, BPM, key, and similarity signals.
+title, artist, ISRC, mood, genre, and similarity signals.
 
 **Curator** — A person who runs a Spotify (or other DSP) playlist.
 Patchline ranks curators by "responsiveness score" — see
-[Playlist matching](/releases/playlist-matching).
+Aria's `find_playlists` MCP tool.
 
 ## D
 
 **DDEX** — Digital Data Exchange. Music industry standards body. DDEX
-DSR (Digital Sales Report) is one royalty statement format Patchline
-[parses](/intelligence/royalty).
+DSR (Digital Sales Report) is one music-industry data exchange format.
 
 **DSP** — Digital Service Provider. Streaming platform (Spotify, Apple
 Music, YouTube Music, etc.).
@@ -111,7 +108,7 @@ campaign — track list, status, tasks, dates. Concurrent-write-safe.
 See [Project anchors](/releases/project-anchors).
 
 **PRO** — Performance Rights Organization (ASCAP, BMI, SoundExchange,
-PRS, etc.). Collects performance royalties.
+PRS, etc.). Industry organizations that collect performance income.
 
 ## R
 
@@ -123,8 +120,7 @@ PRS, etc.). Collects performance royalties.
 streaming platform. Patchline [creates](/storefront/smart-links) these
 via the `create_smart_link` MCP tool.
 
-**Sonic features** — The audio characteristics (BPM, key, mood, energy,
-valence, etc.) that Patchline extracts via [sonic analysis](/catalog/sonic-analysis).
+**AI track caption** — The natural-language description Patchline generates for every track in your catalog so AI tools (ChatGPT, Claude, Cursor) can discover and reason about your music. See [AI-discoverable tracks](/catalog/sonic-analysis).
 
 **Storefront** — A branded artist page on Patchline at `patchline.ai/store/<slug>`
 where fans buy music direct. See [Storefront](/storefront/overview).
@@ -135,12 +131,9 @@ where fans buy music direct. See [Storefront](/storefront/overview).
 Enterprise. See [Pricing & plans](/get-started/pricing).
 
 **TikTok**-driven — Audience growth specifically attributable to TikTok.
-Surfaces in [streaming insights](/intelligence/streaming-insights).
+Surfaces in the Audience tab.
 
 ## V
-
-**Valence** — Sonic-analysis measure of musical positivity (0 = sad,
-1 = happy / cheerful).
 
 ## W
 

@@ -28,7 +28,7 @@ threads, and (with explicit approval per send) send messages.
 | Summarize a thread | Yes (1 credit per chat) |
 | Draft a reply | Yes (1 credit per draft) |
 | Send a message | **Requires explicit approval per send** |
-| Read attachments (PDFs, audio) | Yes — feeds into [royalty](/intelligence/royalty) or [catalog](/catalog/upload) parsing |
+| Read attachments (PDFs, audio) | Yes — feeds into [catalog](/catalog/upload) processing |
 | Triage unread inbox | Yes — Aria categorizes (fan / curator / business / spam) |
 
 ## Connecting
@@ -67,7 +67,7 @@ Aria: 12 unread emails. Triaged:
     • Tessa's manager re: feature on Mira's next
 
   BUSINESS (2)
-    • Distrokid: royalty statement for Q2 ready
+    • Press: features pitch from a music blog
     • Stripe: payout completed ($212.40)
 
   FAN (5)
@@ -113,9 +113,7 @@ without your action.
 <AriaPromptCard prompt="Read the attachment in the email from Distrokid and tell me the totals." />
 
 ```text
-Aria: Parsed the attached PDF. Q2 royalty statement, $3,124.07 across
-23 tracks. Want the full breakdown? (Same flow as
-[Royalty analysis](/intelligence/royalty))
+Aria: Parsed the attached PDF. Looks like a press kit from a music blog. Want me to extract the quote highlights for your EPK?
 ```
 
 ## Privacy
@@ -133,14 +131,13 @@ Aria: Parsed the attached PDF. Q2 royalty statement, $3,124.07 across
 | Triage inbox | 1 |
 | Draft a reply | 1 per draft |
 | Send (with approval) | 0 (sending itself is free, the draft was the credit) |
-| Read attachment (PDF, etc.) | Per the attachment type — royalty PDF = 5 credits, audio = 5 credits sonic analysis |
+| Read attachment (PDF, etc.) | Counted as 1 Aria conversation |
 
 ## Related pages
 
 - [Integrations overview](/integrations/overview)
 - [Calendar](/integrations/calendar) — pair with Gmail for scheduling
 - [Aria overview](/aria/overview) — Aria as a whole
-- [Royalty analysis](/intelligence/royalty) — Aria triggers this from Gmail attachments
 
 ## FAQ
 

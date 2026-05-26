@@ -58,7 +58,6 @@ not roll over**.
 | Similar artist discovery | **2 credits / search** | A&R Scout queries |
 | MCP tool call (read) | **0–1 credit** | Most read tools are 0 — they hit cache. `get_song_intelligence` and similar enrichment tools are 1. |
 | MCP tool call (write / enrichment) | **1–5 credits** | `add_artist` (artist-intelligence refresh) = 2; `create_smart_link` = 1; `generate_pitch` = 2 |
-| Royalty PDF parse | **5 credits / statement** | One per uploaded PDF, regardless of size |
 | Background data refresh | **0 credits** | Runs server-side, not metered |
 
 A few notes:
@@ -66,7 +65,7 @@ A few notes:
 - **Aria chat** is one conversation = 1 credit. If you have a 20-message
   back-and-forth with Aria, that's still 1 credit — until you start a
   new conversation.
-- **Cached reads are free.** Asking Aria "what's the BPM of my track"
+- **Cached reads are free.** Asking Aria "describe my latest track"
   when sonic analysis has already run = 0 credits (cached lookup) + 1
   credit (the chat conversation). Net: 1 credit.
 - **Stem separation** (when surfaced in UI) is metered as a multi-step
@@ -103,7 +102,6 @@ Realistic monthly profiles by user type:
 | Image generation | 8 covers | 40 |
 | Campaign planner | 2 plans | 20 |
 | Similar artist searches | 5 | 10 |
-| Royalty parses | 2 statements | 10 |
 | Total | | **165 credits** of 1,000 |
 
 ### Manager / DIY label (Pro)
@@ -117,7 +115,6 @@ Realistic monthly profiles by user type:
 | Campaign planner | 10 plans | 100 |
 | Similar artist searches | 30 | 60 |
 | MCP tool calls (Cursor / Claude) | 200 | 200 |
-| Royalty parses | 5 statements | 25 |
 | Total | | **935 credits** of 5,000 |
 
 ### Label (Scale)
@@ -131,7 +128,6 @@ Realistic monthly profiles by user type:
 | Campaign planner | 30 plans | 300 |
 | Similar artist searches | 100 | 200 |
 | MCP tool calls | 800 | 800 |
-| Royalty parses | 20 statements | 100 |
 | Total | | **2,950 credits** of 20,000 |
 
 If you're consistently above 80% of your tier's allocation, **upgrading

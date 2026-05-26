@@ -1,0 +1,147 @@
+---
+title: "Launchpad"
+sidebarTitle: "Launchpad"
+description: "One tab for everything you ship outside Patchline — contracts, templates, pitch links, drop links, asset shares, media kits, briefings. Create, send, and track public-facing surfaces in one place."
+icon: "rocket"
+keywords:
+  - launchpad
+  - patchline contracts
+  - pitch links
+  - drop links
+  - media kit
+  - asset share
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+
+**Launchpad** is the tab for everything you ship to people outside
+Patchline — agreements, pitches, asset shares, media kits, and the
+public-facing links those go through.
+
+<TierBadge tier="starter" /> &nbsp; Available on Starter+.
+
+## What lives here
+
+| Surface | What it does |
+|---|---|
+| **Contracts** | Generate, review, and track agreements (splits, sync licenses, work-for-hire, NDAs). Built-in template library. |
+| **Templates** | Curated, music-industry-ready legal templates you can customize and reuse. |
+| **Contract calendar** | Timeline view of contracts coming due, expiring, or waiting on a signature. |
+| **Pitch links** | Public URL you send a curator with the track, audio analysis, and supporting context. |
+| **Drop links** | Public release page — landing URL with all DSP links and pre-saves. |
+| **Asset shares** | Share-only public link to a single asset in your catalog (a master file, a stem, an unreleased preview). |
+| **Media kits** | Artist-facing public page with bio, links, photos, and selected tracks. |
+| **Briefings** | Public markdown-based brief or report page you can send. |
+
+Each public surface comes with its own **QR code** so you can drop it
+on flyers, business cards, posters, or vinyl jackets.
+
+## Where it lives
+
+Sidebar → **Launchpad**.
+
+## Creating a public link
+
+<Steps>
+  <Step title="Click Create link">
+    The top of the Launchpad tab has a **+ Create link** menu — pick
+    the surface type.
+  </Step>
+  <Step title="Pick the source">
+    Bind the link to a release, a catalog asset, an artist, or
+    freeform content depending on the link type.
+  </Step>
+  <Step title="Configure sections">
+    Toggle which sections to expose on the public page — bio, audio,
+    visuals, DSP links, contact, etc.
+  </Step>
+  <Step title="Publish">
+    The link goes live immediately. Copy the URL or scan the auto-
+    generated QR code on the asset's card.
+  </Step>
+</Steps>
+
+## Contracts
+
+The Contracts surface is a music-first agreement workspace. Generate
+a split sheet, a sync license, an NDA, a work-for-hire, or a custom
+agreement from a template. Track signatures and renewal dates in the
+**Contract calendar**. Everything stays in your Patchline workspace.
+
+<TierBadge tier="scale" /> &nbsp; Advanced contract features (multi-party signing, custom counterparty workflows) unlock on Scale+ and Enterprise.
+
+## Pitch links vs smart links
+
+| | Pitch link | [Smart link](/storefront/smart-links) |
+|---|---|---|
+| Who you send to | Curators, A&R, sync supervisors | Fans |
+| Content shown | Track + supporting context + pitch copy | Routing to DSPs + pre-save |
+| Tracking | Per-recipient open / play telemetry | Aggregate fan analytics |
+| Where it lives | Launchpad | Music Store + Campaign Planner |
+
+If you're pitching a track to a Spotify editorial curator, use a
+**pitch link**. If you're sharing your release with fans, use a
+**smart link**.
+
+## Drop links vs smart links
+
+- **Drop link** — the *public release page* for an upcoming or current
+  release. One link, many DSPs surfaced (Spotify, Apple, YouTube),
+  pre-save support, sections you control.
+- **Smart link** — a routing URL: fan clicks → goes to their preferred
+  DSP automatically. Lives inside the drop link's experience or
+  standalone.
+
+You usually want a drop link for the release as a whole and smart
+links for individual tracks.
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| Create a public link (drop / pitch / share / media-kit / briefing) | Small per-link cost from your AI credit pool |
+| Update a published link | 0 credits |
+| Browse / view | 0 credits |
+| Contract template fill | A few credits per generation |
+
+See [plans & credits](/account/plans-credits) for exact numbers.
+
+## Related pages
+
+- [Campaign Planner](/releases/release-planner) — where releases get built
+- [Smart links](/storefront/smart-links) — fan-facing routing links
+- [Music Store overview](/storefront/overview) — direct-to-fan sales surface
+- [Audience](/artists/audience) — telemetry from your public links
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Are my links public to anyone with the URL?">
+    Yes by default. Pitch links, drop links, asset shares, media
+    kits, and briefings are unauthenticated URLs — anyone with the
+    URL sees the page. (Password-protected sharing is on the
+    roadmap.)
+  </Accordion>
+  <Accordion title="Can I delete a link after I publish it?">
+    Yes — the link goes 404 and any QR code becomes inert.
+  </Accordion>
+  <Accordion title="Does a pitch link cost extra to send to multiple curators?">
+    No. One pitch link, share with as many curators as you want.
+    Telemetry per-recipient is aggregate.
+  </Accordion>
+  <Accordion title="What's the difference between a media kit and an asset share?">
+    A **media kit** is an artist-level public page — bio, photos,
+    selected tracks. An **asset share** is a single-asset public link
+    — useful for sharing a single master, a stem, or an unreleased
+    track preview.
+  </Accordion>
+  <Accordion title="Do these links work for SEO?">
+    Yes — public Launchpad surfaces include open graph tags and are
+    crawlable. Drop links and media kits index well; share links and
+    pitch links are typically meant for specific recipients, not
+    discovery.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/launchpad/overview" />

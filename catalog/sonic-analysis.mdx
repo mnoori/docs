@@ -1,254 +1,186 @@
 ---
-title: "Sonic analysis"
-sidebarTitle: "Sonic analysis"
-description: "Patchline runs deep audio analysis on every track in your catalog — BPM, key, mood, energy, valence, danceability, instruments, sonic genres. Powers playlist matching, similar-track discovery, and AI pitch generation."
+title: "AI-discoverable tracks"
+sidebarTitle: "AI-discoverable tracks"
+description: "Patchline captions every track in your catalog so AI copilots like ChatGPT, Claude, and Cursor can naturally discover and reason about your music. Paste a Spotify URL in any AI tool — your captions ground the answer."
 icon: "waveform-lines"
 keywords:
-  - sonic analysis
-  - audio features patchline
-  - bpm key detection
-  - catalog audio analysis
-  - similar track discovery
-  - music ai features
+  - ai music discovery
+  - patchline ai discoverable
+  - music for chatgpt
+  - track captions ai
+  - ai readable music
 schema:
   - "@context": "https://schema.org"
     "@type": "SoftwareApplication"
-    "name": "Patchline Sonic Analysis"
+    "name": "Patchline AI Track Discovery"
     "applicationCategory": "MultimediaApplication"
-    "description": "Deep audio analysis: BPM, key, mood, energy, valence, danceability, sonic genres, instruments, and similarity features."
+    "description": "Auto-generated, AI-readable natural-language captions for every track in your catalog. Grounds AI copilot answers in your real music."
 ---
 
 import { AICallout } from "/snippets/ai-callout.mdx"
 import { TierBadge } from "/snippets/tier-badge.mdx"
 import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
-import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
 
-Every track in your Patchline catalog gets **deep audio analysis** —
-BPM, key, mood, energy, valence, danceability, sonic genres, and
-instruments. This isn't LLM-vibes-based-on-the-title. Patchline runs real
-audio analysis and writes the features back to your catalog.
+The way listeners find music has changed. They're not just searching
+Spotify anymore — they're asking AI copilots ("ChatGPT, give me music
+like…", "Claude, what's [artist] up to?", "Cursor, what's in my
+catalog?"). Patchline makes every track in your catalog
+**AI-discoverable** — automatically.
 
-<TierBadge tier="all" /> &nbsp; **5 AI credits per track.** Runs automatically on
-[import](/catalog/import) and [upload](/catalog/upload).
+<TierBadge tier="all" /> &nbsp; Auto-runs when a track lands in your catalog.
 
-## What gets extracted
+## What this actually does
 
-| Feature | Range | What it measures |
-|---|---|---|
-| **BPM** | 40–220 | Beats per minute |
-| **Key** | C, C♯, D … B (+ major/minor) | Detected musical key |
-| **Mode** | major / minor | Key mode |
-| **Energy** | 0.0–1.0 | Perceptual intensity (loud, fast, noisy = high) |
-| **Valence** | 0.0–1.0 | Musical positivity (happy/cheerful = high; sad/angry = low) |
-| **Danceability** | 0.0–1.0 | How suitable for dancing — based on tempo, rhythm stability, beat strength |
-| **Acousticness** | 0.0–1.0 | Confidence track is acoustic |
-| **Instrumentalness** | 0.0–1.0 | Likelihood of no vocals |
-| **Liveness** | 0.0–1.0 | Likelihood of live audience |
-| **Speechiness** | 0.0–1.0 | Spoken-word content presence |
-| **Loudness** | dB | Overall loudness (typically -20 to 0) |
-| **Time signature** | int | Estimated time signature (3, 4, 5, …) |
-| **Sonic genres** | tags | Multi-label genre tags (e.g., `dreampop`, `lo-fi`, `bedroom-pop`) |
-| **Sub-genres** | tags | Finer-grained tags |
-| **Mood tags** | tags | `melancholy`, `uplifting`, `aggressive`, `chill`, etc. |
-| **Instrument tags** | tags | Detected instruments — `electric guitar`, `synth pad`, `drum machine`, … |
-| **Vocal presence** | bool | Has vocals or not |
-| **Vocal gender** | tags | Detected vocal gender(s) |
+When you add a track to your catalog (by uploading or importing), Aria
+generates a rich, natural-language **caption** for it. That caption is
+the bridge between your music and any AI tool a fan or industry person
+might be using:
 
-## Why it matters
+- A fan asks ChatGPT: *"play me something like Mira's last release"* —
+  ChatGPT can find your tracks because they're captioned in language
+  it understands.
+- A curator asks Claude: *"what's a dreampop track with a soft acoustic
+  feel for a late-night playlist?"* — Claude surfaces your match.
+- You ask Aria in Cursor: *"find playlists for my new track"* — Aria
+  uses the caption to ground the pitch and ranking.
 
-Sonic features are the substrate for almost every downstream Patchline
-feature:
+You can think of it as **SEO for the AI era**. Spotify's catalog can't
+explain itself to an AI. Patchline's can.
 
-<CardGroup cols={2}>
-  <Card title="Playlist matching" icon="list-music" href="/releases/playlist-matching">
-    `find_playlists` ranks Spotify playlists by sonic fit — that "fit"
-    is the cosine similarity between your track's features and the
-    playlist's average features.
-  </Card>
-  <Card title="Similar track discovery" icon="copy" href="/artists/scout">
-    Embeddings derived from sonic features power "tracks like this in
-    your catalog" and "artists who sound like you."
-  </Card>
-  <Card title="DSP pitch generation" icon="file-pen" href="/releases/pitch-kit">
-    Pitch copy references concrete features ("F minor, 124 BPM,
-    dreampop-adjacent") instead of vague descriptors.
-  </Card>
-  <Card title="A&R scout" icon="binoculars" href="/artists/scout">
-    Scout uses sonic embeddings to surface artists with sonically
-    similar catalogs, not just genre-matching ones.
-  </Card>
-</CardGroup>
+## Where the caption lives
 
-## When it runs
+In the **Catalog** tab — sidebar → **Catalog** → click any track. The
+caption appears as part of the track detail view, alongside the rest
+of the track metadata.
 
-| Trigger | Latency |
-|---|---|
-| [Catalog import](/catalog/import) (URL) | Queued immediately, completes in ~30–90 s |
-| [Catalog upload](/catalog/upload) (file) | Queued after upload completes |
-| Manual re-analysis (catalog UI ⋯ menu) | Same queue, ~30–90 s |
-| Aria asks for it | Aria calls [`get_audio_features`](/for-agents/mcp-tools-reference) — cached if available, runs analysis if missing |
+Aria uses the caption automatically when answering catalog questions.
+The same caption is available to any AI client connected via
+[MCP](/for-agents/mcp-overview) — the `get_song_intelligence` tool
+returns it directly.
 
-You don't need to start it manually. Sonic analysis is queued the moment
-a track lands in your catalog.
+## What's in a caption
 
-## Two analysis layers
+The caption captures what AI copilots need to reason about a track in
+plain language. It's written for AI consumption first, humans second:
 
-Patchline combines two complementary analysis layers:
+- **Sonic identity** — the feel, mood, energy of the track in natural
+  prose, not coded numbers.
+- **Genre & subgenre context** — how the track sits in the broader
+  landscape.
+- **Comparable artists & tracks** — sonic peers, lineage, references.
+- **Where it fits** — playlist context, listening occasion, fan
+  archetype.
+- **Hooks worth surfacing** — the parts of the track that make it
+  pitchable.
 
-### Track features
+The caption is indexed for AI retrieval — embedded in the catalog so
+semantic search and AI tool calls return it grounded in your real
+music.
 
-The first layer extracts the music features you see in the catalog UI:
-BPM, key, mood, genre, instruments, vocal presence, energy, valence,
-danceability, and confidence signals.
+## Why this is the angle
 
-- Used by catalog filters, pitch generation, playlist matching, and Aria.
-- Usually completes in 30-90 seconds for a standard track.
-- Costs 5 credits per track when analysis runs.
+Most "audio analysis" products are pinned on numbers — BPM, key,
+danceability scores. Those are useful inside a DAW. They are mostly
+useless to an AI agent answering *"what should I listen to tonight?"*
 
-### Similarity features
+The future of music discovery runs through AI tools. Patchline ships
+that future first — every track in your catalog ready to be found by
+the AI tool your fan happens to be using.
 
-The second layer creates similarity features that help Patchline answer
-questions like "what else sounds like this?" and "which artists are
-sonically close to this track?"
+## Quick start
 
-- Used by similar-track discovery, Scout, and playlist fit.
-- Returned only when the track has enough audio context for a reliable
-  comparison.
-- Combined with metadata and audience context when ranking matches.
+<Steps>
+  <Step title="Add a track to your catalog">
+    [Import via URL](/catalog/import) or [upload](/catalog/upload).
+    Captioning runs automatically — no extra step.
+  </Step>
+  <Step title="See it in the Catalog tab">
+    Sidebar → **Catalog** → click the track. The AI caption is part of
+    the track detail.
+  </Step>
+  <Step title="Ask Aria">
+    <AriaPromptCard prompt="What's the AI-readable description of my latest track?" />
+    <AriaPromptCard prompt="Find tracks in my catalog that fit a late-night dreampop playlist." />
+  </Step>
+  <Step title="(For developers) Connect via MCP">
+    Install the [MCP server](/for-agents/mcp-install) and call
+    `get_song_intelligence` from Cursor, Claude Code, or any
+    MCP-compatible AI tool. The caption rides in the response.
+  </Step>
+</Steps>
 
-You don't pick between layers. Patchline uses the best available analysis
-for each track and surfaces the combined result.
+## How AI tools use it
 
-## How to view a track's analysis
+When your tracks are AI-discoverable through Patchline, here's what
+happens in the real world:
 
-### In the dashboard
+### In ChatGPT or Claude
 
-Sidebar → **Catalog** → click any track row → **Audio features** panel
-on the right.
+A user pastes a Spotify URL or asks about an artist. If the AI client
+has installed the [Patchline MCP](/for-agents/mcp-install), it calls
+`get_song_intelligence` automatically, grounds its answer in your real
+catalog, and surfaces specific tracks with reasons.
 
-Each numeric feature renders as a horizontal bar (0–1 scale) with the
-exact value. BPM and key render as labels. Tag lists (genres, moods,
-instruments) render as chips.
+### In Cursor or Claude Code
 
-### Through Aria
+Developers, A&R, music journalists — anyone using an AI editor — can
+query your catalog the same way they'd query a codebase. *"Find me a
+dreampop track in my roster that fits a sad-night playlist"* returns a
+specific track with a captioned reason.
 
-<AriaPromptCard prompt="What's the BPM and key of my latest track?" />
-<AriaPromptCard prompt="Show me the audio features for 'Late Bloom'." />
-<AriaPromptCard prompt="What's the most energetic track in my catalog right now?" />
+### Inside Patchline (via Aria)
 
-### Through the MCP server
-
-<MCPToolCard name="get_audio_features" />
-<MCPToolCard name="get_song_intelligence" />
-
-`get_audio_features` returns the raw numeric + tag features.
-`get_song_intelligence` returns features **plus** ISRC, streaming stats,
-playlist matches, and collaborator info — a one-shot deep dive.
-
-## Examples
-
-### Example 1 — Find your most energetic track
-
-<AriaPromptCard prompt="Which track in my catalog has the highest energy score?" />
-
-```text
-Aria: That's "Run Hot" — energy 0.84, BPM 142, key A minor.
-It's also the most danceable (0.79). Want me to find playlists matching
-that profile?
-```
-
-### Example 2 — Use features in a pitch
-
-<AriaPromptCard prompt="Draft a pitch for 'Sleeper' that uses the actual audio features." />
-
-```text
-Aria: "Sleeper" is a 76 BPM, F# minor dreampop ballad with low energy
-(0.31), low valence (0.21), and high acousticness (0.78). The track sits
-between Mazzy Star and Phoebe Bridgers sonically. Here's a draft pitch
-for late-night editorial curators... [continues]
-```
-
-### Example 3 — Verify a guess
-
-<AriaPromptCard prompt="My new track feels like 110 BPM but I'm not sure — can you confirm?" />
-
-```text
-Aria: It's 112 BPM, key D major. Time signature 4/4. Want the full
-feature breakdown?
-```
+Aria itself reads the caption when it does anything catalog-related —
+playlist matching, pitch generation, fan-graph cross-roster queries.
 
 ## Pricing
 
-| Action | Credit cost |
+| Tier | AI-discoverable tracks |
 |---|---|
-| Sonic analysis per track | **5 credits** |
-| Re-analysis (re-runs the same pipelines) | **5 credits** |
-| Reading cached features via `get_audio_features` | 0 credits (cached) |
-| `get_song_intelligence` (features + streaming + matches) | 1 credit |
+| <TierBadge tier="free" /> | ✓ |
+| <TierBadge tier="starter" /> | ✓ |
+| <TierBadge tier="pro" /> | ✓ |
+| <TierBadge tier="scale" /> | ✓ |
+| <TierBadge tier="enterprise" /> | ✓ |
 
-A typical Free user runs sonic analysis on a few tracks/month (~30 credits).
-A Pro user with active import flow might run 20–50/mo (~100–250 credits).
+Captioning counts against your AI credit pool — typical cost is small
+(a single track is a few credits to fully describe). See
+[plans & credits](/account/plans-credits).
 
-## Limitations
+## Related pages
 
-- **Metadata-only assets can't be analyzed.** If you imported a track via
-  URL but the streaming source can't fetch the audio,
-  the track stays at "queued." Solution: [upload the audio](/catalog/upload)
-  directly.
-- **Analysis is best-effort.** Very short tracks (under 30s), heavily noisy
-  recordings, or speech-dominated tracks can return partial features.
-  Confidence indicators are exposed in the API response.
-- **Re-analysis costs credits.** If you re-upload a master, the new
-  version gets re-analyzed. The old version's features remain in the
-  catalog but flagged as superseded.
-
-## Privacy
-
-- Uploaded audio is stored in encrypted, access-controlled cloud storage.
-- Analysis runs only to provide Patchline features for your workspace.
-- Patchline does not use your audio to train models.
-- Short-lived access is used for analysis and playback; implementation
-  details are intentionally kept out of public docs.
-
-## Related features
-
-- [Catalog import](/catalog/import) — what triggers analysis
-- [Upload a track](/catalog/upload) — the file path
-- [Playlist matching](/releases/playlist-matching) — what consumes features
-- [Pitch kit](/releases/pitch-kit) — what uses features for pitch copy
-- [MCP tools reference](/for-agents/mcp-tools-reference) — `get_audio_features`, `get_song_intelligence`
+- [Catalog import](/catalog/import) — what triggers captioning
+- [Upload a track](/catalog/upload) — file path
+- [Catalog search](/catalog/search) — uses captions for semantic match
+- [MCP overview](/for-agents/mcp-overview) — how AI clients read your captions
 
 ## FAQ
 
 <AccordionGroup>
-  <Accordion title="Why do results include both tags and similarity?">
-    Tags explain the track in human terms: mood, genre, instruments,
-    energy, and vocal presence. Similarity features compare the track to
-    other tracks and artists. Patchline combines both because pitches,
-    playlists, and A&R workflows need explanation and comparison.
+  <Accordion title="Do I have to do anything to turn this on?">
+    No. Captioning runs automatically the moment a track lands in your
+    catalog.
   </Accordion>
-  <Accordion title="Can I trust the BPM/key on every track?">
-    Mostly yes. BPM is reliable above ~85% accuracy on standard musical
-    content. Key detection drops in confidence for atonal, ambient, or
-    heavily modulating tracks. The API exposes confidence; the UI shows
-    a ?? icon when confidence is below threshold.
+  <Accordion title="Can I edit the caption?">
+    Yes — open the track in your Catalog and edit the caption directly.
+    Edits stick across re-captioning unless you ask Aria to regenerate
+    from scratch.
   </Accordion>
-  <Accordion title="Are sonic genres standardized?">
-    Patchline uses a multi-label taxonomy aligned with common DSP and
-    music-industry genre language. Some tracks receive multiple genres or
-    sub-genres because that is more useful than forcing one label.
+  <Accordion title="What if my track isn't in my catalog yet?">
+    Captioning only runs on tracks in your catalog. If you want
+    AI-discoverability for a track that's released elsewhere, paste its
+    streaming URL — [catalog import](/catalog/import) handles the rest.
   </Accordion>
-  <Accordion title="How long does analysis take?">
-    30–90 seconds for a typical 3-minute song. Longer tracks and large
-    batches can take more time. The catalog UI updates when results land.
+  <Accordion title="What ground truth does the caption use?">
+    Patchline analyzes the actual audio plus your other catalog
+    context — releases, artist roster, history. The caption reflects
+    your real music; it is not generated from the title alone.
   </Accordion>
-  <Accordion title="Can I export the features as CSV?">
-    Yes for individual tracks (catalog row → ⋯ → Export). Bulk CSV
-    export is Enterprise-only via the REST API.
-  </Accordion>
-  <Accordion title="Does Patchline train AI models on my audio?">
-    No. Audio is used to provide analysis features for your workspace,
-    not to train models.
+  <Accordion title="Is the caption visible publicly?">
+    The caption is part of your private catalog. AI tools that connect
+    to your [MCP](/for-agents/mcp-overview) read it on your behalf,
+    scoped to your authenticated session. Public links you create
+    (smart links, share links) don't expose the raw caption.
   </Accordion>
 </AccordionGroup>
 

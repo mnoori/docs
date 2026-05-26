@@ -43,10 +43,9 @@ Aria is one assistant with multiple front doors. <TierBadge tier="all" />
     and next-best-actions.
   </Card>
   <Card title="Analyze a track" icon="waveform" href="/catalog/sonic-analysis">
-    Paste any Spotify URL — get BPM, key, mood, danceability, energy, and a
-    ranked list of similar artists.
+    Paste any Spotify URL — get an AI-readable description of the track, plus a ranked list of similar artists.
   </Card>
-  <Card title="Find playlists" icon="list-music" href="/releases/playlist-matching">
+  <Card title="Find playlists" icon="list-music" href="/aria/prompts">
     Rank Spotify playlists by sonic fit plus curator responsiveness for a
     specific track.
   </Card>
@@ -54,11 +53,7 @@ Aria is one assistant with multiple front doors. <TierBadge tier="all" />
     Generate a curator-facing pitch grounded in real track metadata,
     sonic analysis, and artist context.
   </Card>
-  <Card title="Parse a royalty PDF" icon="file-invoice-dollar" href="/intelligence/royalty">
-    Upload a Distrokid / Tunecore / label PDF — get totals, anomalies, and
-    a forecast in under a minute.
-  </Card>
-  <Card title="Manage your roster" icon="users" href="/artists/roster">
+<Card title="Manage your roster" icon="users" href="/artists/roster">
     Add artists by URL. Background artist intelligence populates the
     profile automatically.
   </Card>
@@ -134,7 +129,7 @@ Pick whichever fits the workflow you're already in.
   <Step title="Connect your music">
     Paste a Spotify, YouTube, or SoundCloud URL into Aria, or upload an
     MP3 / WAV / FLAC directly. Aria adds the track to your catalog and
-    runs [sonic analysis](/catalog/sonic-analysis) (BPM, key, mood)
+    runs [AI captioning](/catalog/sonic-analysis)
     automatically.
   </Step>
   <Step title="Ask Aria what to do next">
@@ -166,13 +161,13 @@ Pick whichever fits the workflow you're already in.
 ## How Aria works
 
 Aria routes your request to the right Patchline capability: artist
-intelligence, Scout, pitch writing, royalty review, metrics, Gmail,
+intelligence, Scout, pitch writing, metrics, Gmail,
 Legal, Documents, catalog, or release planning. Each capability works
 against user-scoped Patchline data and connected integrations, then
 returns a grounded answer.
 
 You don't see the routing — you see one assistant. But it means Aria can
-do work that simple chatbots can't: read your royalty PDF, check the
+do work that simple chatbots can't: read your contracts in Launchpad, check the
 artist and catalog context, draft a follow-up email about a discrepancy,
 and keep the release plan up to date in one conversation.
 
@@ -192,8 +187,8 @@ exposes the same core capabilities to external AI clients.
 > **You:** here's my new single, planning to drop in 6 weeks
 > https://open.spotify.com/track/...
 >
-> **Aria:** Got it. *[reads ISRC, runs sonic analysis: 124 BPM, F minor,
-> dreampop-adjacent, high energy 0.62, low valence 0.31]*. Closest artists
+> **Aria:** Got it. *[reads ISRC, runs AI captioning: dreampop-adjacent,
+> uptempo with a melancholy edge]*. Closest artists
 > in your roster: Mira, Tessa. Last release in this style hit 18k streams
 > in month one. I drafted a 6-week rollout:
 >
@@ -205,16 +200,15 @@ exposes the same core capabilities to external AI clients.
 >
 > Want me to create the project anchor and schedule the tasks?
 
-### Example 2 — Royalty statement triage
+### Example 2 — Contract review
 
-> **You:** *[uploads quarterly Distrokid PDF]*
+> **You:** *[uploads a split sheet from a new collaborator]*
 >
-> **Aria:** Parsed. Total: $3,124.07 across 23 tracks. Two anomalies:
-> - "Late Bloom" earned $0.00 on Apple Music despite 4,200 streams there
->   last quarter — likely a payment-window cutoff, expect it next
->   statement.
-> - "Mira - November" shows on Spotify but is missing from your catalog —
->   want me to import it?
+> **Aria:** Parsed. 50/50 split between you and Tessa. Two flags:
+> - Sync-license language defaults to "exclusive" — you usually take
+>   non-exclusive on collaborations. Want me to suggest the revision?
+> - No territory carve-out. Worth tightening to your standard list?
+
 
 ### Example 3 — Multi-tool workflow
 
@@ -250,7 +244,7 @@ See [Pricing & plans](/get-started/pricing) for the full breakdown.
 
 - [Aria on Telegram](/aria/telegram) — `@AriaMusicBizBot`
 - [Talking to Aria — prompts that work](/aria/prompts)
-- [Asking Aria for updates](/aria/research-mode) — on-demand summaries
+- [Talking to Aria](/aria/prompts) — on-demand summaries
 - [MCP server overview](/for-agents/mcp-overview) — Aria's tool surface
 - [Claude plugin](/for-agents/claude-plugin) — Aria inside Claude
 
@@ -258,7 +252,7 @@ See [Pricing & plans](/get-started/pricing) for the full breakdown.
 
 <AccordionGroup>
   <Accordion title="Does Aria train on my data?">
-    No. Patchline does not use your catalog, royalty statements, or chat
+    No. Patchline does not use your catalog, contracts, or chat
     history to train models. Your data is used to ground Aria's answers
     in the current conversation only.
   </Accordion>

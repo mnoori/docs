@@ -1,7 +1,7 @@
 ---
 title: "Catalog search"
 sidebarTitle: "Search"
-description: "Search across your Patchline catalog by title, artist, ISRC, mood, genre, BPM, key, and similar-track signals. Powers Aria's catalog tools."
+description: "Search across your Patchline catalog by title, artist, ISRC, mood, genre, and natural-language description. Aria-powered semantic search across your AI-captioned tracks."
 icon: "magnifying-glass"
 keywords:
   - catalog search patchline
@@ -17,7 +17,7 @@ import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
 
 Patchline builds a user-scoped search view of your catalog so you can
-search by free-text query, mood, genre, BPM range, ISRC, or sonic
+search by free-text query, mood, genre, ISRC, or natural-language description
 similarity. This powers Aria's catalog tools and the dashboard search
 bar.
 
@@ -30,7 +30,7 @@ bar.
 Sidebar → **Catalog** → search bar at top. Type any query:
 
 ```text
-"dreampop 76 bpm"
+"melancholy dreampop for late-night listening"
 "tracks like 'Sleeper'"
 "F minor 4/4"
 "sad and slow"
@@ -42,7 +42,7 @@ recency.
 
 ### Via Aria
 
-<AriaPromptCard prompt="Search my catalog for melancholy ballads under 90 BPM" />
+<AriaPromptCard prompt="Search my catalog for melancholy ballads for a late-night playlist" />
 <AriaPromptCard prompt="Find tracks similar to 'Sleeper' in my catalog" />
 <AriaPromptCard prompt="Which of my tracks are in F minor?" />
 
@@ -64,12 +64,9 @@ catalog without a query.
 | **Artist** | `"Mira"` | Tracks by that artist |
 | **ISRC** | `GBUM71029604` | The single matching track |
 | **Genre / mood tags** | `"dreampop"`, `"melancholy"` | Tracks tagged with those |
-| **BPM range** | `"between 100 and 120"` | Tracks in that range |
 | **Key** | `"F minor"`, `"D major"` | Tracks in that key |
 | **Time signature** | `"3/4"`, `"7/8"` | Tracks in that meter |
-| **Energy / valence** | `"high energy"`, `"sad"` | Tracks above/below thresholds |
 | **Sonic similarity** | `"like [track ID]"` | Tracks with cosine-similar audio embeddings |
-| **Composite** | `"dreampop 76 bpm female vocal"` | All conditions AND'd |
 
 The semantic layer means natural language works — *"slow sad ballads
 for late night"* returns the right tracks even if those exact words
@@ -105,9 +102,9 @@ You: I'm building a chill playlist — find me 10 tracks in my catalog
      that fit
 Aria: 10 best fits (low energy + acoustic-leaning + slow tempo):
 
-  1. Sleeper (Mira) — 76 BPM, F# minor, energy 0.31, acousticness 0.78
-  2. Long Way (Tessa) — 82 BPM, A minor, energy 0.34
-  3. Velvet (Velvet Bird) — 71 BPM, D minor, energy 0.28
+  1. Sleeper (Mira) — melancholy dreampop, acoustic, low energy
+  2. Long Way (Tessa) — drifting indie folk, soft vocals
+  3. Velvet (Velvet Bird) — slow shoegaze, reverb-heavy
   4. ...
 
   Want me to make a smart link with these 10?
@@ -130,7 +127,7 @@ Aria: Top 5 by sonic similarity (cosine 0.7+):
 ```text
 You: List my catalog
 Aria: 47 tracks total. Showing first 10:
-  [paginated list with title, artist, BPM, key, last activity]
+  [paginated list with title, artist, AI caption snippet, last activity]
 
   Want to filter? "all dreampop", "tracks added this month", etc.
 ```

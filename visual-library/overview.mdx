@@ -1,0 +1,130 @@
+---
+title: "Visual Library"
+sidebarTitle: "Visual Library"
+description: "Generate cover art, promo flyers, and Spotify Canvas videos for your releases. Browse your full library of AI-generated and uploaded visual assets, attach them to releases, and download high-resolution exports."
+icon: "palette"
+keywords:
+  - visual library
+  - patchline cover art
+  - patchline promo flyer
+  - spotify canvas
+  - ai cover art
+schema:
+  - "@context": "https://schema.org"
+    "@type": "SoftwareApplication"
+    "name": "Patchline Visual Library"
+    "applicationCategory": "MultimediaApplication"
+    "description": "AI cover art, promo flyers, and Spotify Canvas videos for music releases."
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+
+The **Visual Library** is where all of your release artwork lives —
+cover art, promo flyers, Spotify Canvas videos, and reference images.
+Generate new visuals through Aria, upload your own, and attach the
+final pick to any release in your campaign.
+
+<TierBadge tier="starter" /> &nbsp; Generation features unlock on Starter+. Free tier can browse and upload.
+
+## What you can do
+
+| Lane | What it generates | Aspect ratio default |
+|---|---|---|
+| **Cover art** | Square release artwork from your prompt + optional reference images | 1:1 |
+| **Promo flyer** | Social-ready flyer with optional CTA copy ("OUT NOW", "PRE-SAVE", custom) | 9:16 vertical or 1:1 |
+| **Canvas (motion)** | Spotify Canvas-style looping video | 9:16, configurable duration |
+
+Every generation hands off to Aria for prompt interpretation, then
+Aria coordinates the underlying generative tools and saves the
+finished asset back into your Visual Library.
+
+## Where it lives
+
+Sidebar → **Visual Library**.
+
+## How to generate
+
+<Steps>
+  <Step title="Pick a lane">
+    On the bottom composer, choose the lane (Cover Art, Flyer, or
+    Motion).
+  </Step>
+  <Step title="(Optional) Select a campaign">
+    Click the campaign chip to bind this generation to a specific
+    release. Aria pulls the release's track context, genre, and any
+    existing artwork as creative reference.
+  </Step>
+  <Step title="(Optional) Attach reference images">
+    Click + → **Upload local image** or **Choose from Studio** to drop
+    visual references in. Aria uses them to lock style and mood.
+  </Step>
+  <Step title="Write the prompt and Generate">
+    Describe the look, mood, or concept. Hit **Generate** — Aria takes
+    over and the generated asset lands in the library in a few
+    seconds.
+  </Step>
+  <Step title="Attach to a release">
+    Click any asset → use it as the cover art, promo flyer, or canvas
+    for a release.
+  </Step>
+</Steps>
+
+## Browsing
+
+The grid view filters by **All**, **Cover Arts**, **Promo Flyers**, or
+**Canvas Videos**. Search box filters by title. Hover any asset for a
+download or delete affordance. Click into an asset to open the
+lightbox — from there you can download, replace, or send the asset
+back through Aria for a revision.
+
+## Replacing release art
+
+If a release already has an active cover or canvas, Visual Library
+shows it in context. You can swap it for any asset in the library —
+the change reflects on the live release and any
+[smart links](/storefront/smart-links) attached.
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| Generate cover art | A small per-image cost from your AI credit pool |
+| Generate promo flyer | Same per-image cost |
+| Generate canvas video | Higher cost than images (video is heavier) |
+| Upload your own | 0 credits |
+| Browse / download | 0 credits |
+
+Exact credit costs are shown on the [plans & credits](/account/plans-credits) page.
+
+## Related pages
+
+- [Campaign Planner](/releases/release-planner) — bind visuals to specific releases
+- [Music Store](/storefront/overview) — store banners come from here too
+- [Aria overview](/aria/overview) — the assistant doing the generation
+- [Smart links](/storefront/smart-links) — live links that pull from your visuals
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I keep iterating on a cover I generated?">
+    Yes — open it in the lightbox and choose **Edit** to send it back
+    through Aria with a follow-up prompt.
+  </Accordion>
+  <Accordion title="Do I need to attach a campaign?">
+    No, freeform generation works. Attaching a campaign just gives
+    Aria more context (track sonic identity, artist style, prior
+    visual choices) so the output matches your release.
+  </Accordion>
+  <Accordion title="What aspect ratios are supported?">
+    1:1 (square), 9:16 (vertical for Stories / Reels / Canvas), and
+    16:9 (horizontal for trailers and banners).
+  </Accordion>
+  <Accordion title="Can I replace a cover I already pushed to a release?">
+    Yes — the lightbox **Replace** action swaps it in place, and the
+    change reflects on the live release page and any associated
+    [smart links](/storefront/smart-links).
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/visual-library/overview" />

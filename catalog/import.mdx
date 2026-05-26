@@ -81,7 +81,7 @@ For a single track URL:
 | Cover art | Spotify oEmbed fallback if not embedded |
 | Release date | Streaming platform |
 | Duration | Streaming platform |
-| BPM, key, mood, energy, valence | Runs after import (5 credits/track) |
+| AI-readable caption | Runs after import |
 | Sonic genres, instruments | Runs after import |
 
 For an album/EP URL, Patchline imports **every track** in the release
@@ -189,7 +189,7 @@ lifetime. Want me to:
    [catalog search](/catalog/search). Deduplication runs before the
    track appears in your catalog.
 4. [Sonic analysis](/catalog/sonic-analysis) is queued when the track can
-   be analyzed. Results such as BPM, key, mood, and genre are written
+   be analyzed. Results such as the AI caption and genre context are written
    back to the catalog row.
 5. The catalog UI polls for updates and renders the feature panel once
    analysis completes.

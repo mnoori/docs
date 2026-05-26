@@ -15,7 +15,7 @@ schema:
         "name": "What is Patchline?"
         "acceptedAnswer":
           "@type": "Answer"
-          "text": "Patchline is the AI command center for the modern music business — your catalog, artists, streaming intelligence, releases, storefront, and royalties wired into AI tools you already use."
+          "text": "Patchline is the AI command center for the modern music business — your catalog, releases, audience, store, and AI-discoverable tracks wired into AI tools you already use."
       - "@type": "Question"
         "name": "How much does Patchline cost?"
         "acceptedAnswer":
@@ -25,7 +25,7 @@ schema:
         "name": "Does Aria train on my data?"
         "acceptedAnswer":
           "@type": "Answer"
-          "text": "No. Patchline does not use your catalog, royalty statements, or chat history to train models. Your data grounds Aria's answers in the current conversation only."
+          "text": "No. Patchline does not use your catalog, contracts, or chat history to train models. Your data grounds Aria's answers in the current conversation only."
 ---
 
 import { AICallout } from "/snippets/ai-callout.mdx"
@@ -40,8 +40,7 @@ feature page (e.g., catalog questions at
   <Accordion title="What is Patchline?">
     Patchline is an AI command center for the music business. You
     talk to Aria (the assistant) and Aria reads your catalog, queries
-    streaming data, drafts pitches, plans releases, parses royalty
-    PDFs, runs your storefront. Web app + Telegram + Claude plugin +
+    streaming data, drafts pitches, plans releases, manages contracts, runs your storefront. Web app + Telegram + Claude plugin +
     MCP for AI editors.
   </Accordion>
   <Accordion title="Who is Patchline for?">
@@ -55,8 +54,7 @@ feature page (e.g., catalog questions at
     Patchline imports the result and runs intelligence on it.
   </Accordion>
   <Accordion title="What's the difference between Patchline and a generic AI chatbot?">
-    Generic AI doesn't have your catalog, your roster, your royalty
-    statements, your audience data. Patchline is grounded in your real
+    Generic AI doesn't have your catalog, your roster, your contracts, your audience data. Patchline is grounded in your real
     music business — every answer references actual ISRCs, actual
     streaming numbers, actual curator history. Generic AI hallucinates
     these details; Patchline doesn't.
@@ -92,8 +90,8 @@ feature page (e.g., catalog questions at
     latency, and safety improve.
   </Accordion>
   <Accordion title="Does Aria train on my data?">
-    No. Patchline does not use your catalog, royalty statements, or
-    chat history to train models.
+    No. Patchline does not use your catalog, contracts, or chat
+    history to train models.
   </Accordion>
   <Accordion title="Can Aria send emails or post to socials?">
     Aria drafts. You approve sends. No auto-send. Direct social posting
@@ -118,13 +116,7 @@ feature page (e.g., catalog questions at
     Limited in v1. Upload stems as separate tracks with naming
     convention `<song>-stem-<part>.wav`. Stem separation tooling is
     in beta.
-  </Accordion>
-  <Accordion title="What's a project anchor?">
-    The persistent state for a release campaign — track list, tasks,
-    dates, concurrent-safe storage. Every release plan you commit
-    becomes a project anchor. See [Project anchors](/releases/project-anchors).
-  </Accordion>
-</AccordionGroup>
+  </Accordion></AccordionGroup>
 
 ## Storefront
 
@@ -174,8 +166,8 @@ feature page (e.g., catalog questions at
     checks.
   </Accordion>
   <Accordion title="Does Patchline train on user data?">
-    No. This includes audio, catalog metadata, royalty PDFs, and chat
-    history. Your data is used to provide Patchline features for your
+    No. This includes audio, catalog metadata, uploaded documents, and
+    chat history. Your data is used to provide Patchline features for your
     workspace, not to train models.
   </Accordion>
   <Accordion title="Are you SOC 2 compliant?">
@@ -186,7 +178,7 @@ feature page (e.g., catalog questions at
   <Accordion title="Can I delete my data?">
     Yes — email [support@patchline.ai](mailto:support@patchline.ai)
     with deletion request. Most data deletes within 7 days. Stripe
-    records and royalty PDFs are retained for legal/tax purposes.
+    records and uploaded contracts are retained for legal/tax purposes.
   </Accordion>
 </AccordionGroup>
 

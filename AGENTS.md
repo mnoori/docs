@@ -73,13 +73,12 @@ This file (`docs.patchline.ai/AGENTS.md`) is about navigating the **docs**.
 | Searching the catalog | [Catalog search](https://docs.patchline.ai/catalog/search) |
 | Release planning, rollout, marketing campaign | [Release planner](https://docs.patchline.ai/releases/release-planner) |
 | Pitch kit, DSP curator pitch | [Pitch kit](https://docs.patchline.ai/releases/pitch-kit) |
-| Spotify playlist matching, curator targeting | [Playlist matching](https://docs.patchline.ai/releases/playlist-matching) |
+| Spotify playlist matching, curator targeting | [Asking Aria for playlists](https://docs.patchline.ai/aria/prompts) |
 | Artist roster, adding artists | [Artist roster](https://docs.patchline.ai/artists/roster) |
 | Artist profile, EPK, intelligence | [Artist intelligence profile](https://docs.patchline.ai/artists/intelligence-profile) |
 | Audience, fans, demographics, fan graph | [Audience](https://docs.patchline.ai/artists/audience) |
 | Scout, A&R, artist discovery | [Scout agent](https://docs.patchline.ai/artists/scout) |
-| Royalty statement analysis, parsing PDFs | [Royalty analysis](https://docs.patchline.ai/intelligence/royalty) |
-| Streaming numbers, momentum, growth | [Streaming insights](https://docs.patchline.ai/intelligence/streaming-insights) |
+| Streaming numbers, momentum, growth | Audience tab in dashboard |
 | Direct-to-fan storefront, 0% fees | [Storefront overview](https://docs.patchline.ai/storefront/overview) |
 | Smart links, pre-saves | [Smart links](https://docs.patchline.ai/storefront/smart-links) |
 | Stripe Connect, payouts | [Checkout & payouts](https://docs.patchline.ai/storefront/checkout-payouts) |
