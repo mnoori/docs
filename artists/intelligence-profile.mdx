@@ -1,0 +1,182 @@
+---
+title: "Artist intelligence profile"
+sidebarTitle: "Intelligence profile"
+description: "Each roster artist gets a living intelligence profile — streaming, social audience, genres, top markets, recent activity, auto-generated bio, EPK. Updated automatically from Soundcharts + Genius."
+icon: "id-badge"
+keywords:
+  - artist intelligence profile
+  - artist EPK
+  - artist bio ai
+  - patchline artist insights
+  - living artist profile
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
+
+Every artist in your roster gets a **living intelligence profile** —
+streaming, social audience, genre tags, top territories, recent
+activity, similar artists, an AI-generated bio, and EPK material — all
+refreshed automatically.
+
+<TierBadge tier="all" /> &nbsp; Free and Starter see the basic profile; Pro+ unlocks the full intelligence view (similar artists, momentum graphs, market breakdown).
+
+## What's in a profile
+
+| Section | What it contains | Source |
+|---|---|---|
+| **Identity** | Name, profile pic, primary URL | Platform metadata |
+| **Streaming** | Monthly listeners (current + 30-day trend), top tracks, top playlists | Soundcharts |
+| **Social audience** | IG, TikTok, YouTube, Twitter, SoundCloud — followers + 30-day trend | Soundcharts |
+| **Genre tags** | Top 5 genres, sub-genres | Soundcharts |
+| **Top markets** | Top 5 cities + 5 countries by listener share | Soundcharts |
+| **Recent activity** | Recent releases, recent playlist adds, recent press | Soundcharts + crawlers |
+| **Similar artists** | Sonically-similar peers in the same listener tier | Soundcharts + RIP embeddings |
+| **Bio (AI-generated)** | 1-paragraph + 3-paragraph + 1-line variants | Aria, cached |
+| **EPK material** | Quotes, press images, press history | Soundcharts + Genius |
+
+## Where to find it
+
+| Surface | Path |
+|---|---|
+| Web dashboard | Sidebar → **Artists** → click an artist row → `/dashboard/artists/[artistId]` |
+| Via Aria | "Tell me about [artist]" |
+| Via MCP | [`get_artist_intelligence`](/for-agents/mcp-tools-reference#get_artist_intelligence) |
+
+## Quick start
+
+<Steps>
+  <Step title="Add an artist">
+    [Add to roster](/artists/roster) by Spotify (or other) URL. Soundcharts
+    enrichment kicks off automatically.
+  </Step>
+  <Step title="Wait for enrichment (~1 minute)">
+    The basic identity appears immediately. Streaming + social audience
+    populate within ~60 seconds. AI bio populates within ~3 minutes.
+  </Step>
+  <Step title="Open the profile">
+    Sidebar → **Artists** → click the row. All sections render in one
+    page.
+  </Step>
+  <Step title="Query Aria for synthesis">
+    <AriaPromptCard prompt="Summarize the last 30 days for [artist]." />
+    <AriaPromptCard prompt="Compare [artist A] and [artist B] on growth." />
+  </Step>
+</Steps>
+
+## The bio
+
+Aria generates the artist bio during enrichment and caches it. Bio
+queries don't re-run LLM calls — they hit the cache and return
+instantly.
+
+<MCPToolCard name="get_bio" />
+
+Three variants per artist:
+
+- **1-line** — for the artist card on the storefront, smart link, etc.
+- **1-paragraph** — for general use (press, EPK, social media).
+- **3-paragraph** — for long-form (cold pitch, full press kit).
+
+Edit any variant manually — your edits are preserved on subsequent
+enrichments unless you opt-in to "regenerate from scratch."
+
+## EPK (Electronic Press Kit)
+
+The EPK is a presentation-ready bundle:
+
+- AI bio (1 + 3 paragraph variants)
+- Press quotes (Genius + crawled)
+- High-res images (artist + recent release covers)
+- Streaming + social proof points (current numbers)
+- Top playlist features
+- Recent press links
+
+Generate a downloadable PDF EPK from the artist profile → **EPK** tab →
+**Export**.
+
+## Refresh cadence
+
+- **Daily**: Soundcharts streaming + social audience numbers
+- **Weekly**: full intelligence refresh (genre re-classification, top markets, etc.)
+- **On-demand**: any time, via "Refresh intel" button (1 credit)
+
+## Tier behavior
+
+| Tier | Profile depth |
+|---|---|
+| <TierBadge tier="free" /> | Identity + basic streaming |
+| <TierBadge tier="starter" /> | + social audience + bio |
+| <TierBadge tier="pro" /> | + similar artists + top markets + momentum + EPK |
+| <TierBadge tier="scale" /> | + roster-wide comparisons + label-level views |
+| <TierBadge tier="enterprise" /> | + REST API access |
+
+## Examples
+
+### Quick artist lookup
+
+<AriaPromptCard prompt="Who is Mira and what's her current streaming?" />
+
+```text
+Aria: Mira — indie pop / dreampop artist, based in LA.
+      Monthly listeners: 18,420 (+2.1% 30d trend, up from 17,800)
+      Top track: "Late Bloom" (4,210 streams last 30d)
+      Top markets: USA (62%), UK (8%), Australia (5%)
+      Last release: 2026-04-12 ("Late Bloom" single)
+      Similar artists: Tessa, Cleo Bell, Sunday Foundation
+
+      Want the full intel page?
+```
+
+### Compare two artists
+
+<AriaPromptCard prompt="Compare Tessa and Mira on growth this quarter." />
+
+```text
+Aria: Q2 growth (Apr-Jun):
+
+  Mira:
+    Monthly listeners: 14,200 → 18,420 (+29.7%)
+    IG followers:      8,100 → 9,400  (+16.0%)
+    TikTok followers:  3,200 → 6,800  (+112.5%)
+
+  Tessa:
+    Monthly listeners: 9,800 → 12,100 (+23.5%)
+    IG followers:      5,400 → 6,900  (+27.8%)
+    TikTok followers:  1,800 → 3,100  (+72.2%)
+
+  Mira leads on listeners + TikTok. Tessa leads on IG growth rate.
+  Both trending up — TikTok-driven.
+```
+
+## Related pages
+
+- [Roster](/artists/roster) — adding artists
+- [Audience](/artists/audience) — deeper fan-graph view
+- [Scout agent](/artists/scout) — A&R discovery
+- [Streaming insights](/intelligence/streaming-insights) — aggregate metrics
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why is my profile incomplete?">
+    Enrichment runs async. Most data populates within 1 minute; bio
+    takes 3 minutes; full intelligence refresh takes ~5 minutes.
+    If after 10 minutes the profile is still sparse, the artist may
+    not be well-covered by Soundcharts.
+  </Accordion>
+  <Accordion title="Can I edit the AI bio?">
+    Yes. Edit any variant in the profile UI. Edits persist across
+    refreshes unless you click "regenerate from scratch."
+  </Accordion>
+  <Accordion title="How current are the streaming numbers?">
+    Soundcharts updates ~daily. Numbers are typically <24h fresh.
+  </Accordion>
+  <Accordion title="Can I export the EPK as a PDF?">
+    Yes — Pro+ tier. EPK tab → Export → PDF or HTML.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/artists/intelligence-profile" />

@@ -1,0 +1,207 @@
+---
+title: "Quickstart"
+sidebarTitle: "Quickstart"
+description: "From sign-up to your first Aria conversation grounded in real catalog data in about 10 minutes — covers the Free tier, no payment method required."
+icon: "rocket"
+keywords:
+  - patchline quickstart
+  - sign up patchline
+  - first track patchline
+  - first aria conversation
+  - free tier
+schema:
+  - "@context": "https://schema.org"
+    "@type": "HowTo"
+    "name": "Get started with Patchline"
+    "description": "Sign up for Patchline, add a track to your catalog, and have your first AI-assisted conversation about your music."
+    "totalTime": "PT10M"
+    "step":
+      - "@type": "HowToStep"
+        "name": "Create a free account"
+        "url": "https://docs.patchline.ai/get-started/quickstart#step-1-create-a-free-account"
+      - "@type": "HowToStep"
+        "name": "Add your first track"
+        "url": "https://docs.patchline.ai/get-started/quickstart#step-2-add-your-first-track"
+      - "@type": "HowToStep"
+        "name": "Wait for sonic analysis"
+        "url": "https://docs.patchline.ai/get-started/quickstart#step-3-wait-for-sonic-analysis"
+      - "@type": "HowToStep"
+        "name": "Chat with Aria"
+        "url": "https://docs.patchline.ai/get-started/quickstart#step-4-chat-with-aria"
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+10 minutes. Free tier. No credit card. By the end you'll have a Patchline
+account, at least one track in your catalog, real sonic analysis run on
+it, and a working conversation with Aria about your own music.
+
+<TierBadge tier="free" /> &nbsp; <TierBadge tier="all" /> works on every plan, but this guide
+assumes the Free tier (100 AI credits/month, 3 lifetime track uploads).
+
+## Before you start
+
+You'll need:
+
+- An email address (Google sign-in also works).
+- **Either** a finished track file (MP3, WAV, or FLAC) **or** the Spotify /
+  Apple Music / YouTube URL of a track you already released.
+- Optional: a Telegram account if you want to also try
+  [Aria on Telegram](/aria/telegram) along the way.
+
+## Step 1 — Create a free account
+
+<Steps>
+  <Step title="Open patchline.ai">
+    Go to [patchline.ai](https://patchline.ai) and click **Get Started**.
+  </Step>
+  <Step title="Sign up">
+    Use Google (one click) or email + password. Confirm your email if you
+    chose the email path.
+  </Step>
+  <Step title="Land on the dashboard">
+    The first page is the Aria chat hero at `/dashboard`. Don't type
+    anything yet — Aria works better once you have a track loaded.
+  </Step>
+</Steps>
+
+<Tip>
+  Free tier defaults: **100 AI credits/month**, **3 lifetime track
+  uploads**, **10 lifetime catalog imports**, **1 GB storage**. See
+  [Pricing & plans](/get-started/pricing) for the full matrix.
+</Tip>
+
+## Step 2 — Add your first track
+
+You have two ways. Both work on Free.
+
+### Option A — Import from a streaming URL <span style={{ fontWeight: 400, fontSize: "0.85em", color: "#71717A" }}>(recommended if you've released)</span>
+
+Paste a Spotify, Apple Music, or YouTube link directly into Aria or into
+the **Catalog** section. Patchline pulls the metadata, cover art, and
+sonic analysis if the track is already analyzable.
+
+```text
+https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh
+```
+
+### Option B — Upload a file
+
+Sidebar → **Catalog** → drag-and-drop your MP3 / WAV / FLAC into the
+upload zone. Patchline reads the file's ID3 metadata, extracts title,
+artist, ISRC if present, and cover art.
+
+Either way, the track now lives in your catalog at
+[`patchline.ai/dashboard/catalog`](https://patchline.ai/dashboard/catalog).
+
+<Note>
+  **No track yet?** Skip this step. Aria can still answer general
+  music-industry questions on the Free tier — just at lower fidelity than
+  it does once it has your real data.
+</Note>
+
+## Step 3 — Wait for sonic analysis
+
+Once a track is in your catalog, Patchline runs **sonic analysis**
+automatically. This extracts BPM, key, mood, danceability, energy,
+valence, and instruments. It takes 30–90 seconds depending on track
+length.
+
+You can watch progress in the catalog list — the track card shows a
+spinner that resolves into a feature panel:
+
+| Field | Example value |
+|---|---|
+| BPM | 124 |
+| Key | F minor |
+| Energy | 0.62 |
+| Valence | 0.31 |
+| Danceability | 0.71 |
+| Top genre | dreampop |
+
+See [Sonic analysis](/catalog/sonic-analysis) for the full feature list and
+what each one means.
+
+## Step 4 — Chat with Aria
+
+Back to `/dashboard`. Click into the chat input. Try one of these:
+
+<AriaPromptCard prompt="What can you tell me about my new track?" />
+<AriaPromptCard prompt="Plan a release for this track." />
+<AriaPromptCard prompt="Find playlists that fit this song." />
+<AriaPromptCard prompt="Suggest 5 artists I should pitch this to." />
+
+Aria reads your catalog, calls real tools, and returns a grounded answer.
+Every Free-tier conversation costs **1 AI credit**.
+
+## What you just did
+
+In 10 minutes you:
+
+1. ✅ Created a Patchline account.
+2. ✅ Got a track into your catalog (file or URL).
+3. ✅ Ran real sonic analysis on it.
+4. ✅ Had a grounded conversation with Aria.
+
+That's the loop. Everything else in Patchline — release planning, pitch
+generation, royalty parsing, storefront setup — extends this same pattern.
+
+## What to do next
+
+<CardGroup cols={2}>
+  <Card title="Add more tracks" icon="plus" href="/catalog/import">
+    Free tier: 3 lifetime uploads + 10 catalog imports. Import an EP or
+    album via URL to use them efficiently.
+  </Card>
+  <Card title="Try Aria on Telegram" icon="paper-plane" href="/aria/telegram">
+    Message [@AriaMusicBizBot](https://t.me/AriaMusicBizBot). Paste a
+    Spotify link. Get a rich track card without leaving Telegram.
+  </Card>
+  <Card title="Plan a release" icon="rocket" href="/releases/release-planner">
+    Turn your track into a 6-week rollout. Best on Starter+ but you can
+    preview the flow on Free.
+  </Card>
+  <Card title="Install the MCP server" icon="code" href="/for-agents/mcp-install">
+    Wire your catalog into Cursor, Codex, Claude Code, or VS Code as
+    callable tools.
+  </Card>
+</CardGroup>
+
+## When to upgrade from Free
+
+<TierBadge tier="starter" /> Starter ($9.99/mo, 30-day free trial) unlocks 25 lifetime track
+uploads, 100 catalog imports, 1,000 AI credits/month, and your **0% fee
+music storefront**. If you're past the first 10 minutes and want to
+actually run your release through Patchline, Starter is the upgrade.
+
+See [Pricing & plans](/get-started/pricing) for the full breakdown.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Sonic analysis is stuck on 'analyzing'">
+    Files larger than 50 MB or longer than 10 minutes can take 2–3
+    minutes. If you're past that, refresh the page. If still stuck, ping
+    [support@patchline.ai](mailto:support@patchline.ai) with the track ID.
+  </Accordion>
+  <Accordion title="My Spotify URL didn't import">
+    Make sure it's a `https://open.spotify.com/track/...` URL (not an
+    artist or playlist URL). For artist/playlist URLs use Aria — it
+    handles all link types via the `analyze_url` tool.
+  </Accordion>
+  <Accordion title="Aria says 'I don't have access to that'">
+    Aria is intentionally grounded. If you ask about a track that isn't
+    in your catalog, it will say so and offer to import. That's the right
+    behavior — it's preferable to inventing data.
+  </Accordion>
+  <Accordion title="I ran out of AI credits">
+    Free tier resets monthly. Each Aria conversation is 1 credit; each
+    sonic analysis is 5 credits per track; each image generation is 5
+    credits. Upgrade to Starter (1,000 credits/mo) or wait for the next
+    cycle.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/get-started/quickstart" />

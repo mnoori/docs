@@ -1,0 +1,179 @@
+---
+title: "Project anchors"
+sidebarTitle: "Project anchors"
+description: "Project anchors are Patchline's persistent state for a release campaign — track list, status, tasks, dates, concurrent-write-safe storage. Every release plan you commit becomes a project anchor."
+icon: "anchor"
+keywords:
+  - project anchors
+  - patchline projects
+  - release campaign state
+  - concurrent write safe
+schema:
+  - "@context": "https://schema.org"
+    "@type": "SoftwareApplication"
+    "name": "Patchline Project Anchors"
+    "applicationCategory": "BusinessApplication"
+    "description": "Persistent release campaign state with concurrent-safe writes."
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+A **project anchor** is a persistent row representing one release
+campaign. It holds the track list, status, tasks, dates, and any state
+that needs to survive across sessions, tabs, and team members. When you
+commit a [release plan](/releases/release-planner), that plan becomes a
+project anchor.
+
+<TierBadge tier="starter" /> &nbsp; Free has 1 manual project. Starter+ enables AI-generated plans + multi-project tracking.
+
+## Why anchors matter
+
+Without persistent state, every release campaign starts from scratch —
+no memory of what was decided, who's doing what, what's done, what's
+overdue. With anchors:
+
+- **Aria remembers** the campaign across conversations.
+- **Your team sees** the same state without trampling each other's edits.
+- **The daily synthesizer** (see [Research mode](/aria/research-mode))
+  knows what tasks are overdue.
+- **Cross-feature surfaces** — storefront, smart link, pitch kit — can
+  all reference the same anchor.
+
+## What lives in an anchor
+
+```text
+Project anchor: "Sleeper — Mira — 2026-07-15"
+├── Status: in_progress
+├── Target release date: 2026-07-15
+├── Created: 2026-06-03
+├── Last updated: 2026-06-10 (concurrent-write-safe via expectedUpdatedAt)
+├── Track list:
+│   • Sleeper (Mira) — assetId abc-123, ISRC ...
+├── Tasks (28):
+│   • [✓] Finalize artwork (due 2026-06-03)
+│   • [ ] Submit to Spotify editorial (due 2026-06-17)
+│   • [ ] ...
+├── Linked surfaces:
+│   • Smart link: patchline.ai/store/mira/sleeper
+│   • Storefront product: enabled
+│   • Pitch kit: 3 drafts
+└── Activity log: 47 events
+```
+
+## How writes stay safe
+
+The 2026-05-03 audit revealed that opening the same project in two tabs
+and saving from a stale tab silently overwrote the other tab's edits.
+That class of bug is now fixed via a concurrent-safe write pattern.
+
+What changed:
+
+- **`ProjectService.upsertCampaign` uses `UpdateCommand` with explicit
+  `SET <fields>`** — only the fields that changed get written, not the
+  whole row.
+- **Legacy `PutCommand` full-row replacements use optimistic concurrency**
+  via an `expectedUpdatedAt` parameter and the condition
+  `attribute_not_exists(updatedAt) OR updatedAt = :expectedUpdatedAt`.
+- **On `ConditionalCheckFailedException`**, the UI surfaces a
+  "project changed elsewhere — refresh" state instead of silently
+  overwriting.
+
+If you and a collaborator both edit the same anchor in different tabs,
+the second-to-save sees a friendly conflict prompt instead of losing
+their work.
+
+## How to use anchors
+
+### Create one
+
+Easiest path:
+
+<AriaPromptCard prompt="Plan a release for 'Sleeper' and commit it as a project." />
+
+Or sidebar → **Projects** → **+ New project**.
+
+### Update one
+
+Click any task to mark complete. Edit the date. Add a new task. All
+changes use the concurrent-safe write pattern transparently.
+
+Via Aria:
+
+<AriaPromptCard prompt="Mark the 'Submit to editorial' task as done for Mira's release." />
+<AriaPromptCard prompt="Add a new task: 'TikTok teaser' due July 1." />
+
+### View one
+
+Sidebar → **Projects** → click the row. Or
+`/dashboard/projects/[id]` directly.
+
+### List active anchors
+
+<AriaPromptCard prompt="Show me all my active release projects." />
+
+Or sidebar → **Projects** for the full list.
+
+## Tier limits
+
+| Tier | Active projects | Anchor features |
+|---|---|---|
+| <TierBadge tier="free" /> | 1 | Manual checklist, no AI plan |
+| <TierBadge tier="starter" /> | 1 | AI-generated plans |
+| <TierBadge tier="pro" /> | 5 | + multi-artist, team seats |
+| <TierBadge tier="scale" /> | 20 | + roster view, label-level |
+| <TierBadge tier="enterprise" /> | Unlimited | + API access |
+
+Active = `status: in_progress` or `status: scheduled`. Archived projects
+don't count.
+
+## Anchor lifecycle
+
+```text
+draft → scheduled → in_progress → released → archived
+                                ↘ cancelled
+```
+
+- **draft** — created but no target date set
+- **scheduled** — target date set, prep underway
+- **in_progress** — within the rollout window
+- **released** — past target date, post-release tracking
+- **archived** — manually archived, no longer counts against active limit
+- **cancelled** — release pulled, history preserved
+
+## Related pages
+
+- [Release planner](/releases/release-planner) — generates the anchor
+- [AI campaign planner](/releases/campaign-planner) — fills the task list
+- [Pitch kit](/releases/pitch-kit) — references the anchor for context
+- [Aria's research mode](/aria/research-mode) — flags overdue tasks
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What happens if my collaborator and I edit at the same time?">
+    Concurrent-safe writes catch the conflict. The second save gets a
+    "project changed elsewhere — refresh and retry" prompt. No silent
+    overwrite. Either user can resolve.
+  </Accordion>
+  <Accordion title="Can I have multiple projects for the same track?">
+    Yes — useful for re-releases, remixes, regional rollouts. Just
+    create separate projects with different target dates.
+  </Accordion>
+  <Accordion title="Do tasks support assignees?">
+    Pro+ (team tier). Tasks can be assigned to a workspace member.
+    The daily synthesizer surfaces overdue tasks per assignee.
+  </Accordion>
+  <Accordion title="Are anchors versioned?">
+    The activity log captures every change. Restore-from-history isn't
+    in v1 but the audit trail is there. Critical fields use
+    optimistic concurrency, so unintended overwrites are blocked.
+  </Accordion>
+  <Accordion title="Can I export an anchor?">
+    Yes — project → ⋯ → Export as Markdown (or JSON via REST on
+    Enterprise).
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/releases/project-anchors" />

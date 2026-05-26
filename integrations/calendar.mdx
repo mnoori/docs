@@ -1,0 +1,131 @@
+---
+title: "Google Calendar integration"
+sidebarTitle: "Calendar"
+description: "Connect Google Calendar so Aria can schedule release milestones, fan emails, tour dates, and content drops on your calendar. Aria respects existing events when proposing new ones."
+icon: "calendar-days"
+keywords:
+  - patchline google calendar
+  - calendar integration music
+  - schedule release patchline
+  - aria calendar
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+Connect Google Calendar so Aria can schedule release campaigns, content
+drops, fan emails, and tour dates directly on your calendar. Release
+plans auto-populate calendar events when committed as project anchors.
+
+<TierBadge tier="all" /> &nbsp; Free to connect.
+
+## What Aria can do
+
+| Action | Default behavior |
+|---|---|
+| Read your calendar | Yes |
+| Propose new events around existing ones | Yes |
+| Add a single event | Asks for confirmation |
+| Add a release-plan task bundle | Asks for batch confirmation |
+| Move / reschedule events | Asks for confirmation per move |
+| Delete events | Asks for confirmation, with undo window |
+| Read attendee responses | Yes (for meeting scheduling) |
+
+## Connecting
+
+<Steps>
+  <Step title="Settings → Connected Platforms → Google Calendar">
+    Or use the direct OAuth callback:
+
+    ```text
+    https://patchline.ai/api/auth/connect/google
+    ```
+  </Step>
+  <Step title="Approve scopes">
+    Patchline requests:
+    - `calendar` (read + write)
+    - `userinfo.email`
+    - `userinfo.profile`
+  </Step>
+  <Step title="Confirm">
+    Connection shows in Connected Platforms.
+  </Step>
+</Steps>
+
+## Examples
+
+### Schedule a release rollout
+
+<AriaPromptCard prompt="Schedule my Sleeper release plan on my calendar." />
+
+```text
+Aria: I'll add 28 events from your release plan to your calendar.
+A few collisions:
+
+  • June 12 — proposed "Submit to Spotify editorial" conflicts with
+    your "Studio session w/ Mira" 2-4pm. Move to morning?
+  • July 1 — proposed "Pre-save go-live" overlaps with "Family dinner"
+    at 6pm. Move to noon?
+
+  Approve all, fix collisions, or cancel?
+```
+
+### Add a one-off event
+
+<AriaPromptCard prompt="Add a calendar event: 'Pitch to Lush Sounds curator' for tomorrow at 10am, 30 minutes." />
+
+### Check before scheduling
+
+<AriaPromptCard prompt="When am I free this week for a 1-hour meeting with Mira's manager?" />
+
+```text
+Aria: Free slots this week (1h+):
+  • Wed 2-4pm
+  • Thu 11am-12pm
+  • Fri 9-11am, 3-5pm
+
+Want me to send a meeting proposal to Mira's manager with these times?
+```
+
+## Privacy
+
+- OAuth tokens stored encrypted, per-user.
+- Calendar events are read only when you ask.
+- New events are created only with your explicit confirmation.
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| Read calendar | 0 (cached for the conversation) |
+| Add a single event | 1 (counted as Aria chat) |
+| Bulk-add release plan | 1 per Aria interaction (the events are free) |
+| Move / delete | 1 per Aria interaction |
+
+## Related pages
+
+- [Integrations overview](/integrations/overview)
+- [Gmail](/integrations/gmail) — pair with Calendar for full coordination
+- [Release planner](/releases/release-planner) — auto-populates calendar events
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Will Aria spam my calendar?">
+    No. Aria proposes; you approve. Batch operations (like a 28-event
+    release plan) get one batch-approval prompt, not 28 individual
+    prompts.
+  </Accordion>
+  <Accordion title="Can I use Outlook / Apple Calendar?">
+    Google Calendar only in v1. Outlook is on the roadmap. Apple
+    Calendar via CalDAV is not currently planned.
+  </Accordion>
+  <Accordion title="What calendar does Aria use if I have multiple?">
+    Your primary calendar by default. Multi-calendar support
+    (assign release-plan events to a specific calendar) is on the
+    roadmap.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/integrations/calendar" />

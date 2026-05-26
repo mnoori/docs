@@ -1,0 +1,172 @@
+---
+title: "Gmail integration"
+sidebarTitle: "Gmail"
+description: "Connect your Gmail to let Aria read, draft, and (with your approval) send emails. Aria triages curator emails, drafts follow-ups, summarizes inbox threads about your releases."
+icon: "envelope"
+keywords:
+  - patchline gmail
+  - gmail integration music
+  - aria email
+  - patchline email assistant
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+Connect Gmail so Aria can read your inbox, draft replies, summarize
+threads, and (with explicit approval per send) send messages. Backed by
+the Gmail specialist agent (`gmail-action-handler.py` Lambda + Bedrock
+agent `PatchlineEmailAgent`).
+
+<TierBadge tier="all" /> &nbsp; Free to connect. Drafts are 1 credit; sends require your explicit approval per message.
+
+## What Aria can do with Gmail
+
+| Action | Default behavior |
+|---|---|
+| Read recent emails | Yes, when you ask |
+| Search inbox | Yes ("emails about Mira's release", "from a curator") |
+| Summarize a thread | Yes (1 credit per chat) |
+| Draft a reply | Yes (1 credit per draft) |
+| Send a message | **Requires explicit approval per send** |
+| Read attachments (PDFs, audio) | Yes — feeds into [royalty](/intelligence/royalty) or [catalog](/catalog/upload) parsing |
+| Triage unread inbox | Yes — Aria categorizes (fan / curator / business / spam) |
+
+## Connecting
+
+<Steps>
+  <Step title="Settings → Connected Platforms">
+    UI is being finalized — for now, contact support to enable Gmail in
+    your account, or use the OAuth callback URL directly:
+
+    ```text
+    https://patchline.ai/api/auth/connect/gmail
+    ```
+  </Step>
+  <Step title="Approve Gmail scopes">
+    Patchline requests:
+    - `gmail.readonly` (read your inbox)
+    - `gmail.send` (only used when you explicitly approve a send)
+  </Step>
+  <Step title="Confirm in dashboard">
+    Connection appears in Settings → Connected Platforms once OAuth
+    completes.
+  </Step>
+  <Step title="Test with Aria">
+    <AriaPromptCard prompt="Summarize my unread emails about Mira's release." />
+  </Step>
+</Steps>
+
+## Examples
+
+### Triage your inbox
+
+<AriaPromptCard prompt="Triage my unread emails — what needs my attention today?" />
+
+```text
+Aria: 12 unread emails. Triaged:
+
+  CURATOR (3) — respond today
+    • @lush_sounds_oslo confirming track receipt
+    • SubmitHub status update for "Sleeper"
+    • Tessa's manager re: feature on Mira's next
+
+  BUSINESS (2)
+    • Distrokid: royalty statement for Q2 ready
+    • Stripe: payout completed ($212.40)
+
+  FAN (5)
+    • 3 download confirmations, 1 question about lossless availability,
+      1 thank-you note
+
+  SPAM (2)
+
+  Want me to draft replies to the curator emails?
+```
+
+### Draft a follow-up
+
+<AriaPromptCard prompt="Draft a follow-up to the 3 curators who haven't replied to my pitch in 2 weeks." />
+
+```text
+Aria: Drafted 3 follow-ups (one per curator, personalized to their last
+add). Review:
+
+  Subject: Quick check-in — Mira "Sleeper"
+  To: anders@lushsounds.com
+
+  Hi Anders,
+
+  Following up on my note from 2 weeks ago about Mira's single "Sleeper."
+  I saw you added Cleo Bell's "Distant" recently — same sonic territory.
+
+  Sleeper is out and getting traction (now at 4,200 streams in week 1).
+  If you have a moment, listen here: https://...
+
+  No pressure if it's not a fit.
+
+  — Mira
+
+  [Send] [Edit] [Skip]
+```
+
+Each draft has explicit Send / Edit / Skip controls. Aria never sends
+without your action.
+
+### Pull data out of an email
+
+<AriaPromptCard prompt="Read the attachment in the email from Distrokid and tell me the totals." />
+
+```text
+Aria: Parsed the attached PDF. Q2 royalty statement, $3,124.07 across
+23 tracks. Want the full breakdown? (Same flow as
+[Royalty analysis](/intelligence/royalty))
+```
+
+## Privacy
+
+- Patchline stores OAuth tokens encrypted at rest (per-user).
+- Email content is read only when you ask — no background scanning.
+- Drafted replies are stored only until sent (or until you discard).
+- Patchline does not use your email content for model training.
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| Read / summarize email | 1 (counted as Aria chat) |
+| Triage inbox | 1 |
+| Draft a reply | 1 per draft |
+| Send (with approval) | 0 (sending itself is free, the draft was the credit) |
+| Read attachment (PDF, etc.) | Per the attachment type — royalty PDF = 5 credits, audio = 5 credits sonic analysis |
+
+## Related pages
+
+- [Integrations overview](/integrations/overview)
+- [Calendar](/integrations/calendar) — pair with Gmail for scheduling
+- [Aria overview](/aria/overview) — Aria as a whole
+- [Royalty analysis](/intelligence/royalty) — Aria triggers this from Gmail attachments
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does Aria send emails without my approval?">
+    No. Drafts are stored; sends require explicit Send action per
+    message. We never auto-send.
+  </Accordion>
+  <Accordion title="Can I use a non-Gmail email account?">
+    Not in v1. Outlook / Microsoft 365 is on the roadmap. Workarounds:
+    forward relevant emails to a Gmail address you connect.
+  </Accordion>
+  <Accordion title="Can multiple Gmail accounts connect to one Patchline workspace?">
+    Pro+ tiers (team seats) — each team member connects their own
+    Gmail. Aria scopes inbox queries per-member.
+  </Accordion>
+  <Accordion title="What if I want Aria to ignore certain emails?">
+    Use Gmail filters / labels — Aria respects them. Label something
+    `Aria-Ignore` and triage skips it.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/integrations/gmail" />

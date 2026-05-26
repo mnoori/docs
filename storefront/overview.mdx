@@ -1,0 +1,239 @@
+---
+title: "Storefront"
+sidebarTitle: "Storefront — overview"
+description: "Sell your music direct to fans from a branded storefront. Stripe-powered checkout, instant payouts, 0% platform fee on every paid Patchline tier. Includes smart links, pre-saves, fan stats, and an embeddable widget."
+icon: "store"
+keywords:
+  - patchline storefront
+  - sell music direct
+  - 0 percent platform fee
+  - music store
+  - stripe music store
+schema:
+  - "@context": "https://schema.org"
+    "@type": "SoftwareApplication"
+    "name": "Patchline Storefront"
+    "applicationCategory": "BusinessApplication"
+    "description": "Direct-to-fan music storefront with 0% platform fee on paid Patchline tiers. Stripe-powered checkout and payouts."
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { SurfaceMatrix } from "/snippets/surface-matrix.mdx"
+
+Patchline storefronts let you sell music direct to fans from a
+branded page — `patchline.ai/store/<your-slug>`. Stripe handles the
+checkout and payouts. Patchline takes a **0% platform fee** on every
+paid tier; **10% on Free**. You keep 100% of revenue after Stripe
+processing (typically 2.9% + $0.30/transaction).
+
+<TierBadge tier="all" /> &nbsp; 0% platform fee on Starter, Pro, Scale, Enterprise. 10% on Free.
+
+## What's included
+
+<CardGroup cols={2}>
+  <Card title="Public store page" icon="browser" href="/storefront/setup">
+    Branded page at `patchline.ai/store/<slug>` with your banner,
+    products, smart links. Mobile + desktop, dark by default.
+  </Card>
+  <Card title="Stripe-powered checkout" icon="credit-card" href="/storefront/checkout-payouts">
+    Stripe Connect. Cards, Apple Pay, Google Pay. Instant payouts to
+    your bank account.
+  </Card>
+  <Card title="Embeddable widget" icon="code" href="/storefront/setup#embed">
+    `/store/<slug>/embed/<assetId>` — drop into your website, Linktree,
+    artist site. Looks native.
+  </Card>
+  <Card title="Smart links + pre-saves" icon="link" href="/storefront/smart-links">
+    Routing links for fans across DSPs. Pre-save flow for unreleased
+    tracks. Built on the same storefront infrastructure.
+  </Card>
+  <Card title="Fan stats" icon="chart-line" href="/storefront/checkout-payouts">
+    Sales, conversion, top fans, geographic breakdown. Built into the
+    storefront dashboard.
+  </Card>
+  <Card title="Asset delivery" icon="download" href="/storefront/checkout-payouts">
+    Buyers get download links via email + in-page after purchase. Signed
+    URLs, expiring tokens, anti-leech.
+  </Card>
+</CardGroup>
+
+## The 0% platform fee — what it actually means
+
+This is the storefront's headline. Specifics:
+
+- **Free tier:** Patchline takes **10%** of every storefront sale,
+  before payout.
+- **Every paid tier (Starter, Pro, Scale, Enterprise):** Patchline takes
+  **0%**. You keep 100% of the sale.
+- **Stripe processing** (typically 2.9% + $0.30 per transaction) applies on every tier, separate from Patchline's fee.
+
+Worked example — selling an album for $10:
+
+| Tier | Gross sale | Patchline fee | Stripe fee | You keep |
+|---|---|---|---|---|
+| Free | $10.00 | $1.00 (10%) | $0.59 | **$8.41** |
+| Starter+ | $10.00 | **$0.00** | $0.59 | **$9.41** |
+
+If you sell more than ~$100/month direct, **Starter ($9.99/mo) pays for
+itself just from the dropped platform fee**, ignoring everything else
+Starter unlocks.
+
+## When to use it
+
+- **You have superfans willing to pay direct.** Bandcamp-style audience.
+- **You want margins streaming can't match.** $10 album direct = $9.41
+  to you. Same album on streaming = ~$0.003 × thousands of plays before
+  you net the same.
+- **You're selling more than music** — merch, signed copies, demos,
+  stems, instrumental versions. The storefront supports any digital
+  product, not just full tracks.
+- **You want a Bandcamp alternative** that integrates with the rest of
+  your Patchline workflow (release planning, smart links, fan stats).
+
+## Where it lives
+
+<SurfaceMatrix feature="storefront" />
+
+Storefronts are a **web-first** product. Setup happens in the dashboard;
+the public store page is a separate route at `patchline.ai/store/<slug>`.
+
+| Surface | Path |
+|---|---|
+| Artist-side setup | Sidebar → **Store** at `/dashboard/store` |
+| Public store page | `patchline.ai/store/<your-slug>` |
+| Single-product page | `patchline.ai/store/<slug>/<assetId>` |
+| Checkout | `patchline.ai/store/<slug>/checkout` |
+| Thank-you / download page | `patchline.ai/store/<slug>/thank-you` |
+| Embed widget | `patchline.ai/store/<slug>/embed/<assetId>` |
+
+## Quick start
+
+<Steps>
+  <Step title="Sign up + connect Stripe">
+    On Starter+, sidebar → **Store** → **Connect Stripe**. Standard
+    Stripe Connect flow — takes 5 minutes if you already have a Stripe
+    account, longer if not.
+  </Step>
+  <Step title="Pick what you're selling">
+    Storefronts sell **assets** from your catalog. Pick the tracks you
+    want to sell. Add custom products if you're selling merch or
+    bundles.
+  </Step>
+  <Step title="Set pricing">
+    Per-product. Pay-what-you-want supported (with optional minimum).
+    Currency follows your Stripe account default.
+  </Step>
+  <Step title="Add a banner + bio">
+    Banner image (1500×500 recommended). Short bio. Your storefront URL.
+  </Step>
+  <Step title="Share the link">
+    `patchline.ai/store/<your-slug>`. Drop it in your Linktree, bio,
+    socials, fan email.
+  </Step>
+</Steps>
+
+See [Set up your store](/storefront/setup) for the full setup walkthrough.
+
+## Prerequisites
+
+- **Starter+ subscription** (recommended) — Free works but 10% fee.
+- **Stripe Connect account** — created during setup if you don't have
+  one. Takes 5 minutes.
+- **At least one asset in your catalog** to sell.
+
+## How fans buy
+
+From the fan's side:
+
+1. They click a link (smart link, embed, social, your bio).
+2. Land on `patchline.ai/store/<slug>/<assetId>` — product page with
+   audio preview, art, price.
+3. Click **Buy** → Stripe Checkout. Cards, Apple Pay, Google Pay.
+4. Land on the thank-you page with a direct download link + emailed
+   download link (signed URL, 30-day expiration).
+5. Fan stats record the purchase: which asset, which country, referrer.
+
+Total time fan-side: ~30 seconds.
+
+## What kinds of products you can sell
+
+- **Single tracks** from your catalog.
+- **EPs / albums** as bundles.
+- **Stems** (separate stem pack — vocals, drums, bass, other).
+- **Demos / unreleased material** (gated behind purchase).
+- **Instrumentals** as separate SKUs.
+- **Lossless masters** (WAV / FLAC at premium price).
+- **Custom digital products** — exclusive cover art, tab books, etc.
+
+What you **cannot** sell (yet):
+
+- **Physical merch** — not in v1. Roadmap.
+- **Vinyl / CDs** — not in v1. Roadmap.
+- **Subscriptions** — fan club / patreon-style monthly support — not in v1.
+
+## Pricing
+
+| Tier | Storefront platform fee | Stripe processing |
+|---|---|---|
+| <TierBadge tier="free" /> | **10%** | Stripe: typically 2.9% + $0.30/txn |
+| <TierBadge tier="starter" /> | **0%** | Stripe: 2.9% + $0.30/txn |
+| <TierBadge tier="pro" /> | **0%** | Stripe: 2.9% + $0.30/txn |
+| <TierBadge tier="scale" /> | **0%** | Stripe: 2.9% + $0.30/txn |
+| <TierBadge tier="enterprise" /> | **0%** | Stripe: 2.9% + $0.30/txn |
+
+Stripe rates vary by country and card type — check
+[stripe.com/pricing](https://stripe.com/pricing) for your jurisdiction.
+The above is US-standard.
+
+## Related features
+
+- [Set up your store](/storefront/setup) — full setup walkthrough
+- [Smart links & pre-saves](/storefront/smart-links) — routing links + pre-save flow
+- [Checkout & payouts](/storefront/checkout-payouts) — Stripe Connect, payout schedule, taxes
+- [Catalog](/catalog/import) — assets are what you sell
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Is the 0% platform fee really 0%?">
+    Yes on paid Patchline tiers. Patchline keeps nothing of the sale.
+    Stripe processing (typically 2.9% + $0.30) is separate and goes
+    to Stripe, not Patchline.
+  </Accordion>
+  <Accordion title="How fast are payouts?">
+    Stripe's standard payout schedule: 2 business days in the US, 5–7
+    in most other countries. You can configure faster payout schedules
+    in Stripe (some include a small fee).
+  </Accordion>
+  <Accordion title="What about taxes?">
+    Stripe Tax (optional, ~0.5% per txn) handles sales tax / VAT
+    calculation in most jurisdictions. Without it, you're responsible
+    for declaring and remitting. See [Checkout & payouts](/storefront/checkout-payouts).
+  </Accordion>
+  <Accordion title="Can fans listen before they buy?">
+    Yes. Product pages include a 30-second preview by default (full
+    preview optional, configurable per asset).
+  </Accordion>
+  <Accordion title="Can I use my own domain?">
+    Custom domain for the storefront (`store.your-band.com`) is on the
+    Enterprise tier today. Other tiers use
+    `patchline.ai/store/<your-slug>`.
+  </Accordion>
+  <Accordion title="What happens if Stripe holds my payout?">
+    Stripe may hold payouts on new accounts or for high-risk transactions
+    — standard Stripe behavior. You contact Stripe directly to resolve.
+    Patchline can't unlock funds we don't hold.
+  </Accordion>
+  <Accordion title="Can I refund a sale?">
+    Yes. Settings → Sales → Issue refund. Stripe processes the refund,
+    Patchline marks the sale refunded and revokes download access.
+  </Accordion>
+  <Accordion title="Is there a marketplace where fans discover all artists?">
+    Yes — `patchline.ai/marketplace`. It's the cross-store discovery
+    surface. Your storefront is auto-listed by default; you can opt out
+    in Store settings.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/storefront/overview" />

@@ -1,0 +1,170 @@
+---
+title: "Pitch kit"
+sidebarTitle: "Pitch kit"
+description: "Generate compelling DSP curator pitches grounded in real track metadata, sonic analysis, and artist context. Per-curator personalization, A/B variants, tone control."
+icon: "file-pen"
+keywords:
+  - dsp pitch
+  - spotify pitch
+  - curator pitch
+  - playlist submission patchline
+  - ai pitch generation
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
+
+A **pitch kit** is the per-track package of DSP-curator-facing copy —
+the message you send when submitting to editorial playlists, pitching
+to an independent curator, or applying for a Spotify Marquee. Aria
+generates these grounded in real audio features, artist history, and
+the specific curator's context.
+
+<TierBadge tier="starter" /> &nbsp; Generation costs 2 credits per pitch.
+
+## What's in a pitch kit
+
+For one track, Aria generates:
+
+| Variant | Length | Use |
+|---|---|---|
+| **Short** | 280 chars | Twitter, DM, in-app message |
+| **Medium** | ~150 words | Editorial submission form, generic pitch |
+| **Long** | ~400 words | Cold email to curator, detailed positioning |
+| **Personalized per curator** | varies | References curator's recent adds + style |
+
+Plus:
+
+- **One-line hook** — for subject lines, headers
+- **Sonic positioning statement** — "between [artist A] and [artist B]"
+- **Three social proof points** — relevant numbers (streams, playlists, growth)
+- **One-paragraph artist bio** — concise, recent, accurate
+- **Asset references** — links to streaming, smart link, cover art
+
+## Why it matters
+
+Generic pitches get ignored. Pitches grounded in the curator's actual
+recent adds plus your track's actual sonic profile get heard. Aria's
+pitch kit closes the gap between "I have a track" and "here's why this
+curator should care."
+
+## How to generate
+
+<Steps>
+  <Step title="Pick a track">
+    Track must be in your catalog with sonic analysis complete.
+  </Step>
+  <Step title="Ask Aria">
+    <AriaPromptCard prompt="Draft a pitch kit for 'Sleeper'." />
+
+    Or sidebar → **Releases** → project → **Pitch kit** tab → **Generate**.
+  </Step>
+  <Step title="Pick a curator (optional)">
+    For personalized pitches:
+
+    <AriaPromptCard prompt="Draft a pitch for 'Sleeper' targeted at the curator of 'Lush Sounds'." />
+
+    Aria fetches the curator's recent adds via
+    [inspect_playlist](/releases/playlist-matching) and references them.
+  </Step>
+  <Step title="Edit + send">
+    Pitch is markdown. Edit anything that doesn't sound like you.
+    Send via your usual channel (email, DM, S4A, SubmitHub).
+  </Step>
+</Steps>
+
+## Example: long-form personalized pitch
+
+```text
+Subject: Sleeper — for Lush Sounds curators
+
+Hi Anders,
+
+I saw you added Tessa's "Long Way" to Lush Sounds 11 days ago — I
+mention it because Mira (whose track I'm sharing) shares Tessa's mixer
+and tends to sit sonically adjacent to her work.
+
+Sleeper is Mira's third single this year. It's a 76 BPM F# minor
+dreampop ballad with high acousticness (0.78), low valence (0.21), and
+prominent reverb-soaked guitar. Closest sonic peers are Mazzy Star and
+late-period Beach House.
+
+A few proof points:
+  • Her last release ("Late Bloom") hit 8.2k streams in week 1 and was
+    added to "Bedroom Vibes" within 4 days of release.
+  • Editorial adds on Mint Friday and Lush Sounds (CA) this year.
+  • 1,247 active fan-list subscribers, 28% open rate.
+
+Sleeper releases July 15. Pre-save: patchline.ai/store/mira/sleeper.
+Lossless version available if you'd prefer that for the playlist.
+
+Happy to send the artwork pack or a longer write-up — just ask.
+
+— Mira
+```
+
+## Tone control
+
+Aria can rewrite in different tones:
+
+<AriaPromptCard prompt="Rewrite this pitch more casually — less corporate." />
+<AriaPromptCard prompt="Make this 50% shorter." />
+<AriaPromptCard prompt="Translate to Spanish for the LATAM curator." />
+
+## Where pitches get used
+
+| Channel | How |
+|---|---|
+| **Spotify for Artists (S4A)** | Copy the medium variant into the editorial pitch form |
+| **SubmitHub** | Use the long form, attach the track |
+| **Curator DMs (IG, Twitter, email)** | Use the personalized variant |
+| **Submission portals (Daily Playlists, etc.)** | Use the long form |
+| **Spotify Marquee / Showcase** | Use the medium + budget block (Aria can add the budget rationale) |
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| Generate pitch kit (all 3 variants) | 2 credits |
+| Personalized variant for a specific curator | 2 credits |
+| Tone rewrite | 1 credit |
+| Translation | 1 credit |
+
+## Related pages
+
+- [Playlist matching](/releases/playlist-matching) — find the curators worth pitching
+- [Release planner](/releases/release-planner) — pitch generation is a task in every release plan
+- [Sonic analysis](/catalog/sonic-analysis) — supplies the audio features that ground pitches
+- [Artist intelligence](/artists/intelligence-profile) — the artist context
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Will the pitch be different every time I run it?">
+    Yes — Aria varies wording across regenerations. The factual content
+    (BPM, key, sonic peers, social proof) stays consistent because
+    those are pulled from your real data.
+  </Accordion>
+  <Accordion title="Can Aria submit to Spotify editorial directly?">
+    No. There's no public submission API for S4A editorial. You copy
+    the pitch into the S4A form yourself. Aria reminds you when the
+    submission window opens (in the release plan).
+  </Accordion>
+  <Accordion title="What if I don't have sonic analysis on the track?">
+    Run [sonic analysis](/catalog/sonic-analysis) first. Pitches without
+    audio features default to generic genre descriptors — much weaker.
+  </Accordion>
+  <Accordion title="Can I pitch a track that's already released?">
+    Yes — same flow. Released tracks can still be added to playlists.
+    Some curators prefer 30-90 days post-release for "we already
+    validated it" reasons.
+  </Accordion>
+  <Accordion title="Does Patchline track pitch responses?">
+    Pitch-response tracking is on the roadmap. v1 you manually log it
+    in the project anchor activity feed.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/releases/pitch-kit" />

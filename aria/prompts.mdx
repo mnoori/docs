@@ -1,0 +1,137 @@
+---
+title: "Talking to Aria — prompts that work"
+sidebarTitle: "Prompts that work"
+description: "Pattern library of high-signal Aria prompts. Copy-paste templates for release planning, track analysis, playlist research, pitch drafting, royalty triage, and roster management."
+icon: "comment-dots"
+keywords:
+  - aria prompts
+  - patchline prompt examples
+  - ai music prompts
+  - how to use aria
+  - patchline chat tips
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+
+Aria works best when the prompt gives it enough context to act. This
+page is a pattern library — prompts that consistently return high-signal
+results, organized by what you're trying to do.
+
+<TierBadge tier="all" /> &nbsp; All prompts work on every tier (Free included). Some specific responses are tier-gated (playlist matching, etc.) — Aria will say so.
+
+## The core pattern
+
+Most great Aria prompts share three parts:
+
+1. **Verb** — what you want done ("plan," "find," "draft," "summarize").
+2. **Subject** — what / who / which track ("this track," "Mira's catalog," "the new release").
+3. **Constraint** — how / when / for whom ("for dreampop curators," "by next Friday," "under $100").
+
+Skip any of these and Aria will ask for clarification. That's a feature.
+
+## Release planning
+
+<AriaPromptCard prompt="Plan a release for 'Sleeper' — target date 6 weeks out, $0 ad budget." />
+<AriaPromptCard prompt="Compress my 'Late Bloom' plan into 3 weeks — release is sooner than expected." />
+<AriaPromptCard prompt="What's overdue on my current releases?" />
+<AriaPromptCard prompt="Build a roster-level calendar for the next 60 days across all active artists." />
+
+## Track analysis
+
+<AriaPromptCard prompt="What's the BPM, key, and mood of my latest track?" />
+<AriaPromptCard prompt="Which track in my catalog has the highest energy?" />
+<AriaPromptCard prompt="Compare 'Sleeper' and 'Late Bloom' — which is more streaming-friendly?" />
+<AriaPromptCard prompt="Analyze https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh and tell me what's working sonically." />
+
+## Playlist research
+
+<AriaPromptCard prompt="Find playlists for 'Sleeper' that fit and have active curators." />
+<AriaPromptCard prompt="Inspect 'Bedroom Vibes' — is the curator worth pitching?" />
+<AriaPromptCard prompt="Which curators added Tessa or Cleo Bell recently?" />
+<AriaPromptCard prompt="Show me the 5 playlists most likely to add my new track based on history." />
+
+## Pitch drafting
+
+<AriaPromptCard prompt="Draft a pitch for 'Sleeper' to the curator of 'Lush Sounds'." />
+<AriaPromptCard prompt="Write a 60-second pitch grounded in the actual audio features, not generic copy." />
+<AriaPromptCard prompt="Draft 3 variations of a pitch — short, medium, long." />
+<AriaPromptCard prompt="Rewrite this pitch in a more casual tone: [paste draft]" />
+
+## Artist intelligence
+
+<AriaPromptCard prompt="Tell me everything about Mira's last 30 days — streaming, socials, momentum." />
+<AriaPromptCard prompt="Compare Tessa to her top 3 sonic peers in audience size and growth." />
+<AriaPromptCard prompt="Add this artist to my roster: https://open.spotify.com/artist/4LWlR8nq19v7sZ2C9CGfMR" />
+<AriaPromptCard prompt="Refresh intelligence for every artist in my roster." />
+
+## A&R discovery (Pro+)
+
+<AriaPromptCard prompt="Find 10 emerging dreampop artists with under 50k monthly listeners." />
+<AriaPromptCard prompt="Show me trending hip-hop artists in Q1 with growing engagement." />
+<AriaPromptCard prompt="Who's making music similar to Mira that I should be following?" />
+
+## Royalty & insights
+
+<AriaPromptCard prompt="Parse my latest royalty statement and flag anomalies." />
+<AriaPromptCard prompt="Compare this quarter's earnings to last quarter — what changed?" />
+<AriaPromptCard prompt="Summarize my streaming for the last 30 days across all artists." />
+<AriaPromptCard prompt="Which artist had the biggest growth this month?" />
+
+## Storefront
+
+<AriaPromptCard prompt="How much did my storefront earn this month?" />
+<AriaPromptCard prompt="Which product is converting best?" />
+<AriaPromptCard prompt="Suggest a price for the lossless version of 'Sleeper'." />
+
+## Email & coordination
+
+<AriaPromptCard prompt="Draft a follow-up email to the 3 curators who haven't replied in 2 weeks." />
+<AriaPromptCard prompt="Summarize unread emails about Mira's release." />
+<AriaPromptCard prompt="Schedule the smart link launch for 7 days before release." />
+
+## Pattern: hand Aria a problem, not a question
+
+Less effective: *"What should I do?"*
+
+More effective: *"My release is in 3 weeks, I have a $50 budget, my last
+release got 8k streams. What's the highest-impact thing to do this week?"*
+
+The more constraints you supply, the more concrete the answer.
+
+## Pattern: use Aria for triage, not strategy
+
+Aria is fast at synthesizing data into a shortlist. Strategy decisions
+are still yours.
+
+Good Aria task: *"Of these 25 playlist matches, which 3 are highest
+priority?"*
+
+Less-good Aria task: *"Should I sign with [label]?"*
+
+## Pattern: paste, don't paraphrase
+
+If a curator emailed you, paste the email and ask for a draft reply.
+Don't summarize — Aria sees nuance you might miss.
+
+If a contract has a clause you want analyzed, paste the clause. Don't
+describe it.
+
+## What Aria *won't* do
+
+- **Make decisions for you.** Aria recommends; you choose.
+- **Send a message without your approval.** Aria drafts; you send.
+- **Submit to Spotify editorial.** No public API for that.
+- **Move money.** Aria can summarize earnings; payouts go through
+  Stripe directly.
+- **Train on your data.** Hard rule.
+
+## Related pages
+
+- [Aria overview](/aria/overview) — what Aria is
+- [Aria on Telegram](/aria/telegram) — same Aria, mobile-friendly
+- [Aria's research mode](/aria/research-mode) — daily / weekly synthesis
+- [MCP overview](/for-agents/mcp-overview) — the tools Aria uses
+
+<AICallout page="/aria/prompts" />

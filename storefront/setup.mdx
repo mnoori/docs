@@ -1,0 +1,117 @@
+---
+title: "Set up your store"
+sidebarTitle: "Set up your store"
+description: "Step-by-step storefront setup: connect Stripe, choose your slug, add products from your catalog, set pricing, add a banner, share your link. About 15 minutes start-to-finish."
+icon: "store"
+keywords:
+  - storefront setup
+  - patchline store setup
+  - stripe connect music
+  - sell music direct
+schema:
+  - "@context": "https://schema.org"
+    "@type": "HowTo"
+    "name": "Set up a Patchline storefront"
+    "description": "Connect Stripe, choose a slug, add products, set pricing, share your link."
+    "totalTime": "PT15M"
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+
+15 minutes from "I want to sell my music" to "I have a working
+storefront link." Works on every tier — Free gives you the storefront
+with a 10% platform fee; Starter+ is 0% platform fee.
+
+<TierBadge tier="all" /> &nbsp; 0% platform fee on Starter+. Stripe processing applies on every tier.
+
+## What you'll need
+
+- **A Patchline account** ([sign up](https://patchline.ai)).
+- **A Stripe account** (or willingness to create one — takes 5 minutes).
+- **At least one [asset in your catalog](/catalog/import)** to sell.
+- **A banner image** (1500×500 recommended) — can be added later.
+
+## Step-by-step
+
+<Steps>
+  <Step title="Open the Store dashboard">
+    Sidebar → **Store** → `/dashboard/store`.
+  </Step>
+  <Step title="Connect Stripe">
+    Click **Connect Stripe**. Standard Stripe Connect flow:
+    - Existing Stripe account: sign in, approve Patchline as a
+      connected app. ~2 min.
+    - New Stripe account: create one through Stripe's flow (business
+      info, bank account, tax info). ~5–10 min.
+  </Step>
+  <Step title="Pick your slug">
+    Your storefront URL is `patchline.ai/store/<slug>`. Pick something
+    short and brandable — `mira-music`, `runhot`, `velvetbird`. Slugs
+    are unique platform-wide.
+  </Step>
+  <Step title="Add products">
+    Inventory → **+ Add product**. For each product:
+    - Pick a track from your catalog (or upload a new one)
+    - Set product type: single track / album / stems / merch (text-only
+      for v1, no shipping)
+    - Set price (fixed or pay-what-you-want with optional minimum)
+    - Optionally add a description, behind-the-scenes asset, signed
+      cover art
+  </Step>
+  <Step title="Set up your banner + bio">
+    Storefront → **Customize**:
+    - Banner image (1500×500 recommended, JPG/PNG)
+    - Short bio (under 200 chars)
+    - Profile photo (uses your roster artist photo by default)
+    - Social links (IG, TikTok, YouTube, etc.)
+  </Step>
+  <Step title="Preview + publish">
+    **Preview** opens your store URL in a new tab. When it looks right,
+    flip the **Live** toggle.
+  </Step>
+  <Step title="Share the link">
+    `patchline.ai/store/<your-slug>`. Drop in your Linktree, bio,
+    socials, email signature. The link auto-generates an OG image for
+    social previews.
+  </Step>
+</Steps>
+
+## Embedding on your own site
+
+The embed widget lets you drop a product into any HTML page:
+
+```html
+<iframe
+  src="https://patchline.ai/store/<your-slug>/embed/<asset-id>"
+  width="100%"
+  height="420"
+  frameborder="0"
+></iframe>
+```
+
+The embed renders the product card + a buy button that opens checkout
+in a popup. Works on Squarespace, Webflow, Wix, plain HTML, or anywhere
+iframes are allowed.
+
+## Reordering products
+
+Inventory → drag-and-drop to reorder. The order on your storefront
+follows the inventory order.
+
+## Pricing modes per product
+
+| Mode | Use when |
+|---|---|
+| **Fixed** | Standard — $5, $10, etc. |
+| **Pay-what-you-want** | Solidarity / tip jar feel — fan picks the price |
+| **Pay-what-you-want with minimum** | Soft floor with upside — minimum $3, fans can pay more |
+| **Free download** | Lead magnet — collect emails in exchange for music |
+
+## Related pages
+
+- [Storefront overview](/storefront/overview) — what storefronts are
+- [Smart links](/storefront/smart-links) — routing links for fans
+- [Checkout & payouts](/storefront/checkout-payouts) — Stripe details
+
+<AICallout page="/storefront/setup" />

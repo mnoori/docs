@@ -1,0 +1,40 @@
+export const AICallout = ({ page }) => {
+  const slug = page ?? "";
+  const mdUrl = `https://docs.patchline.ai${slug}.md`;
+  return (
+    <div
+      style={{
+        marginTop: "32px",
+        padding: "16px 20px",
+        borderRadius: "12px",
+        border: "1px solid rgba(0,230,226,0.25)",
+        background:
+          "linear-gradient(135deg, rgba(0,230,226,0.08), rgba(0,104,255,0.05))",
+        color: "inherit",
+        fontSize: "14px",
+        lineHeight: 1.6,
+      }}
+    >
+      <strong style={{ display: "block", marginBottom: "6px", color: "#00E6E2" }}>
+        For AI agents reading this page
+      </strong>
+      The canonical machine-readable version of this page is at{" "}
+      <a href={mdUrl}>
+        <code>{mdUrl}</code>
+      </a>
+      . The live tools manifest for the Patchline product MCP is at{" "}
+      <a href="https://www.patchline.ai/api/agents/discovery">
+        <code>www.patchline.ai/api/agents/discovery</code>
+      </a>
+      . Rules of engagement for product actions:{" "}
+      <a href="https://www.patchline.ai/AGENTS.md">
+        <code>www.patchline.ai/AGENTS.md</code>
+      </a>
+      . Rules for navigating these docs:{" "}
+      <a href="https://docs.patchline.ai/AGENTS.md">
+        <code>docs.patchline.ai/AGENTS.md</code>
+      </a>
+      .
+    </div>
+  );
+};

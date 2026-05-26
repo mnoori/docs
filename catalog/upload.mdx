@@ -1,0 +1,194 @@
+---
+title: "Upload a track"
+sidebarTitle: "Upload"
+description: "Upload MP3, WAV, or FLAC files directly to your Patchline catalog. Auto-extracts ID3 metadata, runs sonic analysis, stores the master in versioned S3. Best for unreleased work or when you want the master in Patchline."
+icon: "upload"
+keywords:
+  - upload track patchline
+  - patchline music upload
+  - mp3 wav flac upload
+  - master file upload
+schema:
+  - "@context": "https://schema.org"
+    "@type": "HowTo"
+    "name": "Upload a music file to Patchline"
+    "description": "Add unreleased or master audio to your Patchline catalog. Auto metadata extraction and sonic analysis run on upload."
+    "totalTime": "PT3M"
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+Upload a finished audio file directly into your Patchline catalog.
+Patchline stores it in versioned S3, extracts ID3 metadata, queues
+[sonic analysis](/catalog/sonic-analysis), and makes it searchable.
+Best for **unreleased work** or when you want your master to live in
+Patchline alongside the catalog metadata.
+
+<TierBadge tier="all" /> &nbsp; Per-tier upload limits: Free 3 lifetime · Starter 25 · Pro 200 · Scale 1,000 · Enterprise unlimited.
+
+## When to upload vs import
+
+| | Upload (this page) | [Import](/catalog/import) |
+|---|---|---|
+| Use when | Track is **unreleased** or you want the master in Patchline | Track is **already released** on a streaming platform |
+| Audio file in Patchline | **Yes** (versioned S3) | No |
+| Sonic analysis runs | Yes, on your master | Yes, via the streaming source |
+| Storage cost | Counts against your storage limit | None |
+| Use-case fit | Demos, rough cuts, masters, stems | Released catalog from Distrokid/Tunecore/labels |
+
+If your track is already on Spotify, **import is cheaper** (no storage,
+no upload time). Upload only when you need the master.
+
+## Supported formats
+
+| Format | Notes |
+|---|---|
+| **MP3** | Any bitrate, any ID3 version |
+| **WAV** | Recommended for masters |
+| **FLAC** | Recommended for masters |
+| **AIFF** | Supported |
+| **M4A / AAC** | Supported |
+| **OGG** | Supported |
+
+Max file size: **500 MB** (web upload), **1 GB** (chunked upload on
+Scale+/Enterprise).
+
+## How to upload
+
+### Web dashboard
+
+<Steps>
+  <Step title="Open the catalog">
+    Sidebar → **Catalog**.
+  </Step>
+  <Step title="Drop your file">
+    Drag the file onto the upload zone, or click **Upload** to pick a file.
+  </Step>
+  <Step title="Confirm metadata">
+    Patchline pre-fills title, artist, ISRC (if present), cover art (if
+    embedded). You confirm or edit.
+  </Step>
+  <Step title="Wait for sonic analysis">
+    Analysis queues immediately, completes in 30–90s. The track appears
+    in the catalog list with a spinner that resolves into the feature
+    panel.
+  </Step>
+</Steps>
+
+### Via Aria
+
+<AriaPromptCard prompt="Upload this file to my catalog: [attach file]" />
+
+Aria handles the upload + metadata confirmation in the chat. Best on
+Telegram for small files, web for larger ones.
+
+## What gets extracted from your file
+
+| Field | Source |
+|---|---|
+| Title | ID3 v2 `TIT2` tag |
+| Artist | ID3 v2 `TPE1` tag |
+| Album | ID3 v2 `TALB` tag |
+| ISRC | ID3 v2 `TSRC` tag (if present) |
+| Genre | ID3 v2 `TCON` tag |
+| Track number | ID3 v2 `TRCK` tag |
+| Year | ID3 v2 `TYER` / `TDRC` tag |
+| Cover art | Embedded APIC frame (PNG / JPEG) |
+| Duration | Read from file directly |
+| Sample rate / bit depth | Read from file (WAV / FLAC) |
+| BPM, key, mood, energy, valence, danceability, instruments, sonic genres | Runs via sonic analysis after upload (5 credits/track) |
+
+If a tag is missing, the upload UI prompts you to fill it. ISRC is
+strongly encouraged but not required.
+
+## Storage limits
+
+| Tier | Storage cap |
+|---|---|
+| <TierBadge tier="free" /> | 1 GB |
+| <TierBadge tier="starter" /> | 10 GB |
+| <TierBadge tier="pro" /> | 100 GB |
+| <TierBadge tier="scale" /> | 500 GB |
+| <TierBadge tier="enterprise" /> | Unlimited |
+
+A typical 3-minute WAV master is ~30 MB. So Starter (10 GB) holds ~300
+masters; Pro (100 GB) holds ~3,000. FLAC compresses to roughly half
+the size of WAV.
+
+## Version control
+
+Every upload to the same track ID creates a new **version**. Versions
+are listed in the catalog row → ⋯ → Versions.
+
+- **Latest version** is what plays, what sonic analysis runs on, what
+  the storefront sells.
+- **Older versions** are kept (full audit trail) until you explicitly
+  delete them.
+- **Restore** any version with one click.
+
+Useful for: re-uploading after a master revision, swapping a censored
+edit, A/B testing storefront versions.
+
+## Privacy & security
+
+- Files are stored in S3 bucket `patchline-files-us-east-1`, server-side
+  encrypted, versioned, with object-level access logging.
+- Only you can access your upload's signed URL.
+- [Cynite](/catalog/sonic-analysis) receives the audio for analysis but
+  does not retain it for training (per the
+  [no-Cynite-training audit](/reference/glossary), ratified 2026-05-16).
+- The Patchline RIP audio pipeline runs entirely in our `us-east-1` AWS
+  region.
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| File upload itself | 0 credits (counts against lifetime upload cap) |
+| Sonic analysis on upload | 5 credits/track (automatic) |
+| Storage | Included in tier — no per-GB charge |
+
+## Related pages
+
+- [Catalog import](/catalog/import) — the URL-based path
+- [Sonic analysis](/catalog/sonic-analysis) — what runs after upload
+- [Storefront overview](/storefront/overview) — sell what you upload
+- [Plans & credits](/account/plans-credits) — credit math
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I upload an album as a single file?">
+    Better to upload each track separately. Patchline treats each upload
+    as a single catalog entry, so an album-as-one-file becomes one row
+    instead of 12. If you have a 12-track album, upload 12 files.
+  </Accordion>
+  <Accordion title="What if my file has no ID3 metadata?">
+    The upload dialog prompts you to enter title, artist, etc. manually.
+    ISRC is optional — fill it in when you have it.
+  </Accordion>
+  <Accordion title="Does upload count against my catalog import limit?">
+    No. Uploads and imports are tracked separately. Upload cap (Free 3 /
+    Starter 25 / Pro 200 / Scale 1,000) is independent of catalog import
+    cap (Free 10 / Starter 100 / Pro 500).
+  </Accordion>
+  <Accordion title="Can I bulk-upload from a folder?">
+    Yes — drag a folder of files onto the upload zone. Patchline
+    processes them serially with a progress bar.
+  </Accordion>
+  <Accordion title="What about stems (multitrack)?">
+    Upload them as separate tracks with naming convention
+    `<song>-stem-<vocals|drums|bass|other>.wav`. They'll appear as
+    related rows. Stem separation tooling is in beta — see
+    [Sonic analysis](/catalog/sonic-analysis).
+  </Accordion>
+  <Accordion title="What's the upload bandwidth requirement?">
+    Mostly governed by your internet connection. A 50 MB WAV on a
+    typical home connection (50 Mbps up) uploads in ~10s. Chunked
+    upload on Scale+ handles flaky connections gracefully.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/catalog/upload" />

@@ -1,0 +1,162 @@
+---
+title: "Royalty statement analysis"
+sidebarTitle: "Royalty"
+description: "Upload a Distrokid, Tunecore, label, or publisher royalty PDF. Aria parses every line, computes totals, identifies anomalies (missing platforms, unusual deltas), and surfaces opportunities."
+icon: "file-invoice-dollar"
+keywords:
+  - royalty analysis
+  - patchline royalty
+  - distrokid statement parser
+  - tunecore parser
+  - royalty pdf ai
+schema:
+  - "@context": "https://schema.org"
+    "@type": "SoftwareApplication"
+    "name": "Patchline Royalty Analysis"
+    "applicationCategory": "FinanceApplication"
+    "description": "Parse music royalty statements, identify anomalies, forecast revenue."
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+Royalty statements are PDFs no one wants to read. Patchline's royalty
+analysis parses them in seconds, computes totals, finds anomalies
+(missing platforms, unexpected drops, payment-window cutoffs), and
+forecasts the next period.
+
+<TierBadge tier="pro" /> &nbsp; Pro+ includes royalty analysis. 5 credits per statement.
+
+## What it does
+
+Upload a PDF → Aria returns:
+
+- **Total earnings** across all tracks
+- **Per-track breakdown** with platform mix
+- **Per-platform totals** (Spotify, Apple, YouTube, Tidal, Amazon, etc.)
+- **Anomalies** flagged automatically
+- **Period-over-period comparison** if prior statements exist
+- **Revenue forecast** for next period
+
+## Supported formats
+
+| Source | Status |
+|---|---|
+| **Distrokid** | ✓ |
+| **Tunecore** | ✓ |
+| **CD Baby** | ✓ |
+| **Amuse** | ✓ |
+| **United Masters** | ✓ |
+| **Label statements** (custom format) | ✓ — parsing improves with each one we see |
+| **Publishing statements** (ASCAP, BMI, SoundExchange) | ✓ |
+| **DDEX DSR** | ✓ |
+
+If your statement format isn't supported well, send it to
+[support@patchline.ai](mailto:support@patchline.ai) — every new format
+makes the parser smarter.
+
+## How to upload
+
+### Web
+
+Sidebar → **Royalties** → drag-and-drop PDF → wait 30–60s for parse.
+
+### Via Aria
+
+<AriaPromptCard prompt="Parse my latest royalty statement: [attach PDF]" />
+
+## What anomaly detection catches
+
+Common anomalies the royalty parser flags:
+
+| Anomaly | What it means | Example |
+|---|---|---|
+| **Zero earnings on a platform with streams** | Payment-window cutoff or platform glitch | "Late Bloom earned $0 on Apple despite 4,200 streams" |
+| **Sudden drop on a previously-strong platform** | Possible removal or playlist drop | "Sleeper dropped from $124 to $12 on Spotify mo/mo" |
+| **Track in catalog missing from statement** | Distribution gap | "Mira - November shows on Spotify but isn't on this statement" |
+| **Suspiciously consistent earnings** | Possible stream manipulation flag | "Same $43.21 every month — worth checking" |
+| **Currency conversion losses** | Multiple-currency statements | "USD-equivalent dropped 3% from FX, not from performance" |
+
+## Example output
+
+```text
+You: [uploads Distrokid Q2 2026 PDF]
+Aria: Parsed ✓ (12 sec)
+
+       Total: $3,124.07 across 23 tracks
+       Period: April-June 2026
+       Compared to Q1 2026: +18% ($2,647 → $3,124)
+
+       PER-TRACK TOP 5
+       1. Late Bloom     $1,082    (Spotify $890, Apple $124, YouTube $68)
+       2. Sleeper          $612    (Spotify $510, Apple $74, Amazon $28)
+       3. Long Way         $419    (steady across platforms)
+       4. Velvet           $310    (notable: TikTok $52 — first TikTok earnings)
+       5. Run Hot          $287
+
+       PER-PLATFORM
+       Spotify     $2,124   (68%)
+       Apple Music   $510   (16%)
+       YouTube       $284    (9%)
+       Amazon        $112    (4%)
+       TikTok         $52    (2%)
+       Other          $42    (1%)
+
+       ⚠  ANOMALIES (2)
+       1. "Late Bloom" earned $0 on Apple Music despite 4,200 streams
+          last quarter. Likely a payment-window cutoff — expect it next
+          statement.
+       2. "Mira - November" shows on Spotify (1,200 streams) but is
+          missing from this statement. Possible distribution gap — want
+          me to import it to your catalog?
+
+       Q3 FORECAST: $3,400 ± $200
+       Based on current run-rate + the TikTok earnings line, expect
+       slight growth.
+```
+
+## Privacy
+
+- PDFs are stored encrypted in S3, retention 5 years for tax purposes.
+- Only you have access — no shared dashboards expose royalty data.
+- The royalty processor (`royalty-processor.py`) runs in-region.
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| Parse a statement (PDF) | 5 |
+| Period comparison query | 1 |
+| Forecast query | 1 |
+| Anomaly re-scan | 1 |
+
+## Related pages
+
+- [Streaming insights](/intelligence/streaming-insights) — the stream-side counterpart
+- [Aria's research mode](/aria/research-mode) — surfaces royalty anomalies in the weekly synthesis
+- [Plans & credits](/account/plans-credits) — credit cost
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does Patchline pay me royalties?">
+    No. Royalties come from your distributor (Distrokid, Tunecore, etc.)
+    or label. Patchline reads the statements they send you and finds
+    insights — we don't sit in the money flow.
+  </Accordion>
+  <Accordion title="What if my statement format isn't supported?">
+    Email it (with permission) to support@patchline.ai. Each new format
+    improves the parser. Most major distributors and publishers are
+    already supported.
+  </Accordion>
+  <Accordion title="Can I export the parsed data?">
+    Yes — CSV per statement, or aggregated cross-statement (Scale+).
+  </Accordion>
+  <Accordion title="Is the forecast accurate?">
+    Typically within ±10% if you have 3+ months of prior statements.
+    Less reliable for new releases or seasonal genres.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/intelligence/royalty" />

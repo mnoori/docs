@@ -1,0 +1,203 @@
+---
+title: "Audience & fan graph"
+sidebarTitle: "Audience & fan graph"
+description: "Audience intelligence per artist — demographics, top markets, listener geography, social audience overlap, fan momentum. The 'fan graph' is the network view of how fans connect across your roster and storefront."
+icon: "people-group"
+keywords:
+  - artist audience
+  - fan graph
+  - music demographics
+  - listener geography
+  - patchline audience
+  - fan overlap
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+Audience intelligence answers *"who's actually listening?"* — per
+artist, per release, per market. The **fan graph** extends that across
+your full roster + storefront to show how fans connect: who overlaps
+between which artists, where momentum is building, which audience
+segments are responding to what.
+
+<TierBadge tier="scale" /> &nbsp; Full audience + fan-graph features. Pro shows per-artist audience without cross-roster fan-graph view.
+
+## Two layers
+
+| Layer | What it answers | Tier |
+|---|---|---|
+| **Audience** (per artist) | "Who is listening to X?" — demographics, geography, social channels | Pro+ |
+| **Fan graph** (cross-roster) | "Who is listening to multiple artists in my roster?" — overlap, momentum, segments | Scale+ |
+
+## Audience — per artist
+
+What you see for one artist:
+
+| Section | What it contains | Source |
+|---|---|---|
+| **Demographics** | Age (binned), gender (estimated), language | Soundcharts |
+| **Geography** | Top cities, top countries, geographic share | Soundcharts |
+| **Listener tier** | Casual / engaged / fan classification | Patchline-derived from listening behavior |
+| **Social audience** | IG, TikTok, YouTube, X overlap and growth | Soundcharts |
+| **Fan momentum** | 30-day growth across streaming + social | Soundcharts |
+| **Streaming behavior** | Repeat-listen %, playlist save %, completion rate | Soundcharts (top track only) |
+
+### Where to find it
+
+Web dashboard: sidebar → **Artists** → click an artist → **Audience**
+tab.
+
+Via Aria:
+
+<AriaPromptCard prompt="Show me Mira's audience demographics." />
+<AriaPromptCard prompt="Where are Tessa's fans located?" />
+<AriaPromptCard prompt="What's the gender split for Cleo Bell's TikTok?" />
+
+## Fan graph — cross-roster
+
+The fan graph is the cross-artist view. If you manage Mira, Tessa, and
+Cleo Bell, the fan graph shows:
+
+- **Overlap matrix** — how many fans listen to ≥ 2 of your artists
+- **Bridge artists** — which roster artist drives the most cross-discovery
+- **Geographic momentum** — where the roster collectively is gaining
+- **Cluster identification** — natural fan segments (dreampop heads,
+  bedroom-pop seekers, etc.)
+- **Storefront-fan overlap** — fans who bought from your storefront and
+  also stream multiple roster artists
+
+### Example fan graph output
+
+```text
+You: Show me the fan graph across my roster
+Aria: 5 artists, ~32k unique fans:
+
+       Mira    Tessa   Cleo Bell   Run Hot   Velvet Bird
+Mira       —    14%       18%         3%         9%
+Tessa     14%     —       22%         2%         11%
+CleoB     18%   22%        —          1%         8%
+RunHot     3%    2%        1%         —          15%
+VelvB      9%   11%        8%        15%         —
+
+Cluster 1 (dreampop, 56% of unique fans):
+  Mira + Tessa + Cleo Bell + Velvet Bird (slightly)
+  Top markets: LA, NYC, London, Stockholm
+
+Cluster 2 (electronic, 18%):
+  Run Hot + Velvet Bird (slightly)
+  Top markets: Berlin, Detroit, Tokyo
+
+Cluster 3 (crossover, 11%):
+  Velvet Bird connects both clusters.
+  3,500 fans listen to ≥ 2 artists across clusters.
+
+Bridge artist: Velvet Bird. Pushing her releases benefits both
+clusters disproportionately.
+```
+
+### Where the fan graph lives
+
+- Web: sidebar → **Artists** → **Fan graph** tab (Scale+).
+- Via Aria: "show me the fan graph" or "where's my roster overlap."
+
+## Streaming behavior
+
+For each artist's top track, Patchline surfaces:
+
+- **Completion rate** — % of listeners who finish the track (high =
+  strong hook + retention).
+- **Repeat-listen %** — % who play multiple times in a session.
+- **Playlist-save %** — % of casual listeners who save to their own
+  playlist.
+
+These signals are stronger predictors of long-term success than raw
+stream counts.
+
+## Examples
+
+### Where is my growth coming from?
+
+<AriaPromptCard prompt="In the last 30 days, where did Mira gain the most listeners?" />
+
+```text
+Aria: Mira's top growth markets (last 30d):
+  1. Stockholm, Sweden — +320 monthly listeners (+47% mo/mo)
+  2. Brooklyn, USA      — +280 (+18%)
+  3. Berlin, Germany    — +210 (+24%)
+  4. London, UK         — +195 (+11%)
+  5. Los Angeles, USA   — +180 (+8%)
+
+  Notable: Stockholm growth correlates with a "Lush Sounds" playlist
+  add 23 days ago. Worth a Swedish-language email blast to fans there.
+```
+
+### Cross-roster discovery
+
+<AriaPromptCard prompt="Which of my roster artists drives the most cross-listening?" />
+
+```text
+Aria: Velvet Bird. 15% of her fans also listen to Run Hot, 9% to
+Mira, 8% to Cleo Bell. She's the bridge artist between your dreampop
+and electronic clusters.
+
+Releasing her next single in a way that points to both clusters could
+unlock unique cross-streams.
+```
+
+## Privacy
+
+- Audience data is aggregated, not individually identifiable.
+- No personally-identifiable fan information (names, emails, etc.)
+  surfaces in audience or fan-graph views.
+- Demographics are estimated from listening behavior, not declared
+  identity.
+
+## Pricing
+
+| Tier | Audience (per artist) | Fan graph (cross-roster) |
+|---|---|---|
+| <TierBadge tier="free" /> | — | — |
+| <TierBadge tier="starter" /> | — | — |
+| <TierBadge tier="pro" /> | ✅ | — |
+| <TierBadge tier="scale" /> | ✅ | ✅ |
+| <TierBadge tier="enterprise" /> | ✅ + API | ✅ + API |
+
+Queries are cached for 24h. Force-refreshing costs 2 credits per query.
+
+## Related pages
+
+- [Intelligence profile](/artists/intelligence-profile) — per-artist intel
+- [Streaming insights](/intelligence/streaming-insights) — aggregate metrics
+- [Scout agent](/artists/scout) — find new artists for your roster
+- [Storefront](/storefront/overview) — fan-buyer overlap source
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What is the 'fan graph' exactly?">
+    A network view of fans across your roster + storefront. It's an
+    aggregate, not individual-fan tracking — we never expose
+    identifiable fans. The graph surfaces overlap percentages,
+    cluster identification, and bridge artists.
+  </Accordion>
+  <Accordion title="Why is my Pro audience incomplete?">
+    Soundcharts data quality varies by artist. Smaller artists (under
+    ~5k monthly listeners) often have limited demographic data.
+  </Accordion>
+  <Accordion title="Can I export audience data?">
+    Yes for individual artists (CSV via audience tab). Cross-roster
+    fan-graph export is Enterprise-only.
+  </Accordion>
+  <Accordion title="How fresh is the data?">
+    Daily refresh from Soundcharts. Force-refresh on demand (2 credits).
+  </Accordion>
+  <Accordion title="Does this work for unsigned artists I'm scouting?">
+    Yes — any artist you've added to roster gets audience data.
+    [Scout agent](/artists/scout) returns audience data for discovery
+    candidates too.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/artists/audience" />

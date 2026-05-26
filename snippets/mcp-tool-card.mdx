@@ -1,0 +1,134 @@
+export const MCP_TOOLS = {
+  analyze_url: {
+    category: "Dispatch",
+    summary: "Universal dispatcher for Spotify, YouTube, TikTok, SoundCloud, Apple Music, and Instagram URLs. Paste any link, get the canonical identity plus a ranked list of next MCP tools to call with exact arguments. Call this FIRST when a user shares a streaming-platform URL.",
+    callFirst: true,
+  },
+  browse_catalog: {
+    category: "Catalog",
+    summary: "List tracks in the user catalog with pagination — title, ISRC, BPM, key, status.",
+  },
+  catalog_search: {
+    category: "Catalog",
+    summary: "Semantic search across the user catalog via OpenSearch. Relevance-ranked results.",
+  },
+  get_asset: {
+    category: "Catalog",
+    summary: "Full metadata for a single track by asset ID — covers, audio features, version history, distribution status.",
+  },
+  get_artist_intelligence: {
+    category: "Artists",
+    summary: "Cached roster intelligence for a single artist: streaming, social audience, genres, recent activity. Run add_artist first if the artist is missing.",
+  },
+  search_artists: {
+    category: "Artists",
+    summary: "Search artists by name within the user roster.",
+  },
+  get_trending_artists: {
+    category: "Artists",
+    summary: "Soundcharts top artists. Optional genre filter and listener range. Not market-specific.",
+  },
+  add_artist: {
+    category: "Roster",
+    summary: "Add an artist to the user roster. REQUIRES a platform URL (Spotify, YouTube, TikTok, SoundCloud, Apple Music, or Instagram). Name-only is rejected. Triggers background Soundcharts enrichment.",
+  },
+  remove_artist: {
+    category: "Roster",
+    summary: "Remove an artist from the user roster by patchlineArtistId.",
+  },
+  get_releases: {
+    category: "Releases",
+    summary: "Release plans, schedules, and campaign details for the authenticated user.",
+  },
+  find_playlists: {
+    category: "Playlists",
+    summary: "Playlist match opportunities ranked by sonic fit and curator responsiveness for a given track.",
+  },
+  inspect_playlist: {
+    category: "Playlists",
+    summary: "Full Spotify playlist intelligence: curator identity, genres, freshness, followers, track turnover, recent additions, submission status.",
+  },
+  create_smart_link: {
+    category: "Smart Links",
+    summary: "Smart links and pre-save pages — server-side resolves ISRC, DSP URLs, and cover art.",
+  },
+  get_audio_features: {
+    category: "Music Data",
+    summary: "BPM, key, mood, danceability, and genre tags for a track. Accepts assetId or ISRC.",
+  },
+  get_song_intelligence: {
+    category: "Music Data",
+    summary: "Full track intelligence: ISRC, Cynite audio analysis, playlist matches, streaming stats, collaborators. Accepts a Spotify track URL.",
+  },
+  get_work_metadata: {
+    category: "Music Data",
+    summary: "Writers, publishers, and ISWC for a musical work.",
+  },
+  get_bio: {
+    category: "AI Generation",
+    summary: "Returns the AI-generated bio for an artist from intelligence cache. Populated during enrichment — no live LLM call.",
+  },
+  generate_pitch: {
+    category: "AI Generation",
+    summary: "Playlist curator pitch for a specific track. Grounded in the track's real audio analysis and audience data.",
+  },
+};
+
+export const MCPToolCard = ({ name }) => {
+  const t = MCP_TOOLS[name];
+  if (!t) {
+    return (
+      <div style={{ padding: "12px", border: "1px dashed #f87171", borderRadius: "8px" }}>
+        Unknown MCP tool: <code>{name}</code>
+      </div>
+    );
+  }
+  const badges = {
+    Dispatch:        "#818CF8",
+    Catalog:         "#22D3EE",
+    Artists:         "#60A5FA",
+    Roster:          "#60A5FA",
+    Releases:        "#C084FC",
+    Playlists:       "#4ADE80",
+    "Smart Links":   "#FACC15",
+    "Music Data":    "#FB923C",
+    "AI Generation": "#F472B6",
+  };
+  const color = badges[t.category] ?? "#A1A1AA";
+  return (
+    <div
+      style={{
+        padding: "16px",
+        borderRadius: "12px",
+        border: "1px solid rgba(255,255,255,0.10)",
+        background: "rgba(255,255,255,0.03)",
+        marginBottom: "12px",
+      }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px", marginBottom: "6px" }}>
+        <code style={{ fontFamily: "var(--font-family-mono)", fontSize: "15px", fontWeight: 600 }}>
+          {name}
+        </code>
+        <span
+          style={{
+            fontSize: "11px",
+            fontWeight: 600,
+            padding: "2px 10px",
+            borderRadius: "999px",
+            border: `1px solid ${color}40`,
+            background: `${color}1A`,
+            color: color,
+          }}
+        >
+          {t.category}
+        </span>
+      </div>
+      {t.callFirst && (
+        <div style={{ fontSize: "11px", color: "#00E6E2", fontWeight: 600, marginBottom: "6px" }}>
+          ★ Call this FIRST
+        </div>
+      )}
+      <div style={{ fontSize: "14px", lineHeight: 1.5, color: "inherit" }}>{t.summary}</div>
+    </div>
+  );
+};

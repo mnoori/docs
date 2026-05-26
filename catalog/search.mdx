@@ -1,0 +1,191 @@
+---
+title: "Catalog search"
+sidebarTitle: "Search"
+description: "Semantic search across your Patchline catalog using OpenSearch Serverless (AOSS). Free-text queries, mood/genre filters, ISRC lookup, similar-track discovery. Powers Aria's catalog tools."
+icon: "magnifying-glass"
+keywords:
+  - catalog search patchline
+  - opensearch music
+  - semantic music search
+  - similar track search
+  - patchline aoss
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
+
+Patchline indexes your catalog into **OpenSearch Serverless (AOSS)** so
+you can search by free-text query, mood, genre, BPM range, ISRC, or
+sonic similarity. This powers Aria's catalog tools and the dashboard
+search bar.
+
+<TierBadge tier="all" /> &nbsp; All tiers can search. Sonic-similarity ranking improves with catalog size and runs across the full catalog regardless of tier.
+
+## How to search
+
+### Web dashboard
+
+Sidebar → **Catalog** → search bar at top. Type any query:
+
+```text
+"dreampop 76 bpm"
+"tracks like 'Sleeper'"
+"F minor 4/4"
+"sad and slow"
+"ISRC GBUM71029604"
+```
+
+Results rank by combined relevance: keyword match + sonic similarity +
+recency.
+
+### Via Aria
+
+<AriaPromptCard prompt="Search my catalog for melancholy ballads under 90 BPM" />
+<AriaPromptCard prompt="Find tracks similar to 'Sleeper' in my catalog" />
+<AriaPromptCard prompt="Which of my tracks are in F minor?" />
+
+### Via MCP
+
+<MCPToolCard name="catalog_search" />
+<MCPToolCard name="browse_catalog" />
+
+`catalog_search` is the semantic search — pass any text query, get
+ranked results.
+`browse_catalog` is the listing endpoint — paginate through your full
+catalog without a query.
+
+## What you can search by
+
+| Query type | Example | What it returns |
+|---|---|---|
+| **Title** | `"Sleeper"` | Tracks with that title |
+| **Artist** | `"Mira"` | Tracks by that artist |
+| **ISRC** | `GBUM71029604` | The single matching track |
+| **Genre / mood tags** | `"dreampop"`, `"melancholy"` | Tracks tagged with those |
+| **BPM range** | `"between 100 and 120"` | Tracks in that range |
+| **Key** | `"F minor"`, `"D major"` | Tracks in that key |
+| **Time signature** | `"3/4"`, `"7/8"` | Tracks in that meter |
+| **Energy / valence** | `"high energy"`, `"sad"` | Tracks above/below thresholds |
+| **Sonic similarity** | `"like [track ID]"` | Tracks with cosine-similar audio embeddings |
+| **Composite** | `"dreampop 76 bpm female vocal"` | All conditions AND'd |
+
+The semantic layer means natural language works — *"slow sad ballads
+for late night"* returns the right tracks even if those exact words
+aren't in any tag.
+
+## Under the hood
+
+- Catalog metadata is indexed in **AOSS** via `catalog-search-indexer.py`
+  on every catalog write.
+- Sonic features (from [sonic analysis](/catalog/sonic-analysis)) ride
+  alongside metadata in the same index.
+- RIP embeddings (audio fingerprints) are stored as
+  `dense_vector` fields for similarity search.
+- Patchline uses `POST /_doc` without explicit `_id` (per AOSS convention) and
+  deduplicates by `docId`.
+
+When you query, AOSS returns relevance-ranked hits; Patchline merges
+in fresh streaming counts and presentation metadata before rendering.
+
+## Examples
+
+### Find a specific track by ISRC
+
+```text
+You: GBUM71029604
+Aria: That's "Bohemian Rhapsody" by Queen. Already in your catalog
+      (imported 2026-04-12). Want full intel or just the audio features?
+```
+
+### Find tracks for a playlist
+
+```text
+You: I'm building a chill playlist — find me 10 tracks in my catalog
+     that fit
+Aria: 10 best fits (low energy + acoustic-leaning + slow tempo):
+
+  1. Sleeper (Mira) — 76 BPM, F# minor, energy 0.31, acousticness 0.78
+  2. Long Way (Tessa) — 82 BPM, A minor, energy 0.34
+  3. Velvet (Velvet Bird) — 71 BPM, D minor, energy 0.28
+  4. ...
+
+  Want me to make a smart link with these 10?
+```
+
+### Find similar tracks
+
+```text
+You: Find tracks in my catalog that sound like 'Late Bloom'
+Aria: Top 5 by sonic similarity (cosine 0.7+):
+
+  1. Late Bloom (the query track itself, 1.00)
+  2. Bright Drop (Cleo Bell) — 0.81
+  3. Soft Rain (Tessa) — 0.79
+  4. ...
+```
+
+### Browse without a query
+
+```text
+You: List my catalog
+Aria: 47 tracks total. Showing first 10:
+  [paginated list with title, artist, BPM, key, last activity]
+
+  Want to filter? "all dreampop", "tracks added this month", etc.
+```
+
+## Limitations
+
+- **Search is only as good as the indexed data.** Tracks without
+  completed sonic analysis won't match audio-feature queries.
+- **Embeddings are catalog-only.** "Find similar tracks" works within
+  your catalog. For cross-catalog similarity, see
+  [Scout agent](/artists/scout).
+- **Index lag is ~30 seconds.** A freshly imported track is searchable
+  within ~30 seconds of import completing.
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| Catalog search query | 0 (cached) |
+| `catalog_search` MCP call | 0 |
+| `browse_catalog` MCP call | 0 |
+
+Search is effectively free. Only the Aria chat conversation wrapping
+the search counts as 1 credit.
+
+## Related pages
+
+- [Catalog import](/catalog/import) — what goes into the index
+- [Catalog upload](/catalog/upload) — file path
+- [Sonic analysis](/catalog/sonic-analysis) — populates audio-feature filters
+- [Scout agent](/artists/scout) — cross-catalog similarity
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I search across other users' catalogs?">
+    No. Search is user-scoped. Each user has their own AOSS index.
+    Cross-roster search (e.g., for label workspaces) on Pro+ shares one
+    index across the team's catalog only.
+  </Accordion>
+  <Accordion title="Why didn't my just-imported track show up?">
+    AOSS indexing has a ~30 second lag. Wait a moment and refresh.
+    If still missing after 5 minutes, the import may have failed —
+    check the catalog UI for an error state.
+  </Accordion>
+  <Accordion title="How are similar-track results ranked?">
+    Cosine similarity over RIP audio embeddings (256-dim dense vector
+    per track). Threshold defaults to 0.65 — tracks below that aren't
+    surfaced.
+  </Accordion>
+  <Accordion title="Can I save searches?">
+    Saved searches / smart playlists are on the roadmap. v1 you re-run
+    the query.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/catalog/search" />

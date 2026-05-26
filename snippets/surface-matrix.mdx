@@ -1,0 +1,83 @@
+export const FEATURE_SURFACES = {
+  aria: {
+    web:      { available: true,  detail: "Full surface — dashboard home" },
+    telegram: { available: true,  detail: "@AriaMusicBizBot, public" },
+    claude:   { available: true,  detail: "Via the Patchline plugin" },
+    mcp:      { available: true,  detail: "18 tools via OAuth 2.0 / PKCE" },
+  },
+  "catalog-import": {
+    web:      { available: true,  detail: "Paste URL in dashboard" },
+    telegram: { available: true,  detail: "Paste URL to @AriaMusicBizBot" },
+    claude:   { available: true,  detail: "Through Aria plugin actions" },
+    mcp:      { available: true,  detail: "analyze_url tool" },
+  },
+  "sonic-analysis": {
+    web:      { available: true,  detail: "Auto-runs on upload" },
+    telegram: { available: true,  detail: "Paste track URL to @AriaMusicBizBot" },
+    claude:   { available: true,  detail: "Through Aria plugin" },
+    mcp:      { available: true,  detail: "get_audio_features / get_song_intelligence" },
+  },
+  "release-planner": {
+    web:      { available: true,  detail: "Dashboard → Releases" },
+    telegram: { available: false, detail: "Conversation only, no full rollout view" },
+    claude:   { available: true,  detail: "Progressive interview workflow" },
+    mcp:      { available: true,  detail: "get_releases tool" },
+  },
+  "playlist-matching": {
+    web:      { available: true,  detail: "Dashboard → Playlists" },
+    telegram: { available: true,  detail: "Returns ranked matches inline" },
+    claude:   { available: true,  detail: "Through Aria plugin" },
+    mcp:      { available: true,  detail: "find_playlists / inspect_playlist" },
+  },
+  storefront: {
+    web:      { available: true,  detail: "Dashboard → Store + public /store/[slug]" },
+    telegram: { available: false, detail: "Not a Telegram surface" },
+    claude:   { available: false, detail: "Not yet exposed" },
+    mcp:      { available: false, detail: "Not yet exposed" },
+  },
+};
+
+export const SurfaceMatrix = ({ feature }) => {
+  const f = FEATURE_SURFACES[feature];
+  if (!f) return null;
+  const surfaces = [
+    { key: "web",      label: "Web dashboard", icon: "🖥" },
+    { key: "telegram", label: "Telegram",      icon: "✈"  },
+    { key: "claude",   label: "Claude",        icon: "✨" },
+    { key: "mcp",      label: "MCP",           icon: "⚡" },
+  ];
+  return (
+    <table style={{ width: "100%", marginTop: "12px", marginBottom: "12px" }}>
+      <thead>
+        <tr>
+          <th style={{ textAlign: "left", padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.10)" }}>Surface</th>
+          <th style={{ textAlign: "left", padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.10)" }}>Status</th>
+          <th style={{ textAlign: "left", padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.10)" }}>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {surfaces.map((s) => {
+          const v = f[s.key];
+          return (
+            <tr key={s.key}>
+              <td style={{ padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                <span style={{ marginRight: "8px" }}>{s.icon}</span>
+                {s.label}
+              </td>
+              <td style={{ padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                {v.available ? (
+                  <span style={{ color: "#22C55E", fontWeight: 600 }}>✓ Available</span>
+                ) : (
+                  <span style={{ color: "#71717A" }}>— Not available</span>
+                )}
+              </td>
+              <td style={{ padding: "8px 12px", borderBottom: "1px solid rgba(255,255,255,0.05)", fontSize: "13px", color: "inherit" }}>
+                {v.detail}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+};

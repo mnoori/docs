@@ -1,0 +1,209 @@
+---
+title: "Aria on Telegram"
+sidebarTitle: "Aria on Telegram"
+description: "Talk to Aria from your Telegram app. @AriaMusicBizBot is the public Patchline bot — paste a Spotify or YouTube URL, get a rich track card back, import to catalog, run pitches, all without leaving Telegram."
+icon: "paper-plane"
+keywords:
+  - aria telegram
+  - patchline telegram bot
+  - ariamusicbizbot
+  - telegram music ai
+schema:
+  - "@context": "https://schema.org"
+    "@type": "SoftwareApplication"
+    "name": "Aria on Telegram (@AriaMusicBizBot)"
+    "applicationCategory": "MultimediaApplication"
+    "operatingSystem": "Telegram"
+    "url": "https://t.me/AriaMusicBizBot"
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+[**@AriaMusicBizBot**](https://t.me/AriaMusicBizBot) is the public
+Patchline Aria bot on Telegram. Paste a streaming URL, get a rich track
+card back, import to catalog, run pitches, ask Aria anything — all
+without leaving Telegram.
+
+<TierBadge tier="all" /> &nbsp; Works on every tier including Free. Same AI credit pool as the web dashboard.
+
+## What it does
+
+Telegram is the lightest-weight Aria surface. No browser, no dashboard
+context-switch. You're already on Telegram — paste a link, get an
+answer.
+
+| Action | How |
+|---|---|
+| **Track lookup** | Paste a Spotify track URL → rich card with art, BPM, key, streaming stats |
+| **Artist lookup** | Paste an artist URL → roster card + recent activity |
+| **One-tap catalog import** | Tap the **Import** button on any track card |
+| **Playlist matching** | Reply to a track card with "find playlists" |
+| **DSP pitch draft** | Reply with "pitch this" |
+| **Catalog browse** | Type `/catalog` |
+| **Roster browse** | Type `/roster` |
+| **Aria chat** | Just type your question |
+
+## Quick start
+
+<Steps>
+  <Step title="Open the bot">
+    Tap [t.me/AriaMusicBizBot](https://t.me/AriaMusicBizBot) on your phone
+    or click the link on desktop. Telegram opens to the bot's chat.
+  </Step>
+  <Step title="Tap Start">
+    First-run: tap **Start**. The bot greets you and asks you to link
+    your Patchline account (or sign up if you don't have one).
+  </Step>
+  <Step title="Link your Patchline account">
+    Bot sends a deep-link to `patchline.ai/telegram/connect`. Open it,
+    sign in, return to Telegram. Your Telegram chat is now bound to
+    your Patchline account.
+  </Step>
+  <Step title="Paste a track URL">
+    Paste any Spotify, YouTube, Apple Music, or SoundCloud track URL.
+    Aria returns a rich card.
+
+    <AriaPromptCard prompt="https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh" surface="telegram" />
+  </Step>
+</Steps>
+
+## What a track card looks like
+
+When you paste a Spotify URL, the bot replies with:
+
+```text
+🎵  Bohemian Rhapsody
+    Queen · 1975 · A Night at the Opera
+
+    ⏱  5:55       🎹  E♭ major
+    💨  72 BPM   🎚  Energy 0.42
+    🎧  Streams (90d): 12,400,000
+    📈  Trending: +2.1% mo/mo
+
+    Top genres: rock, classic rock, prog rock
+
+    [ Import to catalog ]  [ Find playlists ]  [ Get pitch ]
+    [ Artist intel ]  [ Smart link ]  [ Compare ]
+```
+
+Tap any button. Aria responds inline.
+
+## Examples
+
+### Example 1 — Quick intel
+
+```text
+You: https://open.spotify.com/artist/4dpARuHxo51G3z768sgnrY
+Aria: 🎤  Adele
+      📊  142M monthly listeners (+0.8% mo/mo)
+      🌍  Top market: USA (32M)
+      🎵  Latest: "Easy On Me" (2021)
+      Genres: pop, soul, british pop
+
+      [ Full intel ] [ Add to roster ] [ Similar artists ]
+```
+
+### Example 2 — Catalog import on the go
+
+```text
+You: import this for me https://open.spotify.com/track/...
+Aria: ✓ Imported "Sleeper" by Mira.
+      Sonic analysis is running, finishes in ~60 seconds.
+      [ Open in dashboard ]
+```
+
+### Example 3 — Chat without a URL
+
+```text
+You: what's my best-performing track this month?
+Aria: 📈 "Late Bloom" — 4,210 streams in the last 30 days (+18% vs last
+      month). It's also your most-saved track this month (47 saves).
+
+      [ Full insights ] [ Find more playlists ]
+```
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `/start` | Re-greet + re-link if your session lapsed |
+| `/help` | Show command list |
+| `/catalog` | Browse your catalog with pagination |
+| `/roster` | Browse your artist roster |
+| `/credits` | Show this month's AI credit usage and remaining |
+| `/disconnect` | Unlink your Telegram chat from Patchline |
+
+You don't need commands for most things — just type or paste naturally.
+Aria figures it out.
+
+## Where Aria is *not* on Telegram
+
+Some things only work in the web dashboard or via MCP:
+
+- **Storefront management** — selling music is a web-only flow.
+- **Release planner full UI** — you can chat about it on Telegram, but
+  the calendar view + project anchor management is web.
+- **Audio file uploads** — Telegram has a file size limit too small for
+  most masters. Upload via the web dashboard.
+- **Royalty PDF parsing** — same file size + UX concerns. Upload PDFs in
+  the dashboard.
+
+## Privacy
+
+- Patchline does not log Telegram message content beyond what's needed
+  for the active conversation.
+- Your Telegram username is stored only to bind your chat to your
+  Patchline account.
+- Aria respects the same data-grounding rules on Telegram as on web —
+  it only acts on your data, never invents.
+
+## Pricing
+
+| Action on Telegram | Credit cost |
+|---|---|
+| Track / artist card | 0 (cached); 1 if Aria interprets a question alongside |
+| Catalog import | 0 (counts against lifetime cap, see Pricing) |
+| Sonic analysis (auto on import) | 5 / track |
+| Aria chat reply | 1 |
+| Pitch generation | 2 |
+| Playlist matching (Pro+) | 1 |
+
+Same credit pool as the web dashboard.
+
+## Related pages
+
+- [Aria overview](/aria/overview) — full surface area
+- [Catalog import](/catalog/import) — what "Import to catalog" actually does
+- [Playlist matching](/releases/playlist-matching) — what "Find playlists" calls
+- [Pitch kit](/releases/pitch-kit) — what "Get pitch" returns
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Is the bot just a chat wrapper, or is it real Aria?">
+    It's real Aria. Telegram calls the same multi-agent supervisor as
+    the web dashboard. The only difference is the UI (text + buttons
+    vs. full dashboard chrome).
+  </Accordion>
+  <Accordion title="Can multiple Telegram accounts link to one Patchline account?">
+    Yes. Each Telegram user has their own session, but they all act on
+    the same workspace's data. Useful for team members on Pro+.
+  </Accordion>
+  <Accordion title="What if I delete the chat?">
+    The chat unbinds. Re-link with `/start` next time. Your catalog and
+    data stay in Patchline regardless.
+  </Accordion>
+  <Accordion title="Can I send audio files to the bot?">
+    Telegram limits file size to ~50MB for bots. For most masters
+    (10–30MB compressed), it works. For large WAVs, use the web
+    upload.
+  </Accordion>
+  <Accordion title="Does the bot work outside the US?">
+    Yes — Telegram is global. Patchline itself is hosted in `us-east-1`,
+    so non-US users may see slightly higher latency.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/aria/telegram" />

@@ -1,0 +1,129 @@
+---
+title: "Aria's research mode"
+sidebarTitle: "Research mode"
+description: "Aria runs background research on your catalog and roster — daily and weekly synthesizers that surface what changed, what's working, and what needs attention. Insights appear in your dashboard when you open it."
+icon: "magnifying-glass-chart"
+keywords:
+  - aria research
+  - daily synthesizer
+  - weekly insights
+  - patchline insights
+  - automated music intelligence
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+Aria does work even when you're not chatting with it. Behind the scenes,
+two background synthesizers — daily and weekly — read your catalog,
+roster, streaming data, royalties, and storefront. They produce
+insights that surface in the dashboard when you next open it.
+
+<TierBadge tier="all" /> &nbsp; Background research is included in every tier. It doesn't consume your AI credit pool.
+
+## What it does
+
+| Synthesizer | Cadence | What it surfaces |
+|---|---|---|
+| **Daily** | Every morning | What changed in the last 24h — new playlist adds, follower jumps, storefront sales, overdue release tasks |
+| **Weekly** | Every Monday | Trend analysis — week-over-week growth, top performers, anomalies, recommended actions |
+
+Both feed into the **Aria chat hero** on `/dashboard` — the first thing
+you see when you log in. If something interesting happened, Aria leads
+with it.
+
+## How it works under the hood
+
+Three background Lambdas (see `backend/lambda/`):
+
+- **`aria_daily_synthesizer.py`** — runs at ~6 AM in your timezone (best
+  guess from your last-active hour). Reads the previous 24h of catalog
+  activity, streaming deltas (Soundcharts), storefront events, and
+  outstanding release-plan tasks. Synthesizes into ≤5 bullet points.
+
+- **`aria_weekly_synthesizer.py`** — runs Monday morning. Week-over-week
+  comparison across all surfaces. Identifies top + bottom performers,
+  anomalies (e.g., royalty discrepancies), and 1–3 recommended actions.
+
+- **`aria_daily_insights.py`** — the surfacing layer. Reads the
+  synthesizer outputs from S3, formats for the dashboard hero, and
+  renders.
+
+The synthesizer outputs are JSON files in
+`s3://patchline-aria-synth/{userId}/{date}.json` and feed the Aria
+chat directly when you ask "what's new?"
+
+## Example outputs
+
+### Example: a Monday weekly synthesis
+
+```text
+Good morning. Here's last week across your roster:
+
+▲  +18% streams on "Late Bloom" — your dreampop run is working
+▲  Tessa hit 12k monthly listeners (+2.1% wk/wk)
+▼  Run Hot's release is 2 days from launch, 3 tasks still open
+▼  Storefront earnings -8% wk/wk (lower traffic from Telegram)
+
+Highest-priority action: close out Run Hot's tasks today. Want me to
+walk them?
+```
+
+### Example: a daily morning briefing
+
+```text
+Yesterday:
+• Lush Sounds added Tessa's "Long Way" (your pitch from 12 days ago worked)
+• 4 new storefront sales totaling $42
+• Mira's roster intel refresh completed — no notable changes
+
+Today: Mira's release prep deadline (artwork). 1 task overdue.
+```
+
+## How to use research mode
+
+You don't need to do anything — the synthesizers run automatically. But
+you can interact with them:
+
+<AriaPromptCard prompt="What's new since yesterday?" />
+<AriaPromptCard prompt="What's the week's recap?" />
+<AriaPromptCard prompt="What anomalies did you find this week?" />
+<AriaPromptCard prompt="Run a fresh synthesis right now." />
+
+The "fresh synthesis" prompt re-runs the synthesizer on demand (counts
+1 credit + the underlying tool calls).
+
+## What it doesn't do
+
+- **It doesn't send emails or post to socials.** Insights surface in the
+  app and via [Telegram](/aria/telegram) only.
+- **It doesn't make autonomous decisions.** Insights include recommended
+  actions, but you act.
+- **It doesn't replace your manager or label.** Synthesizers spot
+  patterns; strategy is yours.
+
+## Tier behavior
+
+| Tier | Daily synthesizer | Weekly synthesizer |
+|---|---|---|
+| <TierBadge tier="free" /> | ✓ (3 bullets max) | ✓ (basic) |
+| <TierBadge tier="starter" /> | ✓ (5 bullets) | ✓ (full) |
+| <TierBadge tier="pro" /> | ✓ + roster-level | ✓ + roster-level + recommendations |
+| <TierBadge tier="scale" /> | ✓ + label-level | ✓ + label-level + roster trend analysis |
+| <TierBadge tier="enterprise" /> | ✓ + custom queries | ✓ + custom queries |
+
+## Privacy & data handling
+
+- Synthesizer outputs are user-scoped — no cross-user inference.
+- Outputs are stored in your S3 prefix, retention 90 days.
+- The synthesizers read your data but never write to it.
+
+## Related pages
+
+- [Aria overview](/aria/overview)
+- [Streaming insights](/intelligence/streaming-insights) — the underlying data
+- [Royalty analysis](/intelligence/royalty) — feeds anomaly detection
+- [Release planner](/releases/release-planner) — overdue-task detection
+
+<AICallout page="/aria/research-mode" />

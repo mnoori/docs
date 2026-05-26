@@ -1,0 +1,210 @@
+---
+title: "MCP tools reference"
+sidebarTitle: "Tools reference"
+description: "Complete reference for all 18 Patchline MCP tools — schema, arguments, return shape, tier gating, examples per tool. The canonical machine-readable manifest is at www.patchline.ai/api/agents/discovery."
+icon: "list-tree"
+keywords:
+  - patchline mcp tools
+  - mcp tools reference
+  - mcp tool schemas
+  - aria tool list
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
+
+Complete reference for all 18 Patchline MCP tools. For the
+machine-readable canonical manifest, fetch
+[`www.patchline.ai/api/agents/discovery`](https://www.patchline.ai/api/agents/discovery)
+— that's the always-current source of truth.
+
+<TierBadge tier="all" /> &nbsp; All tools are accessible on every tier; some are gated by tier limits (see per-tool notes).
+
+## Dispatch
+
+The most-important tool. Always call this first when a user pastes a
+streaming URL.
+
+<MCPToolCard name="analyze_url" />
+
+**Arguments:** `url: string` (required) — Spotify, YouTube, TikTok,
+SoundCloud, Apple Music, or Instagram URL of any kind.
+
+**Returns:** Canonical identity (`type`, `id`, `name`, `platform`)
+plus a ranked list of `nextSteps` — exact tool names with exact
+argument values.
+
+**Example call:**
+
+```json
+{
+  "name": "analyze_url",
+  "arguments": {
+    "url": "https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh"
+  }
+}
+```
+
+**Example return:**
+
+```json
+{
+  "type": "track",
+  "id": "4iV5W9uYEdYUVa79Axb7Rh",
+  "isrc": "GBUM71029604",
+  "name": "Bohemian Rhapsody",
+  "artist": "Queen",
+  "platform": "spotify",
+  "nextSteps": [
+    { "tool": "get_song_intelligence", "args": { "spotify_url": "..." } },
+    { "tool": "get_audio_features",     "args": { "isrc": "GBUM71029604" } }
+  ]
+}
+```
+
+## Catalog
+
+<MCPToolCard name="browse_catalog" />
+
+**Arguments:** `limit: int` (default 25), `cursor: string` (optional pagination token).
+
+<MCPToolCard name="catalog_search" />
+
+**Arguments:** `query: string` (free text), `limit: int` (default 10).
+
+<MCPToolCard name="get_asset" />
+
+**Arguments:** `asset_id: string` (the Patchline assetId).
+
+## Artists & roster
+
+<MCPToolCard name="get_artist_intelligence" />
+
+**Arguments:** `patchline_artist_id: string` (required).
+
+<MCPToolCard name="search_artists" />
+
+**Arguments:** `query: string` (artist name fragment).
+
+<MCPToolCard name="get_trending_artists" />
+
+**Arguments:** `genre: string` (optional), `listener_min: int` (optional), `listener_max: int` (optional), `limit: int` (default 25).
+
+<MCPToolCard name="add_artist" />
+
+**Arguments:** `url: string` (REQUIRED — Spotify, YouTube, TikTok, SoundCloud, Apple Music, or Instagram).
+
+**Gated by:** roster tier limit (Free 1 / Starter 1 / Pro 5 / Scale 20 / Enterprise unlimited).
+
+<MCPToolCard name="remove_artist" />
+
+**Arguments:** `patchline_artist_id: string`.
+
+## Releases
+
+<MCPToolCard name="get_releases" />
+
+**Arguments:** `status: string` (optional — `in_progress` / `scheduled` / `released` / `archived`), `limit: int` (default 10).
+
+## Playlists
+
+<MCPToolCard name="find_playlists" />
+
+**Arguments:** `asset_id: string` (the track to find matches for), `limit: int` (default 10).
+
+**Gated by:** <TierBadge tier="pro" /> required.
+
+<MCPToolCard name="inspect_playlist" />
+
+**Arguments:** `playlist_id: string` (Spotify playlist ID or URL).
+
+**Gated by:** <TierBadge tier="pro" /> required.
+
+## Smart Links
+
+<MCPToolCard name="create_smart_link" />
+
+**Arguments:** `asset_id: string`, `mode: string` (`smart_link` or `pre_save`), `release_date: string` (required if pre-save, ISO 8601), `capture_email: bool` (default false).
+
+## Music Data
+
+<MCPToolCard name="get_audio_features" />
+
+**Arguments:** `asset_id: string` OR `isrc: string` (one required).
+
+<MCPToolCard name="get_song_intelligence" />
+
+**Arguments:** `spotify_url: string` (required).
+
+<MCPToolCard name="get_work_metadata" />
+
+**Arguments:** `iswc: string` OR `asset_id: string`.
+
+## AI Generation
+
+<MCPToolCard name="get_bio" />
+
+**Arguments:** `patchline_artist_id: string`, `variant: string` (`one_line` / `paragraph` / `long`, default `paragraph`).
+
+**Note:** Returns cached bio from intelligence enrichment. No live LLM call. Free.
+
+<MCPToolCard name="generate_pitch" />
+
+**Arguments:** `asset_id: string`, `target: string` (optional — playlist ID, curator name, or general), `length: string` (`short` / `medium` / `long`, default `medium`).
+
+## Common patterns
+
+### "User pasted a URL — what do I do?"
+
+Always:
+
+1. Call `analyze_url` with the URL.
+2. Read the returned `nextSteps`.
+3. Call those tools with the exact arguments provided.
+
+This pattern saves 2-3 round-trips vs. trying to guess what the URL is.
+
+### "User wants to add an artist by name"
+
+Reject. The MCP tool reflects this:
+
+```text
+"add_artist" requires a `url` argument — a Spotify, YouTube, TikTok,
+SoundCloud, Apple Music, or Instagram URL. Name-only is rejected
+because many artists share names.
+```
+
+Use `search_artists` to find a candidate URL, then `add_artist`.
+
+### "User asks about a track that's not in their catalog"
+
+Two options:
+
+- Use `analyze_url` if they shared a URL — gets you the metadata
+  without importing.
+- Recommend they [import or upload](/catalog/import) the track. Once
+  imported, all catalog tools work on it.
+
+## Rate limits
+
+In practice, you'll hit AI-credit limits before MCP rate limits. The
+server enforces sane per-user limits to prevent abuse but doesn't
+publish hard rate-limit numbers.
+
+## Where this list lives
+
+- This page (human-readable).
+- [`www.patchline.ai/api/agents/discovery`](https://www.patchline.ai/api/agents/discovery) (machine-readable JSON).
+- `lib/agent-discovery/tool-manifest.ts` (source in the Patchline repo).
+
+All three must stay in sync. The JSON manifest is canonical.
+
+## Related pages
+
+- [MCP overview](/for-agents/mcp-overview) — what MCP is, two-server explainer
+- [MCP install](/for-agents/mcp-install) — per-client install
+- [AGENTS.md explained](/for-agents/agents-md-explained) — rules of engagement
+- [Aria overview](/aria/overview) — same tools, conversation form
+
+<AICallout page="/for-agents/mcp-tools-reference" />

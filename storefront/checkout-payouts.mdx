@@ -1,0 +1,140 @@
+---
+title: "Checkout & payouts"
+sidebarTitle: "Checkout & payouts"
+description: "How Stripe Connect powers storefront checkout, when payouts arrive in your bank account, how to handle taxes, refunds, and disputes."
+icon: "credit-card"
+keywords:
+  - stripe connect music
+  - storefront payouts
+  - music store taxes
+  - patchline checkout
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+
+Patchline storefronts run on **Stripe Connect**. Money flows from the
+fan's card to your Stripe account; Patchline never touches your funds.
+This page covers checkout mechanics, payout timing, taxes, refunds,
+and disputes.
+
+<TierBadge tier="all" /> &nbsp; Requires a connected Stripe account. See [storefront setup](/storefront/setup).
+
+## How the money flows
+
+```text
+Fan → Stripe Checkout → Stripe Connect → your Stripe account → your bank
+                                              ↑
+                                         Stripe deducts processing fee
+                                         Patchline platform fee (0% on paid tiers)
+```
+
+Concretely:
+
+| Step | What happens |
+|-------|---|
+| Fan clicks Buy | Stripe Checkout session opens |
+| Fan completes payment | Card charged, $X received |
+| Stripe holds briefly | Risk + fraud checks (seconds to minutes) |
+| Stripe deducts processing fee | Typically 2.9% + $0.30/txn |
+| Patchline platform fee | 0% on Starter+; 10% on Free |
+| Net lands in your Stripe balance | Available for payout |
+| Payout to your bank account | Per Stripe's default schedule (2 business days US) |
+
+## Payout timing
+
+Stripe defaults:
+
+| Country | Standard payout |
+|---|---|
+| United States | T+2 business days |
+| United Kingdom | T+3 business days |
+| EU | T+3-7 business days |
+| Most other countries | T+5-7 business days |
+
+You can configure faster payouts in Stripe (some include a small fee).
+
+## Taxes
+
+Sales tax / VAT depends on jurisdiction:
+
+- **Stripe Tax** (optional, ~0.5% per transaction) — automatic
+  calculation in 30+ countries. Recommended.
+- **Without Stripe Tax** — you're responsible for declaring and
+  remitting sales tax / VAT in your jurisdiction.
+
+Enable Stripe Tax in your Stripe dashboard → Settings → Tax.
+
+Income tax on storefront earnings is **always** your responsibility —
+Patchline issues no tax forms. Use Stripe's annual reports for
+documentation.
+
+## Refunds
+
+Settings → **Sales** → find the transaction → **Issue refund**.
+
+- Stripe processes the refund (T+5-10 business days back to fan's card).
+- Patchline marks the sale refunded.
+- The fan's download access is revoked.
+- The transaction shows refunded in your sales report.
+
+You can issue partial refunds.
+
+## Disputes (chargebacks)
+
+If a fan disputes a charge with their bank:
+
+1. Stripe notifies you via email + dashboard.
+2. You have ~7-21 days to respond with evidence (Stripe template).
+3. Stripe's chargeback fee (~$15) applies if you lose.
+
+Patchline can help draft a chargeback response — paste the dispute
+into Aria:
+
+```text
+You: Help me respond to this chargeback: [paste Stripe email]
+Aria: Here's a draft response. Key points to cite: download proof,
+purchase timestamp, your refund policy. [draft follows]
+```
+
+## Pricing
+
+| Cost | Where it goes |
+|---|---|
+| Stripe processing (typically 2.9% + $0.30/txn) | Stripe |
+| Patchline platform fee (Free: 10%) | Patchline |
+| Patchline platform fee (Starter+: **0%**) | n/a |
+| Stripe Tax (optional ~0.5%) | Stripe (if enabled) |
+| Stripe chargeback fee (~$15) | Stripe (only if you lose) |
+
+## Related pages
+
+- [Storefront overview](/storefront/overview) — 0% fee explainer
+- [Storefront setup](/storefront/setup) — Stripe Connect step
+- [Plans & credits](/account/plans-credits) — Patchline subscription side
+- [Pricing & plans](/get-started/pricing) — tier breakdown
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why does Patchline not hold my money?">
+    By design. Stripe Connect routes funds directly to your account —
+    Patchline only receives our platform fee (0% on paid tiers). This
+    means we can't accidentally hold your funds, can't freeze them,
+    and can't be in the middle if there's ever a payout dispute.
+  </Accordion>
+  <Accordion title="What about international fans?">
+    Stripe handles international cards by default. Currency conversion
+    happens at Stripe; you receive in your account's home currency.
+  </Accordion>
+  <Accordion title="Can I issue free download codes?">
+    Yes — Settings → **Discount codes** → 100% off code with usage limit.
+    Useful for press / promo.
+  </Accordion>
+  <Accordion title="What's the minimum payout amount?">
+    Stripe defaults vary by country — typically $1 in the US. Most
+    artists never hit a minimum because payouts happen automatically.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/storefront/checkout-payouts" />

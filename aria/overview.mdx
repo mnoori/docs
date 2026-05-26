@@ -1,0 +1,297 @@
+---
+title: "Aria"
+sidebarTitle: "Aria — overview"
+description: "Aria is Patchline's AI assistant for the music business. Chat to plan releases, analyze tracks, find playlists, draft pitches, and run your catalog — across web, Telegram, Claude, Cursor, and Codex."
+icon: "sparkles"
+keywords:
+  - aria
+  - ai music assistant
+  - music business ai
+  - patchline aria
+  - multi-agent music
+schema:
+  - "@context": "https://schema.org"
+    "@type": "SoftwareApplication"
+    "name": "Aria"
+    "applicationCategory": "MultimediaApplication"
+    "operatingSystem": "Web, Telegram, Claude, Cursor, VS Code, Codex"
+    "url": "https://patchline.ai/dashboard"
+    "description": "Multi-agent AI assistant for the music business. Reads catalog, queries streaming data, drafts pitches, plans releases."
+    "offers":
+      "@type": "Offer"
+      "price": "0"
+      "priceCurrency": "USD"
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+import { SurfaceMatrix } from "/snippets/surface-matrix.mdx"
+
+Aria is Patchline's AI assistant for the music business. You talk to Aria
+the same way you talk to a manager, A&R, or label-ops person — and Aria
+takes action: reads your catalog, queries streaming data, drafts pitches,
+plans releases, updates project anchors, generates artwork briefs.
+
+Aria is one assistant with multiple front doors. <TierBadge tier="all" />
+
+## What Aria does
+
+<CardGroup cols={2}>
+  <Card title="Plan a release" icon="rocket" href="/releases/release-planner">
+    Turn a track into a 6-week rollout with milestones, launch windows,
+    and next-best-actions.
+  </Card>
+  <Card title="Analyze a track" icon="waveform" href="/catalog/sonic-analysis">
+    Paste any Spotify URL — get BPM, key, mood, danceability, energy, and a
+    ranked list of similar artists.
+  </Card>
+  <Card title="Find playlists" icon="list-music" href="/releases/playlist-matching">
+    Rank Spotify playlists by sonic fit plus curator responsiveness for a
+    specific track.
+  </Card>
+  <Card title="Draft a DSP pitch" icon="file-pen" href="/releases/pitch-kit">
+    Generate a curator-facing pitch grounded in real track metadata,
+    sonic analysis, and artist context.
+  </Card>
+  <Card title="Parse a royalty PDF" icon="file-invoice-dollar" href="/intelligence/royalty">
+    Upload a Distrokid / Tunecore / label PDF — get totals, anomalies, and
+    a forecast in under a minute.
+  </Card>
+  <Card title="Manage your roster" icon="users" href="/artists/roster">
+    Add artists by URL. Background Soundcharts enrichment populates the
+    intelligence profile automatically.
+  </Card>
+</CardGroup>
+
+## When to use Aria
+
+Use Aria for the work that lives between tools — the strategy and
+synthesis that usually means hopping between Spotify for Artists, your
+DAW, a label spreadsheet, and a notes app.
+
+- **You just finished a track and don't know what to do next.** Paste the
+  file or the link. Aria gives you a release plan grounded in your
+  catalog, your audience, and what's actually working for artists like you
+  right now.
+- **A curator asked for a pitch and you have an hour.** "Pitch this track
+  to Mint Friday curators" returns a draft you can edit and send.
+- **You want to know if you have momentum.** "Summarize my streaming for
+  the last month" pulls the real numbers, not vibes.
+- **You're managing 5 artists and an upcoming release schedule.** "What
+  do I owe on Mira's release this week?" reads the project anchor and
+  returns the shortlist.
+
+## Where Aria lives
+
+<SurfaceMatrix feature="aria" />
+
+Pick whichever fits the workflow you're already in.
+
+<AccordionGroup>
+  <Accordion title="Patchline dashboard (web)" icon="browser">
+    Sign in at [patchline.ai](https://patchline.ai). Aria is the home
+    screen at `/dashboard`. Full surface area: catalog import, project
+    anchors, all 18 tools, file uploads. **This is the canonical surface
+    — everything else is a subset.**
+
+    [Open the dashboard →](https://patchline.ai/dashboard)
+  </Accordion>
+  <Accordion title="Telegram" icon="paper-plane">
+    Message [@AriaMusicBizBot](https://t.me/AriaMusicBizBot) on Telegram.
+    Paste a Spotify or YouTube link, get a rich track card back. One-tap
+    catalog import, AI pitches, intelligence reports — all without
+    leaving Telegram.
+
+    [Open in Telegram →](https://t.me/AriaMusicBizBot) ·
+    [Full Telegram guide →](/aria/telegram)
+  </Accordion>
+  <Accordion title="Claude (Desktop + Claude Code)" icon="message">
+    Install the official Patchline plugin and Claude can read your real
+    catalog. Ground every prompt in actual ISRCs, audio features, and
+    streaming data. Plugin includes a "progressive interview" workflow
+    that walks Aria-style release planning inside Claude.
+
+    [Install the Claude plugin →](/for-agents/claude-plugin)
+  </Accordion>
+  <Accordion title="Cursor, Codex, VS Code (MCP)" icon="code">
+    Patchline exposes 18 MCP tools at
+    `https://www.patchline.ai/api/mcp/v1`. OAuth 2.0 with PKCE — your
+    credentials never touch the AI client.
+
+    [Install the MCP server →](/for-agents/mcp-install)
+  </Accordion>
+</AccordionGroup>
+
+## Quick start
+
+<Steps>
+  <Step title="Sign in">
+    Go to [patchline.ai](https://patchline.ai) and create a free account.
+    Free tier includes 100 AI credits/month and Aria chat (1 credit per
+    conversation).
+  </Step>
+  <Step title="Connect your music">
+    Paste a Spotify, YouTube, or SoundCloud URL into Aria, or upload an
+    MP3 / WAV / FLAC directly. Aria adds the track to your catalog and
+    runs [sonic analysis](/catalog/sonic-analysis) (BPM, key, mood)
+    automatically.
+  </Step>
+  <Step title="Ask Aria what to do next">
+    Try one of these:
+
+    <AriaPromptCard prompt="Plan a release for this track." />
+    <AriaPromptCard prompt="Find playlists that fit this song." />
+    <AriaPromptCard prompt="Pitch this to lo-fi curators." />
+    <AriaPromptCard prompt="What's my best-performing track this month?" />
+  </Step>
+  <Step title="(Optional) Add Aria to your AI editor">
+    Install the [Claude plugin](/for-agents/claude-plugin) or the
+    [MCP server](/for-agents/mcp-install) so the AI tool you already use
+    can read your catalog.
+  </Step>
+</Steps>
+
+## Prerequisites
+
+- A free Patchline account ([sign up](https://patchline.ai)).
+- At least one track in your catalog (uploaded or imported) for tools
+  that reference your catalog. Aria can answer general questions without
+  a catalog, but the answers get much sharper once it has your real data.
+- For the [Claude plugin](/for-agents/claude-plugin): Claude Desktop or
+  Claude Code.
+- For the [MCP server](/for-agents/mcp-install): Cursor, Codex, VS Code,
+  or any MCP-compatible client.
+
+## How Aria works under the hood
+
+Aria is a **multi-agent system**. The supervisor agent reads your message,
+decides which specialist agent (Artist Intelligence, Scout, Pitch,
+Royalty, Metrics, Gmail, Legal, Documents) should handle it, and routes
+the work. Each specialist agent runs on AWS Bedrock with Claude Sonnet 4,
+calls real tools against your catalog and integrations, and returns a
+grounded answer.
+
+You don't see the routing — you see one assistant. But it means Aria can
+do work that any single-agent system can't: read your royalty PDF, query
+Soundcharts for the artist on it, draft a follow-up email about a
+discrepancy, all in one conversation.
+
+The supervisor itself runs on ECS Fargate (Patchline's strands-supervisor
+service). The specialist agents run on AWS Bedrock. The product MCP at
+[www.patchline.ai/api/mcp/v1](/for-agents/mcp-overview) exposes the same
+tools to external AI clients.
+
+<Note>
+  Every tool call is grounded in your data. Aria never invents an ISRC, a
+  streaming number, or a curator name. If the data isn't there, Aria says
+  so and offers to fetch it.
+</Note>
+
+## Examples
+
+### Example 1 — From a Spotify link to a release plan
+
+> **You:** here's my new single, planning to drop in 6 weeks
+> https://open.spotify.com/track/...
+>
+> **Aria:** Got it. *[reads ISRC, runs sonic analysis: 124 BPM, F minor,
+> dreampop-adjacent, high energy 0.62, low valence 0.31]*. Closest artists
+> in your roster: Mira, Tessa. Last release in this style hit 18k streams
+> in month one. I drafted a 6-week rollout:
+>
+> - Week -6: confirm artwork, write pitch copy
+> - Week -4: submit to Spotify editorial via your `submission_status: eligible` flag
+> - Week -2: smart link, pre-save, Telegram teaser
+> - Week 0: release day, DMs to the 8 curators who added Mira's last single
+> - Week +2: post-release: TikTok ad targeting the dreampop cluster
+>
+> Want me to create the project anchor and schedule the tasks?
+
+### Example 2 — Royalty statement triage
+
+> **You:** *[uploads quarterly Distrokid PDF]*
+>
+> **Aria:** Parsed. Total: $3,124.07 across 23 tracks. Two anomalies:
+> - "Late Bloom" earned $0.00 on Apple Music despite 4,200 streams there
+>   last quarter — likely a payment-window cutoff, expect it next
+>   statement.
+> - "Mira - November" shows on Spotify but is missing from your catalog —
+>   want me to import it?
+
+### Example 3 — Multi-tool workflow
+
+> **You:** is there a playlist on Spotify with a curator I could pitch
+> Mira's new track to, who also added a similar artist recently?
+>
+> **Aria:** Yes, three:
+> - **Lush Sounds** (78k followers, curator: @lush_sounds_oslo) — added
+>   Tessa's "Sleeper" 11 days ago. Submission status: open.
+> - **Bedroom Vibes** (210k followers, curator: @bedroomvibes) — added
+>   four dreampop tracks this month. Submission status: open.
+> - **Future Female Sounds** (190k followers, curator: @futurefemale) —
+>   adds quickly, high curator responsiveness score.
+>
+> Want a pitch draft for the first one?
+
+## Pricing
+
+Every tier includes Aria chat at **1 credit per conversation**. Volume
+scales with credit pool:
+
+| Tier | AI credits / month | Practical Aria use |
+|---|---|---|
+| Free | 100 | Try Aria, run a few sonic analyses |
+| Starter ($9.99) | 1,000 | Solo artist, daily use |
+| Pro ($29) | 5,000 | Small roster, multi-feature |
+| Scale ($99) | 20,000 | Label / management, high volume |
+| Enterprise ($249+) | Unlimited | Large catalog, programmatic |
+
+See [Pricing & plans](/get-started/pricing) for the full breakdown.
+
+## Related features
+
+- [Aria on Telegram](/aria/telegram) — `@AriaMusicBizBot`
+- [Talking to Aria — prompts that work](/aria/prompts)
+- [Aria's research mode](/aria/research-mode) — daily/weekly synthesizer
+- [MCP server overview](/for-agents/mcp-overview) — Aria's tool surface
+- [Claude plugin](/for-agents/claude-plugin) — Aria inside Claude
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does Aria train on my data?">
+    No. Patchline does not use your catalog, royalty statements, or chat
+    history to train models. Your data is used to ground Aria's answers
+    in the current conversation only.
+  </Accordion>
+  <Accordion title="What model does Aria use?">
+    Aria is a multi-agent system on AWS Bedrock. The supervisor and most
+    specialist agents run on Claude Sonnet 4
+    (`anthropic.claude-sonnet-4-20250514-v1:0`). The Legal and Documents
+    specialist agents use Claude 3.7 Sonnet for contract reasoning.
+  </Accordion>
+  <Accordion title="Can Aria send emails or post to social media?">
+    Aria can draft emails through the Gmail specialist agent (requires
+    [Gmail OAuth](/integrations/gmail)). Direct posting to social media
+    is on the roadmap; for now Aria drafts the copy and you post it.
+  </Accordion>
+  <Accordion title="Why did Aria refuse to answer my question?">
+    Aria is grounded in your data. If you ask about a track that isn't in
+    your catalog or an artist you haven't added to your roster, Aria will
+    say so and offer to import. This is by design — better a clear "I
+    don't have that" than a confident-sounding wrong answer.
+  </Accordion>
+  <Accordion title="Is there an API I can call directly?">
+    Yes — for AI agents. Patchline's product MCP server at
+    [`www.patchline.ai/api/mcp/v1`](/for-agents/mcp-overview) exposes 18
+    tools. A direct REST API is Enterprise-only today.
+  </Accordion>
+  <Accordion title="What happens if Aria gets it wrong?">
+    Send feedback via the thumbs-down on any chat message. The signal
+    feeds the weekly synthesizer and the Aria persona-patch loop. We
+    review every thumbs-down weekly.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/aria/overview" />

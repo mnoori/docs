@@ -1,0 +1,243 @@
+---
+title: "Catalog import"
+sidebarTitle: "Catalog import"
+description: "Import your existing music catalog into Patchline by pasting Spotify, Apple Music, YouTube, or SoundCloud URLs. Patchline pulls metadata, cover art, ISRCs, and runs sonic analysis automatically."
+icon: "download"
+keywords:
+  - import catalog patchline
+  - spotify import patchline
+  - apple music import
+  - youtube import patchline
+  - bulk import music
+schema:
+  - "@context": "https://schema.org"
+    "@type": "HowTo"
+    "name": "Import your music catalog into Patchline"
+    "description": "Paste a Spotify, Apple Music, YouTube, or SoundCloud URL to import a single track or full release. Patchline pulls metadata, cover art, and runs sonic analysis."
+    "totalTime": "PT2M"
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
+
+Catalog import is the fastest way to get your music into Patchline. Paste
+a streaming URL — Spotify, Apple Music, YouTube, SoundCloud — and Patchline
+pulls the metadata, cover art, ISRC, and queues sonic analysis. This is
+the most common first action for new users with already-released music.
+
+<TierBadge tier="all" /> &nbsp; Limits per tier: Free 10 lifetime · Starter 100 · Pro 500 · Scale + Enterprise unlimited.
+
+## What's the difference between import and upload?
+
+| Mode | Use when | Audio file in Patchline? |
+|---|---|---|
+| **Import** (this page) | Track is **already released** on a streaming platform | **No** — Patchline references the canonical streaming version, runs sonic analysis from that |
+| **[Upload](/catalog/upload)** | Track is **unreleased** or you want the master in Patchline | **Yes** — your file is stored in S3, sonic analysis runs on your master |
+
+If you've released through Distrokid, Tunecore, or a label, **import is
+faster and cheaper** — no upload time, no storage cost, sonic analysis
+still runs.
+
+## How to import
+
+### Option A — Paste a URL into Aria
+
+Easiest path. Aria's [`analyze_url`](/for-agents/mcp-tools-reference#analyze_url)
+tool resolves any supported streaming URL to its canonical identity and
+either imports it or asks for confirmation.
+
+<AriaPromptCard prompt="Import this track: https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh" />
+<AriaPromptCard prompt="Import this whole album for me: https://open.spotify.com/album/..." />
+
+### Option B — Use the Catalog UI
+
+Sidebar → **Catalog** → **Import** button (top right) → paste the URL
+into the dialog → click **Import**.
+
+The track appears in the catalog list within ~3 seconds. Sonic analysis
+runs in the background — see [Sonic analysis](/catalog/sonic-analysis).
+
+### Option C — MCP tool call (for AI agents)
+
+<MCPToolCard name="analyze_url" />
+
+```bash
+# Aria's analyze_url is the universal dispatcher — it figures out whether
+# the URL is a track, album, EP, artist, or playlist, and returns the
+# canonical identity plus a ranked list of follow-up tool calls.
+```
+
+## What gets imported
+
+For a single track URL:
+
+| Field | Source |
+|---|---|
+| Title | Streaming platform metadata |
+| Artist(s) | Streaming platform metadata |
+| ISRC | Streaming platform metadata (Spotify, Apple) |
+| Cover art | Spotify oEmbed fallback if not embedded |
+| Release date | Streaming platform |
+| Duration | Streaming platform |
+| BPM, key, mood, energy, valence | Runs after import (5 credits/track) |
+| Sonic genres, instruments | Runs after import |
+
+For an album/EP URL, Patchline imports **every track** in the release
+(counts as several catalog imports against your tier limit).
+
+## Supported URL types
+
+| Platform | Track URL | Album URL | Artist URL | Playlist URL |
+|---|---|---|---|---|
+| Spotify | ✅ | ✅ | ✅ (via [`add_artist`](/artists/roster)) | ⚠️ for analysis only, not imported |
+| Apple Music | ✅ | ✅ | ✅ | — |
+| YouTube | ✅ | — | ✅ (channel URL) | ✅ (read-only) |
+| SoundCloud | ✅ | ✅ | ✅ | — |
+| TikTok | ⚠️ artist-only | — | ✅ | — |
+| Instagram | ⚠️ artist-only | — | ✅ | — |
+
+**Artist URLs** add the artist to your [roster](/artists/roster) and
+trigger a Soundcharts enrichment pass — they don't import all of the
+artist's catalog automatically (that would blow through your import limit).
+
+## Deduplication
+
+Patchline deduplicates by **ISRC** first, then by **`docId`** in
+OpenSearch. If you import the same track twice — once via Spotify URL,
+once via Apple URL — Patchline merges them into a single catalog entry
+and updates the metadata with whatever was missing.
+
+If you've already uploaded a track via file and then import the same track
+via streaming URL, Patchline keeps the master audio (from the upload) and
+augments it with the streaming-platform identifiers.
+
+<Warning>
+  Catalog import never overwrites master audio. If you've uploaded a WAV
+  master and the import resolves to the same ISRC, your master stays.
+  Streaming-platform metadata is added but the master remains the source
+  of truth.
+</Warning>
+
+## Import limits
+
+| Tier | Catalog imports | What counts |
+|---|---|---|
+| <TierBadge tier="free" /> | 10 lifetime | Each track imported = 1. Album with 12 tracks = 12. |
+| <TierBadge tier="starter" /> | 100 lifetime | Same |
+| <TierBadge tier="pro" /> | 500 lifetime | Same |
+| <TierBadge tier="scale" /> | Unlimited | n/a |
+| <TierBadge tier="enterprise" /> | Unlimited | n/a |
+
+Lifetime caps mean if you've used 8/10 on Free, you have 2 imports left
+ever — until you upgrade. The cap is generous for paid tiers and most
+users never hit it.
+
+## Examples
+
+### Import a single
+
+```text
+You: Import this track for me.
+https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh
+```
+
+```text
+Aria: Done. "Bohemian Rhapsody" by Queen added to your catalog.
+ISRC GBUM71029604. Sonic analysis is running — should finish in 30 seconds.
+```
+
+### Import an album
+
+```text
+You: Import this album.
+https://open.spotify.com/album/4LH4d3cOWNNsVw41Gqt2kv
+```
+
+```text
+Aria: Imported 12 tracks from "The Dark Side of the Moon" by Pink Floyd.
+That used 12/500 of your Pro catalog imports. Sonic analysis is queued for
+all 12 — they'll be ready in ~3 minutes. Want me to start a release
+plan or playlist matching once they're ready?
+```
+
+### Import all of an artist's catalog (advanced)
+
+```text
+You: Import every release by Mira on Spotify.
+https://open.spotify.com/artist/...
+```
+
+```text
+Aria: Mira has 24 releases (3 albums, 2 EPs, 19 singles) = 47 tracks
+total. That's a big chunk of your import allowance — Pro tier has 500
+lifetime. Want me to:
+  1. Import everything (uses 47/500)
+  2. Import just the 3 albums (uses 36/500)
+  3. Import just the most recent 12 singles (uses 12/500)
+```
+
+## How it works under the hood
+
+1. Aria's `analyze_url` tool inspects the URL pattern and resolves it
+   against the right platform API (Spotify Web API for `open.spotify.com`,
+   Apple Music API for `music.apple.com`, etc.).
+2. Track metadata is fetched, normalized to Patchline's schema, and
+   written to DynamoDB `Assets-staging` via the asset service.
+3. AOSS (OpenSearch Serverless) indexes the metadata for
+   [catalog search](/catalog/search). Deduplication runs at index time.
+4. A message lands on the Cynite queue; the
+   [sonic analysis](/catalog/sonic-analysis) pipeline picks it up,
+   downloads audio from the streaming source via the analysis provider,
+   and writes back BPM/key/mood/etc.
+5. The catalog UI polls for updates and renders the feature panel once
+   analysis completes.
+
+If DynamoDB is unavailable (extremely rare), Patchline falls back to S3
+at `s3://patchline-files-us-east-1/user-data/{userId}/imported-assets.json`
+and the catalog list merges both sources.
+
+## Related features
+
+- [Upload a track (file)](/catalog/upload) — when you want the master in Patchline
+- [Sonic analysis](/catalog/sonic-analysis) — what runs after import
+- [Catalog search](/catalog/search) — semantic search across imported tracks
+- [Artist roster](/artists/roster) — add artists by URL, separate flow
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does importing a track actually move my audio?">
+    No. Import references the streaming version. Your master stays
+    wherever you uploaded it (Distrokid, Tunecore, etc.). If you want
+    Patchline to hold your master, [upload it](/catalog/upload) instead.
+  </Accordion>
+  <Accordion title="What if the same track is on Spotify with one ISRC and on Apple with a different one?">
+    Most labels distribute the same ISRC to both. If they don't (rare),
+    Patchline treats them as separate catalog entries until you manually
+    merge them in the UI.
+  </Accordion>
+  <Accordion title="Can I bulk-import a CSV of URLs?">
+    Not from the dashboard UI today. From Aria: paste a list and ask
+    "import these all." For Enterprise customers with thousands of URLs,
+    the REST API supports batch import — contact support.
+  </Accordion>
+  <Accordion title="What happens if the streaming URL goes 404?">
+    The catalog entry stays, but sonic re-analysis can't run. We mark the
+    track with a `streaming_unavailable` flag and surface it in the
+    catalog UI.
+  </Accordion>
+  <Accordion title="Can I undo an import?">
+    Yes. Catalog list → track row → ⋯ → Delete. Lifetime import counter
+    does NOT refund (it's a hard cap to prevent abuse). Free tier users:
+    plan accordingly.
+  </Accordion>
+  <Accordion title="Does import work for unreleased tracks?">
+    Only if the unreleased track has a private streaming URL (very
+    uncommon). For unreleased work, [upload the file](/catalog/upload)
+    instead — that's the canonical path.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/catalog/import" />

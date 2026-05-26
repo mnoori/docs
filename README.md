@@ -1,55 +1,71 @@
-# Mintlify Starter Kit
+# Patchline Docs
 
-Use the starter kit to get your docs deployed and ready to customize.
+Source for [docs.patchline.ai](https://docs.patchline.ai) — public
+documentation for [Patchline](https://patchline.ai), the AI command center
+for the modern music business.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Stack
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+- **Hosting:** [Mintlify](https://mintlify.com)
+- **Format:** MDX in this repo, rendered by Mintlify
+- **Config:** [`docs.json`](docs.json)
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
+## Local preview
 
 ```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
 npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
 mint dev
 ```
 
-View your local preview at `http://localhost:3000`.
+Open `http://localhost:3000`.
 
-## Publishing changes
+## Editing
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+Each page is an MDX file under `<section>/<slug>.mdx`. Pages must:
 
-## Need help?
+- Have one H1 (`title:` frontmatter) and use H2/H3 in the body.
+- Follow the standard page template — see any page in `aria/` or `catalog/`
+  for the canonical shape (frontmatter → hero → summary → what/when/where →
+  quickstart → prereqs → how-it-works → examples → pricing → related → FAQ
+  → AI-agent tip block).
+- Cite product behavior to real code paths. No fabrication. If a claim
+  isn't verifiable, drop a `{/* TODO verify */}` comment and add it to
+  `docs-planning/gaps.md` (in the parent repo).
 
-### Troubleshooting
+## Custom components (snippets)
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+All under [`snippets/`](snippets/):
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+- `<TierBadge tier="pro" />` — consistent tier-gating badges.
+- `<AICallout />` — bottom-of-page block for AI agents (links to .md twin,
+  AGENTS.md, live tools manifest).
+- `<AriaPromptCard prompt="..." />` — render an example Aria prompt with
+  copy + "open in dashboard" buttons.
+- `<MCPToolCard name="analyze_url" />` — reference an MCP tool by name.
+- `<SurfaceMatrix feature="aria" />` — cross-surface availability matrix
+  (web / Telegram / Claude / MCP).
+
+## The AI-agent layer
+
+This docs site is dual-audience by construction — humans and AI agents both
+get first-class support:
+
+- [`AGENTS.md`](AGENTS.md) — docs navigation rules of engagement.
+- [`robots.txt`](robots.txt) — explicit AI-bot allowlist.
+- Every page has a `.md` twin at `docs.patchline.ai/<path>.md` (Mintlify auto-generates).
+- `docs.patchline.ai/llms.txt` is the page index (Mintlify auto-generates).
+- `docs.patchline.ai/llms-full.txt` is the full-content dump (Mintlify auto-generates).
+- `docs.patchline.ai/mcp` is the Mintlify-hosted docs MCP server (auto).
+- JSON-LD schema lives in page frontmatter; Mintlify renders it.
+
+## Cross-references with the product site
+
+The marketing/product site at [www.patchline.ai](https://www.patchline.ai)
+ships its own `AGENTS.md`, `llms.txt`, and live tool manifest at
+`/api/agents/discovery`. Those describe the **product MCP** (tools that act
+on user data) — this docs site describes the **documentation**. Both files
+cross-link.
+
+## License
+
+Content © Patchline AI. Code (config, snippets) MIT.

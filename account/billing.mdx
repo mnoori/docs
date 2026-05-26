@@ -1,0 +1,120 @@
+---
+title: "Billing"
+sidebarTitle: "Billing"
+description: "Manage your Patchline subscription — invoices, payment methods, plan changes, cancellation. All powered by Stripe Billing."
+icon: "credit-card"
+keywords:
+  - patchline billing
+  - patchline subscription
+  - cancel patchline
+  - invoices patchline
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+
+Patchline subscription billing runs on **Stripe Billing**. All
+subscription management lives in Settings → Billing, which opens the
+Stripe customer portal.
+
+<TierBadge tier="all" /> &nbsp; Billing tab is available on every tier (Free shows upgrade CTAs).
+
+## What you can do
+
+- Change your plan (upgrade / downgrade)
+- Update payment method
+- Download invoices
+- Change billing email
+- Switch monthly ↔ annual
+- Cancel subscription
+
+## Where to find it
+
+`Settings → Billing` → Patchline opens the Stripe-hosted customer
+portal in the same window.
+
+## Plan changes
+
+- **Upgrade** is immediate. Stripe prorates — you pay the difference
+  for the rest of the current cycle.
+- **Downgrade** takes effect at the next billing cycle. You keep
+  paid-tier access until then.
+- **Cancel** also takes effect at the next billing cycle.
+
+## Trial mechanics
+
+Every paid tier includes a 30-day free trial. See
+[Pricing & plans](/get-started/pricing#the-30-day-free-trial) for full
+details.
+
+- You enter a payment method at sign-up.
+- No charge until day 31.
+- Cancel any time during trial = no charge.
+- On day 31, Stripe charges for month 1 (or year 1 if annual).
+
+## Invoices
+
+Stripe portal → **Invoices** tab. Download as PDF.
+
+For Enterprise customers: invoices are sent via the billing email at
+end-of-month.
+
+## Annual vs. monthly switching
+
+Switch any time:
+
+- **Monthly → Annual** mid-cycle: Stripe prorates the unused portion of
+  the monthly subscription and credits it against the annual price.
+- **Annual → Monthly**: takes effect at the next renewal date.
+
+## Failed payment
+
+If a card declines:
+
+1. Stripe retries 3 times over 7 days.
+2. Patchline notifies you via email.
+3. After 7 days of failed retries, your subscription is paused (not
+   cancelled) — you can update the payment method to resume.
+4. After 30 days of unresolved payment, the subscription cancels and
+   you revert to Free tier. **Your data stays.**
+
+## Cancellation
+
+- **In-portal cancel**: Settings → Billing → Cancel. Takes effect at
+  next renewal. You keep paid access until then.
+- **Cancel via email**: not required. Self-serve.
+- **What happens to data**: stays. You revert to Free tier limits. Can
+  re-upgrade any time.
+- **Refunds**: We don't auto-refund partial cycles. Email
+  [support@patchline.ai](mailto:support@patchline.ai) for refund
+  questions.
+
+## Related pages
+
+- [Pricing & plans](/get-started/pricing) — tier comparison
+- [Plans & credits](/account/plans-credits) — credit math
+- [Storefront checkout & payouts](/storefront/checkout-payouts) — the other side of Stripe (Connect)
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I get a refund if I forgot to cancel?">
+    Email [support@patchline.ai](mailto:support@patchline.ai) with
+    your situation. We're reasonable on case-by-case basis. No
+    automatic refunds for forgotten cancellations.
+  </Accordion>
+  <Accordion title="Why is my card being charged twice in one month?">
+    You probably upgraded mid-cycle (prorated charge for the partial
+    cycle) + the new tier's first full cycle. That's by design.
+    See Stripe's invoice for the line items.
+  </Accordion>
+  <Accordion title="Do you offer student / nonprofit discounts?">
+    Not in v1. The Free tier is generous enough for most
+    student / hobbyist needs.
+  </Accordion>
+  <Accordion title="Can I pay via invoice / ACH instead of card?">
+    ACH on Enterprise tier only. Other tiers are card-only.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/account/billing" />

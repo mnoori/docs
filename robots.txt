@@ -1,0 +1,62 @@
+# Patchline Documentation — robots.txt
+# We want AI crawlers and indexers to read this docs site freely.
+# Auth-only product surfaces live at www.patchline.ai/dashboard and are
+# blocked at that origin's middleware layer, not here.
+
+# --- General crawlers ---
+User-agent: *
+Allow: /
+
+# --- AI / LLM crawlers (explicit allow, identical rules) ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: DiffbotBot
+Allow: /
+
+# --- Pointers ---
+Sitemap: https://docs.patchline.ai/sitemap.xml
+# llmstxt.org index for AI agents:
+# https://docs.patchline.ai/llms.txt
+# Full-content dump for one-shot reads:
+# https://docs.patchline.ai/llms-full.txt
+# Rules of engagement for the docs site:
+# https://docs.patchline.ai/AGENTS.md
+# Rules of engagement for the product MCP (catalog, releases, etc.):
+# https://www.patchline.ai/AGENTS.md

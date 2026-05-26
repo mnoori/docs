@@ -1,0 +1,203 @@
+---
+title: "Scout agent (A&R discovery)"
+sidebarTitle: "Scout (A&R)"
+description: "AI talent scout that discovers and analyzes promising artists using Soundcharts data. Find collaborators, identify rising acts in your genre, build a watchlist of artists worth signing or pitching."
+icon: "binoculars"
+keywords:
+  - patchline scout
+  - ai a&r
+  - artist discovery patchline
+  - find similar artists
+  - emerging artist scout
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
+
+The Scout agent is Patchline's AI A&R — it surfaces artists who match
+your sound, are rising in your genre, or could be collaborators. Built
+on Soundcharts data and Patchline's sonic embeddings, scoped to your
+roster's positioning.
+
+<TierBadge tier="pro" /> &nbsp; Pro+ unlocks the Scout agent. 2 credits per similar-artist search.
+
+## What it does
+
+| Discovery mode | What it surfaces |
+|---|---|
+| **Similar to my roster** | Artists who sound like (and grow like) artists already in your roster |
+| **Emerging in my genre** | Artists rising fast in genres your roster occupies |
+| **Trending — broad** | Soundcharts top artists (optional genre filter, listener range) |
+| **Potential collaborators** | Artists with adjacent sound + similar audience overlap with your roster |
+| **Sub-tier filter** | Filter by monthly listener band (e.g., "find dreampop artists 5k-50k listeners") |
+
+## Where to find it
+
+| Surface | Path |
+|---|---|
+| Web dashboard | Sidebar → **Agents** → **Scout** at `/dashboard/agents/scout` |
+| Via Aria | "Find me similar artists to..." / "Show me emerging artists in..." |
+| Via MCP | `get_trending_artists`, `search_artists`, `get_artist_intelligence` |
+
+## Quick start
+
+<Steps>
+  <Step title="Have at least one artist in your roster">
+    Scout uses your roster as the anchor for "similar." Add at least
+    one artist first — see [Roster](/artists/roster).
+  </Step>
+  <Step title="Ask Aria">
+    <AriaPromptCard prompt="Find 10 artists similar to Mira with under 50k monthly listeners." />
+  </Step>
+  <Step title="Review the results">
+    Each result includes name, monthly listeners, growth, top genres,
+    a similarity score (0-100), and why it surfaced.
+  </Step>
+  <Step title="Add to watchlist or roster">
+    Watchlist (Scale+) = "track but don't add to roster." Adding to
+    roster runs full enrichment.
+  </Step>
+</Steps>
+
+## What Scout returns
+
+For each candidate:
+
+```text
+Artist: [Name]
+Score: 87/100 (sonic similarity 0.81, growth match 0.92)
+Monthly listeners: 12,400
+30-day growth: +18%
+Top genres: dreampop, bedroom pop, lo-fi
+Top markets: LA, NYC, London
+Why surfaced: Strong sonic match to Mira (0.81 cosine), growing
+  at a similar early-trajectory rate (+18% vs Mira's +21% at the
+  same listener tier). Recent playlist adds on "Lush Sounds" and
+  "Bedroom Vibes."
+[ Add to roster ] [ Watchlist ] [ Full intel ]
+```
+
+## Scoring
+
+The composite Scout score weighs:
+
+- **Sonic similarity** (40%) — cosine similarity over RIP audio embeddings
+- **Growth trajectory match** (25%) — similar growth pattern to your roster
+- **Genre overlap** (20%) — Soundcharts genre tag overlap
+- **Audience overlap potential** (15%) — projected fan overlap based on similar artists' actual overlap
+
+Scores above 75 are typically worth a closer look. Below 50 are noise.
+
+## Examples
+
+### Find collaborators for a release
+
+<AriaPromptCard prompt="Find 5 artists who could collaborate with Mira on her next single — similar sound, comparable audience size, accepting features." />
+
+```text
+Aria: Top 5 collaboration candidates for Mira:
+
+  1. Cloud Castle — 18,200 listeners, dreampop, recent collabs visible,
+     LA-based (geographic overlap with Mira). Score 89.
+  2. Soft Animal — 9,800 listeners, indie/dreampop, has done features
+     with 3 artists at Mira's tier. Score 82.
+  3. Bright Drop — 14,500 listeners, female dreampop adjacent. Score 78.
+  4. Sleeper House — 23,000 listeners, dreampop. No public collab
+     history. Score 76.
+  5. Indigo Glow — 8,400 listeners, growing fast (+42% 30d). Score 74.
+
+  Top pick: Cloud Castle — strongest sonic match + active collaborator.
+  Want a pitch draft to their management?
+```
+
+### Find emerging artists in your genre
+
+<AriaPromptCard prompt="Who's emerging in dreampop with under 25k monthly listeners and growing >25% month-over-month?" />
+
+```text
+Aria: 8 emerging dreampop artists matching:
+
+  Score  Artist        Listeners  Growth   Why
+  92     Indigo Glow   8,400      +42%     Strong sonic match, rapid growth
+  88     Cloud Castle  18,200     +28%     LA-based, recent press
+  85     Soft Animal   9,800      +35%     Genre-pure dreampop, female vocal
+  82     ...
+
+  Want me to add the top 3 to your watchlist?
+```
+
+### Find similar to an external artist
+
+<AriaPromptCard prompt="Find 10 artists who sound like https://open.spotify.com/artist/4dpARuHxo51G3z768sgnrY — not from my roster." />
+
+```text
+Aria: 10 artists similar to Adele (non-roster):
+
+  1. Sam Smith (sonic similarity 0.78, mood: melancholic ballad)
+  2. Bishop Briggs (0.71)
+  3. Lewis Capaldi (0.69)
+  ...
+```
+
+## Limitations
+
+- **Scout is roster-anchored.** Empty roster = no anchor = generic
+  results.
+- **Soundcharts coverage varies.** Niche genres or very-new artists
+  may have sparse data.
+- **Sonic embeddings need analyzed tracks.** Scout's "sound like" is
+  most accurate when your roster artists have completed sonic analysis.
+
+## Tier behavior
+
+| Tier | Scout access |
+|---|---|
+| <TierBadge tier="free" /> | — |
+| <TierBadge tier="starter" /> | — |
+| <TierBadge tier="pro" /> | Similar to roster, emerging in genre |
+| <TierBadge tier="scale" /> | + watchlist, + collaboration finder, + sub-tier filters |
+| <TierBadge tier="enterprise" /> | + bulk discovery API |
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| `search_artists` (your roster) | 0 (cached) |
+| `get_trending_artists` | 1 |
+| Similar-to-roster scout query | 2 |
+| Sonic-fingerprint similarity search | 2 |
+| Full intel pull on a discovery candidate | 1 per candidate |
+
+## Related pages
+
+- [Roster](/artists/roster) — Scout uses roster as the anchor
+- [Intelligence profile](/artists/intelligence-profile) — what's pulled for each candidate
+- [Audience](/artists/audience) — fan-overlap projection
+- [Playlist matching](/releases/playlist-matching) — overlap with curator targeting
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I scout for artists outside the genres I'm in?">
+    Yes — just specify the genre in the prompt. "Find emerging jazz
+    artists" works even if your roster is all pop.
+  </Accordion>
+  <Accordion title="Does Scout suggest signing terms or contract advice?">
+    No. Scout finds candidates. Signing decisions and contract
+    negotiation are handled by humans (and the
+    [Legal / Documents agents](/aria/overview)).
+  </Accordion>
+  <Accordion title="What's the watchlist?">
+    Scale+ feature. Save discovery candidates to a watchlist for
+    ongoing tracking without committing to your roster cap.
+    Daily synthesizer surfaces big changes in watchlisted artists.
+  </Accordion>
+  <Accordion title="How fresh are the results?">
+    Soundcharts data refreshes daily. Scout queries are typically
+    based on <24h-old data.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/artists/scout" />

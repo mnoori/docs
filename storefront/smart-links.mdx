@@ -1,0 +1,136 @@
+---
+title: "Smart links & pre-saves"
+sidebarTitle: "Smart links"
+description: "One link → fan routes to their preferred platform (Spotify, Apple, YouTube). Pre-save flow for unreleased tracks. Auto-resolves ISRC, DSP URLs, and cover art server-side."
+icon: "link"
+keywords:
+  - smart links
+  - pre-save spotify
+  - music routing link
+  - patchline smart link
+schema:
+  - "@context": "https://schema.org"
+    "@type": "SoftwareApplication"
+    "name": "Patchline Smart Links"
+    "applicationCategory": "MultimediaApplication"
+    "description": "Smart routing links and pre-save pages for music."
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
+
+A smart link is one URL that routes a fan to their preferred streaming
+platform — Spotify if they're a Spotify user, Apple if they're Apple,
+YouTube if they're YouTube. Same link, right destination per fan. Pre-save
+links extend this to unreleased tracks: fans pre-save before release,
+and the track auto-adds to their library when it drops.
+
+<TierBadge tier="starter" /> &nbsp; Starter+ for smart links. 1 credit per smart link created.
+
+## What it does
+
+| Feature | Smart link (released) | Pre-save (unreleased) |
+|---|---|---|
+| Fan opens link → routes to their platform | ✓ | ✓ |
+| Auto-saves to library on release day | — | ✓ |
+| Captures fan email (optional) | ✓ | ✓ |
+| Tracks click + conversion | ✓ | ✓ |
+| Auto-generates OG image | ✓ | ✓ |
+| Custom landing page (artwork, bio, "listen" CTA) | ✓ | ✓ |
+
+## How to create
+
+### Via Aria
+
+<AriaPromptCard prompt="Create a smart link for 'Sleeper'." />
+<AriaPromptCard prompt="Create a pre-save link for my upcoming single, releasing July 15." />
+
+### Via the storefront UI
+
+Sidebar → **Store** → asset → **Smart link** → **Create**.
+
+### Via MCP
+
+<MCPToolCard name="create_smart_link" />
+
+The smart link tool resolves the ISRC against major DSPs server-side
+and assembles the routing logic — you don't have to provide every
+platform URL.
+
+## Where smart links live
+
+`patchline.ai/link/<short-code>` — short, shareable. Custom slug
+(`patchline.ai/link/mira-sleeper`) on Pro+.
+
+Embed in:
+- Your Linktree / bio
+- Email signatures
+- Social bios
+- Fan list emails
+- Press release "listen here" links
+
+## Pre-save flow
+
+<Steps>
+  <Step title="Create the pre-save link before release">
+    Asset → **Smart link** → **Pre-save** mode → set release date.
+  </Step>
+  <Step title="Share the link">
+    Same URL you'll use post-release. No need to swap links — same
+    URL transitions from pre-save to smart-link on release day.
+  </Step>
+  <Step title="Fans pre-save">
+    Each fan picks a platform (Spotify, Apple, etc.) and authenticates.
+    Their authorized save is queued.
+  </Step>
+  <Step title="Release day: auto-save fires">
+    At release time, the queued saves execute. Each fan's library
+    auto-adds the track.
+  </Step>
+  <Step title="Post-release: same link works as smart link">
+    The URL automatically transitions. Late fans get routed normally.
+  </Step>
+</Steps>
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| Create smart link | 1 |
+| Create pre-save | 1 |
+| Custom slug (Pro+) | 0 |
+| Click tracking | 0 |
+
+## Related pages
+
+- [Storefront overview](/storefront/overview)
+- [Storefront setup](/storefront/setup) — connect Stripe first
+- [Release planner](/releases/release-planner) — smart link is a task in every plan
+- [MCP tools reference](/for-agents/mcp-tools-reference#create_smart_link)
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What platforms does the smart link route to?">
+    Spotify, Apple Music, YouTube Music, Amazon Music, Tidal, Deezer,
+    Pandora, SoundCloud, Bandcamp. We add new DSPs as they become
+    relevant.
+  </Accordion>
+  <Accordion title="Can I A/B test smart links?">
+    Pro+ — duplicate a smart link, set different landing-page copy /
+    art per version, share both. Patchline tracks conversion per
+    variant.
+  </Accordion>
+  <Accordion title="Do smart links work on iMessage / Telegram / Discord previews?">
+    Yes. Each link has an auto-generated OG image (track cover + title)
+    that renders on all major platforms.
+  </Accordion>
+  <Accordion title="Can I see who clicked?">
+    Aggregate stats (clicks, conversions, geo) — yes. Per-fan tracking
+    requires the email-capture variant, which is opt-in for fans.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/storefront/smart-links" />

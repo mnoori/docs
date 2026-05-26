@@ -1,0 +1,264 @@
+---
+title: "Sonic analysis"
+sidebarTitle: "Sonic analysis"
+description: "Patchline runs deep audio analysis on every track in your catalog — BPM, key, mood, energy, valence, danceability, instruments, sonic genres. Powers playlist matching, similar-track discovery, and AI pitch generation."
+icon: "waveform-lines"
+keywords:
+  - sonic analysis
+  - audio features patchline
+  - bpm key detection
+  - cynite patchline
+  - rip audio analysis
+  - music ai features
+schema:
+  - "@context": "https://schema.org"
+    "@type": "SoftwareApplication"
+    "name": "Patchline Sonic Analysis"
+    "applicationCategory": "MultimediaApplication"
+    "description": "Deep audio analysis pipeline: BPM, key, mood, energy, valence, danceability, sonic genres, instruments. Runs on Cynite + Patchline's RIP pipeline."
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
+
+Every track in your Patchline catalog gets **deep audio analysis** —
+BPM, key, mood, energy, valence, danceability, sonic genres, and
+instruments. This isn't LLM-vibes-based-on-the-title. Patchline runs real
+audio analysis through two complementary pipelines and writes the
+features back to your catalog.
+
+<TierBadge tier="all" /> &nbsp; **5 AI credits per track.** Runs automatically on
+[import](/catalog/import) and [upload](/catalog/upload).
+
+## What gets extracted
+
+| Feature | Range | What it measures |
+|---|---|---|
+| **BPM** | 40–220 | Beats per minute |
+| **Key** | C, C♯, D … B (+ major/minor) | Detected musical key |
+| **Mode** | major / minor | Key mode |
+| **Energy** | 0.0–1.0 | Perceptual intensity (loud, fast, noisy = high) |
+| **Valence** | 0.0–1.0 | Musical positivity (happy/cheerful = high; sad/angry = low) |
+| **Danceability** | 0.0–1.0 | How suitable for dancing — based on tempo, rhythm stability, beat strength |
+| **Acousticness** | 0.0–1.0 | Confidence track is acoustic |
+| **Instrumentalness** | 0.0–1.0 | Likelihood of no vocals |
+| **Liveness** | 0.0–1.0 | Likelihood of live audience |
+| **Speechiness** | 0.0–1.0 | Spoken-word content presence |
+| **Loudness** | dB | Overall loudness (typically -20 to 0) |
+| **Time signature** | int | Estimated time signature (3, 4, 5, …) |
+| **Sonic genres** | tags | Multi-label genre tags (e.g., `dreampop`, `lo-fi`, `bedroom-pop`) |
+| **Sub-genres** | tags | Finer-grained tags |
+| **Mood tags** | tags | `melancholy`, `uplifting`, `aggressive`, `chill`, etc. |
+| **Instrument tags** | tags | Detected instruments — `electric guitar`, `synth pad`, `drum machine`, … |
+| **Vocal presence** | bool | Has vocals or not |
+| **Vocal gender** | tags | Detected vocal gender(s) |
+
+## Why it matters
+
+Sonic features are the substrate for almost every downstream Patchline
+feature:
+
+<CardGroup cols={2}>
+  <Card title="Playlist matching" icon="list-music" href="/releases/playlist-matching">
+    `find_playlists` ranks Spotify playlists by sonic fit — that "fit"
+    is the cosine similarity between your track's features and the
+    playlist's average features.
+  </Card>
+  <Card title="Similar track discovery" icon="copy" href="/artists/scout">
+    Embeddings derived from sonic features power "tracks like this in
+    your catalog" and "artists who sound like you."
+  </Card>
+  <Card title="DSP pitch generation" icon="file-pen" href="/releases/pitch-kit">
+    Pitch copy references concrete features ("F minor, 124 BPM,
+    dreampop-adjacent") instead of vague descriptors.
+  </Card>
+  <Card title="A&R scout" icon="binoculars" href="/artists/scout">
+    Scout uses sonic embeddings to surface artists with sonically
+    similar catalogs, not just genre-matching ones.
+  </Card>
+</CardGroup>
+
+## When it runs
+
+| Trigger | Latency |
+|---|---|
+| [Catalog import](/catalog/import) (URL) | Queued immediately, completes in ~30–90 s |
+| [Catalog upload](/catalog/upload) (file) | Queued after upload completes |
+| Manual re-analysis (catalog UI ⋯ menu) | Same queue, ~30–90 s |
+| Aria asks for it | Aria calls [`get_audio_features`](/for-agents/mcp-tools-reference) — cached if available, runs analysis if missing |
+
+You don't need to start it manually. Sonic analysis is queued the moment
+a track lands in your catalog.
+
+## Two pipelines, complementary
+
+Patchline runs **two** audio-analysis pipelines:
+
+### Cynite
+
+The default pipeline for most user-facing features. Cynite is a
+specialist audio-analysis SaaS optimized for music industry features —
+mood tags, sonic genre taxonomies, vocal detection, instrument tagging.
+
+- Triggers via `cynite-integration-handler.py`
+- Results land via `cynite-webhook-handler.py`
+- Cached in DynamoDB, surfaced in catalog UI within seconds of webhook
+- 5 credits per track
+
+### RIP (Patchline's audio-analysis pipeline)
+
+Patchline's own multi-stage audio-analysis pipeline for the features we
+want to own end-to-end — primarily the embeddings used by similar-track
+search and the A&R scout, plus a deeper key/chord progression analysis
+(`keychord`).
+
+- 7 stages (`rip_stage5_keychord.py`, `rip_stage7_aggregate.py`,
+  `rip_embedding_indexer.py`, `rip_scorecard_aggregator.py`, …)
+- Coordinated by `rip_batch_dispatcher.py`
+- Outputs ride alongside Cynite results in the same catalog row
+
+You don't pick. Both pipelines run on every analyzable track. The catalog
+UI surfaces the union of features. AI tools and MCP calls return the
+union.
+
+## How to view a track's analysis
+
+### In the dashboard
+
+Sidebar → **Catalog** → click any track row → **Audio features** panel
+on the right.
+
+Each numeric feature renders as a horizontal bar (0–1 scale) with the
+exact value. BPM and key render as labels. Tag lists (genres, moods,
+instruments) render as chips.
+
+### Through Aria
+
+<AriaPromptCard prompt="What's the BPM and key of my latest track?" />
+<AriaPromptCard prompt="Show me the audio features for 'Late Bloom'." />
+<AriaPromptCard prompt="What's the most energetic track in my catalog right now?" />
+
+### Through the MCP server
+
+<MCPToolCard name="get_audio_features" />
+<MCPToolCard name="get_song_intelligence" />
+
+`get_audio_features` returns the raw numeric + tag features.
+`get_song_intelligence` returns features **plus** ISRC, streaming stats,
+playlist matches, and collaborator info — a one-shot deep dive.
+
+## Examples
+
+### Example 1 — Find your most energetic track
+
+<AriaPromptCard prompt="Which track in my catalog has the highest energy score?" />
+
+```text
+Aria: That's "Run Hot" — energy 0.84, BPM 142, key A minor.
+It's also the most danceable (0.79). Want me to find playlists matching
+that profile?
+```
+
+### Example 2 — Use features in a pitch
+
+<AriaPromptCard prompt="Draft a pitch for 'Sleeper' that uses the actual audio features." />
+
+```text
+Aria: "Sleeper" is a 76 BPM, F# minor dreampop ballad with low energy
+(0.31), low valence (0.21), and high acousticness (0.78). The track sits
+between Mazzy Star and Phoebe Bridgers sonically. Here's a draft pitch
+for late-night editorial curators... [continues]
+```
+
+### Example 3 — Verify a guess
+
+<AriaPromptCard prompt="My new track feels like 110 BPM but I'm not sure — can you confirm?" />
+
+```text
+Aria: It's 112 BPM, key D major. Time signature 4/4. Want the full
+feature breakdown?
+```
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| Sonic analysis per track | **5 credits** |
+| Re-analysis (re-runs the same pipelines) | **5 credits** |
+| Reading cached features via `get_audio_features` | 0 credits (cached) |
+| `get_song_intelligence` (features + streaming + matches) | 1 credit |
+
+A typical Free user runs sonic analysis on a few tracks/month (~30 credits).
+A Pro user with active import flow might run 20–50/mo (~100–250 credits).
+
+## Limitations
+
+- **Metadata-only assets can't be analyzed.** If you imported a track via
+  URL but the streaming source's analysis provider can't fetch the audio,
+  the track stays at "queued." Solution: [upload the audio](/catalog/upload)
+  directly.
+- **Analysis is best-effort.** Very short tracks (<30s), heavily noisy
+  recordings, or speech-dominated tracks can return partial features.
+  Confidence indicators are exposed in the API response.
+- **Re-analysis costs credits.** If you re-upload a master, the new
+  version gets re-analyzed. The old version's features remain in the
+  catalog but flagged as superseded.
+
+## Privacy
+
+- Your audio files are stored in S3 (`patchline-files-us-east-1`,
+  versioned, server-side encrypted).
+- Cynite receives the audio for analysis but does not retain it for
+  training (per the [Cynite no-training audit](/reference/glossary)
+  ratified 2026-05-16).
+- Patchline's RIP pipeline runs entirely in your AWS region.
+
+## Related features
+
+- [Catalog import](/catalog/import) — what triggers analysis
+- [Upload a track](/catalog/upload) — the file path
+- [Playlist matching](/releases/playlist-matching) — what consumes features
+- [Pitch kit](/releases/pitch-kit) — what uses features for pitch copy
+- [MCP tools reference](/for-agents/mcp-tools-reference) — `get_audio_features`, `get_song_intelligence`
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why two pipelines (Cynite + RIP)?">
+    Cynite gives us best-in-class tag taxonomies and battle-tested
+    feature extraction. RIP gives us embeddings for similar-track search
+    plus features we want to own end-to-end (deep chord/key analysis).
+    Running both costs the same and we keep optionality if either side
+    has an outage.
+  </Accordion>
+  <Accordion title="Can I trust the BPM/key on every track?">
+    Mostly yes. BPM is reliable above ~85% accuracy on standard musical
+    content. Key detection drops in confidence for atonal, ambient, or
+    heavily modulating tracks. The API exposes confidence; the UI shows
+    a ?? icon when confidence is below threshold.
+  </Accordion>
+  <Accordion title="Are sonic genres standardized?">
+    Cynite uses a multi-label taxonomy aligned with major DSP genre
+    taxonomies (Spotify "every noise at once" subset). RIP adds a few
+    Patchline-internal tags. Both ride together in the catalog row.
+  </Accordion>
+  <Accordion title="How long does analysis take?">
+    30–90 seconds for a typical 3-minute song. Longer for 10-minute+
+    tracks. Cynite is async via webhook so the catalog UI updates the
+    moment results land.
+  </Accordion>
+  <Accordion title="Can I export the features as CSV?">
+    Yes for individual tracks (catalog row → ⋯ → Export). Bulk CSV
+    export is Enterprise-only via the REST API.
+  </Accordion>
+  <Accordion title="Does Patchline train AI models on my audio?">
+    No. Audio is used for the analysis pipelines (Cynite + RIP) only,
+    not for model training. Patchline has a hard rule against
+    Cynite-supervised training — see the
+    [no-Cynite-training audit](/reference/glossary).
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/catalog/sonic-analysis" />

@@ -1,0 +1,213 @@
+---
+title: "FAQ"
+sidebarTitle: "FAQ"
+description: "Frequently asked questions about Patchline — across pricing, Aria, catalog, releases, integrations, MCP, security, and roadmap. Per-feature FAQs live on each feature page."
+icon: "circle-question"
+keywords:
+  - patchline faq
+  - patchline frequently asked questions
+  - patchline help
+schema:
+  - "@context": "https://schema.org"
+    "@type": "FAQPage"
+    "mainEntity":
+      - "@type": "Question"
+        "name": "What is Patchline?"
+        "acceptedAnswer":
+          "@type": "Answer"
+          "text": "Patchline is the AI command center for the modern music business — your catalog, artists, streaming intelligence, releases, storefront, and royalties wired into AI tools you already use."
+      - "@type": "Question"
+        "name": "How much does Patchline cost?"
+        "acceptedAnswer":
+          "@type": "Answer"
+          "text": "Free tier is permanent. Paid tiers start at $9.99/month for Starter. Pro is $29, Scale is $99, Enterprise starts at $249. Every paid tier includes a 30-day free trial."
+      - "@type": "Question"
+        "name": "Does Aria train on my data?"
+        "acceptedAnswer":
+          "@type": "Answer"
+          "text": "No. Patchline does not use your catalog, royalty statements, or chat history to train models. Your data grounds Aria's answers in the current conversation only."
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+
+Cross-feature questions live here. Per-feature FAQs live on each
+feature page (e.g., catalog questions at
+[Catalog import FAQ](/catalog/import#faq)).
+
+## About Patchline
+
+<AccordionGroup>
+  <Accordion title="What is Patchline?">
+    Patchline is an AI command center for the music business. You
+    talk to Aria (the assistant) and Aria reads your catalog, queries
+    streaming data, drafts pitches, plans releases, parses royalty
+    PDFs, runs your storefront. Web app + Telegram + Claude plugin +
+    MCP for AI editors.
+  </Accordion>
+  <Accordion title="Who is Patchline for?">
+    Independent artists, DIY labels, managers, A&R, music publishers.
+    Plus any AI agent (Claude, Cursor, Codex, Perplexity) that wants
+    real music industry tools instead of generic web search.
+  </Accordion>
+  <Accordion title="Is Patchline a distributor?">
+    No. Patchline doesn't ship music to Spotify, Apple, etc. You
+    distribute through Distrokid, Tunecore, CD Baby, or your label.
+    Patchline imports the result and runs intelligence on it.
+  </Accordion>
+  <Accordion title="What's the difference between Patchline and a generic AI chatbot?">
+    Generic AI doesn't have your catalog, your roster, your royalty
+    statements, your audience data. Patchline is grounded in your real
+    music business — every answer references actual ISRCs, actual
+    streaming numbers, actual curator history. Generic AI hallucinates
+    these details; Patchline doesn't.
+  </Accordion>
+</AccordionGroup>
+
+## Pricing & plans
+
+<AccordionGroup>
+  <Accordion title="Is there a free tier?">
+    Yes. 100 AI credits/month, 3 lifetime track uploads, 10 lifetime
+    catalog imports, 1 GB storage. Permanent — no expiration.
+  </Accordion>
+  <Accordion title="What's the cheapest paid tier?">
+    Starter at $9.99/month ($99/year). 30-day free trial. Unlocks
+    1,000 AI credits/month + 0% storefront platform fee.
+  </Accordion>
+  <Accordion title="Do annual plans save money?">
+    Yes — annual = 2 months free (~17% discount vs monthly).
+  </Accordion>
+  <Accordion title="Can I upgrade or downgrade mid-cycle?">
+    Yes. Upgrade is immediate (prorated). Downgrade takes effect at
+    next billing cycle.
+  </Accordion>
+</AccordionGroup>
+
+## Aria
+
+<AccordionGroup>
+  <Accordion title="What model powers Aria?">
+    Aria is a multi-agent system on AWS Bedrock. Most specialist agents
+    run on Claude Sonnet 4 (`anthropic.claude-sonnet-4-20250514-v1:0`).
+    Legal and Documents specialists use Claude 3.7 Sonnet.
+  </Accordion>
+  <Accordion title="Does Aria train on my data?">
+    No. Patchline does not use your catalog, royalty statements, or
+    chat history to train models.
+  </Accordion>
+  <Accordion title="Can Aria send emails or post to socials?">
+    Aria drafts. You approve sends. No auto-send. Direct social posting
+    is on the roadmap.
+  </Accordion>
+  <Accordion title="Why did Aria say 'I don't have that data'?">
+    Aria is grounded — it doesn't invent. If a track isn't in your
+    catalog or an artist isn't in your roster, Aria offers to import
+    rather than guess.
+  </Accordion>
+</AccordionGroup>
+
+## Catalog & releases
+
+<AccordionGroup>
+  <Accordion title="Do I have to upload my music to Patchline?">
+    No. [Import via URL](/catalog/import) (Spotify, Apple, YouTube) is
+    cheaper and easier. Upload is for unreleased work or when you want
+    your master in Patchline.
+  </Accordion>
+  <Accordion title="Does Patchline support stems?">
+    Limited in v1. Upload stems as separate tracks with naming
+    convention `<song>-stem-<part>.wav`. Stem separation tooling is
+    in beta.
+  </Accordion>
+  <Accordion title="What's a project anchor?">
+    The persistent state for a release campaign — track list, tasks,
+    dates, concurrent-safe storage. Every release plan you commit
+    becomes a project anchor. See [Project anchors](/releases/project-anchors).
+  </Accordion>
+</AccordionGroup>
+
+## Storefront
+
+<AccordionGroup>
+  <Accordion title="Is the 0% platform fee really 0%?">
+    Yes on every paid tier (Starter / Pro / Scale / Enterprise).
+    Free tier is 10%. Stripe processing (~2.9% + $0.30/txn) applies
+    on every tier separately.
+  </Accordion>
+  <Accordion title="How do payouts work?">
+    Stripe Connect — money goes from fan's card to your Stripe
+    account directly. Patchline never holds your funds.
+  </Accordion>
+  <Accordion title="Can I sell merch?">
+    Digital products only in v1. Physical merch / vinyl / CDs are on
+    the roadmap.
+  </Accordion>
+</AccordionGroup>
+
+## MCP & integrations
+
+<AccordionGroup>
+  <Accordion title="What's MCP?">
+    Model Context Protocol. Open standard for giving AI tools access
+    to external services as callable functions. Patchline ships two
+    MCP servers — [overview here](/for-agents/mcp-overview).
+  </Accordion>
+  <Accordion title="Which AI clients work with Patchline?">
+    Cursor, Codex, Claude Desktop, Claude Code, VS Code, plus any
+    MCP-compatible client. ChatGPT support is pending OpenAI's MCP
+    rollout.
+  </Accordion>
+  <Accordion title="Why do I need to OAuth to use MCP?">
+    Tools that act on your data (catalog, roster, releases) need to
+    know who you are. OAuth 2.0 with PKCE — your credentials never
+    touch the AI client. See [MCP overview](/for-agents/mcp-overview).
+  </Accordion>
+</AccordionGroup>
+
+## Security & privacy
+
+<AccordionGroup>
+  <Accordion title="Where is my data stored?">
+    AWS `us-east-1`. DynamoDB for metadata, S3 for audio/PDFs (encrypted
+    + versioned), OpenSearch Serverless for catalog search.
+  </Accordion>
+  <Accordion title="Does Patchline train on user data?">
+    No. Hard rule. Includes audio (no Cynite-supervised training per
+    the 2026-05-16 audit), catalog metadata, royalty PDFs, chat history.
+  </Accordion>
+  <Accordion title="Are you SOC 2 compliant?">
+    Patchline implements SOC 2 Type II-aligned controls. Formal
+    certification status: contact [support@patchline.ai](mailto:support@patchline.ai)
+    for current attestation status.
+  </Accordion>
+  <Accordion title="Can I delete my data?">
+    Yes — email [support@patchline.ai](mailto:support@patchline.ai)
+    with deletion request. Most data deletes within 7 days. Stripe
+    records and royalty PDFs are retained for legal/tax purposes.
+  </Accordion>
+</AccordionGroup>
+
+## Support & roadmap
+
+<AccordionGroup>
+  <Accordion title="How do I contact support?">
+    [support@patchline.ai](mailto:support@patchline.ai). We aim for
+    24-hour response on weekdays.
+  </Accordion>
+  <Accordion title="Where can I report a bug?">
+    [github.com/Patchline-AI/aria/issues](https://github.com/Patchline-AI/aria/issues)
+    for plugin / MCP issues. Email for everything else.
+  </Accordion>
+  <Accordion title="What's on the roadmap?">
+    See [patchline.ai/changelog](https://patchline.ai/changelog) for
+    shipped features. Major items in flight: Aria iOS app, Outlook
+    integration, physical merch on storefront, REST API beyond
+    Enterprise.
+  </Accordion>
+  <Accordion title="How do I request a feature?">
+    GitHub Discussions or email. We read every request — though we
+    can't promise every one ships.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/reference/faq" />

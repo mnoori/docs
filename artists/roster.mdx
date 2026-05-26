@@ -1,0 +1,153 @@
+---
+title: "Artist roster"
+sidebarTitle: "Roster"
+description: "Add artists to your Patchline roster by platform URL — Spotify, YouTube, TikTok, SoundCloud, Apple Music, or Instagram. Soundcharts enrichment runs in the background to build the full intelligence profile."
+icon: "users"
+keywords:
+  - artist roster patchline
+  - add artist patchline
+  - soundcharts enrichment
+  - manage artists music
+  - roster management
+schema:
+  - "@context": "https://schema.org"
+    "@type": "HowTo"
+    "name": "Add an artist to your Patchline roster"
+    "description": "Add by platform URL — name-only is rejected because many artists share names."
+    "totalTime": "PT1M"
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
+
+Your roster is the set of artists Patchline tracks intelligence for —
+yours, your label's, your roster as a manager, or artists you're
+scouting. Each roster artist gets a full
+[intelligence profile](/artists/intelligence-profile) built from
+Soundcharts data and refreshed automatically.
+
+<TierBadge tier="all" /> &nbsp; Connected-artist limits: Free 1 · Starter 1 · Pro 5 · Scale 20 · Enterprise unlimited.
+
+## Why platform URL only
+
+You **cannot** add an artist by name alone. Many artists share names —
+"Tessa," "Mira," "Cloud" — and name-only matching produces wrong
+artists ~30% of the time at scale. So Patchline requires a platform URL
+that uniquely identifies the artist.
+
+Supported URL types:
+
+- Spotify: `https://open.spotify.com/artist/...`
+- Apple Music: `https://music.apple.com/.../artist/.../...`
+- YouTube: `https://youtube.com/@channelname` or channel URL
+- SoundCloud: `https://soundcloud.com/username`
+- TikTok: `https://tiktok.com/@username`
+- Instagram: `https://instagram.com/username`
+
+Spotify is most common and most informative. Use Spotify if you have it.
+
+## How to add an artist
+
+### Via the UI
+
+Sidebar → **Artists** → **+ Add artist** → paste platform URL → **Add**.
+
+### Via Aria
+
+<AriaPromptCard prompt="Add this artist to my roster: https://open.spotify.com/artist/4dpARuHxo51G3z768sgnrY" />
+
+### Via MCP
+
+<MCPToolCard name="add_artist" />
+
+Programmatic adds work the same — URL required, name-only rejected.
+
+## What happens after you add
+
+1. **Immediate**: artist row appears in `/dashboard/artists` with the
+   platform-supplied basics (name, profile pic, URL).
+2. **Background (10–60 seconds)**: Soundcharts enrichment runs via
+   `artist-enrichment-handler.py`. Streaming stats, social audience,
+   genre tags, top tracks all populate.
+3. **Background (1–5 minutes)**: AI bio generation — `get_bio` populates
+   the bio cache for fast lookups later (no live LLM call needed for
+   future bio queries).
+4. **Background (~daily)**: ongoing intelligence refresh via
+   `roster-sync-handler.py`.
+
+You can use the artist (search, link to releases, query intel) before
+the background enrichment completes. The profile just gets richer over
+time.
+
+## Removing an artist
+
+Roster row → ⋯ → **Remove**. Or via Aria:
+
+<AriaPromptCard prompt="Remove [artist] from my roster." />
+
+<MCPToolCard name="remove_artist" />
+
+Removal frees a slot against your roster cap. Historical intelligence
+stays in Patchline (you can re-add and pick up where you left off).
+
+## Tier limits
+
+| Tier | Connected artists |
+|---|---|
+| <TierBadge tier="free" /> | 1 |
+| <TierBadge tier="starter" /> | 1 |
+| <TierBadge tier="pro" /> | 5 |
+| <TierBadge tier="scale" /> | 20 |
+| <TierBadge tier="enterprise" /> | Unlimited |
+
+If you hit the cap, `add_artist` returns 403 with the upgrade-path
+message.
+
+## Best practices
+
+- **Add your own artist first** if you're an artist (your roster cap
+  starts at 1 on Free/Starter).
+- **For managers / labels**, add the artists in priority order —
+  enrichment runs sequentially, so the first-added artist is fully
+  intel-rich fastest.
+- **Re-add an artist** if their URL changed (rare — labels sometimes
+  re-launch profiles).
+
+## Related pages
+
+- [Artist intelligence profile](/artists/intelligence-profile) — what gets enriched
+- [Audience](/artists/audience) — the fan-graph view
+- [Scout agent](/artists/scout) — A&R discovery
+- [Plans & credits](/account/plans-credits) — credit cost per enrichment
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why does add_artist reject 'Beyoncé' (a name)?">
+    Many artists share names. Even unique-sounding names ("Mira",
+    "Tessa") have hundreds of artists per Soundcharts. Platform URL
+    is the only safe identifier.
+  </Accordion>
+  <Accordion title="What if my artist isn't on Soundcharts?">
+    Enrichment returns partial data — name, profile pic from the
+    platform, no streaming stats. The artist still appears in the
+    roster and can be referenced in releases, just with limited intel.
+  </Accordion>
+  <Accordion title="How fresh is the Soundcharts data?">
+    Initial enrichment uses current Soundcharts cache (typically <24h
+    fresh). Background refresh runs daily.
+  </Accordion>
+  <Accordion title="Can two users add the same artist?">
+    Yes — each workspace has its own roster. Cross-workspace artists
+    are tracked uniquely in Soundcharts.
+  </Accordion>
+  <Accordion title="Does adding an artist import their catalog?">
+    No — that's a separate flow ([catalog import](/catalog/import)).
+    `add_artist` adds intelligence; `analyze_url` + import adds
+    catalog. You can do both for the same artist.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/artists/roster" />

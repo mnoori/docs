@@ -1,0 +1,134 @@
+---
+title: "Streaming insights"
+sidebarTitle: "Streaming insights"
+description: "Aggregate streaming metrics across your catalog and roster — monthly listeners, top tracks, playlist features, momentum, and per-artist comparisons. Powered by Soundcharts."
+icon: "chart-line"
+keywords:
+  - streaming insights
+  - patchline streaming analytics
+  - monthly listeners
+  - soundcharts patchline
+  - music momentum
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+Streaming insights aggregates everything that's happening on the
+streaming side — monthly listeners, top tracks, playlist features,
+momentum — across your catalog and roster. The Metrics agent
+(`metrics-action-handler.py`) surfaces it.
+
+<TierBadge tier="pro" /> &nbsp; Pro+ for full streaming insights. Free/Starter see basic per-artist numbers in the [intelligence profile](/artists/intelligence-profile).
+
+## What you can ask
+
+The most common queries:
+
+<AriaPromptCard prompt="Summarize my streaming for the last 30 days across all artists." />
+<AriaPromptCard prompt="Which track had the biggest growth this month?" />
+<AriaPromptCard prompt="What's the top playlist driving streams for Mira?" />
+<AriaPromptCard prompt="Compare this month to last month for the full roster." />
+<AriaPromptCard prompt="Where are my streams coming from geographically?" />
+
+## What's tracked
+
+| Metric | Per artist | Per track | Per roster |
+|---|---|---|---|
+| Monthly listeners | ✓ | — | ✓ aggregate |
+| Stream counts (30d / 7d / yesterday) | ✓ | ✓ | ✓ |
+| Top tracks | ✓ | — | ✓ ranked |
+| Playlist features | ✓ | ✓ | ✓ |
+| Top markets | ✓ | ✓ | ✓ |
+| Social audience | ✓ | — | ✓ |
+| Momentum (week-over-week, month-over-month) | ✓ | ✓ | ✓ |
+| Streaming source (editorial / algorithmic / user playlists) | — | ✓ | — |
+
+## Where to find it
+
+| Surface | Path |
+|---|---|
+| Web | Sidebar → **Insights** at `/dashboard/insights` |
+| Per artist | Sidebar → **Artists** → click artist → **Insights** tab |
+| Via Aria | "Summarize my streaming..." / "Compare..." |
+
+## Example: monthly roster recap
+
+```text
+You: Summarize my roster's streaming for May 2026.
+Aria: ROSTER MAY 2026
+
+       Total streams (30d):    142,400 across 5 artists
+       Monthly listeners:       58,200 (combined unique)
+       Growth vs April:        +12.3%
+
+       PER-ARTIST
+       Mira         42,100 streams  (top: "Late Bloom" 18,300)
+       Tessa        38,800 streams  (top: "Long Way" 16,200)
+       Cleo Bell    28,400 streams  (top: "Distant" 11,900)
+       Run Hot      19,200 streams  (top: "Run Hot" 8,100)
+       Velvet Bird  13,900 streams  (top: "Velvet" 7,400)
+
+       TOP PLAYLISTS DRIVING STREAMS
+       Lush Sounds          12,400 streams (4 roster artists featured)
+       Bedroom Vibes         8,900 streams (2 roster artists)
+       Future Female Sounds  6,200 streams (3 roster artists)
+
+       GROWTH WINNERS (mo/mo)
+       Mira          +18%  (driven by "Late Bloom" playlist adds)
+       Tessa         +14%  (TikTok lift)
+       Cleo Bell     +9%
+       Run Hot       +1%
+       Velvet Bird   -3%   (no new releases, expected drop)
+
+       NOTABLE
+       Velvet Bird's first TikTok earnings landed ($52 in royalties)
+       suggests TikTok is starting to convert — worth a TikTok ad
+       push.
+```
+
+## Refresh cadence
+
+- **Soundcharts data**: refreshes ~daily.
+- **Aria's daily synthesizer**: runs every morning, surfaces deltas.
+- **On-demand refresh**: any time, 1 credit.
+
+## Pricing
+
+| Action | Credit cost |
+|---|---|
+| Insights query (cached) | 0 |
+| Insights query (force refresh) | 1 |
+| Cross-artist comparison | 1 |
+| Cross-period comparison | 1 |
+
+## Related pages
+
+- [Intelligence profile](/artists/intelligence-profile) — per-artist streaming
+- [Audience](/artists/audience) — demographic breakdown
+- [Royalty](/intelligence/royalty) — the $ side
+- [Aria's research mode](/aria/research-mode) — automatic synthesis
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Where do the numbers come from?">
+    Soundcharts is the primary source. Spotify Web API supplements for
+    a few specific signals. Apple Music for Artists data isn't
+    accessible via API — those numbers come through Soundcharts'
+    estimate.
+  </Accordion>
+  <Accordion title="How accurate are the numbers?">
+    Monthly listeners are exact (Spotify-supplied via Soundcharts).
+    Daily stream counts are estimates. Growth percentages are reliable
+    for established artists, noisier for very-new artists.
+  </Accordion>
+  <Accordion title="Can I get TikTok / YouTube Music data?">
+    YouTube Music numbers come through Soundcharts. TikTok music
+    discovery data is partial — TikTok doesn't expose track-level
+    play counts publicly.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/intelligence/streaming-insights" />

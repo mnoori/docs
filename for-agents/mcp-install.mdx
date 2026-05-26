@@ -1,0 +1,290 @@
+---
+title: "Install the MCP server"
+sidebarTitle: "MCP install"
+description: "Step-by-step install for the Patchline MCP server in Cursor, Codex, Claude Desktop, Claude Code, and VS Code. One config snippet or one command per client."
+icon: "download"
+keywords:
+  - install patchline mcp
+  - mcp cursor install
+  - mcp claude desktop
+  - mcp codex install
+  - mcp vscode
+schema:
+  - "@context": "https://schema.org"
+    "@type": "HowTo"
+    "name": "Install the Patchline MCP server"
+    "description": "Add the Patchline product MCP server to your AI client. Cursor, Codex, Claude Desktop, Claude Code, and VS Code supported."
+    "totalTime": "PT2M"
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+
+Pick your client. Each install is one config snippet or one command —
+about 30 seconds. Authentication runs the first time you make a tool
+call (browser-based OAuth 2.0 with PKCE).
+
+<TierBadge tier="all" /> &nbsp; Free to install on every tier. Tool calls consume your AI credit pool.
+
+## The endpoint
+
+For every client, the URL is the same:
+
+```text
+https://www.patchline.ai/api/mcp/v1
+```
+
+## Cursor
+
+<Steps>
+  <Step title="Open Cursor settings">
+    Cmd / Ctrl + `,` → **MCP** in the sidebar → **+ Add new MCP server**.
+  </Step>
+  <Step title="Paste the config">
+    ```json
+    {
+      "mcpServers": {
+        "aria": {
+          "url": "https://www.patchline.ai/api/mcp/v1"
+        }
+      }
+    }
+    ```
+  </Step>
+  <Step title="Authenticate on first call">
+    The first tool call opens a browser to `patchline.ai`. Sign in (or
+    Google OAuth), approve the connection, return to Cursor. You're set.
+  </Step>
+</Steps>
+
+**1-click install:** open this URL on the same machine running Cursor —
+it triggers Cursor's MCP deeplink installer:
+
+```text
+cursor://anysphere.cursor-deeplink/mcp/install?name=aria&config=eyJhcmlhIjp7InVybCI6Imh0dHBzOi8vd3d3LnBhdGNobGluZS5haS9hcGkvbWNwL3YxIn19
+```
+
+Or use the **"Install in Cursor"** button at the top of any page in
+these docs (via the contextual menu).
+
+## Codex
+
+<Steps>
+  <Step title="Enable remote MCP">
+    In `~/.codex/config.toml`, set:
+
+    ```toml
+    experimental_use_rmcp_client = true
+    ```
+  </Step>
+  <Step title="Add the server">
+    ```bash
+    codex mcp add aria --url https://www.patchline.ai/api/mcp/v1
+    ```
+  </Step>
+  <Step title="Authenticate on first call">
+    Codex opens the browser, you sign in to Patchline, return to Codex.
+    Tokens cached locally.
+  </Step>
+</Steps>
+
+## VS Code (with Copilot or any MCP-aware extension)
+
+<Steps>
+  <Step title="Create or edit .vscode/mcp.json">
+    In your workspace root, create `.vscode/mcp.json` (or merge with an existing one):
+
+    ```json
+    {
+      "servers": {
+        "aria": {
+          "type": "http",
+          "url": "https://www.patchline.ai/api/mcp/v1"
+        }
+      }
+    }
+    ```
+  </Step>
+  <Step title="Reload VS Code">
+    Reload the window so the extension picks up the new server.
+  </Step>
+  <Step title="Authenticate on first call">
+    Same browser-based OAuth flow.
+  </Step>
+</Steps>
+
+**Alternate**: if your extension doesn't support direct HTTP transport,
+use `mcp-remote` to bridge:
+
+```json
+{
+  "servers": {
+    "aria": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://www.patchline.ai/api/mcp/v1"]
+    }
+  }
+}
+```
+
+## Claude Desktop
+
+<Steps>
+  <Step title="Open Claude Desktop config">
+    Settings → **Developer** → **Edit Config**. Opens
+    `claude_desktop_config.json`.
+  </Step>
+  <Step title="Add the Patchline server">
+    ```json
+    {
+      "mcpServers": {
+        "aria": {
+          "url": "https://www.patchline.ai/api/mcp/v1",
+          "transport": "http"
+        }
+      }
+    }
+    ```
+  </Step>
+  <Step title="Restart Claude Desktop">
+    Quit and relaunch. Aria appears in the connectors list.
+  </Step>
+  <Step title="Authenticate on first call">
+    Browser-based OAuth.
+  </Step>
+</Steps>
+
+<Note>
+  **Recommended for Claude users:** use the official
+  [Patchline Claude plugin](/for-agents/claude-plugin) instead. It
+  wraps the same MCP server with a progressive-interview workflow
+  built for music release planning.
+</Note>
+
+## Claude Code
+
+Claude Code has its own plugin command. Three steps:
+
+<Steps>
+  <Step title="Add the marketplace">
+    ```bash
+    /plugin marketplace add Patchline-AI/aria
+    ```
+  </Step>
+  <Step title="Install the plugin">
+    ```bash
+    /plugin install aria@patchline-ai
+    /reload-plugins
+    ```
+  </Step>
+  <Step title="Authenticate">
+    Run:
+
+    ```bash
+    /mcp
+    ```
+
+    Then authenticate `plugin:aria:aria`. Browser OAuth opens.
+  </Step>
+</Steps>
+
+This is the recommended path for Claude Code. The plugin ships with
+extra context: progressive interview workflow, lifecycle phase skills,
+and Patchline-specific slash commands.
+
+## ChatGPT / OpenAI ChatGPT app
+
+ChatGPT's MCP support is in early access at time of writing. When it
+lands publicly, point ChatGPT's MCP config at
+`https://www.patchline.ai/api/mcp/v1` with the same OAuth flow as the
+other clients.
+
+## Any other MCP-compatible client
+
+Patchline implements the MCP spec version `2025-03-26`. Any compliant
+client should work with this config shape:
+
+```json
+{
+  "name": "aria",
+  "transport": "http",
+  "url": "https://www.patchline.ai/api/mcp/v1"
+}
+```
+
+OAuth discovery is at `/.well-known/oauth-protected-resource` per RFC 9728.
+
+## Verify your install
+
+After authenticating, ask your AI:
+
+```text
+What MCP tools do you have available?
+```
+
+You should see the 18 Patchline tools listed (or a count of 18+). If you
+see them, you're connected.
+
+Test a real call:
+
+```text
+Paste a Spotify URL → AI calls analyze_url → returns track identity.
+```
+
+If the first call fails with `unauthenticated`, your client may have
+skipped the OAuth flow — disconnect and reconnect, the browser should open.
+
+## Pricing
+
+| Tier | Install | Tool call cost |
+|---|---|---|
+| All tiers | Free | Counts against your AI credit pool |
+
+A typical user spends 200–500 credits/month via MCP. The MCP server
+itself is free; only the underlying tool calls consume credits. See
+[Plans & credits](/account/plans-credits).
+
+## Related pages
+
+- [MCP overview](/for-agents/mcp-overview) — what MCP is, two-server explanation
+- [MCP tools reference](/for-agents/mcp-tools-reference) — full schemas per tool
+- [Claude plugin](/for-agents/claude-plugin) — the higher-level Claude alternative
+- [AGENTS.md explained](/for-agents/agents-md-explained) — rules of engagement
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Cursor says 'MCP server failed to connect'">
+    Most likely the URL is missing `https://` or has a trailing slash.
+    The correct value is exactly `https://www.patchline.ai/api/mcp/v1`
+    — no trailing `/`.
+  </Accordion>
+  <Accordion title="The browser opened but never came back">
+    Check the URL the browser opened — it should be
+    `https://patchline.ai/api/mcp/v1/authorize?...`. If you saw a
+    `localhost:` URL, your client is using loopback callback and got
+    blocked by a firewall. Try a different network or check firewall
+    settings.
+  </Accordion>
+  <Accordion title="I get '403 Forbidden' on certain tools">
+    Tier-gated tool. `find_playlists` and `inspect_playlist` require
+    Pro+. Upgrade or use a different tool.
+  </Accordion>
+  <Accordion title="The OAuth window says 'invalid_redirect_uri'">
+    Your client's redirect URI isn't registered with Patchline. Email
+    [support@patchline.ai](mailto:support@patchline.ai) with the URI
+    your client uses — we'll add it.
+  </Accordion>
+  <Accordion title="How do I disconnect?">
+    Patchline Settings → Security → Connected applications → revoke
+    Aria MCP. Next call from the client will re-prompt OAuth.
+  </Accordion>
+  <Accordion title="Can I install both this and the docs MCP?">
+    Yes — they're separate servers with separate names. Most users
+    install both: docs MCP for learning Patchline, product MCP for
+    acting on data. See [MCP overview](/for-agents/mcp-overview) for
+    the distinction.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/for-agents/mcp-install" />

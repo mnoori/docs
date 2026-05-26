@@ -1,0 +1,270 @@
+---
+title: "MCP server overview"
+sidebarTitle: "MCP overview"
+description: "Patchline exposes 18 music-business tools via the Model Context Protocol (MCP) at www.patchline.ai/api/mcp/v1. Connect any MCP client — Cursor, Codex, Claude Desktop, Claude Code, VS Code — and your AI gains catalog, artist intelligence, playlist matching, and smart link tools."
+icon: "code"
+keywords:
+  - patchline mcp
+  - mcp server music
+  - model context protocol music
+  - patchline tools api
+  - cursor music tools
+  - claude music plugin
+schema:
+  - "@context": "https://schema.org"
+    "@type": "SoftwareApplication"
+    "name": "Patchline MCP Server"
+    "applicationCategory": "DeveloperApplication"
+    "operatingSystem": "MCP-compatible clients (Cursor, Codex, Claude, VS Code)"
+    "description": "18-tool MCP server for music industry workflows. OAuth 2.0 with PKCE."
+    "offers":
+      "@type": "Offer"
+      "price": "0"
+      "priceCurrency": "USD"
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
+
+The Model Context Protocol (MCP) is an open standard for giving AI tools
+access to external services as callable functions. Patchline ships **two
+MCP servers** — one for your **product data**, one for these **docs**.
+Both are public, both speak the same protocol, but they serve different
+purposes.
+
+<TierBadge tier="all" /> &nbsp; Tools requiring user-scoped data (catalog, roster, etc.) need an authenticated session via OAuth 2.0 with PKCE.
+
+## Two MCP servers
+
+This is the most-important distinction on this page. Don't conflate them.
+
+| | **Product MCP** | **Docs MCP** |
+|---|---|---|
+| **URL** | `https://www.patchline.ai/api/mcp/v1` | `https://docs.patchline.ai/mcp` |
+| **What it exposes** | 18 tools that act on your music data | 2 tools that search & read these docs |
+| **Auth** | OAuth 2.0 with PKCE (user-scoped) | Public, no auth |
+| **Built by** | Patchline | Mintlify (auto-generated) |
+| **Use it when** | You want the AI to *do* something with your catalog / roster / releases | You want the AI to *learn* about how Patchline works |
+| **Example** | "Find playlists for this track" → `find_playlists` | "How does the release planner work?" → `search` |
+
+**If in doubt:** install the product MCP. It can answer most docs
+questions implicitly by knowing the tool surface; it can also act.
+
+## What MCP is (60-second primer)
+
+MCP is a protocol from Anthropic that lets AI tools (Claude, Cursor,
+ChatGPT, Codex) call external functions safely. Think of it like a
+"plugin standard" for AI:
+
+1. **Server** (Patchline) exposes tools — named functions with typed
+   arguments and return values.
+2. **Client** (your AI tool) connects to the server, gets the list of
+   tools, and decides when to call them based on user conversation.
+3. **Calls** are made on demand. Results stream back into the AI's
+   response.
+
+Why this matters: Patchline isn't a chatbot you have to switch to. It's
+a set of tools your existing AI gains. Ask Cursor "find playlists for
+my new track" and Cursor calls Patchline directly. No copy-paste.
+
+## The 18 product tools
+
+Grouped by category. Full schemas at
+[MCP tools reference](/for-agents/mcp-tools-reference).
+
+### Dispatch (1)
+
+<MCPToolCard name="analyze_url" />
+
+### Catalog (3)
+
+<MCPToolCard name="browse_catalog" />
+<MCPToolCard name="catalog_search" />
+<MCPToolCard name="get_asset" />
+
+### Artists & roster (5)
+
+<MCPToolCard name="get_artist_intelligence" />
+<MCPToolCard name="search_artists" />
+<MCPToolCard name="get_trending_artists" />
+<MCPToolCard name="add_artist" />
+<MCPToolCard name="remove_artist" />
+
+### Releases (1)
+
+<MCPToolCard name="get_releases" />
+
+### Playlists (2)
+
+<MCPToolCard name="find_playlists" />
+<MCPToolCard name="inspect_playlist" />
+
+### Smart links (1)
+
+<MCPToolCard name="create_smart_link" />
+
+### Music data (3)
+
+<MCPToolCard name="get_audio_features" />
+<MCPToolCard name="get_song_intelligence" />
+<MCPToolCard name="get_work_metadata" />
+
+### AI generation (2)
+
+<MCPToolCard name="get_bio" />
+<MCPToolCard name="generate_pitch" />
+
+## How auth works
+
+Patchline's product MCP uses **OAuth 2.0 with PKCE** — the same flow
+Spotify, Google, GitHub, and every modern OAuth server uses. Concretely:
+
+1. You add the Patchline MCP URL to your AI client's config.
+2. First time you make a tool call, your client opens a browser to
+   `patchline.ai`.
+3. You sign in (or are already signed in) to Patchline.
+4. You approve the AI client's access.
+5. The client gets a bearer token and uses it for every subsequent call.
+
+**Your credentials never touch the AI client.** Tokens are bound to the
+client, revocable from Patchline Settings, and expire on a schedule.
+
+The MCP server publishes its OAuth metadata at:
+
+```text
+https://www.patchline.ai/.well-known/oauth-protected-resource
+```
+
+Per RFC 9728. Your client uses this to discover the authorization
+endpoint and required scopes automatically.
+
+## Tier gating
+
+Every tier can install and connect the MCP server. Tool calls consume
+your AI credit pool just like Aria chat does:
+
+| Tier | AI credits / month | Practical use |
+|---|---|---|
+| <TierBadge tier="free" /> | 100 | Try a few tools, ~50 calls |
+| <TierBadge tier="starter" /> | 1,000 | Daily use for one artist |
+| <TierBadge tier="pro" /> | 5,000 | Heavy use, roster of 5 |
+| <TierBadge tier="scale" /> | 20,000 | Label-scale automation |
+| <TierBadge tier="enterprise" /> | Unlimited | Programmatic / agent-driven |
+
+Some tools have **tier requirements** beyond credit cost:
+
+- `find_playlists`, `inspect_playlist` — **Pro+** (same as the web feature)
+- `add_artist` beyond your roster limit — gated by tier limit (Free 1, Starter 1, Pro 5, Scale 20, Ent unlimited)
+
+If a call hits a tier gate, the MCP server returns a `403` with an
+upgrade-path message. Your client surfaces it.
+
+## Installation
+
+[**Install the MCP server →**](/for-agents/mcp-install)
+
+One-line install for Cursor (URL config), one-command for Codex
+(`codex mcp add aria --url …`), JSON snippet for Claude Desktop and
+VS Code. Patchline ships a 1-click "Add to Cursor" deeplink directly
+from this docs site (top-right of any page).
+
+## Example: from zero to first tool call
+
+```json
+// Cursor — paste this into Settings > MCP > Add new MCP server
+{
+  "mcpServers": {
+    "aria": {
+      "url": "https://www.patchline.ai/api/mcp/v1"
+    }
+  }
+}
+```
+
+Then in Cursor chat:
+
+```text
+You: "Find playlists I should pitch my track to:
+      https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh"
+```
+
+Cursor recognizes the URL, calls `analyze_url`, which resolves the track,
+then calls `find_playlists` (after OAuth handshake if not yet
+authenticated). Returns 10 ranked matches inline.
+
+Total time: ~5 seconds + first-run OAuth (~30 seconds).
+
+## Rules of engagement for AI agents
+
+If you're an AI agent reading this page programmatically, the
+authoritative rules of engagement are at
+[`www.patchline.ai/AGENTS.md`](https://www.patchline.ai/AGENTS.md):
+
+- **ALWAYS call `analyze_url` first** when a user pastes a streaming URL.
+- **NEVER call `add_artist` name-only** — always include a platform URL.
+- **PREFER cached `get_artist_intelligence`** over re-enriching.
+- **For docs navigation rules**, see
+  [`docs.patchline.ai/AGENTS.md`](https://docs.patchline.ai/AGENTS.md).
+
+## Performance
+
+- **Latency:** Most tools return in <500ms. Tools that hit upstream APIs
+  (Soundcharts, Cynite) can take 2–5s for cold-cache calls. Cached
+  results are <200ms.
+- **Rate limits:** None published; in practice you'll hit your AI credit
+  budget before you hit rate limits.
+- **Idempotency:** Read tools are idempotent. Write tools (`add_artist`,
+  `create_smart_link`) are not — calling twice creates two entries.
+
+## Related pages
+
+- [MCP install](/for-agents/mcp-install) — per-client install steps
+- [MCP tools reference](/for-agents/mcp-tools-reference) — full schemas per tool
+- [Claude plugin](/for-agents/claude-plugin) — the higher-level alternative for Claude
+- [AGENTS.md explained](/for-agents/agents-md-explained) — what `/AGENTS.md` and `/llms.txt` are for
+- [Aria overview](/aria/overview) — Aria *is* the MCP tools, in chat form
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Do MCP tool calls cost me money?">
+    They consume AI credits from your monthly pool — same pool as Aria
+    chat. The MCP server itself is free to install and connect.
+  </Accordion>
+  <Accordion title="Can I write my own MCP client?">
+    Yes. The MCP protocol is open. Patchline's server implements MCP
+    spec version 2025-03-26. See modelcontextprotocol.io for the spec.
+    OAuth metadata is at `/.well-known/oauth-protected-resource`.
+  </Accordion>
+  <Accordion title="Why two MCP servers?">
+    Product MCP acts on user data (authenticated, write-capable). Docs
+    MCP searches public docs (unauthenticated, read-only). Different
+    auth models, different data, different purposes. Both ship because
+    AI tools benefit from both.
+  </Accordion>
+  <Accordion title="Can I use this MCP server with non-AI tools?">
+    Technically yes — anything that speaks MCP and can complete the
+    OAuth flow. In practice it's almost always an AI client.
+  </Accordion>
+  <Accordion title="Is there a public REST API?">
+    Enterprise tier includes API access. The MCP server is the
+    recommended interface for everyone else — same data, lower
+    integration cost, AI-native.
+  </Accordion>
+  <Accordion title="What's the difference between the MCP server and the Claude plugin?">
+    The MCP server is the raw tool surface — any MCP client can use it.
+    The [Claude plugin](/for-agents/claude-plugin) is a higher-level
+    wrapper that adds a Patchline-specific progressive interview
+    workflow on top of the same tools. If you use Claude, the plugin
+    is the better start.
+  </Accordion>
+  <Accordion title="Where do I report bugs?">
+    GitHub: [github.com/Patchline-AI/aria/issues](https://github.com/Patchline-AI/aria/issues)
+    for plugin + MCP issues. Email
+    [support@patchline.ai](mailto:support@patchline.ai) for account
+    issues.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/for-agents/mcp-overview" />

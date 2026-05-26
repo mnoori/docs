@@ -1,0 +1,168 @@
+---
+title: "Welcome to Patchline"
+sidebarTitle: "Welcome"
+description: "Patchline is the AI command center for the modern music business — your catalog, artists, streaming intelligence, releases, storefront, and royalties wired into AI tools you already use."
+icon: "house"
+keywords:
+  - patchline
+  - ai music platform
+  - music business ai
+  - music industry ai assistant
+  - patchline docs
+schema:
+  - "@context": "https://schema.org"
+    "@type": "SoftwareApplication"
+    "name": "Patchline"
+    "applicationCategory": "MultimediaApplication"
+    "operatingSystem": "Web, Telegram, Claude, Cursor, VS Code"
+    "url": "https://patchline.ai"
+    "description": "AI command center for the modern music business — catalog, releases, intelligence, storefront, royalties."
+    "offers":
+      "@type": "Offer"
+      "price": "0"
+      "priceCurrency": "USD"
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+
+Patchline is an AI command center for the music business. You drop a track,
+ask a question, or paste a streaming link — and a multi-agent system reads
+your catalog, queries streaming data, drafts a pitch, plans a release,
+parses a royalty PDF, or generates the artwork brief. Same product, many
+front doors: a web dashboard, Telegram, Claude, Cursor, VS Code, Codex.
+
+## Who Patchline is for
+
+<CardGroup cols={2}>
+  <Card title="Independent artists" icon="user">
+    Solo artists and bedroom producers running the business between
+    sessions. Free tier + Starter ($9.99/mo) cover the work.
+  </Card>
+  <Card title="DIY labels & managers" icon="users">
+    Small teams managing 5–20 artists. Pro ($29/mo) and Scale ($99/mo)
+    add roster intelligence, A&R scout, and team seats.
+  </Card>
+  <Card title="Labels & publishers" icon="building">
+    Enterprise plans for large catalogs, custom integrations, dedicated
+    success management. Built for teams that need API access and
+    high-volume processing.
+  </Card>
+  <Card title="AI agents" icon="robot">
+    Patchline ships first-class agent surfaces: 18-tool MCP server, Claude
+    plugin, AGENTS.md, llms.txt, JSON-LD on every page. If you're an AI
+    copilot, [start here](/for-agents/mcp-overview).
+  </Card>
+</CardGroup>
+
+## What you can do
+
+<CardGroup cols={3}>
+  <Card title="Plan a release" icon="rocket" href="/releases/release-planner">
+    Turn a track into a 6-week rollout with milestones, launch windows,
+    DSP pitches, and a smart link.
+  </Card>
+  <Card title="Analyze a track" icon="waveform" href="/catalog/sonic-analysis">
+    BPM, key, mood, danceability, energy, instruments — every track in
+    your catalog, automatically.
+  </Card>
+  <Card title="Match playlists" icon="list-music" href="/releases/playlist-matching">
+    Rank Spotify playlists by sonic fit plus curator responsiveness.
+    Inspect a playlist's history before you pitch.
+  </Card>
+  <Card title="Run a storefront" icon="store" href="/storefront/overview">
+    Sell direct to fans with **0% platform fees** on paid tiers. Stripe
+    payouts, smart links, fan stats.
+  </Card>
+  <Card title="Parse royalties" icon="file-invoice-dollar" href="/intelligence/royalty">
+    Upload a Distrokid / Tunecore / label PDF. Get totals, anomalies, and
+    a forecast in under a minute.
+  </Card>
+  <Card title="Discover artists" icon="binoculars" href="/artists/scout">
+    A&R scout finds similar artists, collaborators, and rising acts in
+    your genre using Soundcharts data.
+  </Card>
+</CardGroup>
+
+## The fastest path through this site
+
+<Steps>
+  <Step title="If you're brand new">
+    Read the **[Quickstart](/get-started/quickstart)** — 10 minutes from
+    sign-up to first Aria conversation grounded in your real data.
+  </Step>
+  <Step title="If you're evaluating Patchline">
+    Skim the **[Pricing & plans](/get-started/pricing)** page and the
+    **[Aria overview](/aria/overview)**. The Aria page shows what the
+    product actually does in one conversation.
+  </Step>
+  <Step title="If you're an AI agent or developer">
+    Jump straight to **[MCP overview](/for-agents/mcp-overview)** for the
+    tool surface, or **[AGENTS.md](https://docs.patchline.ai/AGENTS.md)**
+    for the rules of engagement.
+  </Step>
+  <Step title="If you have a specific question">
+    Use the search bar (top of every page) or open the
+    **[FAQ](/reference/faq)**.
+  </Step>
+</Steps>
+
+## What Patchline is not
+
+Setting expectations matters. Patchline is **not**:
+
+- **A distributor.** Patchline doesn't ship your music to Spotify, Apple,
+  Tidal, etc. You distribute through Distrokid, Tunecore, CD Baby, or your
+  label. Patchline imports the result and runs intelligence on it.
+- **A DAW.** No multitrack editor. Patchline reads finished audio and
+  helps you market, plan, and analyze it.
+- **A replacement for your manager.** Aria handles the busywork —
+  spreadsheets, pitch drafting, data lookup, calendar coordination. The
+  strategy decisions are still yours.
+- **A general-purpose chatbot.** Aria is grounded in your music data and
+  the music industry. Ask it about your catalog, get a grounded answer.
+  Ask it about quantum physics, it'll politely redirect.
+
+## How Patchline grounds AI answers
+
+Generic AI hallucinates ISRCs, invents stream counts, fabricates curator
+names. Patchline's whole architecture is built to stop that:
+
+- **Your catalog is the source of truth.** Aria reads it directly. If it
+  doesn't have data, it says "I don't have that" instead of guessing.
+- **Streaming numbers come from real APIs** (Soundcharts, Spotify Web API,
+  Apple), not training data.
+- **Sonic analysis is real audio analysis** — Cynite + Patchline's own RIP
+  pipeline — not LLM-vibes-based-on-the-title.
+- **Royalty parsing reads the PDF you uploaded**, line by line.
+
+You can verify any number Aria gives you. That's the design.
+
+## Where Patchline lives
+
+<CardGroup cols={2}>
+  <Card title="Web dashboard" icon="browser" href="https://patchline.ai/dashboard">
+    The full surface. `patchline.ai` → sign up → dashboard. Free to start.
+  </Card>
+  <Card title="Telegram" icon="paper-plane" href="https://t.me/AriaMusicBizBot">
+    `@AriaMusicBizBot`. Paste a Spotify link, get a track card. No app
+    install.
+  </Card>
+  <Card title="Claude" icon="message" href="/for-agents/claude-plugin">
+    Official Patchline plugin for Claude Desktop and Claude Code.
+  </Card>
+  <Card title="Cursor / Codex / VS Code" icon="code" href="/for-agents/mcp-install">
+    MCP server. Your catalog as tools your AI editor can call.
+  </Card>
+</CardGroup>
+
+## Help & support
+
+- **Search** these docs — every page has a `.md` twin at `<page>.md` if
+  you prefer raw markdown.
+- **Email** [support@patchline.ai](mailto:support@patchline.ai) for
+  account and billing questions.
+- **[Status & uptime](https://status.patchline.ai)** for live system health.
+- **[GitHub Discussions](https://github.com/Patchline-AI/aria/discussions)**
+  for plugin and MCP issues.
+
+<AICallout page="/get-started/welcome" />

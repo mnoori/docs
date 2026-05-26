@@ -1,0 +1,160 @@
+---
+title: "AI campaign planner"
+sidebarTitle: "Campaign planner"
+description: "Generate a marketing campaign for a release from intake (artist, audience, budget) — Aria assembles channels, content calendar, ad targeting, fan messaging into a deliverable plan you can execute or hand to a marketing team."
+icon: "bullhorn"
+keywords:
+  - ai campaign planner
+  - music marketing campaign
+  - release marketing patchline
+  - ai marketing plan
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+The AI campaign planner generates the **marketing-layer** of a release:
+which channels, what content calendar, which ad targeting, what fan
+messaging, what budget allocation. It's the marketing-strategy
+counterpart to the [release planner's](/releases/release-planner)
+operational rollout.
+
+<TierBadge tier="starter" /> &nbsp; Free shows the layout (no AI generation). Starter+ generates the plan. 10 credits per plan.
+
+## What's in a campaign plan
+
+| Section | What it contains |
+|---|---|
+| **Audience profile** | Who you're marketing to — drawn from existing fan data, similar artists, audience demographics |
+| **Channel mix** | Spotify, TikTok, Instagram, YouTube, email, paid ads, organic — weighted by what's worked for similar releases |
+| **Content calendar** | Week-by-week post schedule with topic, channel, asset reference |
+| **Ad targeting** | If you have a budget — interest tags, lookalikes, geo |
+| **Fan messaging** | Email/Telegram copy for the fan list at each phase |
+| **Budget allocation** | Per-channel split of whatever budget you provided |
+| **Success metrics** | What to measure, what "good" looks like |
+
+## When to use it
+
+- **You have a release plan and now need the marketing layer.** The
+  release planner gives you ops; the campaign planner gives you
+  marketing.
+- **You have ad money to spend and don't know where.** The campaign
+  planner allocates a budget across channels based on signal.
+- **You want a deliverable to hand to a marketing person.** The output
+  is markdown — clean enough to send.
+
+## Quick start
+
+<Steps>
+  <Step title="Have a release plan first">
+    Campaign planner builds on top of a
+    [release plan](/releases/release-planner). Create that first if you
+    haven't.
+  </Step>
+  <Step title="Ask Aria">
+    <AriaPromptCard prompt="Build a marketing campaign for 'Sleeper' — $100 ad budget, 6 weeks." />
+  </Step>
+  <Step title="Review + edit">
+    Aria returns a campaign plan in markdown. Edit anything that doesn't
+    fit your audience, budget, or risk tolerance.
+  </Step>
+  <Step title="Commit to the project anchor">
+    Say "yes, commit" — the campaign becomes part of the
+    [project anchor](/releases/project-anchors). Tasks land in the
+    release timeline.
+  </Step>
+</Steps>
+
+## Example output
+
+```text
+🎯  Marketing campaign: Sleeper — Mira — 6 weeks — $100 budget
+
+AUDIENCE
+  Primary: 18-29 dreampop fans, US/UK/AU, female-skewing.
+  Lookalikes from Mira's last release: 4.2k fans, 87% match.
+  Adjacent audiences: Tessa fans (1.1k overlap), Cleo Bell fans (640).
+
+CHANNEL MIX
+  TikTok      40% — high virality for the sonic profile
+  Instagram   25% — visual-first content, Reels priority
+  Email       15% — Mira's list (1,247 subscribers, ~24% open rate)
+  Paid ads    15% — TikTok ads to dreampop interest cluster
+  Spotify     5%  — Marquee or Showcase if budget permits later
+
+WEEKLY CONTENT CALENDAR
+
+  Week -6: artwork reveal (IG + TikTok), pitch teaser to fan list
+  Week -4: 30-sec preview clip (TikTok), curator DMs
+  Week -2: pre-save go-live, Telegram drop, email blast
+  Week 0:  release day post (3 platforms), TikTok ad campaign starts
+  Week +1: behind-the-scenes content, fan story repost
+  Week +2: TikTok ad optimization, lookalike refresh
+  Week +4: post-mortem, learnings doc
+
+AD TARGETING (TikTok $40 budget)
+  Interest tags: dreampop, indie pop, lo-fi, bedroom pop
+  Audience: 18-29, female-skewing, US/UK/AU
+  Lookalike: Mira existing fans (1% lookalike)
+  Creative: 30-sec preview video, full-bleed
+
+FAN MESSAGING
+  Email pre-release: 1 week before — "New single dropping Friday"
+  Email release day: "Sleeper is out — listen + share"
+  Telegram drop: same-day, exclusive lossless link to fan-Telegram
+
+SUCCESS METRICS
+  Streams week 1: target 8k (baseline 5k from last release)
+  Playlist adds: target 3 (last release: 1)
+  Email open rate: target 28% (baseline 24%)
+  Storefront conversion: target 12 sales (baseline 7)
+```
+
+## Prerequisites
+
+- A release plan committed as a [project anchor](/releases/project-anchors).
+- Optionally: a fan list (Telegram, email) for messaging.
+- Optionally: an ad budget — Aria can plan without budget too (organic-only).
+- Optionally: historical campaign data (auto-pulled if you've used
+  Patchline for prior releases).
+
+## Pricing
+
+| Tier | Campaign planner access | Generation cost |
+|---|---|---|
+| <TierBadge tier="free" /> | Layout only (no AI) | — |
+| <TierBadge tier="starter" /> | Full | 10 credits/plan |
+| <TierBadge tier="pro" /> | Full + multi-channel | 10 credits/plan |
+| <TierBadge tier="scale" /> | Full + roster-level | 10 credits/plan |
+| <TierBadge tier="enterprise" /> | Full + API | 10 credits/plan |
+
+## Related pages
+
+- [Release planner](/releases/release-planner) — the operational layer
+- [Project anchors](/releases/project-anchors) — where the campaign lives
+- [Pitch kit](/releases/pitch-kit) — DSP-specific output, separate from campaign
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Does Aria run the ads for me?">
+    No. Aria plans the campaign and writes the targeting brief. You
+    run ads through TikTok/Meta/Spotify Ad Studio directly. Patchline
+    doesn't have ad-platform integrations yet.
+  </Accordion>
+  <Accordion title="What if I have $0 budget?">
+    Aria generates organic-only campaigns — content calendar, fan
+    messaging, curator DMs. No ad targeting section.
+  </Accordion>
+  <Accordion title="Can I regenerate the plan with different constraints?">
+    Yes. "Regenerate with $250 budget" or "more aggressive timeline"
+    — costs another 10 credits per regen.
+  </Accordion>
+  <Accordion title="Does the campaign update if my audience grows?">
+    Not automatically. Regenerate when you have meaningfully more data.
+    A small audience delta doesn't change the plan much.
+  </Accordion>
+</AccordionGroup>
+
+<AICallout page="/releases/campaign-planner" />

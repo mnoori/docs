@@ -1,0 +1,31 @@
+export const TierBadge = ({ tier }) => {
+  const styles = {
+    free:       { label: "Free",       color: "#A1A1AA" },
+    starter:    { label: "Starter+",   color: "#00E6E2" },
+    pro:        { label: "Pro+",       color: "#0068FF" },
+    scale:      { label: "Scale+",     color: "#7A5BFF" },
+    enterprise: { label: "Enterprise", color: "#FF7A59" },
+    all:        { label: "All plans",  color: "#22C55E" },
+  };
+  const t = styles[tier?.toLowerCase()] ?? styles.all;
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "4px",
+        padding: "2px 10px",
+        borderRadius: "999px",
+        border: `1px solid ${t.color}40`,
+        background: `${t.color}1A`,
+        color: t.color,
+        fontSize: "12px",
+        fontWeight: 600,
+        fontFamily: "var(--font-family-mono)",
+        verticalAlign: "middle",
+      }}
+    >
+      {t.label}
+    </span>
+  );
+};

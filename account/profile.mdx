@@ -1,0 +1,81 @@
+---
+title: "Account & profile"
+sidebarTitle: "Account"
+description: "Manage your Patchline account — name, email, profile picture, role, password, security settings."
+icon: "user"
+keywords:
+  - patchline account
+  - patchline profile
+  - account settings patchline
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+
+Manage the basics: name, email, profile picture, role, password,
+security settings.
+
+<TierBadge tier="all" /> &nbsp; All tiers.
+
+## Account tab
+
+Settings → **Account**:
+
+| Field | Notes |
+|---|---|
+| Name | Display name across the app |
+| Email | Sign-in identity. Changing requires email verification. |
+| Profile picture | Used in shared workspaces + comments |
+| Role | What you're using Patchline for (artist / manager / label / publisher / other) — informs Aria's default style |
+
+## Security tab
+
+Settings → **Security**:
+
+- **Password** — change anytime, requires current password
+- **Active sessions** — see where you're signed in, revoke remotely
+- **Two-factor authentication** (2FA) — TOTP-based, recommended
+- **Connected OAuth applications** — apps that have token access to
+  your Patchline (MCP clients, integrations) — revoke any time
+
+## Workspaces & teams
+
+Pro+ tiers include team seats. Workspace management UI is being
+finalized — for now, contact [support@patchline.ai](mailto:support@patchline.ai)
+to add team members to your workspace.
+
+| Tier | Seats |
+|---|---|
+| <TierBadge tier="free" /> | 1 |
+| <TierBadge tier="starter" /> | 1 |
+| <TierBadge tier="pro" /> | 3 |
+| <TierBadge tier="scale" /> | 10 |
+| <TierBadge tier="enterprise" /> | Unlimited |
+
+## Deleting your account
+
+Email [support@patchline.ai](mailto:support@patchline.ai) with the
+subject "Account deletion request." We delete:
+
+- Your account row
+- Your catalog metadata
+- Your project anchors
+- Your storefront configuration
+- All OAuth tokens
+
+We keep (per legal / tax requirements):
+
+- Stripe transaction records (Stripe's retention policy)
+- Audit logs (90 days)
+- Royalty PDFs you uploaded (5 years for tax purposes — encrypted,
+  inaccessible to you after deletion, but legally retained)
+
+Deletion completes within 7 days of request.
+
+## Related pages
+
+- [Billing](/account/billing) — subscription management
+- [Plans & credits](/account/plans-credits) — AI credit math
+- [Pricing](/get-started/pricing) — tier comparison
+
+<AICallout page="/account/profile" />

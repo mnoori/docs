@@ -1,0 +1,249 @@
+---
+title: "Plans & credits"
+sidebarTitle: "Plans & credits"
+description: "Deep dive on Patchline's AI credit system — what a credit is, exact cost per AI action, how to budget per artist or per release, what to do when you run out."
+icon: "coin"
+keywords:
+  - patchline ai credits
+  - ai credits cost
+  - credit consumption patchline
+  - plans patchline
+  - upgrade patchline
+schema:
+  - "@context": "https://schema.org"
+    "@type": "FAQPage"
+    "mainEntity":
+      - "@type": "Question"
+        "name": "What is an AI credit on Patchline?"
+        "acceptedAnswer":
+          "@type": "Answer"
+          "text": "An AI credit is the unit Patchline charges per AI action. Aria conversations cost 1, sonic analysis costs 5 per track, image generation costs 5, video costs 20, campaign planner costs 10 per plan, similar artist search costs 2."
+      - "@type": "Question"
+        "name": "Do AI credits roll over?"
+        "acceptedAnswer":
+          "@type": "Answer"
+          "text": "No. Credits reset at the start of each calendar month (monthly plans) or first of each month after annual renewal (annual plans). Unused credits do not carry over."
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+
+This page goes deeper than [Pricing & plans](/get-started/pricing) — it
+covers exactly **what an AI credit is**, how each AI action consumes
+credits, and how to budget your monthly allocation across artists and
+releases.
+
+If you just want the price list, see
+[Pricing & plans](/get-started/pricing).
+
+## What an AI credit is
+
+An **AI credit** is Patchline's unit of metered AI consumption. Every
+AI action — Aria chat, sonic analysis, image generation, MCP tool call —
+debits credits from your monthly pool.
+
+Credits **reset** on the first of each calendar month (monthly plans) or
+the first of each month after annual renewal (annual plans). They **do
+not roll over**.
+
+## Credit cost per action
+
+| Action | Cost | Notes |
+|---|---|---|
+| Aria chat conversation | **1 credit** | Per conversation, not per message — a multi-message chat = 1 credit total |
+| Sonic analysis | **5 credits / track** | Runs once per track on import / upload; re-analysis also = 5 |
+| Image generation | **5 credits / image** | Cover art, banners, social cards |
+| Video generation | **20 credits / video** | Short-form / canvas videos |
+| AI campaign planner | **10 credits / plan** | Each new release plan generation |
+| Similar artist discovery | **2 credits / search** | A&R Scout queries |
+| MCP tool call (read) | **0–1 credit** | Most read tools are 0 — they hit cache. `get_song_intelligence` and similar enrichment tools are 1. |
+| MCP tool call (write / enrichment) | **1–5 credits** | `add_artist` (Soundcharts enrichment) = 2; `create_smart_link` = 1; `generate_pitch` = 2 |
+| Royalty PDF parse | **5 credits / statement** | One per uploaded PDF, regardless of size |
+| Background-job synthesis (daily / weekly) | **0 credits** | Runs server-side, not metered |
+
+A few notes:
+
+- **Aria chat** is one conversation = 1 credit. If you have a 20-message
+  back-and-forth with Aria, that's still 1 credit — until you start a
+  new conversation.
+- **Cached reads are free.** Asking Aria "what's the BPM of my track"
+  when sonic analysis has already run = 0 credits (cached lookup) + 1
+  credit (the chat conversation). Net: 1 credit.
+- **Stem separation** (when surfaced in UI) is metered as a multi-step
+  Cynite operation — typically 10–15 credits per track.
+
+## Monthly allocation by tier
+
+| Tier | AI credits / month |
+|---|---|
+| <TierBadge tier="free" /> | 100 |
+| <TierBadge tier="starter" /> | 1,000 |
+| <TierBadge tier="pro" /> | 5,000 |
+| <TierBadge tier="scale" /> | 20,000 |
+| <TierBadge tier="enterprise" /> | Unlimited |
+
+## How much will I use?
+
+Realistic monthly profiles by user type:
+
+### Curious user (Free tier)
+
+| Action | Times/month | Cost |
+|---|---|---|
+| Aria chats | 20 | 20 |
+| Sonic analysis | 2 tracks | 10 |
+| Total | | **30 credits** of 100 |
+
+### Solo artist (Starter)
+
+| Action | Times/month | Cost |
+|---|---|---|
+| Aria chats | 60 | 60 |
+| Sonic analysis | 5 tracks | 25 |
+| Image generation | 8 covers | 40 |
+| Campaign planner | 2 plans | 20 |
+| Similar artist searches | 5 | 10 |
+| Royalty parses | 2 statements | 10 |
+| Total | | **165 credits** of 1,000 |
+
+### Manager / DIY label (Pro)
+
+| Action | Times/month | Cost |
+|---|---|---|
+| Aria chats | 200 | 200 |
+| Sonic analysis | 30 tracks | 150 |
+| Image generation | 20 | 100 |
+| Video generation | 5 | 100 |
+| Campaign planner | 10 plans | 100 |
+| Similar artist searches | 30 | 60 |
+| MCP tool calls (Cursor / Claude) | 200 | 200 |
+| Royalty parses | 5 statements | 25 |
+| Total | | **935 credits** of 5,000 |
+
+### Label (Scale)
+
+| Action | Times/month | Cost |
+|---|---|---|
+| Aria chats | 600 | 600 |
+| Sonic analysis | 80 tracks | 400 |
+| Image generation | 50 | 250 |
+| Video generation | 15 | 300 |
+| Campaign planner | 30 plans | 300 |
+| Similar artist searches | 100 | 200 |
+| MCP tool calls | 800 | 800 |
+| Royalty parses | 20 statements | 100 |
+| Total | | **2,950 credits** of 20,000 |
+
+If you're consistently above 80% of your tier's allocation, **upgrading
+is almost always cheaper than running out** — see [When to upgrade](#when-to-upgrade).
+
+## What happens when you run out
+
+If you exhaust your monthly pool:
+
+- **Aria chat** returns a friendly "you've used all your AI credits this
+  month — upgrade or wait until [next reset date]."
+- **Sonic analysis** queues the track but doesn't run — it'll process
+  automatically when credits reset.
+- **MCP tool calls** return `429 Too Many Requests` with an upgrade-path
+  message.
+- **Image / video generation** is rejected at the form.
+- **Existing data is unaffected.** Your catalog, projects, storefront
+  all keep working — you just can't trigger new AI actions.
+
+Credits reset at midnight UTC on the first of the month.
+
+## When to upgrade
+
+Specific thresholds:
+
+| If you're using... | Consider upgrading from / to |
+|---|---|
+| > 80% of Free's 100 credits | Free → Starter ($9.99) |
+| > 80% of Starter's 1,000 | Starter → Pro ($29) |
+| > 80% of Pro's 5,000 | Pro → Scale ($99) |
+| > 80% of Scale's 20,000 | Scale → Enterprise (custom) |
+
+The **0% storefront fee** (Starter+) and **playlist matching** (Pro+) are
+often standalone reasons to upgrade earlier than the credit math alone
+suggests. See [Pricing & plans](/get-started/pricing).
+
+## Checking your usage
+
+Settings → **Billing** → **AI credit usage** panel shows:
+
+- Credits used this period
+- Credits remaining
+- Reset date
+- Breakdown by action type (Aria / sonic / image / video / MCP / other)
+
+You can also ask Aria directly:
+
+```text
+"How many AI credits have I used this month?"
+"How many do I have left?"
+"Show me my credit consumption breakdown."
+```
+
+## How credits map to dollars
+
+Roughly, per tier:
+
+| Tier | $/month | Credits/month | $/1,000 credits |
+|---|---|---|---|
+| Free | $0 | 100 | $0 (but capped) |
+| Starter | $9.99 | 1,000 | $9.99 |
+| Pro | $29 | 5,000 | $5.80 |
+| Scale | $99 | 20,000 | $4.95 |
+| Enterprise | $249+ | Unlimited | n/a (volume) |
+
+Higher tiers get **more credits per dollar** — the volume discount.
+
+## Frequently asked
+
+<AccordionGroup>
+  <Accordion title="Do credits roll over month-to-month?">
+    No. They reset on the 1st of each calendar month (monthly plans) or
+    on the first of each month after annual renewal (annual plans).
+  </Accordion>
+  <Accordion title="Can I buy extra credits without upgrading?">
+    Not in v1 — credit top-ups aren't surfaced as a self-serve option.
+    Enterprise customers can negotiate volume credit packs. For
+    everyone else, upgrade to the next tier (almost always cheaper than
+    add-on packs would be).
+  </Accordion>
+  <Accordion title="Does an MCP tool call cost the same as Aria chat?">
+    Almost. Most read tools are 0 credits (cached). Tools that fetch
+    fresh data (Soundcharts, Cynite) are 1–5 credits. The Aria chat
+    that wraps a tool call adds 1 credit on top, but only for the chat
+    itself — not per tool call within it.
+  </Accordion>
+  <Accordion title="If I run sonic analysis twice on the same track, do I pay twice?">
+    Yes — re-analysis is 5 credits each time. The features may have
+    changed (Cynite model improvements) so re-running is metered as a
+    full analysis, not a cache hit.
+  </Accordion>
+  <Accordion title="Are background jobs (daily synthesizer, RIP pipeline) metered?">
+    No. Server-side background work is included in the tier — not
+    metered against your credit pool. Only AI actions you trigger are
+    metered.
+  </Accordion>
+  <Accordion title="What about Free tier with no payment method — am I limited there too?">
+    Yes. Free is 100 credits / month, no exceptions. There's no way
+    to buy more on Free without adding a payment method and upgrading
+    to a paid tier.
+  </Accordion>
+  <Accordion title="If I cancel mid-trial, do unused credits refund?">
+    No — trial credits don't refund. They were free. If you cancel
+    during the trial, no charge is made and your subscription ends at
+    the trial cutoff.
+  </Accordion>
+</AccordionGroup>
+
+## Related pages
+
+- [Pricing & plans](/get-started/pricing) — tier comparison + storefront fee
+- [Billing](/account/billing) — how Stripe portal works
+- [Quickstart](/get-started/quickstart) — for new users
+
+<AICallout page="/account/plans-credits" />

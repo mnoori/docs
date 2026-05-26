@@ -1,0 +1,52 @@
+export const AriaPromptCard = ({ prompt, surface = "web" }) => {
+  const surfaces = {
+    web:      { href: "https://patchline.ai/dashboard",    label: "Try in dashboard" },
+    telegram: { href: "https://t.me/AriaMusicBizBot",      label: "Try in Telegram"   },
+    claude:   { href: "https://patchline.ai/claude",       label: "Try in Claude"     },
+    mcp:      { href: "https://patchline.ai/mcp",          label: "Install MCP first" },
+  };
+  const s = surfaces[surface] ?? surfaces.web;
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        gap: "16px",
+        padding: "12px 16px",
+        marginBottom: "12px",
+        borderRadius: "10px",
+        border: "1px solid rgba(255,255,255,0.10)",
+        background: "rgba(255,255,255,0.03)",
+      }}
+    >
+      <code
+        style={{
+          fontFamily: "var(--font-family-mono)",
+          fontSize: "14px",
+          color: "inherit",
+          flex: 1,
+        }}
+      >
+        "{prompt}"
+      </code>
+      <a
+        href={s.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          fontSize: "12px",
+          fontWeight: 600,
+          padding: "6px 12px",
+          borderRadius: "999px",
+          background: "linear-gradient(92deg, #00E6E2, #0068FF)",
+          color: "#FFFFFF",
+          textDecoration: "none",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {s.label} →
+      </a>
+    </div>
+  );
+};
