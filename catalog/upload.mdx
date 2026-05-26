@@ -1,7 +1,7 @@
 ---
 title: "Upload a track"
 sidebarTitle: "Upload"
-description: "Upload MP3, WAV, or FLAC files directly to your Patchline catalog. Auto-extracts ID3 metadata, runs sonic analysis, and stores the master securely. Best for unreleased work or when you want the master in Patchline."
+description: "Upload MP3, WAV, or FLAC files directly to your Patchline catalog. Aria captions the track for AI discovery the moment the upload finishes. Best for unreleased work or your masters."
 icon: "upload"
 keywords:
   - upload track patchline
@@ -12,7 +12,7 @@ schema:
   - "@context": "https://schema.org"
     "@type": "HowTo"
     "name": "Upload a music file to Patchline"
-    "description": "Add unreleased or master audio to your Patchline catalog. Auto metadata extraction and sonic analysis run on upload."
+    "description": "Add unreleased or master audio to your Patchline catalog. Aria captions the track on upload."
     "totalTime": "PT3M"
 ---
 
@@ -21,7 +21,7 @@ import { TierBadge } from "/snippets/tier-badge.mdx"
 import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 
 Upload a finished audio file directly into your Patchline catalog.
-Patchline stores it securely, extracts ID3 metadata, queues
+Patchline stores it securely, queues
 [sonic analysis](/catalog/sonic-analysis), and makes it searchable.
 Best for **unreleased work** or when you want your master to live in
 Patchline alongside the catalog metadata.
@@ -84,24 +84,9 @@ Scale+/Enterprise).
 Aria handles the upload + metadata confirmation in the chat. Best on
 Telegram for small files, web for larger ones.
 
-## What gets extracted from your file
+## What happens on upload
 
-| Field | Source |
-|---|---|
-| Title | ID3 v2 `TIT2` tag |
-| Artist | ID3 v2 `TPE1` tag |
-| Album | ID3 v2 `TALB` tag |
-| ISRC | ID3 v2 `TSRC` tag (if present) |
-| Genre | ID3 v2 `TCON` tag |
-| Track number | ID3 v2 `TRCK` tag |
-| Year | ID3 v2 `TYER` / `TDRC` tag |
-| Cover art | Embedded APIC frame (PNG / JPEG) |
-| Duration | Read from file directly |
-| Sample rate / bit depth | Read from file (WAV / FLAC) |
-| AI-readable caption | Generated automatically after upload |
-
-If a tag is missing, the upload UI prompts you to fill it. ISRC is
-strongly encouraged but not required.
+When the upload finishes, Aria starts generating the [AI caption](/catalog/sonic-analysis) for the track so it becomes discoverable across AI tools. You set the title, artist, and other metadata yourself in the track detail panel — Patchline does not extract ID3 tags from your file.
 
 ## Storage limits
 
