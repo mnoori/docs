@@ -39,8 +39,8 @@ Aria is one assistant with multiple front doors. <TierBadge tier="all" />
 
 <CardGroup cols={2}>
   <Card title="Plan a release" icon="rocket" href="/releases/release-planner">
-    Turn a track into a 6-week rollout with milestones, launch windows,
-    and next-best-actions.
+    Turn a track into an intelligent rollout — milestones, launch
+    windows, and next-best-actions tuned to the artist's journey.
   </Card>
   <Card title="Analyze a track" icon="waveform" href="/catalog/sonic-analysis">
     Paste any Spotify URL — get an AI-readable description of the track, plus a ranked list of similar artists.
@@ -92,19 +92,10 @@ Pick whichever fits the workflow you're already in.
 
     [Open the dashboard →](https://patchline.ai/dashboard)
   </Accordion>
-  <Accordion title="Telegram" icon="paper-plane">
-    Message [@AriaMusicBizBot](https://t.me/AriaMusicBizBot) on Telegram.
-    Paste a Spotify or YouTube link, get a rich track card back. One-tap
-    catalog import, AI pitches, intelligence reports — all without
-    leaving Telegram.
-
-    [Open in Telegram →](https://t.me/AriaMusicBizBot) ·
-    [Full Telegram guide →](/aria/telegram)
-  </Accordion>
   <Accordion title="Claude (Desktop + Claude Code)" icon="message">
     Install the official Patchline plugin and Claude can read your real
-    catalog. Ground every prompt in actual ISRCs, audio features, and
-    streaming data. Plugin includes a "progressive interview" workflow
+    catalog. Ground every prompt in actual ISRCs, audio context, and
+    streaming signal. Plugin includes a progressive-interview workflow
     that walks Aria-style release planning inside Claude.
 
     [Install the Claude plugin →](/for-agents/claude-plugin)
@@ -116,6 +107,17 @@ Pick whichever fits the workflow you're already in.
 
     [Install the MCP server →](/for-agents/mcp-install)
   </Accordion>
+  <Accordion title="Slack (coming)" icon="hashtag">
+    Aria-on-Slack ships soon. Chat with Aria from your team channels;
+    deliveries, briefings, and release prompts run in-thread.
+  </Accordion>
+  <Accordion title="Telegram" icon="paper-plane">
+    Lightweight mobile surface. Paste a Spotify or YouTube link into
+    [@AriaMusicBizBot](https://t.me/AriaMusicBizBot), get a track card
+    back. Useful when you're on your phone.
+
+    [Telegram guide →](/aria/telegram)
+  </Accordion>
 </AccordionGroup>
 
 ## Quick start
@@ -123,8 +125,7 @@ Pick whichever fits the workflow you're already in.
 <Steps>
   <Step title="Sign in">
     Go to [patchline.ai](https://patchline.ai) and create a free account.
-    Free tier includes 100 AI credits/month and Aria chat (1 credit per
-    conversation).
+    Free tier lets you explore the surface with limited credits. See [Pricing](/get-started/pricing) for current limits.
   </Step>
   <Step title="Connect your music">
     Paste a Spotify, YouTube, or SoundCloud URL into Aria, or upload an
@@ -161,15 +162,16 @@ Pick whichever fits the workflow you're already in.
 ## How Aria works
 
 Aria routes your request to the right Patchline capability: artist
-intelligence, Scout, pitch writing, metrics, Gmail,
-Legal, Documents, catalog, or release planning. Each capability works
-against user-scoped Patchline data and connected integrations, then
-returns a grounded answer.
+intelligence, A&R scout, pitch writing, audience reads, catalog
+captioning, release planning, contract review, connector actions. Each
+capability works against your real Patchline data and authorized
+[connectors](/integrations/overview), then returns a grounded answer.
 
-You don't see the routing — you see one assistant. But it means Aria can
-do work that simple chatbots can't: read your contracts in Launchpad, check the
-artist and catalog context, draft a follow-up email about a discrepancy,
-and keep the release plan up to date in one conversation.
+You don't see the routing — you see one assistant. But it means Aria
+can do work that simple chatbots can't: cross-reference your contracts
+in Launchpad, check the artist and catalog context, draft outreach in
+Instagram via a connector, and keep the release plan up to date in
+one conversation.
 
 The product MCP at [www.patchline.ai/api/mcp/v1](/for-agents/mcp-overview)
 exposes the same core capabilities to external AI clients.
@@ -263,9 +265,9 @@ See [Pricing & plans](/get-started/pricing) for the full breakdown.
     statements, or chat history to train models.
   </Accordion>
   <Accordion title="Can Aria send emails or post to social media?">
-    Aria can draft emails through the Gmail integration (requires
-    [Gmail OAuth](/integrations/gmail)). Direct posting to social media
-    is on the roadmap; for now Aria drafts the copy and you post it.
+    Aria can act through your [connectors](/integrations/overview) —
+    Instagram, ClickUp, Notion, and more. For surfaces not yet available
+    as connectors, Aria drafts the copy and you publish it.
   </Accordion>
   <Accordion title="Why did Aria refuse to answer my question?">
     Aria is grounded in your data. If you ask about a track that isn't in

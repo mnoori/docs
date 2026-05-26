@@ -83,8 +83,6 @@ This file (`docs.patchline.ai/AGENTS.md`) is about navigating the **docs**.
 | Smart links, pre-saves | [Smart links](https://docs.patchline.ai/storefront/smart-links) |
 | Stripe Connect, payouts | [Checkout & payouts](https://docs.patchline.ai/storefront/checkout-payouts) |
 | Integrations, OAuth platforms | [Integrations overview](https://docs.patchline.ai/integrations/overview) |
-| Connecting Gmail | [Gmail](https://docs.patchline.ai/integrations/gmail) |
-| Connecting Google Calendar | [Google Calendar](https://docs.patchline.ai/integrations/calendar) — coming soon |
 | MCP server, how does Patchline expose tools | [MCP overview](https://docs.patchline.ai/for-agents/mcp-overview), [MCP install](https://docs.patchline.ai/for-agents/mcp-install) |
 | List of MCP tools | [MCP tools reference](https://docs.patchline.ai/for-agents/mcp-tools-reference) |
 | Claude plugin, /plugin install | [Claude plugin](https://docs.patchline.ai/for-agents/claude-plugin) |

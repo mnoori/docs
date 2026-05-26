@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
   "name": "Patchline",
-  "description": "Patchline is the AI command center for the modern music business \u2014 your catalog, releases, audience, store, and AI-discoverable tracks wired into AI tools you already use. (v2.0)",
+  "description": "Patchline is the AI command center for the modern music business \u2014 your catalog, releases, audience, store, and AI-discoverable tracks wired into AI tools you already use.",
   "colors": {
     "primary": "#0068FF",
     "light": "#00E6E2",
@@ -131,7 +131,7 @@
     ]
   },
   "search": {
-    "prompt": "Ask Patchline docs anything\u2026"
+    "prompt": "Search Patchline docs"
   },
   "seo": {
     "metatags": {
@@ -206,9 +206,9 @@
             "group": "Catalog",
             "icon": "music",
             "pages": [
-              "catalog/sonic-analysis",
-              "catalog/import",
               "catalog/upload",
+              "catalog/import",
+              "catalog/sonic-analysis",
               "catalog/search"
             ]
           },
@@ -227,12 +227,10 @@
             ]
           },
           {
-            "group": "Integrations",
+            "group": "Connectors",
             "icon": "plug",
             "pages": [
-              "integrations/overview",
-              "integrations/gmail",
-              "integrations/calendar"
+              "integrations/overview"
             ]
           },
           {
@@ -282,26 +280,7 @@
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Status",
-          "href": "https://status.patchline.ai",
-          "icon": "circle-check"
-        },
-        {
-          "anchor": "Changelog",
-          "href": "https://patchline.ai/changelog",
-          "icon": "list"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://patchline.ai/community",
-          "icon": "comments"
-        }
-      ]
-    }
+    ]
   },
   "contextual": {
     "options": [
