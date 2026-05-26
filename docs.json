@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
   "name": "Patchline",
-  "description": "Patchline is the AI command center for the modern music business — your catalog, releases, audience, store, and AI-discoverable tracks wired into AI tools you already use.",
+  "description": "Patchline is the AI command center for the modern music business \u2014 your catalog, releases, audience, store, and AI-discoverable tracks wired into AI tools you already use. (v2.0)",
   "colors": {
     "primary": "#0068FF",
     "light": "#00E6E2",
@@ -55,41 +55,83 @@
       {
         "header": "Product",
         "items": [
-          { "label": "Aria", "href": "https://patchline.ai" },
-          { "label": "MCP server", "href": "https://patchline.ai/mcp" },
-          { "label": "Claude plugin", "href": "https://patchline.ai/claude" },
-          { "label": "Pricing", "href": "https://patchline.ai/pricing" }
+          {
+            "label": "Aria",
+            "href": "https://patchline.ai"
+          },
+          {
+            "label": "MCP server",
+            "href": "https://patchline.ai/mcp"
+          },
+          {
+            "label": "Claude plugin",
+            "href": "https://patchline.ai/claude"
+          },
+          {
+            "label": "Pricing",
+            "href": "https://patchline.ai/pricing"
+          }
         ]
       },
       {
         "header": "For AI agents",
         "items": [
-          { "label": "Docs AGENTS.md", "href": "https://docs.patchline.ai/AGENTS.md" },
-          { "label": "Docs llms.txt", "href": "https://docs.patchline.ai/llms.txt" },
-          { "label": "Product MCP", "href": "https://www.patchline.ai/mcp" }
+          {
+            "label": "Docs AGENTS.md",
+            "href": "https://docs.patchline.ai/AGENTS.md"
+          },
+          {
+            "label": "Docs llms.txt",
+            "href": "https://docs.patchline.ai/llms.txt"
+          },
+          {
+            "label": "Product MCP",
+            "href": "https://www.patchline.ai/mcp"
+          }
         ]
       },
       {
         "header": "Company",
         "items": [
-          { "label": "About", "href": "https://patchline.ai/about" },
-          { "label": "Careers", "href": "https://patchline.ai/careers" },
-          { "label": "Contact", "href": "https://patchline.ai/contact" }
+          {
+            "label": "About",
+            "href": "https://patchline.ai/about"
+          },
+          {
+            "label": "Careers",
+            "href": "https://patchline.ai/careers"
+          },
+          {
+            "label": "Contact",
+            "href": "https://patchline.ai/contact"
+          }
         ]
       },
       {
         "header": "Legal",
         "items": [
-          { "label": "Privacy", "href": "https://patchline.ai/privacy" },
-          { "label": "Terms", "href": "https://patchline.ai/terms" },
-          { "label": "Cookies", "href": "https://patchline.ai/cookies" },
-          { "label": "DMCA", "href": "https://patchline.ai/dmca" }
+          {
+            "label": "Privacy",
+            "href": "https://patchline.ai/privacy"
+          },
+          {
+            "label": "Terms",
+            "href": "https://patchline.ai/terms"
+          },
+          {
+            "label": "Cookies",
+            "href": "https://patchline.ai/cookies"
+          },
+          {
+            "label": "DMCA",
+            "href": "https://patchline.ai/dmca"
+          }
         ]
       }
     ]
   },
   "search": {
-    "prompt": "Ask Patchline docs anything…"
+    "prompt": "Ask Patchline docs anything\u2026"
   },
   "seo": {
     "metatags": {
@@ -100,7 +142,10 @@
     "indexing": "all"
   },
   "redirects": [
-    { "source": "/", "destination": "/get-started/welcome" }
+    {
+      "source": "/",
+      "destination": "/get-started/welcome"
+    }
   ],
   "navigation": {
     "tabs": [
