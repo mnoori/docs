@@ -39,6 +39,8 @@ answer.
 | **Track lookup** | Paste a Spotify track URL → rich card with art, AI caption, streaming stats |
 | **Artist lookup** | Paste an artist URL → roster card + recent activity |
 | **One-tap catalog import** | Tap the **Import** button on any track card |
+| **Upload your master** | Ask Aria to upload → get an authenticated link → drop the file |
+| **Generate cover art** | Describe the cover → Aria runs the same image gen as the web Visual Library |
 | **Playlist matching** | Reply to a track card with "find playlists" |
 | **DSP pitch draft** | Reply with "pitch this" |
 | **Catalog browse** | Type `/catalog` |
@@ -110,7 +112,9 @@ Aria: 🎤  Adele
 ```text
 You: import this for me https://open.spotify.com/track/...
 Aria: ✓ Imported "Sleeper" by Mira.
-      Sonic analysis is running, finishes in ~60 seconds.
+      Streaming metadata pulled — title, artist, ISRC, cover art.
+      The master stays on the streaming source; if you want Patchline
+      to host the audio, upload it from the web app or send it here.
       [ Open in dashboard ]
 ```
 
@@ -120,17 +124,48 @@ Aria: ✓ Imported "Sleeper" by Mira.
 You: what's my best-performing track this month?
 Aria: 📈 "Late Bloom" — 4,210 streams in the last 30 days (+18% vs last
       month). It's also your most-saved track this month (47 saves).
-
-      [ Full insights ] [ Find more playlists ]
 ```
+
+(Action buttons like `[ Find playlists ]` or `[ Get pitch ]` only
+appear when you share a streaming URL — they hang off the track card
+the bot generates for that link.)
 
 ## Uploading audio from Telegram
 
-You can send Aria an audio file (MP3, WAV, FLAC) directly in the
-Telegram chat. Aria treats it like a dashboard upload — the track
-lands in your Catalog, ready for AI captioning, smart links, and
-the Music Store. Useful when you're recording on your phone and
-want to ship it without opening the web app.
+Want Aria to host your master? Ask in chat:
+
+```text
+You: I want to upload my new track
+Aria: 🎵 Drop it here →  https://patchline.ai/u/<authenticated-link>
+      Link is bound to your Patchline account and expires shortly.
+      I'll take it from there.
+```
+
+Aria responds with a short-lived, authenticated upload link tied to
+your account. You open the link in your browser (the Telegram in-app
+browser works too), drop your audio file, and Aria takes over —
+captioning, version history, smart link, Music Store wiring. You
+don't have to come back to Telegram for anything.
+
+Useful when you're recording on your phone or away from your laptop
+and want to ship the master without opening the dashboard yourself.
+
+## Generating cover art from Telegram
+
+Aria can generate cover art directly from the Telegram chat. Describe
+what you want and Aria runs the same image generation it uses on the
+web Visual Library:
+
+```text
+You: generate cover art for "Sleeper" — dreampop, late-night,
+     muted neon, single figure on a balcony
+Aria: 🎨 Working on it…
+      [3 image options come back as Telegram media]
+      Want me to swap any of these in as the cover for "Sleeper"?
+```
+
+Pick one and Aria attaches it to the track in your catalog. From
+there it auto-propagates to your storefront and any smart links.
 
 ## Commands
 
@@ -144,8 +179,9 @@ Aria in plain English.
 Some things only work in the web dashboard:
 
 - **Storefront management** — selling music is a web-only flow.
-- **Visual generation** — generating cover art / promo flyers / canvas
-  videos is a web flow tied to your Visual Library.
+- **Promo flyers & Canvas videos** — flyer and motion-video generation
+  stay in the web Visual Library. Cover art generation works on
+  Telegram (see above).
 - **Project / release planner UI** — you can chat about it on Telegram,
   but the calendar view and project board are web.
 
