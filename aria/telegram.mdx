@@ -57,9 +57,9 @@ answer.
     your Patchline account (or sign up if you don't have one).
   </Step>
   <Step title="Link your Patchline account">
-    Bot sends a deep-link to `patchline.ai/telegram/connect`. Open it,
-    sign in, return to Telegram. Your Telegram chat is now bound to
-    your Patchline account.
+    The bot sends you a **connection code**. Sign in to Patchline on
+    the web, paste the code where the in-app prompt asks for it, and
+    your Telegram chat is now bound to your Patchline account.
   </Step>
   <Step title="Paste a track URL">
     Paste any Spotify, YouTube, Apple Music, or SoundCloud track URL.
@@ -78,14 +78,14 @@ When you paste a Spotify URL, the bot replies with:
     Queen · 1975 · A Night at the Opera
 
     ⏱  5:55       🎹  E♭ major
-    🎼  AI-readable caption · ready for AI discovery
+    🎼  Streaming stats · audience signal · similar artists
     🎧  Streams (90d): 12,400,000
     📈  Trending: +2.1% mo/mo
 
     Top genres: rock, classic rock, prog rock
 
     [ Import to catalog ]  [ Find playlists ]  [ Get pitch ]
-    [ Artist intel ]  [ Smart link ]  [ Compare ]
+    [ Artist intel ]  [ Smart link ]
 ```
 
 Tap any button. Aria responds inline.
@@ -124,29 +124,30 @@ Aria: 📈 "Late Bloom" — 4,210 streams in the last 30 days (+18% vs last
       [ Full insights ] [ Find more playlists ]
 ```
 
+## Uploading audio from Telegram
+
+You can send Aria an audio file (MP3, WAV, FLAC) directly in the
+Telegram chat. Aria treats it like a dashboard upload — the track
+lands in your Catalog, ready for AI captioning, smart links, and
+the Music Store. Useful when you're recording on your phone and
+want to ship it without opening the web app.
+
 ## Commands
 
-| Command | What it does |
-|---|---|
-| `/start` | Re-greet + re-link if your session lapsed |
-| `/help` | Show command list |
-| `/catalog` | Browse your catalog with pagination |
-| `/roster` | Browse your artist roster |
-| `/credits` | Show this month's AI credit usage and remaining |
-| `/disconnect` | Unlink your Telegram chat from Patchline |
-
-You don't need commands for most things — just type or paste naturally.
-Aria figures it out.
+You don't need commands for most things — just type or paste a URL
+naturally. Telegram-standard `/start` and `/help` are available; for
+specific app features, use the menu in the bot reply or just ask
+Aria in plain English.
 
 ## Where Aria is *not* on Telegram
 
-Some things only work in the web dashboard or via MCP:
+Some things only work in the web dashboard:
 
 - **Storefront management** — selling music is a web-only flow.
-- **Release planner full UI** — you can chat about it on Telegram, but
-  the calendar view + project anchor management is web.
-- **Audio file uploads** — Telegram has a file size limit too small for
-  most masters. Upload via the web dashboard.
+- **Visual generation** — generating cover art / promo flyers / canvas
+  videos is a web flow tied to your Visual Library.
+- **Project / release planner UI** — you can chat about it on Telegram,
+  but the calendar view and project board are web.
 
 ## Privacy
 
@@ -156,19 +157,6 @@ Some things only work in the web dashboard or via MCP:
   Patchline account.
 - Aria respects the same data-grounding rules on Telegram as on web —
   it only acts on your data, never invents.
-
-## Pricing
-
-| Action on Telegram | Credit cost |
-|---|---|
-| Track / artist card | 0 (cached); 1 if Aria interprets a question alongside |
-| Catalog import | 0 (counts against lifetime cap, see Pricing) |
-| Sonic analysis (auto on import) | 5 / track |
-| Aria chat reply | 1 |
-| Pitch generation | 2 |
-| Playlist matching (Pro+) | 1 |
-
-Same credit pool as the web dashboard.
 
 ## Related pages
 

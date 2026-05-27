@@ -1,7 +1,7 @@
 ---
-title: "Catalog import"
+title: "Catalog import (metadata)"
 sidebarTitle: "Catalog import"
-description: "Import your existing music catalog into Patchline by pasting Spotify, Apple Music, YouTube, or SoundCloud URLs. Patchline pulls metadata, cover art, ISRCs, and runs sonic analysis automatically."
+description: "Import the metadata of your existing catalog by pasting Spotify, Apple Music, YouTube, or SoundCloud URLs. Patchline pulls title, artist, cover art, ISRC, release date, and duration. AI captioning and the Music Store run when you upload the audio."
 icon: "download"
 keywords:
   - import catalog patchline
@@ -13,7 +13,7 @@ schema:
   - "@context": "https://schema.org"
     "@type": "HowTo"
     "name": "Import your music catalog into Patchline"
-    "description": "Paste a Spotify, Apple Music, YouTube, or SoundCloud URL to import a single track or full release. Patchline pulls metadata, cover art, and runs sonic analysis."
+    "description": "Paste a Spotify, Apple Music, YouTube, or SoundCloud URL to import the metadata of a single track or full release. Audio is not imported — upload separately to unlock AI captioning and the Music Store."
     "totalTime": "PT2M"
 ---
 
@@ -22,23 +22,28 @@ import { TierBadge } from "/snippets/tier-badge.mdx"
 import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
 
-Catalog import is the fastest way to get your music into Patchline. Paste
-a streaming URL — Spotify, Apple Music, YouTube, SoundCloud — and Patchline
-pulls the metadata, cover art, ISRC, and queues sonic analysis. This is
-the most common first action for new users with already-released music.
+**Import is the metadata path.** You paste a streaming URL (Spotify,
+Apple Music, YouTube, SoundCloud) and Patchline pulls what the
+streaming platform exposes — title, artist, cover art, ISRC, release
+date, duration. That's it. **Audio doesn't come over via import** —
+streaming platforms only give us metadata, not the master file.
 
-<TierBadge tier="all" /> &nbsp; Limits per tier: Free 10 lifetime · Starter 100 · Pro 500 · Scale + Enterprise unlimited.
+<TierBadge tier="all" /> &nbsp; Catalog import limits scale with your tier.
 
-## What's the difference between import and upload?
+## Import vs upload
 
-| Mode | Use when | Audio file in Patchline? |
-|---|---|---|
-| **Import** (this page) | Track is **already released** on a streaming platform | **No** — Patchline references the canonical streaming version, runs sonic analysis from that |
-| **[Upload](/catalog/upload)** | Track is **unreleased** or you want the master in Patchline | **Yes** — your file is stored in encrypted cloud storage, sonic analysis runs on your master |
+| Mode | What lands in Patchline |
+|---|---|
+| **Import** (this page) | Metadata only — title, artist, cover art, ISRC, release date, duration. **No audio file**, no AI caption. |
+| **[Upload](/catalog/upload)** | The audio file itself. Unlocks AI captioning, the Music Store, smart links, asset shares, and full Aria reasoning on your master. |
 
-If you've released through Distrokid, Tunecore, or a label, **import is
-faster and cheaper** — no upload time, no storage cost, sonic analysis
-still runs.
+**Import then upload — that's the recommended path.** Import gets the
+metadata in fast so Patchline knows your full catalog exists. Upload
+the audio for the tracks you want to act on — that's what unlocks
+the rest of the product.
+
+If you only want intelligence and don't plan to sell or AI-caption,
+import alone is fine.
 
 ## How to import
 
@@ -56,8 +61,9 @@ either imports it or asks for confirmation.
 Sidebar → **Catalog** → **Import** button (top right) → paste the URL
 into the dialog → click **Import**.
 
-The track appears in the catalog list within ~3 seconds. Sonic analysis
-runs in the background — see [Sonic analysis](/catalog/sonic-analysis).
+The track's metadata appears in the catalog list within a few
+seconds. To unlock AI captioning, smart links, and the Music Store
+for that track, [upload the audio](/catalog/upload) next.
 
 ### Option C — MCP tool call (for AI agents)
 
@@ -71,21 +77,31 @@ runs in the background — see [Sonic analysis](/catalog/sonic-analysis).
 
 ## What gets imported
 
-For a single track URL:
+Import pulls **only the metadata** the streaming platform makes
+public:
 
 | Field | Source |
 |---|---|
-| Title | Streaming platform metadata |
-| Artist(s) | Streaming platform metadata |
-| ISRC | Streaming platform metadata (Spotify, Apple) |
-| Cover art | Spotify oEmbed fallback if not embedded |
+| Title | Streaming platform |
+| Artist(s) | Streaming platform |
+| ISRC | Streaming platform |
+| Cover art | Streaming platform |
 | Release date | Streaming platform |
 | Duration | Streaming platform |
-| AI-readable caption | Runs after import |
-| Sonic genres, instruments | Runs after import |
 
-For an album/EP URL, Patchline imports **every track** in the release
-(counts as several catalog imports against your tier limit).
+**What import does not give you:**
+
+- The audio file
+- AI captions
+- Music Store listings, smart links, asset shares for the track
+
+For those, [upload the audio](/catalog/upload) once the track is in
+your catalog. The metadata import + audio upload paths combine into
+one catalog row per ISRC.
+
+For an album/EP URL, Patchline imports the metadata for **every
+track** in the release (counts as several catalog imports against
+your tier limit).
 
 ## Supported URL types
 
@@ -144,8 +160,9 @@ https://open.spotify.com/track/4iV5W9uYEdYUVa79Axb7Rh
 ```
 
 ```text
-Aria: Done. "Bohemian Rhapsody" by Queen added to your catalog.
-ISRC GBUM71029604. Sonic analysis is running — should finish in 30 seconds.
+Aria: Metadata imported. "Bohemian Rhapsody" by Queen — ISRC
+GBUM71029604 — added to your catalog. Upload the audio when you're
+ready to AI-caption it or list it on your Music Store.
 ```
 
 ### Import an album
@@ -156,10 +173,10 @@ https://open.spotify.com/album/4LH4d3cOWNNsVw41Gqt2kv
 ```
 
 ```text
-Aria: Imported 12 tracks from "The Dark Side of the Moon" by Pink Floyd.
-That used 12/500 of your Pro catalog imports. Sonic analysis is queued for
-all 12 — they'll be ready in ~3 minutes. Want me to start a release
-plan or playlist matching once they're ready?
+Aria: Imported metadata for 12 tracks from "The Dark Side of the
+Moon" by Pink Floyd. That used 12/500 of your Pro catalog imports.
+Want me to walk you through uploading the audio for one of them so
+you can list it on your Music Store?
 ```
 
 ### Import all of an artist's catalog (advanced)
@@ -206,7 +223,7 @@ lifetime. Want me to:
 <AccordionGroup>
   <Accordion title="Does importing a track actually move my audio?">
     No. Import references the streaming version. Your master stays
-    wherever you uploaded it (Distrokid, Tunecore, etc.). If you want
+    wherever you originally distributed it. If you want
     Patchline to hold your master, [upload it](/catalog/upload) instead.
   </Accordion>
   <Accordion title="What if the same track is on Spotify with one ISRC and on Apple with a different one?">
