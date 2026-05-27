@@ -1,0 +1,194 @@
+---
+title: "Install Patchline in your AI tool"
+sidebarTitle: "Install in your AI tool"
+description: "One-click install of the Patchline docs MCP for Claude, Cursor, Codex, and VS Code. Your AI tool gains native search across the entire Patchline knowledge base — no copy-paste, no URL fetching."
+icon: "plug-circle-plus"
+keywords:
+  - install patchline mcp
+  - claude patchline mcp
+  - cursor patchline
+  - vs code patchline
+  - patchline docs mcp install
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+
+Connect Patchline to **Claude, Cursor, Codex, or VS Code** with one
+click — your AI tool gains native search across the entire Patchline
+knowledge base. No more copy-paste, no more "I can't read that URL,"
+no more re-explaining the product to your AI.
+
+## What this installs
+
+The **Patchline docs MCP** at `https://docs.patchline.ai/mcp`. Once
+installed, your AI tool gets two native tools it can call any time:
+
+- **`search_patchline`** — semantic search across the full Patchline
+  knowledge base (returns the relevant docs sections with links).
+- **`query_docs_filesystem_patchline`** — read any docs page directly,
+  search with `rg`, list the tree with `tree` and `ls`.
+
+The AI tool decides when to use them. You just ask your normal
+questions — *"how does Patchline pricing work?"*, *"how do I plan a
+release?"*, *"what does the Audience tab show?"* — and the answers
+come grounded in the real docs.
+
+<Note>
+  This is the **docs MCP** (search + read the documentation). It's
+  different from the **product MCP** at
+  `https://www.patchline.ai/api/mcp/v1`, which gives AI tools access
+  to your actual Patchline account (catalog, releases, etc.). See
+  [MCP overview](/for-agents/mcp-overview) for the full distinction.
+</Note>
+
+## Cursor — one-click install
+
+<a
+  href="cursor://anysphere.cursor-deeplink/mcp/install?name=patchline-docs&config=eyJwYXRjaGxpbmUtZG9jcyI6IHsidXJsIjogImh0dHBzOi8vZG9jcy5wYXRjaGxpbmUuYWkvbWNwIn19"
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "10px 20px",
+    borderRadius: "999px",
+    background: "linear-gradient(92deg, #00E6E2, #0068FF)",
+    color: "#fff",
+    textDecoration: "none",
+    fontWeight: 600,
+  }}
+>
+  Install in Cursor →
+</a>
+
+Click that link on the same machine running Cursor — Cursor opens and
+asks you to confirm the install. Done in 5 seconds.
+
+**Manual config (if the deeplink doesn't open):**
+
+```json
+{
+  "mcpServers": {
+    "patchline-docs": {
+      "url": "https://docs.patchline.ai/mcp"
+    }
+  }
+}
+```
+
+Paste into Settings → MCP → **+ Add new MCP server**.
+
+## VS Code — one-click install
+
+<a
+  href="https://vscode.dev/redirect/mcp/install?name=patchline-docs&config=%7B%22type%22%3A%20%22http%22%2C%20%22url%22%3A%20%22https%3A//docs.patchline.ai/mcp%22%7D"
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "10px 20px",
+    borderRadius: "999px",
+    background: "linear-gradient(92deg, #00E6E2, #0068FF)",
+    color: "#fff",
+    textDecoration: "none",
+    fontWeight: 600,
+  }}
+>
+  Install in VS Code →
+</a>
+
+**Manual config:** create `.vscode/mcp.json` in your workspace:
+
+```json
+{
+  "servers": {
+    "patchline-docs": {
+      "type": "http",
+      "url": "https://docs.patchline.ai/mcp"
+    }
+  }
+}
+```
+
+## Claude Code — one-line install
+
+```bash
+claude mcp add --transport http patchline-docs https://docs.patchline.ai/mcp
+```
+
+Verify with:
+
+```bash
+claude mcp list
+```
+
+You should see `patchline-docs` in the list.
+
+## Claude Desktop
+
+Open **Settings → Developer → Edit Config** (`claude_desktop_config.json`)
+and add:
+
+```json
+{
+  "mcpServers": {
+    "patchline-docs": {
+      "url": "https://docs.patchline.ai/mcp",
+      "transport": "http"
+    }
+  }
+}
+```
+
+Restart Claude Desktop. The Patchline docs become a native connector.
+
+**Or via Claude's Connectors UI:**
+
+1. Go to [claude.ai/settings/connectors](https://claude.ai/settings/connectors).
+2. Click **Add custom connector**.
+3. Name: `Patchline Docs`. URL: `https://docs.patchline.ai/mcp`.
+4. Click **Add**.
+
+## ChatGPT
+
+ChatGPT MCP support is in flight. In the meantime, ChatGPT Plus / Team
+users can paste any `https://docs.patchline.ai/<page>.md` URL into a
+chat with **Browse** enabled and ChatGPT will read it directly.
+
+## Test that it worked
+
+After installing, ask your AI any of these:
+
+- *"What can you tell me about Patchline?"*
+- *"How does the Aria release planner work?"*
+- *"What's the Patchline pricing structure?"*
+- *"Where does the Audience tab pull data from?"*
+
+If it answers with citations to `docs.patchline.ai/...` pages, you're
+connected.
+
+## Why this is better than URL fetching
+
+Most AI tools can't reliably fetch web URLs. ChatGPT free tier doesn't
+browse. Claude needs Web search toggled on per chat. Cursor doesn't
+have browse at all. **An MCP install solves it permanently** — the
+docs become a native, always-on tool the AI can use without any
+fetching.
+
+You install once. Every chat after that, your AI knows Patchline.
+
+## What's NOT in the docs MCP
+
+The docs MCP only searches and reads the documentation. It does NOT:
+
+- Read your actual Patchline account
+- Add artists or upload tracks
+- Run releases or generate visuals
+
+For those actions, install the **product MCP** at
+`https://www.patchline.ai/api/mcp/v1` — see
+[MCP overview](/for-agents/mcp-overview).
+
+Most users install **both**: the docs MCP to learn Patchline, the
+product MCP to act on their data.
+
+<AICallout page="/for-agents/install-docs-mcp" />

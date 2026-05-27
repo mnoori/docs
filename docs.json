@@ -266,6 +266,7 @@
             "group": "Model Context Protocol",
             "icon": "code",
             "pages": [
+              "for-agents/install-docs-mcp",
               "for-agents/mcp-overview",
               "for-agents/mcp-install",
               "for-agents/mcp-tools-reference"
