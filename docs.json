@@ -108,23 +108,15 @@
         ]
       },
       {
-        "header": "Legal",
+        "header": "Resources",
         "items": [
           {
-            "label": "Privacy",
-            "href": "https://patchline.ai/privacy"
+            "label": "Open dashboard",
+            "href": "https://patchline.ai/dashboard"
           },
           {
-            "label": "Terms",
-            "href": "https://patchline.ai/terms"
-          },
-          {
-            "label": "Cookies",
-            "href": "https://patchline.ai/cookies"
-          },
-          {
-            "label": "DMCA",
-            "href": "https://patchline.ai/dmca"
+            "label": "Sign up free",
+            "href": "https://patchline.ai/signup"
           }
         ]
       }
@@ -272,13 +264,6 @@
             ]
           },
           {
-            "group": "Docs MCP (search the docs)",
-            "icon": "book-open",
-            "pages": [
-              "for-agents/install-docs-mcp"
-            ]
-          },
-          {
             "group": "Claude",
             "icon": "message",
             "pages": [
@@ -290,6 +275,13 @@
             "icon": "robot",
             "pages": [
               "for-agents/agents-md-explained"
+            ]
+          },
+          {
+            "group": "Docs MCP (for AI agents)",
+            "icon": "book-open",
+            "pages": [
+              "for-agents/install-docs-mcp"
             ]
           }
         ]
