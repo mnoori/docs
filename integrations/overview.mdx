@@ -1,111 +1,113 @@
 ---
 title: "Connectors"
 sidebarTitle: "Connectors"
-description: "Aria reaches into the third-party tools you already use — Instagram, YouTube, ClickUp, Notion, Discord, and more — so a single prompt can act across your whole stack."
+description: "Aria connects to the tools your team already uses - Instagram, YouTube, Google Drive, ClickUp, Notion, Slack, and more - so music strategy can move into action."
 icon: "plug"
 keywords:
   - patchline connectors
   - aria integrations
   - instagram aria
   - youtube aria
+  - google drive aria
   - clickup aria
+  - slack aria
 ---
 
 import { AICallout } from "/snippets/ai-callout.mdx"
 import { TierBadge } from "/snippets/tier-badge.mdx"
 
 Everything in Patchline is interconnected. **Connectors** extend Aria
-into the third-party tools you already use — so a single prompt can
-pull from your music data **and** act on your social, project, and
-workflow tools.
+into the third-party tools you already use, so a single prompt can pull
+from your music data, find campaign assets, create follow-up work, and
+send strategy updates to the team.
 
-<TierBadge tier="all" /> &nbsp; Connector actions consume AI credits when Aria calls into the third-party tool.
+<TierBadge tier="all" /> &nbsp; Connector actions consume AI credits when Aria calls into a third-party tool.
 
 ## What a connector is
 
-A connector is a bridge between Aria and an external service. Aria
-authenticates to the service on your behalf (your OAuth, your scopes),
-then can do things there from inside a chat:
+A connector is a bridge between Aria and an external service. Once a
+service is connected, Aria can use it inside a chat:
 
-- *"Post the cover art to my Instagram with this caption."*
-- *"Pull recent comments on the YouTube video for the release."*
-- *"Add a ClickUp task for tomorrow: 'pitch Lush Sounds curator'."*
+- *"Find the Google Drive folder with cover options for Sleeper and attach the best links to the release brief."*
+- *"Create a ClickUp task for tomorrow: pitch Lush Sounds curator with the final version."*
+- *"Pull recent YouTube performance for this track and summarize what should shape next week's campaign."*
+- *"Send the release strategy report to the marketing channel in Slack."*
 
 ## What's available
 
 | Connector | What Aria can do |
 |---|---|
-| **Instagram** | Read your profile, post media + captions, fetch insights, read comments |
-| **YouTube** | Read channel data, fetch video stats, read comments |
-| **ClickUp** | Create tasks, attach context from a release, link campaigns to your task board |
-| **Notion** | Read pages, append entries, sync release notes |
-| **Discord** | Read channel context, post messages |
-| **Slack** | Aria-on-Slack is **coming** — today Slack is used for Patchline-side notifications only |
+| **Instagram** | Read connected profile context, fetch insights, pull comments for review, and prepare campaign-ready copy |
+| **YouTube** | Read channel data, fetch video stats, pull comment context, and support campaign analysis |
+| **Google Drive** | Find files and folders, pull campaign assets, and attach Drive links to briefs or tasks |
+| **ClickUp** | Create tasks, attach release context, and link campaign work to your task board |
+| **Notion** | Read pages, append entries, and sync release notes or campaign briefs |
+| **Slack** | Aria-on-Slack is in beta: chat with Aria in Slack and send strategy reports or release updates to channels |
 
 The exact set Aria can call depends on what your workspace has enabled.
 If you don't see a connector you want, ask in support and we'll
 prioritize.
 
-## How Aria uses them
+## How to connect
 
-You don't install a connector explicitly. The first time you ask Aria
-to do something that needs one (e.g., *"post this to Instagram"*), Aria
-walks you through the connector authorization. Once authorized, future
-requests for the same service use the saved authorization automatically.
+Open Patchline, click **+**, and choose the connector you want to add.
+You can also go to **Settings -> Connectors** and connect the service
+from there.
 
-Authorizations are workspace-scoped, encrypted, and revocable at any
-time. Patchline never stores your third-party credentials directly.
+If you are already chatting with Aria, ask for the connector directly:
 
-## What's NOT a connector
+> *"Connect Google Drive."*
 
-Some things in Patchline look like third-party integrations but are
-actually built-in product capabilities, not connector surfaces:
-
-- **Spotify / Apple Music / SoundCloud / YouTube track lookup** — Aria
-  reads these via public APIs as part of
-  [catalog import](/catalog/import). No OAuth, no setup.
-- **Stripe (storefront payouts)** — built into the
-  [Music Store](/storefront/overview); you connect Stripe directly
-  through the store setup flow.
-- **The Patchline product MCP** — Aria itself exposed to your AI tools
-  (Claude, Cursor, etc.). See [MCP overview](/for-agents/mcp-overview).
+Aria gives you the authenticated link for that service. After you
+complete the connection, future requests can use that connector from
+inside Aria.
 
 ## Examples
 
-### Catalog → social
-
-> *"Post my new release cover art to Instagram with the caption I wrote."*
-
-Aria pulls the cover from your catalog, applies your caption, hands to
-the Instagram connector, and confirms the post.
-
-### Release plan → tasks
+### Release plan -> ClickUp tasks
 
 > *"For each remaining task in my Sleeper release plan, create a ClickUp
-> task on my 'Active Releases' list with the due date."*
+> task on my Active Releases list with the due date."*
 
-Aria reads the release plan from your Campaign Planner, iterates each
-open task, and creates them in ClickUp via the connector.
+Aria reads the release plan from Patchline, turns each open campaign
+step into a ClickUp task, and keeps the project context attached.
 
-### Audience → social reply
+### Audience signal -> campaign strategy
 
-> *"Reply to my last 5 Instagram comments — keep the tone warm and
-> mention the release coming up."*
+> *"Look at the latest audience and video performance signals for Sleeper
+> and write a one-page strategy for next week's content push."*
 
-Aria pulls the comments, drafts contextual replies, and posts each one
-after you approve.
+Aria pulls the available audience and platform context, then turns it
+into a practical strategy brief instead of posting anything on your
+behalf.
+
+### Drive assets -> release brief
+
+> *"Find the Drive folder for the Sleeper cover-art options and add the
+> final links to the project brief."*
+
+Aria searches connected Drive assets, identifies the relevant files, and
+adds links where the campaign team can use them.
+
+### Strategy -> Slack report
+
+> *"Send the Sleeper launch summary to Slack with the next three actions
+> for marketing."*
+
+Aria formats the release status, strategy notes, and next actions into a
+Slack-ready update for the right channel.
 
 ## Pricing
 
 Connector calls consume AI credits like any other Aria action. The
-underlying third-party service may have its own usage limits (e.g.,
-Instagram API rate limits, YouTube quota) — Aria respects those.
+underlying third-party service may have its own usage limits, and Aria
+works within those limits.
 
 ## Related pages
 
-- [Aria overview](/aria/overview) — the assistant doing the connecting
-- [Use cases](/aria/prompts) — example prompts that span connectors
-- [Audience](/artists/audience) — fan-side data that connectors act on
-- [Launchpad](/launchpad/overview) — public surfaces you share via connectors
+- [Aria overview](/aria/overview) - the assistant doing the connecting
+- [Use cases](/aria/prompts) - example prompts that span connectors
+- [Audience](/artists/audience) - audience data that can shape connector workflows
+- [Launchpad](/launchpad/overview) - public surfaces you can share with your team
 
 <AICallout page="/integrations/overview" />
