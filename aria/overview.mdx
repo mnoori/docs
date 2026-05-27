@@ -79,47 +79,32 @@ DAW, a label spreadsheet, and a notes app.
 
 ## Where Aria lives
 
+Same Aria, multiple surfaces. Pick whichever fits the workflow you're
+already in — they all hit the same data and the same connectors.
+
+<CardGroup cols={2}>
+  <Card title="Web dashboard" icon="browser" href="https://patchline.ai/dashboard">
+    The full surface. Profiles, Catalog, Projects, Playlists, Visual
+    Library, Music Store, Launchpad, Audience — all wired to Aria
+    on the home screen.
+  </Card>
+  <Card title="Claude (Desktop + Claude Code)" icon="message" href="/for-agents/claude-plugin">
+    Official Patchline plugin. Ground every Claude prompt in your real
+    catalog, audience, and release context. Includes a progressive
+    release-planning workflow inside Claude.
+  </Card>
+  <Card title="Cursor / Codex / VS Code (MCP)" icon="code" href="/for-agents/mcp-install">
+    The Patchline MCP server. OAuth 2.0 with PKCE — your credentials
+    never touch the AI client. Your catalog becomes callable tools.
+  </Card>
+  <Card title="Aria on Slack (beta)" icon="hashtag">
+    Chat with Aria from your team channels. Briefings, release prompts,
+    and deliveries run in-thread. Private beta — ask for access in
+    the in-app support.
+  </Card>
+</CardGroup>
+
 <SurfaceMatrix feature="aria" />
-
-Pick whichever fits the workflow you're already in.
-
-<AccordionGroup>
-  <Accordion title="Patchline dashboard (web)" icon="browser">
-    Sign in at [patchline.ai](https://patchline.ai). Aria is the home
-    screen at `/dashboard`. Full surface area: catalog import, project
-    anchors, MCP-backed tools, and file uploads. **This is the canonical
-    surface — everything else is a subset.**
-
-    [Open the dashboard →](https://patchline.ai/dashboard)
-  </Accordion>
-  <Accordion title="Claude (Desktop + Claude Code)" icon="message">
-    Install the official Patchline plugin and Claude can read your real
-    catalog. Ground every prompt in actual ISRCs, audio context, and
-    streaming signal. Plugin includes a progressive-interview workflow
-    that walks Aria-style release planning inside Claude.
-
-    [Install the Claude plugin →](/for-agents/claude-plugin)
-  </Accordion>
-  <Accordion title="Cursor, Codex, VS Code (MCP)" icon="code">
-    Patchline exposes its product MCP server at
-    `https://www.patchline.ai/api/mcp/v1`. OAuth 2.0 with PKCE — your
-    credentials never touch the AI client.
-
-    [Install the MCP server →](/for-agents/mcp-install)
-  </Accordion>
-  <Accordion title="Slack (beta)" icon="hashtag">
-    Aria on Slack is in **private beta**. Chat with Aria from your team
-    channels — deliveries, briefings, and release prompts run in-thread.
-    Ask for access via in-app support.
-  </Accordion>
-  <Accordion title="Telegram" icon="paper-plane">
-    Lightweight mobile surface. Paste a Spotify or YouTube link into
-    [@AriaMusicBizBot](https://t.me/AriaMusicBizBot), get a track card
-    back. Useful when you're on your phone.
-
-    [Telegram guide →](/aria/telegram)
-  </Accordion>
-</AccordionGroup>
 
 ## Quick start
 
