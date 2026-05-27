@@ -263,13 +263,19 @@
         "tab": "For AI agents & developers",
         "groups": [
           {
-            "group": "Model Context Protocol",
+            "group": "Patchline MCP — your music data in your AI",
             "icon": "code",
             "pages": [
-              "for-agents/install-docs-mcp",
               "for-agents/mcp-overview",
               "for-agents/mcp-install",
               "for-agents/mcp-tools-reference"
+            ]
+          },
+          {
+            "group": "Docs MCP (search the docs)",
+            "icon": "book-open",
+            "pages": [
+              "for-agents/install-docs-mcp"
             ]
           },
           {
