@@ -1,7 +1,7 @@
 ---
 title: "Storefront"
 sidebarTitle: "Storefront — overview"
-description: "Sell your music direct to fans from a branded storefront. Stripe-powered checkout, instant payouts, 0% platform fee on every paid Patchline tier. Includes smart links, pre-saves, fan stats, and an embeddable widget."
+description: "Sell your music direct to fans from a branded storefront. Stripe-powered checkout, 0% platform fee on every paid Patchline tier. Includes smart links, pre-saves, fan stats, and an embeddable widget."
 icon: "store"
 keywords:
   - patchline storefront
@@ -37,7 +37,7 @@ processing (typically 2.9% + $0.30/transaction).
     products, smart links. Mobile + desktop, dark by default.
   </Card>
   <Card title="Stripe-powered checkout" icon="credit-card" href="/storefront/checkout-payouts">
-    Stripe Connect. Cards, Apple Pay, Google Pay. Instant payouts to
+    Stripe Connect. Cards, Apple Pay, Google Pay. Payouts to
     your bank account.
   </Card>
   <Card title="Embeddable widget" icon="code" href="/storefront/setup#embed">
@@ -85,9 +85,8 @@ Starter unlocks.
 - **You want margins streaming can't match.** $10 album direct = $9.41
   to you. Same album on streaming = ~$0.003 × thousands of plays before
   you net the same.
-- **You're selling more than music** — merch, signed copies, demos,
-  stems, instrumental versions. The storefront supports any digital
-  product, not just full tracks.
+- **You're selling more than standard releases** — demos, instrumentals,
+  lossless files, or bonus downloads from your catalog.
 - **You want a Bandcamp alternative** that integrates with the rest of
   your Patchline workflow (release planning, smart links, fan stats).
 
@@ -116,9 +115,8 @@ the public store page is a separate route at `patchline.ai/store/<slug>`.
     account, longer if not.
   </Step>
   <Step title="Pick what you're selling">
-    Storefronts sell **assets** from your catalog. Pick the tracks you
-    want to sell. Add custom products if you're selling merch or
-    bundles.
+    Storefronts sell **assets** from your catalog. Pick the tracks,
+    EPs, albums, or bundles you want to sell.
   </Step>
   <Step title="Set pricing">
     Per-product. Pay-what-you-want supported (with optional minimum).
@@ -160,17 +158,13 @@ Total time fan-side: ~30 seconds.
 
 - **Single tracks** from your catalog.
 - **EPs / albums** as bundles.
-- **Stems** (separate stem pack — vocals, drums, bass, other).
 - **Demos / unreleased material** (gated behind purchase).
 - **Instrumentals** as separate SKUs.
 - **Lossless masters** (WAV / FLAC at premium price).
 - **Custom digital products** — exclusive cover art, tab books, etc.
 
-What you **cannot** sell (yet):
-
-- **Physical merch** — not in v1. Roadmap.
-- **Vinyl / CDs** — not in v1. Roadmap.
-- **Subscriptions** — fan club / patreon-style monthly support — not in v1.
+Storefront v1 is for digital music products, not physical goods or
+subscriptions.
 
 ## Pricing
 
@@ -190,7 +184,7 @@ The above is US-standard.
 
 - [Set up your store](/storefront/setup) — full setup walkthrough
 - [Smart links & pre-saves](/storefront/smart-links) — routing links + pre-save flow
-- [Checkout & payouts](/storefront/checkout-payouts) — Stripe Connect, payout schedule, taxes
+- [Checkout & payouts](/storefront/checkout-payouts) — Stripe Connect and payout schedule
 - [Catalog](/catalog/import) — assets are what you sell
 
 ## FAQ
@@ -206,11 +200,6 @@ The above is US-standard.
     in most other countries. You can configure faster payout schedules
     in Stripe (some include a small fee).
   </Accordion>
-  <Accordion title="What about taxes?">
-    Stripe Tax (optional, ~0.5% per txn) handles sales tax / VAT
-    calculation in most jurisdictions. Without it, you're responsible
-    for declaring and remitting. See [Checkout & payouts](/storefront/checkout-payouts).
-  </Accordion>
   <Accordion title="Can fans listen before they buy?">
     Yes. Product pages include a 30-second preview by default (full
     preview optional, configurable per asset).
@@ -219,15 +208,6 @@ The above is US-standard.
     Custom domain for the storefront (`store.your-band.com`) is on the
     Enterprise tier today. Other tiers use
     `patchline.ai/store/<your-slug>`.
-  </Accordion>
-  <Accordion title="What happens if Stripe holds my payout?">
-    Stripe may hold payouts on new accounts or for high-risk transactions
-    — standard Stripe behavior. You contact Stripe directly to resolve.
-    Patchline can't unlock funds we don't hold.
-  </Accordion>
-  <Accordion title="Can I refund a sale?">
-    Yes. Settings → Sales → Issue refund. Stripe processes the refund,
-    Patchline marks the sale refunded and revokes download access.
   </Accordion>
   <Accordion title="Is there a marketplace where fans discover all artists?">
     Yes — `patchline.ai/marketplace`. It's the cross-store discovery

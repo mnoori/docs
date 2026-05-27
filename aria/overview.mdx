@@ -49,8 +49,8 @@ your connectors.
     music-business knowledge graph.
   </Card>
   <Card title="AI-discoverable tracks" icon="waveform" href="/catalog/sonic-analysis">
-    Every track in your catalog gets an AI-readable caption Aria can
-    reason about and any AI tool can discover.
+    Uploaded audio gets an AI-readable caption Aria can reason about
+    and any connected AI tool can discover.
   </Card>
   <Card title="Research any artist" icon="binoculars" href="/artists/intelligence-profile">
     Streaming, follower growth, top tracks, similar artists, audience
@@ -119,7 +119,7 @@ already in — they all hit the same data and the same connectors.
   </Card>
   <Card title="Aria on Slack (beta)" icon="hashtag">
     Chat with Aria from your team channels. Briefings, release prompts,
-    and deliveries run in-thread. Private beta — ask for access in
+    and deliveries run in-thread. Invite-only beta — ask for access in
     the in-app support.
   </Card>
 </CardGroup>
@@ -135,9 +135,9 @@ already in — they all hit the same data and the same connectors.
   </Step>
   <Step title="Connect your music">
     Paste a Spotify, YouTube, or SoundCloud URL into Aria, or upload an
-    MP3 / WAV / FLAC directly. Aria adds the track to your catalog and
-    runs [AI captioning](/catalog/sonic-analysis)
-    automatically.
+    MP3 / WAV / FLAC directly. URL import pulls metadata into your
+    catalog. Uploading audio unlocks
+    [AI captioning](/catalog/sonic-analysis).
   </Step>
   <Step title="Ask Aria what to do next">
     Try one of these:
@@ -173,7 +173,7 @@ and routes work across many specialized capabilities under the hood.
 
 What that means in practice:
 
-- **Aria has access to your entire dataset.** Profiles, catalog,
+- **Aria has access to your Patchline workspace context.** Profiles, catalog,
   releases, playlists, visuals, music store, launchpad, audience,
   connectors. One conversation can pull from all of them.
 - **Aria coordinates many specialist capabilities.** Artist research,
@@ -225,10 +225,11 @@ Aria's capability surface using their own AI.
 > **You:** here's my new single, planning to drop in 6 weeks
 > https://open.spotify.com/track/...
 >
-> **Aria:** Got it. *[reads ISRC, runs AI captioning: dreampop-adjacent,
-> uptempo with a melancholy edge]*. Closest artists
-> in your roster: Mira, Tessa. Last release in this style hit 18k streams
-> in month one. I drafted a 6-week rollout:
+> **Aria:** Got it. *[reads title, artist, ISRC, cover art, release
+> date]*. This is a metadata import, so upload the audio when you want
+> sonic captioning. Closest artists in your roster: Mira, Tessa. I can
+> draft a 6-week rollout from the release metadata and your artist
+> context:
 >
 > - Week -6: confirm artwork, write pitch copy
 > - Week -4: submit to Spotify editorial via your `submission_status: eligible` flag
@@ -291,16 +292,10 @@ See [Pricing & plans](/get-started/pricing) for the full breakdown.
 ## FAQ
 
 <AccordionGroup>
-  <Accordion title="Does Aria train on my data?">
-    No. Patchline does not use your catalog, audience data, or chat
-    history to train models. Your data is used to ground Aria's answers
-    in the current conversation only.
-  </Accordion>
   <Accordion title="What model does Aria use?">
     Aria runs on hosted frontier AI models combined with Patchline-built
     tooling. Exact model versions and providers may change as quality,
-    latency, and safety improve. Patchline does not use your catalog,
-    statements, or chat history to train models.
+    latency, and reliability improve.
   </Accordion>
   <Accordion title="Can Aria send emails or post to social media?">
     Aria can act through your [connectors](/integrations/overview) —

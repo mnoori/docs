@@ -17,7 +17,7 @@ schema:
         "name": "What is an AI credit on Patchline?"
         "acceptedAnswer":
           "@type": "Answer"
-          "text": "An AI credit is the unit Patchline charges per AI action. Aria conversations cost 1, sonic analysis costs 5 per track, image generation costs 5, video costs 20, campaign planner costs 10 per plan, similar artist search costs 2."
+          "text": "An AI credit is the unit Patchline charges per AI action. Aria conversations cost 1, sonic analysis on uploaded audio costs 5 per track, image generation costs 5, video costs 20, campaign planner costs 10 per plan, similar artist search costs 2."
       - "@type": "Question"
         "name": "Do AI credits roll over?"
         "acceptedAnswer":
@@ -51,13 +51,13 @@ not roll over**.
 | Action | Cost | Notes |
 |---|---|---|
 | Aria chat conversation | **1 credit** | Per conversation, not per message — a multi-message chat = 1 credit total |
-| Sonic analysis | **5 credits / track** | Runs once per track on import / upload; re-analysis also = 5 |
+| Sonic analysis | **5 credits / track** | Runs on uploaded audio; re-analysis also = 5 |
 | Image generation | **5 credits / image** | Cover art, banners, social cards |
 | Video generation | **20 credits / video** | Short-form / canvas videos |
 | AI campaign planner | **10 credits / plan** | Each new release plan generation |
 | Similar artist discovery | **2 credits / search** | A&R Scout queries |
 | MCP tool call (read) | **0–1 credit** | Most read tools are 0 — they hit cache. `get_song_intelligence` and similar enrichment tools are 1. |
-| MCP tool call (write / enrichment) | **1–5 credits** | `add_artist` (artist-intelligence refresh) = 2; `create_smart_link` = 1; `generate_pitch` = 2 |
+| MCP tool call (write / enrichment) | **1–5 credits** | Artist-intelligence refresh = 3; `create_smart_link` = 1; `generate_pitch` = 2 |
 | Background data refresh | **0 credits** | Runs server-side, not metered |
 
 A few notes:
@@ -68,9 +68,6 @@ A few notes:
 - **Cached reads are free.** Asking Aria "describe my latest track"
   when sonic analysis has already run = 0 credits (cached lookup) + 1
   credit (the chat conversation). Net: 1 credit.
-- **Stem separation** (when surfaced in UI) is metered as a multi-step
-  audio operation — typically 10–15 credits per track.
-
 ## Monthly allocation by tier
 
 | Tier | AI credits / month |
@@ -228,11 +225,6 @@ Higher tiers get **more credits per dollar** — the volume discount.
     Yes. Free is 100 credits / month, no exceptions. There's no way
     to buy more on Free without adding a payment method and upgrading
     to a paid tier.
-  </Accordion>
-  <Accordion title="If I cancel mid-trial, do unused credits refund?">
-    No — trial credits don't refund. They were free. If you cancel
-    during the trial, no charge is made and your subscription ends at
-    the trial cutoff.
   </Accordion>
 </AccordionGroup>
 

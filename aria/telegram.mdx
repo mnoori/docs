@@ -36,7 +36,7 @@ answer.
 
 | Action | How |
 |---|---|
-| **Track lookup** | Paste a Spotify track URL → rich card with art, AI caption, streaming stats |
+| **Track lookup** | Paste a Spotify track URL → rich card with art, metadata, streaming stats |
 | **Artist lookup** | Paste an artist URL → roster card + recent activity |
 | **One-tap catalog import** | Tap the **Import** button on any track card |
 | **Upload your master** | Ask Aria to upload → get an authenticated link → drop the file |
@@ -144,7 +144,7 @@ Aria: 🎵 Drop it here →  https://patchline.ai/u/<authenticated-link>
 Aria responds with a short-lived, authenticated upload link tied to
 your account. You open the link in your browser (the Telegram in-app
 browser works too), drop your audio file, and Aria takes over —
-captioning, version history, smart link, Music Store wiring. You
+captioning, version history, and catalog wiring. You
 don't have to come back to Telegram for anything.
 
 Useful when you're recording on your phone or away from your laptop
@@ -190,7 +190,7 @@ Some things only work in the web dashboard:
 - [Aria overview](/aria/overview) — full surface area
 - [Catalog import](/catalog/import) — what "Import to catalog" actually does
 - [Asking Aria for playlists](/aria/prompts) — what "Find playlists" calls
-- [Pitch kit](/releases/pitch-kit) — what "Get pitch" returns
+- [Launchpad](/launchpad/overview) — where pitch links live
 
 ## FAQ
 
@@ -202,7 +202,7 @@ Some things only work in the web dashboard:
   </Accordion>
   <Accordion title="Can multiple Telegram accounts link to one Patchline account?">
     Yes. Each Telegram user has their own session, but they all act on
-    the same workspace's data. Useful for team members on Pro+.
+    the same workspace's data. Useful for approved team setups.
   </Accordion>
   <Accordion title="What if I delete the chat?">
     The chat unbinds. Re-link with `/start` next time. Your catalog and

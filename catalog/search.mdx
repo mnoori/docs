@@ -1,7 +1,7 @@
 ---
 title: "Catalog search"
 sidebarTitle: "Search"
-description: "Search across your Patchline catalog by title, artist, ISRC, mood, genre, and natural-language description. Aria-powered semantic search across your AI-captioned tracks."
+description: "Search across your Patchline catalog by title, artist, ISRC, mood, genre, metadata, and natural-language descriptions from uploaded tracks."
 icon: "magnifying-glass"
 keywords:
   - catalog search patchline
@@ -17,9 +17,9 @@ import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 import { MCPToolCard } from "/snippets/mcp-tool-card.mdx"
 
 Patchline builds a user-scoped search view of your catalog so you can
-search by free-text query, mood, genre, ISRC, or natural-language description
-similarity. This powers Aria's catalog tools and the dashboard search
-bar.
+search by free-text query, mood, genre, ISRC, metadata, and
+natural-language description similarity where uploaded audio has been
+captioned. This powers Aria's catalog tools and the dashboard search bar.
 
 <TierBadge tier="all" /> &nbsp; All tiers can search. Sonic-similarity ranking improves with catalog size and runs across the full catalog regardless of tier.
 
@@ -127,7 +127,7 @@ Aria: Top 5 by sonic similarity (cosine 0.7+):
 ```text
 You: List my catalog
 Aria: 47 tracks total. Showing first 10:
-  [paginated list with title, artist, AI caption snippet, last activity]
+  [paginated list with title, artist, metadata, caption snippet if available, last activity]
 
   Want to filter? "all dreampop", "tracks added this month", etc.
 ```
@@ -137,8 +137,7 @@ Aria: 47 tracks total. Showing first 10:
 - **Search is only as good as the indexed data.** Tracks without
   completed sonic analysis won't match audio-feature queries.
 - **Embeddings are catalog-only.** "Find similar tracks" works within
-  your catalog. For cross-catalog similarity, see
-  [Scout agent](/artists/scout).
+  your catalog.
 - **Index lag is ~30 seconds.** A freshly imported track is searchable
   within ~30 seconds of import completing.
 
@@ -158,15 +157,15 @@ the search counts as 1 credit.
 - [Catalog import](/catalog/import) — what goes into the index
 - [Catalog upload](/catalog/upload) — file path
 - [Sonic analysis](/catalog/sonic-analysis) — populates audio-feature filters
-- [Scout agent](/artists/scout) — cross-catalog similarity
+- [Playlists](/playlists/overview) — match tracks to playlist targets
 
 ## FAQ
 
 <AccordionGroup>
   <Accordion title="Can I search across other users' catalogs?">
-    No. Search is user-scoped. Team and label workspaces can search
-    across the shared workspace catalog, but not other customers'
-    catalogs.
+    No. Search is scoped to your Patchline workspace. Enterprise
+    customers with multi-user workspace access search the shared
+    workspace catalog.
   </Accordion>
   <Accordion title="Why didn't my just-imported track show up?">
     Search can have a ~30 second lag after import. Wait a moment and refresh.

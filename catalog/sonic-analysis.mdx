@@ -1,7 +1,7 @@
 ---
-title: "AI-discoverable tracks"
+title: "AI-discoverable uploaded tracks"
 sidebarTitle: "AI-discoverable tracks"
-description: "Patchline captions every track in your catalog so AI copilots like ChatGPT, Claude, and Cursor can naturally discover and reason about your music. Paste a Spotify URL in any AI tool — your captions ground the answer."
+description: "Patchline captions uploaded audio so AI copilots like ChatGPT, Claude, and Cursor can naturally discover and reason about your music. Streaming imports are metadata-only until you upload the audio."
 icon: "waveform-lines"
 keywords:
   - ai music discovery
@@ -14,7 +14,7 @@ schema:
     "@type": "SoftwareApplication"
     "name": "Patchline AI Track Discovery"
     "applicationCategory": "MultimediaApplication"
-    "description": "Auto-generated, AI-readable natural-language captions for every track in your catalog. Grounds AI copilot answers in your real music."
+    "description": "Auto-generated, AI-readable natural-language captions for uploaded tracks. Grounds AI copilot answers in your real music."
 ---
 
 import { AICallout } from "/snippets/ai-callout.mdx"
@@ -24,15 +24,15 @@ import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 The way listeners find music has changed. They're not just searching
 Spotify anymore — they're asking AI copilots ("ChatGPT, give me music
 like…", "Claude, what's [artist] up to?", "Cursor, what's in my
-catalog?"). Patchline makes every track in your catalog
-**AI-discoverable** — automatically.
+catalog?"). Patchline makes uploaded tracks **AI-discoverable** by
+turning the audio into a natural-language caption.
 
-<TierBadge tier="all" /> &nbsp; Auto-runs when a track lands in your catalog.
+<TierBadge tier="all" /> &nbsp; Runs when uploaded audio lands in your catalog.
 
 ## What this actually does
 
-When you add a track to your catalog (by uploading or importing), Aria
-generates a rich, natural-language **caption** for it. That caption is
+When you upload audio, Aria generates a rich, natural-language
+**caption** for it. That caption is
 the bridge between your music and any AI tool a fan or industry person
 might be using:
 
@@ -82,15 +82,15 @@ danceability scores. Those are useful inside a DAW. They are mostly
 useless to an AI agent answering *"what should I listen to tonight?"*
 
 The future of music discovery runs through AI tools. Patchline ships
-that future first — every track in your catalog ready to be found by
-the AI tool your fan happens to be using.
+that future first — uploaded tracks ready to be found by the AI tool
+your fan happens to be using.
 
 ## Quick start
 
 <Steps>
   <Step title="Add a track to your catalog">
-    [Import via URL](/catalog/import) or [upload](/catalog/upload).
-    Captioning runs automatically — no extra step.
+    [Upload the audio](/catalog/upload). Importing a streaming URL
+    creates a metadata row; uploading is what starts captioning.
   </Step>
   <Step title="See it in the Catalog tab">
     Sidebar → **Catalog** → click the track. The AI caption is part of
@@ -147,7 +147,7 @@ Captioning counts against your AI credit pool — typical cost is small
 
 ## Related pages
 
-- [Catalog import](/catalog/import) — what triggers captioning
+- [Catalog import](/catalog/import) — metadata-only import path
 - [Upload a track](/catalog/upload) — file path
 - [Catalog search](/catalog/search) — uses captions for semantic match
 - [MCP overview](/for-agents/mcp-overview) — how AI clients read your captions
@@ -156,8 +156,7 @@ Captioning counts against your AI credit pool — typical cost is small
 
 <AccordionGroup>
   <Accordion title="Do I have to do anything to turn this on?">
-    No. Captioning runs automatically the moment a track lands in your
-    catalog.
+    No. Captioning starts automatically after audio upload.
   </Accordion>
   <Accordion title="Can I edit the caption?">
     Yes — open the track in your Catalog and edit the caption directly.
@@ -165,20 +164,19 @@ Captioning counts against your AI credit pool — typical cost is small
     from scratch.
   </Accordion>
   <Accordion title="What if my track isn't in my catalog yet?">
-    Captioning only runs on tracks in your catalog. If you want
-    AI-discoverability for a track that's released elsewhere, paste its
-    streaming URL — [catalog import](/catalog/import) handles the rest.
+    Captioning runs on uploaded audio. If a track is already released
+    elsewhere, import the metadata first, then upload the master to add
+    the caption.
   </Accordion>
   <Accordion title="What ground truth does the caption use?">
     Patchline analyzes the actual audio plus your other catalog
     context — releases, artist roster, history. The caption reflects
     your real music; it is not generated from the title alone.
   </Accordion>
-  <Accordion title="Is the caption visible publicly?">
-    The caption is part of your private catalog. AI tools that connect
-    to your [MCP](/for-agents/mcp-overview) read it on your behalf,
-    scoped to your authenticated session. Public links you create
-    (smart links, share links) don't expose the raw caption.
+  <Accordion title="Where can AI tools read the caption?">
+    AI tools connected through the [Patchline MCP](/for-agents/mcp-overview)
+    can read the caption through catalog tools such as
+    `get_song_intelligence`.
   </Accordion>
 </AccordionGroup>
 

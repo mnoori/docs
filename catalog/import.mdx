@@ -205,16 +205,14 @@ lifetime. Want me to:
 3. Patchline updates the user-scoped search view used by
    [catalog search](/catalog/search). Deduplication runs before the
    track appears in your catalog.
-4. [Sonic analysis](/catalog/sonic-analysis) is queued when the track can
-   be analyzed. Results such as the AI caption and genre context are written
-   back to the catalog row.
-5. The catalog UI polls for updates and renders the feature panel once
-   analysis completes.
+4. The catalog UI renders the imported row. Upload the audio later if
+   you want [sonic analysis](/catalog/sonic-analysis), AI captioning,
+   smart links, or Music Store delivery.
 
 ## Related features
 
 - [Upload a track (file)](/catalog/upload) — when you want the master in Patchline
-- [Sonic analysis](/catalog/sonic-analysis) — what runs after import
+- [Sonic analysis](/catalog/sonic-analysis) — what runs after audio upload
 - [Catalog search](/catalog/search) — semantic search across imported tracks
 - [Artist roster](/artists/roster) — add artists by URL, separate flow
 
@@ -237,17 +235,15 @@ lifetime. Want me to:
     the REST API supports batch import — contact support.
   </Accordion>
   <Accordion title="What happens if the streaming URL goes 404?">
-    The catalog entry stays, but sonic re-analysis can't run. We mark the
-    track with a `streaming_unavailable` flag and surface it in the
-    catalog UI.
+    The catalog entry stays. Patchline marks the source as unavailable
+    and keeps the metadata already imported.
   </Accordion>
   <Accordion title="Can I undo an import?">
-    Yes. Catalog list → track row → ⋯ → Delete. Lifetime import counter
-    does NOT refund (it's a hard cap to prevent abuse). Free tier users:
-    plan accordingly.
+    Yes. Catalog list → track row → ⋯ → Delete. Lifetime import usage
+    does not reset after deletion.
   </Accordion>
   <Accordion title="Does import work for unreleased tracks?">
-    Only if the unreleased track has a private streaming URL (very
+    Only if the unreleased track has an unlisted streaming URL (very
     uncommon). For unreleased work, [upload the file](/catalog/upload)
     instead — that's the canonical path.
   </Accordion>

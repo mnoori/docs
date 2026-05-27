@@ -1,7 +1,7 @@
 ---
 title: "FAQ"
 sidebarTitle: "FAQ"
-description: "Frequently asked questions about Patchline — across pricing, Aria, catalog, releases, integrations, MCP, security, and roadmap. Per-feature FAQs live on each feature page."
+description: "Frequently asked questions about Patchline — across pricing, Aria, catalog, releases, integrations, MCP, and roadmap. Per-feature FAQs live on each feature page."
 icon: "circle-question"
 keywords:
   - patchline faq
@@ -21,11 +21,6 @@ schema:
         "acceptedAnswer":
           "@type": "Answer"
           "text": "Patchline has 5 tiers from Free to Enterprise. The live prices are at https://patchline.ai/pricing."
-      - "@type": "Question"
-        "name": "Does Aria train on my data?"
-        "acceptedAnswer":
-          "@type": "Answer"
-          "text": "No. Patchline does not use your catalog, audience data, or chat history to train models. Your data grounds Aria's answers in the current conversation only."
 ---
 
 import { AICallout } from "/snippets/ai-callout.mdx"
@@ -85,10 +80,6 @@ feature page (e.g., catalog questions at
     tooling. Exact model versions and providers may change as quality,
     latency, and safety improve.
   </Accordion>
-  <Accordion title="Does Aria train on my data?">
-    No. Patchline does not use your catalog, audience data, or chat
-    history to train models.
-  </Accordion>
   <Accordion title="Can Aria send emails or post to socials?">
     Aria drafts. You approve sends. No auto-send. Direct social posting
     is on the roadmap.
@@ -108,11 +99,11 @@ feature page (e.g., catalog questions at
     cheaper and easier. Upload is for unreleased work or when you want
     your master in Patchline.
   </Accordion>
-  <Accordion title="Does Patchline support stems?">
-    Limited in v1. Upload stems as separate tracks with naming
-    convention `<song>-stem-<part>.wav`. Stem separation tooling is
-    in beta.
-  </Accordion></AccordionGroup>
+  <Accordion title="What is the difference between import and upload?">
+    Import brings in streaming metadata. Upload brings in the audio file
+    and unlocks sonic analysis, AI captions, and Music Store delivery.
+  </Accordion>
+</AccordionGroup>
 
 ## Storefront
 
@@ -126,9 +117,9 @@ feature page (e.g., catalog questions at
     Stripe Connect — money goes from fan's card to your Stripe
     account directly. Patchline never holds your funds.
   </Accordion>
-  <Accordion title="Can I sell merch?">
-    Digital products only in v1. Physical merch / vinyl / CDs are on
-    the roadmap.
+  <Accordion title="What can I sell?">
+    Digital music products: tracks, EPs, albums, unreleased downloads,
+    instrumentals, and lossless files from your catalog.
   </Accordion>
 </AccordionGroup>
 
@@ -142,8 +133,8 @@ feature page (e.g., catalog questions at
   </Accordion>
   <Accordion title="Which AI clients work with Patchline?">
     Cursor, Codex, Claude Desktop, Claude Code, VS Code, plus any
-    MCP-compatible client. Aria-on-Slack is in private beta.
-    ChatGPT support is pending OpenAI's MCP rollout.
+    MCP-compatible client. Aria-on-Slack is in invite-only beta.
+    ChatGPT support depends on the client's MCP support.
   </Accordion>
   <Accordion title="Why do I need to OAuth to use MCP?">
     Tools that act on your data (catalog, roster, releases) need to
@@ -166,8 +157,7 @@ feature page (e.g., catalog questions at
   <Accordion title="What's on the roadmap?">
     See [patchline.ai/changelog](https://patchline.ai/changelog) for
     shipped features. Major items in flight: Aria iOS app, Outlook
-    integration, physical merch on storefront, REST API beyond
-    Enterprise.
+    integration, and deeper Enterprise API surfaces.
   </Accordion>
   <Accordion title="How do I request a feature?">
     GitHub Discussions or email. We read every request — though we

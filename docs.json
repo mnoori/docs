@@ -130,8 +130,7 @@
       "og:site_name": "Patchline Documentation",
       "og:image": "https://patchline.ai/og-image.png",
       "twitter:site": "@patchline_ai"
-    },
-    "indexing": "all"
+    }
   },
   "redirects": [
     {
