@@ -1,7 +1,7 @@
 ---
 title: "Aria"
 sidebarTitle: "Aria — overview"
-description: "Aria is Patchline's AI assistant for the music business. Chat to plan releases, analyze tracks, find playlists, draft pitches, and run your catalog — across web, Telegram, Claude, Cursor, and Codex."
+description: "Aria is Patchline's AI assistant for the music business — one orchestrator that coordinates release strategy, A&R research, catalog captioning, playlist matching, audience reads, and connector actions across your full Patchline workspace."
 icon: "sparkles"
 keywords:
   - aria
@@ -14,9 +14,9 @@ schema:
     "@type": "SoftwareApplication"
     "name": "Aria"
     "applicationCategory": "MultimediaApplication"
-    "operatingSystem": "Web, Telegram, Claude, Cursor, VS Code, Codex"
+    "operatingSystem": "Web, Claude, Cursor, VS Code, Codex, Slack (beta)"
     "url": "https://patchline.ai/dashboard"
-    "description": "AI assistant for the music business. Reads catalog, queries streaming data, drafts pitches, plans releases."
+    "description": "Orchestrator AI for the music business — release strategy, A&R research, catalog captioning, playlist matching, audience reads, visual generation, storefront ops."
     "offers":
       "@type": "Offer"
       "price": "0"
@@ -37,25 +37,45 @@ Aria is one assistant with multiple front doors. <TierBadge tier="all" />
 
 ## What Aria does
 
+Aria is one assistant covering many disciplines — release strategy,
+A&R research, catalog captioning, playlist matching, audience reads,
+storefront ops, content generation, and cross-tool actions through
+your connectors.
+
 <CardGroup cols={2}>
   <Card title="Plan a release" icon="rocket" href="/releases/release-planner">
-    Turn a track into an intelligent rollout — milestones, launch
-    windows, and next-best-actions tuned to the artist's journey.
+    Generate an intelligent rollout — milestones, launch windows, and
+    next-best-actions — tuned to the artist's journey and the
+    music-business knowledge graph.
   </Card>
-  <Card title="Analyze a track" icon="waveform" href="/catalog/sonic-analysis">
-    Paste any Spotify URL — get an AI-readable description of the track, plus a ranked list of similar artists.
+  <Card title="AI-discoverable tracks" icon="waveform" href="/catalog/sonic-analysis">
+    Every track in your catalog gets an AI-readable caption Aria can
+    reason about and any AI tool can discover.
   </Card>
-  <Card title="Find playlists" icon="list-music" href="/aria/prompts">
-    Rank Spotify playlists by sonic fit plus curator responsiveness for a
-    specific track.
+  <Card title="Research any artist" icon="binoculars" href="/artists/intelligence-profile">
+    Streaming, follower growth, top tracks, similar artists, audience
+    demographics, engagement, interests, and health signal for any
+    artist on the planet.
   </Card>
-  <Card title="Draft a DSP pitch" icon="file-pen" href="/releases/pitch-kit">
-    Generate a curator-facing pitch grounded in real track metadata,
-    sonic analysis, and artist context.
+  <Card title="Match playlists" icon="list-music" href="/playlists/overview">
+    Rank Spotify playlists by sonic fit plus curator responsiveness.
+    Inspect a playlist before you pitch.
   </Card>
-<Card title="Manage your roster" icon="users" href="/artists/roster">
-    Add artists by URL. Background artist intelligence populates the
-    profile automatically.
+  <Card title="Read the audience" icon="chart-network" href="/artists/audience">
+    Fan graph across your roster, QR attribution from real-world
+    moments, growth signal across DSPs and socials.
+  </Card>
+  <Card title="Generate visuals" icon="palette" href="/visual-library/overview">
+    Cover art, promo flyers, and Canvas videos — built from your
+    release context and saved to your Visual Library.
+  </Card>
+  <Card title="Run your storefront" icon="store" href="/storefront/overview">
+    Sell direct to fans with 0% platform fees on paid tiers. Aria can
+    set up products, smart links, and pricing.
+  </Card>
+  <Card title="Manage your roster" icon="users" href="/artists/roster">
+    Add and claim profiles, pull intelligence in the background, ask
+    Aria for cross-roster reads.
   </Card>
 </CardGroup>
 
@@ -145,22 +165,63 @@ already in — they all hit the same data and the same connectors.
 - For the [MCP server](/for-agents/mcp-install): Cursor, Codex, VS Code,
   or any MCP-compatible client.
 
-## How Aria works
+## One agent, many disciplines
 
-Aria routes your request to the right Patchline capability: artist
-intelligence, A&R scout, pitch writing, audience reads, catalog
-captioning, release planning, contract review, connector actions. Each
-capability works against your real Patchline data and authorized
-[connectors](/integrations/overview), then returns a grounded answer.
+Aria is built as an **orchestrator** — not a single LLM with a long
+system prompt, but a coordination layer that holds your full context
+and routes work across many specialized capabilities under the hood.
 
-You don't see the routing — you see one assistant. But it means Aria
-can do work that simple chatbots can't: cross-reference your contracts
-in Launchpad, check the artist and catalog context, draft outreach in
-Instagram via a connector, and keep the release plan up to date in
-one conversation.
+What that means in practice:
 
-The product MCP at [www.patchline.ai/api/mcp/v1](/for-agents/mcp-overview)
-exposes the same core capabilities to external AI clients.
+- **Aria has access to your entire dataset.** Profiles, catalog,
+  releases, playlists, visuals, music store, launchpad, audience,
+  connectors. One conversation can pull from all of them.
+- **Aria coordinates many specialist capabilities.** Artist research,
+  catalog captioning, playlist matching, release strategy, pitch
+  drafting, audience reads, visual generation, storefront ops,
+  connector actions. You see one assistant. Behind it, dozens of
+  capabilities are being chosen, sequenced, and combined to answer
+  your prompt.
+- **Aria reads the music-business knowledge graph.** Aria isn't just
+  reasoning over your data — it's also reasoning over a deep,
+  continuously updated model of the music business: what works for
+  which artist tier, which playlists are moving, which audiences are
+  growing where. That's what makes "what do I do now, and why?" a
+  real question with a real answer.
+
+This is why we built Aria as **one agent to rule them all**, instead
+of shipping ten separate agents you'd have to switch between. The
+work in the music business doesn't live in silos — your audience is
+your release strategy is your storefront. Your assistant shouldn't
+either.
+
+## Grounded by design
+
+Every Aria answer is grounded in real data — your account state plus
+the music-business knowledge graph. Aria does not invent ISRCs,
+fabricate stream counts, or guess curator names. If a piece of data
+isn't available, Aria says so and offers to fetch it.
+
+You can verify any number Aria gives you. That's the design.
+
+## Privacy and control
+
+- Your data stays scoped to your workspace.
+- Patchline does not use your catalog, audience data, or chat
+  history to train models. (Hard rule.)
+- Connector authorizations are revocable from your account at any
+  time.
+- Public surfaces you create (smart links, drop links, pitch links)
+  expose only what you explicitly publish — your raw catalog and
+  internal data are not in those public pages.
+
+## Developer / agent surface
+
+The same orchestrator is exposed to external AI clients through the
+product MCP at
+[`www.patchline.ai/api/mcp/v1`](/for-agents/mcp-overview). Cursor,
+Claude Code, Codex, and any MCP-compatible client can call into
+Aria's capability surface using their own AI.
 
 <Note>
   Every tool call is grounded in your data. Aria never invents an ISRC, a
@@ -188,14 +249,16 @@ exposes the same core capabilities to external AI clients.
 >
 > Want me to create the project anchor and schedule the tasks?
 
-### Example 2 — Contract review
+### Example 2 — Cross-roster audience read
 
-> **You:** *[uploads a split sheet from a new collaborator]*
+> **You:** Which artist on my roster is gaining traction fastest right
+> now, and which markets is it coming from?
 >
-> **Aria:** Parsed. 50/50 split between you and Tessa. Two flags:
-> - Sync-license language defaults to "exclusive" — you usually take
->   non-exclusive on collaborations. Want me to suggest the revision?
-> - No territory carve-out. Worth tightening to your standard list?
+> **Aria:** Cleo Bell. Up 18% in monthly listeners over the last 30
+> days, +42% on TikTok. Lift is concentrated in three cities — Mexico
+> City, São Paulo, and Stockholm — and traces back to a sync placement
+> two weeks ago. Want me to draft a localized push for those three
+> markets?
 
 
 ### Example 3 — Multi-tool workflow
@@ -240,7 +303,7 @@ See [Pricing & plans](/get-started/pricing) for the full breakdown.
 
 <AccordionGroup>
   <Accordion title="Does Aria train on my data?">
-    No. Patchline does not use your catalog, contracts, or chat
+    No. Patchline does not use your catalog, audience data, or chat
     history to train models. Your data is used to ground Aria's answers
     in the current conversation only.
   </Accordion>
