@@ -23,25 +23,38 @@ refreshed automatically.
 
 <TierBadge tier="all" /> &nbsp; Free and Starter see the basic profile; Pro+ unlocks the full intelligence view (similar artists, momentum graphs, market breakdown).
 
-## What's in a profile
+## What's inside a profile
 
-| Section | What it contains | Source |
-|---|---|---|
-| **Identity** | Name, profile pic, primary URL | Platform metadata |
-| **Streaming** | Monthly listeners (current + 30-day trend), top tracks, top playlists | Licensed music data |
-| **Social audience** | IG, TikTok, YouTube, Twitter, SoundCloud — followers + 30-day trend | Licensed audience data |
-| **Genre tags** | Top 5 genres, sub-genres | Licensed music data |
-| **Top markets** | Top 5 cities + 5 countries by listener share | Licensed music data |
-| **Recent activity** | Recent releases, recent playlist adds, recent press | Platform and web context |
-| **Similar artists** | Sonically-similar peers in the same listener tier | Music data + audio analysis |
-| **Bio (AI-generated)** | 1-paragraph + 3-paragraph + 1-line variants | Aria, cached |
-| **EPK material** | Quotes, press images, press history | Platform and web context |
+When you open any artist profile (yours or anyone you've added),
+you land on a header with the artist's image, name, last-updated
+stamp, and the connected platform row (Spotify, Instagram, TikTok,
+YouTube, Apple, SoundCloud, Tidal — connect any you have, edit
+inline).
+
+You also get two bios side-by-side:
+
+- **AI Generated Bio** — refreshes regularly to reflect career
+  progress.
+- **Online Bio** — the public-web-pulled version.
+
+The profile is organized into these tabs:
+
+| Tab | What you see |
+|---|---|
+| **Profile** | Identity, social links, both bios. |
+| **Overview** | Current state at a glance — monthly listeners, top markets, the headline numbers. |
+| **Trends** | Streaming and audience growth over time. Multi-platform. |
+| **Similar Artists** | Sonic peers and lineage. |
+| **Fanbase** | Who's listening — geography, demographics. |
+| **Engagement** | How fans are engaging across platforms. |
+| **Affinities** | Genre, scene, and adjacent-artist affinities. |
+| **Credibility** | Editorial coverage, playlist authority, press signal. |
 
 ## Where to find it
 
 | Surface | Path |
 |---|---|
-| Web dashboard | Sidebar → **Artists** → click an artist row → `/dashboard/artists/[artistId]` |
+| Web dashboard | Sidebar → **Profiles** → click an artist row → `/dashboard/artists/[artistId]` |
 | Via Aria | "Tell me about [artist]" |
 | Via MCP | [`get_artist_intelligence`](/for-agents/mcp-tools-reference#get_artist_intelligence) |
 
@@ -49,15 +62,15 @@ refreshed automatically.
 
 <Steps>
   <Step title="Add an artist">
-    [Add to roster](/artists/roster) by Spotify (or other) URL. Artist
-    intelligence refresh kicks off automatically.
+    [Add an artist to your profiles](/artists/roster) by searching for
+    them. Intelligence refresh kicks off automatically.
   </Step>
   <Step title="Wait for enrichment (~1 minute)">
     The basic identity appears immediately. Streaming + social audience
     populate within ~60 seconds. AI bio populates within ~3 minutes.
   </Step>
   <Step title="Open the profile">
-    Sidebar → **Artists** → click the row. All sections render in one
+    Sidebar → **Profiles** → click the row. All sections render in one
     page.
   </Step>
   <Step title="Query Aria for synthesis">

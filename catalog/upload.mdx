@@ -1,18 +1,19 @@
 ---
 title: "Upload a track"
 sidebarTitle: "Upload"
-description: "Upload MP3, WAV, or FLAC files directly to your Patchline catalog. Aria captions the track for AI discovery the moment the upload finishes. Best for unreleased work or your masters."
+description: "Upload your audio directly into Patchline and unlock catalog management, AI-readable descriptions, and a discoverability layer built for the world where AI agents run music discovery."
 icon: "upload"
 keywords:
   - upload track patchline
   - patchline music upload
   - mp3 wav flac upload
   - master file upload
+  - ai-discoverable catalog
 schema:
   - "@context": "https://schema.org"
     "@type": "HowTo"
     "name": "Upload a music file to Patchline"
-    "description": "Add unreleased or master audio to your Patchline catalog. Aria captions the track on upload."
+    "description": "Add audio to your Patchline catalog. Aria captions the track for AI discovery the moment the upload finishes."
     "totalTime": "PT3M"
 ---
 
@@ -20,40 +21,61 @@ import { AICallout } from "/snippets/ai-callout.mdx"
 import { TierBadge } from "/snippets/tier-badge.mdx"
 import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 
-Upload a finished audio file directly into your Patchline catalog.
-Patchline stores it securely, queues
-[sonic analysis](/catalog/sonic-analysis), and makes it searchable.
-Best for **unreleased work** or when you want your master to live in
-Patchline alongside the catalog metadata.
+Upload your finished audio into Patchline and unlock the rest of the
+product. Once a track is in your catalog, Patchline turns into your
+catalog-management home base — all your files in one place, queryable,
+with an AI-readable description attached so every AI tool you connect
+can find and reason about the track.
+
+We're building this for a world where AI agents run a growing share of
+music discovery and operations. The artists who keep their catalog on
+Patchline are the ones those agents will find first.
 
 <TierBadge tier="all" /> &nbsp; Upload limits vary by tier — see [pricing](/get-started/pricing).
 
-## When to upload vs import
+## What you get when you upload
+
+- **Catalog home base** — all your audio in one place, organized by
+  artist and project, with version history.
+- **AI-readable description** — Aria writes a natural-language caption
+  the moment the upload finishes. It's the bridge between your music
+  and any AI tool a fan or industry contact might be using. See
+  [AI-discoverable tracks](/catalog/sonic-analysis).
+- **Queryable from anywhere** — semantic [catalog search](/catalog/search),
+  Aria's catalog tools, and the [product MCP](/for-agents/mcp-overview)
+  all read your uploads.
+- **Storefront-ready** — uploaded tracks can power your
+  [music store](/storefront/overview) directly.
+- **Project-ready** — the [release planner](/releases/release-planner)
+  uses upload-grade sonic grounding to build sharper campaigns.
+
+## Upload vs import
 
 | | Upload (this page) | [Import](/catalog/import) |
 |---|---|---|
-| Use when | Track is **unreleased** or you want the master in Patchline | Track is **already released** on a streaming platform |
-| Audio file in Patchline | **Yes** (secure, versioned storage) | No |
-| Sonic analysis runs | Yes, on your master | Yes, via the streaming source |
-| Storage cost | Counts against your storage limit | None |
-| Use-case fit | Demos, rough cuts, masters, stems | Released catalog from Distrokid/Tunecore/labels |
+| Audio in Patchline | **Yes** (secure, versioned storage) | No (metadata only) |
+| AI-readable caption | **Yes** (grounded in the audio) | Yes (based on streaming metadata) |
+| Storefront-ready | **Yes** | No |
+| Sonic grounding | **Full** — best Aria output | Lighter — based on what streaming returns |
 
-If your track is already on Spotify, **import is cheaper** (no storage,
-no upload time). Upload only when you need the master.
+The two paths complement each other. Use **import** to bring in tracks
+you've already released to streaming so Aria has the full catalog
+picture. Use **upload** to make Patchline the home for the master,
+unlock the storefront, and give Aria the strongest grounding for
+projects and discovery.
 
 ## Supported formats
 
 | Format | Notes |
 |---|---|
-| **MP3** | Any bitrate, any ID3 version |
 | **WAV** | Recommended for masters |
+| **MP3** | Any bitrate |
 | **FLAC** | Recommended for masters |
-| **AIFF** | Supported |
 | **M4A / AAC** | Supported |
 | **OGG** | Supported |
 
-Max file size: **500 MB** (web upload), **1 GB** (chunked upload on
-Scale+/Enterprise).
+Large file uploads use chunked upload automatically. See
+[pricing](/get-started/pricing) for current storage limits per tier.
 
 ## How to upload
 
@@ -67,13 +89,13 @@ Scale+/Enterprise).
     Drag the file onto the upload zone, or click **Upload** to pick a file.
   </Step>
   <Step title="Confirm metadata">
-    Patchline pre-fills title, artist, ISRC (if present), cover art (if
-    embedded). You confirm or edit.
-  </Step>
-  <Step title="Wait for sonic analysis">
-    Analysis queues immediately, completes in 30–90s. The track appears
-    in the catalog list with a spinner that resolves into the feature
+    Set the title, artist, ISRC, and cover art in the track detail
     panel.
+  </Step>
+  <Step title="Wait for the AI-readable caption">
+    Aria starts the caption as soon as the upload completes. The track
+    appears in the catalog list with a spinner that resolves into the
+    description panel.
   </Step>
 </Steps>
 
@@ -81,34 +103,35 @@ Scale+/Enterprise).
 
 <AriaPromptCard prompt="Upload this file to my catalog: [attach file]" />
 
-Aria handles the upload + metadata confirmation in the chat. Best on
-Telegram for small files, web for larger ones.
+Aria handles the upload + metadata confirmation in the chat. Works on
+the web dashboard and on Telegram for small files.
 
 ## What happens on upload
 
-When the upload finishes, Aria starts generating the [AI caption](/catalog/sonic-analysis) for the track so it becomes discoverable across AI tools. You set the title, artist, and other metadata yourself in the track detail panel — Patchline does not extract ID3 tags from your file.
+When the upload finishes, Aria generates the
+[AI-readable caption](/catalog/sonic-analysis) for the track so it
+becomes discoverable across AI tools — ChatGPT, Claude, Cursor, and any
+other AI client connected via [MCP](/for-agents/mcp-overview).
 
-## Storage limits
+The track is immediately:
 
-| Tier | Storage cap |
-|---|---|
-| <TierBadge tier="free" /> | 1 GB |
-| <TierBadge tier="starter" /> | 10 GB |
-| <TierBadge tier="pro" /> | 100 GB |
-| <TierBadge tier="scale" /> | 500 GB |
-| <TierBadge tier="enterprise" /> | Unlimited |
+- searchable in [catalog search](/catalog/search),
+- referenceable in any Aria conversation,
+- available as a track anchor for [projects](/releases/release-planner),
+- listable on your [storefront](/storefront/overview).
 
-A typical 3-minute WAV master is ~30 MB. So Starter (10 GB) holds ~300
-masters; Pro (100 GB) holds ~3,000. FLAC compresses to roughly half
-the size of WAV.
+## Storage
+
+Storage limits scale with your tier. See
+[pricing](/get-started/pricing) for current numbers.
 
 ## Version control
 
 Every upload to the same track ID creates a new **version**. Versions
 are listed in the catalog row → ⋯ → Versions.
 
-- **Latest version** is what plays, what sonic analysis runs on, what
-  the storefront sells.
+- **Latest version** is what plays, what the caption describes, and
+  what the storefront sells.
 - **Older versions** are kept (full audit trail) until you explicitly
   delete them.
 - **Restore** any version with one click.
@@ -118,27 +141,29 @@ edit, A/B testing storefront versions.
 
 ## Privacy & security
 
-- Files are stored in encrypted, access-controlled cloud storage with
+- Files are stored in encrypted, access-controlled storage with
   version history.
 - Only authorized users in your workspace can access playback or
   download links.
 - Short-lived signed URLs are used for playback, analysis, and uploads.
-- Patchline does not use your uploaded audio to train models.
 
 ## Pricing
 
-| Action | Credit cost |
-|---|---|
-| File upload itself | 0 credits (counts against lifetime upload cap) |
-| Sonic analysis on upload | 5 credits/track (automatic) |
-| Storage | Included in tier — no per-GB charge |
+Captioning counts against your AI credit pool (a few credits per
+track). Upload, storage, and version history are included in your
+tier — see [pricing](/get-started/pricing) for the current numbers.
 
 ## Related pages
 
-- [Catalog import](/catalog/import) — the URL-based path
-- [Sonic analysis](/catalog/sonic-analysis) — what runs after upload
+- [Catalog import](/catalog/import) — the URL-based path for released
+  tracks
+- [AI-discoverable tracks](/catalog/sonic-analysis) — what the caption
+  is and why it matters
+- [Catalog search](/catalog/search) — uses your captions for semantic
+  matching
 - [Storefront overview](/storefront/overview) — sell what you upload
-- [Plans & credits](/account/plans-credits) — credit math
+- [Release planner](/releases/release-planner) — uploaded tracks ground
+  the strongest campaigns
 
 ## FAQ
 
@@ -147,11 +172,6 @@ edit, A/B testing storefront versions.
     Better to upload each track separately. Patchline treats each upload
     as a single catalog entry, so an album-as-one-file becomes one row
     instead of 12. If you have a 12-track album, upload 12 files.
-  </Accordion>
-  <Accordion title="What metadata does Patchline pull from my file?">
-    None. Patchline does not read embedded file tags. You set the
-    title, artist, ISRC, and other fields manually in the track detail
-    panel after upload.
   </Accordion>
   <Accordion title="Does upload count against my catalog import limit?">
     No. Uploads and imports are tracked separately. See
@@ -165,12 +185,19 @@ edit, A/B testing storefront versions.
     Upload them as separate tracks with naming convention
     `<song>-stem-<vocals|drums|bass|other>.wav`. They'll appear as
     related rows. Stem separation tooling is in beta — see
-    [Sonic analysis](/catalog/sonic-analysis).
+    [AI-discoverable tracks](/catalog/sonic-analysis).
   </Accordion>
   <Accordion title="What's the upload bandwidth requirement?">
-    Mostly governed by your internet connection. A 50 MB WAV on a
-    typical home connection (50 Mbps up) uploads in ~10s. Chunked
-    upload on Scale+ handles flaky connections gracefully.
+    Mostly governed by your internet connection. Patchline uses chunked
+    upload for large files so flaky connections are handled gracefully.
+  </Accordion>
+  <Accordion title="Why upload if my track is already on streaming?">
+    Three reasons. (1) **Storefront** — only uploaded tracks can be
+    sold through your Patchline store. (2) **Stronger AI grounding** —
+    Aria reasons more accurately when the actual master is available.
+    (3) **Future-proofing** — AI agents will increasingly act through
+    direct catalog access; the master on Patchline is the master those
+    agents will reach.
   </Accordion>
 </AccordionGroup>
 
