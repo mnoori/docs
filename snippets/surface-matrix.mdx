@@ -1,37 +1,36 @@
-export const FEATURE_SURFACES = {
-  aria: {
-    web:      { available: true,  detail: "Full surface — dashboard home" },
-    telegram: { available: true,  detail: "@AriaMusicBizBot, public" },
-    claude:   { available: true,  detail: "Via the Patchline plugin" },
-    mcp:      { available: true,  detail: "Product tools via OAuth 2.0 / PKCE" },
-  },
-  "catalog-import": {
-    web:      { available: true,  detail: "Paste URL in dashboard" },
-    telegram: { available: true,  detail: "Paste URL to @AriaMusicBizBot" },
-    claude:   { available: true,  detail: "Through Aria plugin actions" },
-    mcp:      { available: true,  detail: "analyze_url tool" },
-  },
-  "sonic-analysis": {
-    web:      { available: true,  detail: "Auto-runs on upload" },
-    telegram: { available: true,  detail: "Paste track URL to @AriaMusicBizBot" },
-    claude:   { available: true,  detail: "Through Aria plugin" },
-    mcp:      { available: true,  detail: "get_audio_features / get_song_intelligence" },
-  },
-  "release-planner": {
-    web:      { available: true,  detail: "Dashboard → Releases" },
-    telegram: { available: false, detail: "Conversation only, no full rollout view" },
-    claude:   { available: true,  detail: "Progressive interview workflow" },
-    mcp:      { available: true,  detail: "get_releases tool" },
-  },
-  storefront: {
-    web:      { available: true,  detail: "Dashboard → Store + public /store/[slug]" },
-    telegram: { available: false, detail: "Not a Telegram surface" },
-    claude:   { available: false, detail: "Not yet exposed" },
-    mcp:      { available: false, detail: "Not yet exposed" },
-  },
-};
-
 export const SurfaceMatrix = ({ feature }) => {
+  const FEATURE_SURFACES = {
+    aria: {
+      web:      { available: true,  detail: "Full surface — dashboard home" },
+      telegram: { available: true,  detail: "@AriaMusicBizBot, public" },
+      claude:   { available: true,  detail: "Via the Patchline plugin" },
+      mcp:      { available: true,  detail: "Product tools via OAuth 2.0 / PKCE" },
+    },
+    "catalog-import": {
+      web:      { available: true,  detail: "Paste URL in dashboard" },
+      telegram: { available: true,  detail: "Paste URL to @AriaMusicBizBot" },
+      claude:   { available: true,  detail: "Through Aria plugin actions" },
+      mcp:      { available: true,  detail: "analyze_url tool" },
+    },
+    "sonic-analysis": {
+      web:      { available: true,  detail: "Auto-runs on upload" },
+      telegram: { available: true,  detail: "Paste track URL to @AriaMusicBizBot" },
+      claude:   { available: true,  detail: "Through Aria plugin" },
+      mcp:      { available: true,  detail: "get_audio_features / get_song_intelligence" },
+    },
+    "release-planner": {
+      web:      { available: true,  detail: "Dashboard → Projects" },
+      telegram: { available: false, detail: "Conversation only, no full rollout view" },
+      claude:   { available: true,  detail: "Progressive interview workflow" },
+      mcp:      { available: true,  detail: "get_releases tool" },
+    },
+    storefront: {
+      web:      { available: true,  detail: "Dashboard → Store + public /store/[slug]" },
+      telegram: { available: false, detail: "Not a Telegram surface" },
+      claude:   { available: false, detail: "Not yet exposed" },
+      mcp:      { available: false, detail: "Not yet exposed" },
+    },
+  };
   const f = FEATURE_SURFACES[feature];
   if (!f) return null;
   const surfaces = [
