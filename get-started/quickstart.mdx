@@ -1,26 +1,26 @@
 ---
 title: "Quickstart"
 sidebarTitle: "Quickstart"
-description: "Sign up, claim your artist profile, get your catalog into Patchline, and have your first grounded Aria conversation."
+description: "Sign up, claim your artist profile, tell Patchline what you're trying to get done, and land on the dashboard ready for Aria."
 icon: "rocket"
 keywords:
   - patchline quickstart
   - sign up patchline
   - claim artist profile
-  - first aria conversation
+  - onboarding patchline
 schema:
   - "@context": "https://schema.org"
     "@type": "HowTo"
     "name": "Get started with Patchline"
-    "description": "Sign up, claim your artist profile, get your catalog in, and chat with Aria."
+    "description": "Sign up, claim your artist profile, complete onboarding, get a track in, talk to Aria."
 ---
 
 import { AICallout } from "/snippets/ai-callout.mdx"
 import { TierBadge } from "/snippets/tier-badge.mdx"
 import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
 
-Let's get you in. By the end of this page Patchline knows who you are,
-your catalog is loaded, and Aria is ready to act on it.
+By the end of this page Patchline knows who you are, what you're
+trying to do, your catalog is loaded, and Aria is ready to act.
 
 ## Step 1 — Onboarding
 
@@ -30,65 +30,75 @@ your catalog is loaded, and Aria is ready to act on it.
     email.
   </Step>
   <Step title="Search for your artist name">
-    Patchline asks for your artist name. Type it — we search across the
-    real music landscape.
+    Patchline asks for your artist name. Type it — we search across
+    the real music landscape.
   </Step>
   <Step title="Claim your profile">
-    Find yourself in the results and claim the profile. This wires your
-    streaming presence, your audience, and your release history into
-    your Patchline workspace.
+    Find yourself in the results and claim the profile. This wires
+    your streaming presence, your audience, and your release history
+    into your Patchline workspace.
+  </Step>
+  <Step title="Tell Patchline what you want">
+    Patchline asks **what you're trying to get out of Patchline** —
+    plan a release, run a roster, sell direct to fans, hand Aria to
+    your team, whatever. Your answer steers Aria's defaults and the
+    cards we show on your dashboard. Skip if you're just exploring.
   </Step>
   <Step title="Auto-import (if we have you)">
-    If your artist is on streaming platforms and we already have data on
-    you, **Patchline auto-imports your top 10 tracks** into your
-    catalog. You'll see them appear in the Catalog tab — captioned and
-    ready.
+    If your artist is on streaming platforms and we already have data
+    on you, **Patchline auto-imports 10 of your tracks** into your
+    catalog. They appear in the Catalog tab — captioned and ready.
 
     You can import more later from the Catalog tab.
+  </Step>
+  <Step title="Land on the dashboard">
+    Onboarding done. You land on the Aria home screen.
   </Step>
 </Steps>
 
 ## Step 2 — Get a track in (if you didn't auto-import)
 
-Sidebar → **Catalog** → drag your file (MP3, WAV, FLAC) into the upload
-zone. Aria starts captioning the moment the upload finishes.
+Sidebar → **Catalog** → drag your file (MP3, WAV, FLAC) into the
+upload zone. Aria starts captioning the moment the upload finishes.
 
 <Note>
   **No tracks yet?** Skip this step. Aria still answers general
-  music-industry questions and helps you scope your first release.
+  music-business questions and helps you scope your first release.
 </Note>
 
-## Step 3 — While it processes, explore your profile
+## Step 3 — While it processes, explore
 
 Catalog processing runs in the background. Use the time:
 
-- Open the **Roster** tab — your claimed profile is there with the
-  streaming, audience, and momentum context that Patchline pulled.
+- Open the **Profiles** tab — your claimed profile is there with the
+  streaming, audience, and momentum context Patchline pulled.
 - Hit the **Audience** tab — fan graph, growth signals, top markets.
-- Glance at **Campaign Planner** — empty for now, but this is where
-  your release plan will live.
+- Glance at **Projects** — empty for now, but this is where your
+  release plan will live.
 
 The whole product is interconnected. The data Patchline pulled in
 Step 1 already flows into every tab.
 
 ## Step 4 — Talk to Aria
 
-Go back to the dashboard. Aria is the home screen. Try:
+Back to the dashboard. Aria is the home screen. Try:
 
+<AriaPromptCard prompt="What do I do now, and why?" />
 <AriaPromptCard prompt="What can you tell me about my catalog?" />
 <AriaPromptCard prompt="Plan a release for my next track." />
-<AriaPromptCard prompt="Find playlists that fit my latest song." />
 <AriaPromptCard prompt="Where is my audience growing right now?" />
 
-Aria reads your real data and answers grounded in it. If something's
-missing, Aria says so and offers to fetch.
+Aria reads your real data plus the music-business knowledge graph and
+returns grounded answers with reasoning. If something's missing, Aria
+says so and offers to fetch.
 
 ## That's the loop
 
-Catalog → audience → Aria → release plan → public surfaces → repeat.
+Profiles → catalog → audience → Aria → release plan → public
+surfaces → repeat.
 
-Everything else in Patchline — release planning, pitch generation,
-contract drafting, storefront setup — extends this same pattern.
+Everything else in Patchline — release planning, playlist matching,
+pitch generation, storefront, contracts — extends this same pattern.
 
 ## What to do next
 
@@ -101,8 +111,7 @@ contract drafting, storefront setup — extends this same pattern.
     Sell direct to fans with **0% platform fees** on paid tiers.
   </Card>
   <Card title="Generate visuals" icon="palette" href="/visual-library/overview">
-    Cover art, promo flyers, Spotify Canvas videos from your release
-    context.
+    Cover art, promo flyers, Canvas videos from your release context.
   </Card>
   <Card title="Install Aria in Claude / Cursor" icon="code" href="/for-agents/mcp-install">
     Connect Patchline's MCP server to your favorite AI tool.
@@ -113,8 +122,8 @@ contract drafting, storefront setup — extends this same pattern.
 
 <AccordionGroup>
   <Accordion title="My upload is still processing">
-    Patchline queues every upload — depending on volume across the
-    platform, captioning can take a few minutes. It runs in the
+    Patchline queues every upload. Depending on volume across the
+    platform, captioning can take a few minutes — it runs in the
     background, you don't need to sit on the catalog page. If it stays
     stuck for a long time, open the in-app **Support** button.
   </Accordion>
@@ -123,15 +132,15 @@ contract drafting, storefront setup — extends this same pattern.
     canonical track URL into Aria and ask Aria to import.
   </Accordion>
   <Accordion title="Aria says 'I don't have access to that'">
-    Aria is intentionally grounded. If you ask about a track that isn't
-    in your catalog or an artist you haven't claimed, Aria says so and
-    offers to fetch. That's the right behavior — better than inventing
-    data.
+    Aria is intentionally grounded. If you ask about a track that
+    isn't in your catalog or an artist you haven't claimed, Aria says
+    so and offers to fetch. That's the right behavior — better than
+    inventing data.
   </Accordion>
   <Accordion title="I couldn't find my artist when searching">
     If your artist isn't in our index yet, you can still create a
-    profile manually from the Roster tab and upload your catalog
-    directly.
+    profile manually from the **Profiles** tab and upload your
+    catalog directly.
   </Accordion>
 </AccordionGroup>
 

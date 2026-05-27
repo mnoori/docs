@@ -1,0 +1,80 @@
+---
+title: "Playlists"
+sidebarTitle: "Playlists"
+description: "Playlist targeting for every track in your catalog. Paste a Spotify link or pick from your catalog — Aria finds matching playlists, ranks them by sonic fit and curator responsiveness, and gives you the inspector view before you pitch."
+icon: "list-music"
+keywords:
+  - patchline playlists
+  - playlist targeting
+  - spotify playlist match
+  - curator responsiveness
+  - playlist inspector
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+import { AriaPromptCard } from "/snippets/aria-prompt-card.mdx"
+
+The **Playlists** tab is your pitching workspace. Pick a track from your
+catalog — or paste any Spotify link — and Aria surfaces playlists worth
+your time, with the context you need to pitch right.
+
+<TierBadge tier="all" /> &nbsp; Available on every tier. Match depth and curator intelligence expand on paid tiers.
+
+## What you can do here
+
+- **Match playlists for a specific track.** Aria ranks them by sonic
+  fit plus curator responsiveness — not just follower count.
+- **Inspect a playlist.** Curator identity, recent adds, freshness,
+  turnover rate, submission status — everything you need before you
+  spend a pitch.
+- **Pitch with grounding.** Aria drafts the pitch using your real
+  track context (the [AI caption](/catalog/sonic-analysis)) and the
+  curator's recent adds.
+
+## Where to find it
+
+Sidebar → **Playlists**.
+
+From inside a playlist match, you can hand a pitch over to
+[Launchpad](/launchpad/overview) and ship a public pitch link to the
+curator directly.
+
+## How to use it
+
+<Steps>
+  <Step title="Pick a track">
+    Either choose a track from your catalog or paste a Spotify track
+    URL into the search bar at the top of the tab.
+  </Step>
+  <Step title="Review the ranked matches">
+    Aria returns playlists with a match score, follower count, curator
+    handle, and recent activity. The score weighs sonic fit + curator
+    responsiveness, not just size.
+  </Step>
+  <Step title="Inspect the top 2-3">
+    Click into the playlists you're seriously considering. Read the
+    curator profile, recent additions, and submission status before
+    you decide to pitch.
+  </Step>
+  <Step title="Pitch via Launchpad">
+    Generate a pitch in [Launchpad](/launchpad/overview) — Aria drafts
+    a contextual pitch link you can send the curator.
+  </Step>
+</Steps>
+
+## Prompts you can use in Aria
+
+<AriaPromptCard prompt="Find playlists for my latest track." />
+<AriaPromptCard prompt="Inspect this Spotify playlist for me." />
+<AriaPromptCard prompt="Show me playlists where the curator added a similar artist recently." />
+<AriaPromptCard prompt="Draft a pitch for the top match." />
+
+## Related pages
+
+- [AI-discoverable tracks](/catalog/sonic-analysis) — the captions Aria uses to rank match
+- [Catalog upload](/catalog/upload) — get tracks in first
+- [Launchpad](/launchpad/overview) — where pitches ship from
+- [Use cases](/aria/prompts) — more playlist-shaped prompts
+
+<AICallout page="/playlists/overview" />

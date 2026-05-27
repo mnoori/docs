@@ -171,35 +171,11 @@
             ]
           },
           {
-            "group": "Roster",
+            "group": "Profiles",
             "icon": "users",
             "pages": [
               "artists/roster",
               "artists/intelligence-profile"
-            ]
-          },
-          {
-            "group": "Music Store",
-            "icon": "store",
-            "pages": [
-              "storefront/overview",
-              "storefront/setup",
-              "storefront/smart-links",
-              "storefront/checkout-payouts"
-            ]
-          },
-          {
-            "group": "Campaign Planner",
-            "icon": "calendar-days",
-            "pages": [
-              "releases/release-planner"
-            ]
-          },
-          {
-            "group": "Visual Library",
-            "icon": "palette",
-            "pages": [
-              "visual-library/overview"
             ]
           },
           {
@@ -213,10 +189,34 @@
             ]
           },
           {
-            "group": "Audience",
-            "icon": "chart-network",
+            "group": "Projects",
+            "icon": "calendar-days",
             "pages": [
-              "artists/audience"
+              "releases/release-planner"
+            ]
+          },
+          {
+            "group": "Playlists",
+            "icon": "list-music",
+            "pages": [
+              "playlists/overview"
+            ]
+          },
+          {
+            "group": "Visual Library",
+            "icon": "palette",
+            "pages": [
+              "visual-library/overview"
+            ]
+          },
+          {
+            "group": "Music Store",
+            "icon": "store",
+            "pages": [
+              "storefront/overview",
+              "storefront/setup",
+              "storefront/smart-links",
+              "storefront/checkout-payouts"
             ]
           },
           {
@@ -224,6 +224,13 @@
             "icon": "rocket-launch",
             "pages": [
               "launchpad/overview"
+            ]
+          },
+          {
+            "group": "Audience",
+            "icon": "chart-network",
+            "pages": [
+              "artists/audience"
             ]
           },
           {

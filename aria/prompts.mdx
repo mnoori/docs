@@ -33,6 +33,13 @@ Most high-signal Aria prompts share three parts:
 
 The more constraints you supply, the more concrete the answer.
 
+## Strategy & next moves
+
+<AriaPromptCard prompt="What do I do now, and why?" />
+<AriaPromptCard prompt="What's the best next move for my upcoming release?" />
+<AriaPromptCard prompt="Which playlist should I pitch first, and why that one?" />
+<AriaPromptCard prompt="What's working in my catalog this month?" />
+
 ## Release planning
 
 <AriaPromptCard prompt="Plan a release for 'Sleeper' — target date 6 weeks out, $0 ad budget." />
@@ -93,24 +100,30 @@ The more constraints you supply, the more concrete the answer.
 <AriaPromptCard prompt="Summarize unread emails about Mira's release." />
 <AriaPromptCard prompt="Schedule the smart link launch for 7 days before release." />
 
-## Pattern: hand Aria a problem, not a question
+## Pattern: more context = sharper answer
 
-Less effective: *"What should I do?"*
+Open-ended works: *"What do I do now, and why?"* — Aria pulls your
+current state and recommends.
 
-More effective: *"My release is in 3 weeks, I have a $50 budget, my last
-release got 8k streams. What's the highest-impact thing to do this week?"*
+More context gets sharper answers: *"My release is in 3 weeks, I have
+a $50 budget, my last release got 8k streams. What's the highest-impact
+thing to do this week?"*
 
-The more constraints you supply, the more concrete the answer.
+Both work. The more constraints you supply, the more concrete the
+answer.
 
-## Pattern: use Aria for triage, not strategy
+## Pattern: ask for strategy AND triage
 
-Aria is fast at synthesizing data into a shortlist. Strategy decisions
-are still yours.
+Aria reads the music-business knowledge graph plus your real data, so
+it can do both: recommend the next move *and* shortlist work for you.
 
-Good Aria task: *"Of these 25 playlist matches, which 3 are highest
-priority?"*
+Strategy: *"What do I do this week to maximize my release momentum?"*
 
-Less-good Aria task: *"Should I sign with [label]?"*
+Triage: *"Of these 25 playlist matches, which 3 are highest priority,
+and why?"*
+
+Decision-level choices (e.g., signing a label deal) are still yours —
+Aria gives you the framing and the data.
 
 ## Pattern: paste, don't paraphrase
 
@@ -122,18 +135,16 @@ describe it.
 
 ## What Aria *won't* do
 
-- **Make decisions for you.** Aria recommends; you choose.
-- **Send a message without your approval.** Aria drafts; you send.
+- **Send a message without your approval.** Aria drafts; you confirm.
 - **Submit to Spotify editorial.** No public API for that.
-- **Move money.** Aria can summarize earnings; payouts go through
-  Stripe directly.
+- **Move money on your behalf.** Aria can summarize earnings and
+  flag actions, but payouts go through Stripe directly.
 - **Train on your data.** Hard rule.
 
 ## Related pages
 
 - [Aria overview](/aria/overview) — what Aria is
 - [Aria on Telegram](/aria/telegram) — same Aria, mobile-friendly
-- [Talking to Aria](/aria/prompts) — synthesis prompts
 - [MCP overview](/for-agents/mcp-overview) — the tools Aria uses
 
 <AICallout page="/aria/prompts" />
