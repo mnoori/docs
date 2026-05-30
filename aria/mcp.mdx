@@ -1,0 +1,65 @@
+---
+title: "Aria via MCP"
+sidebarTitle: "MCP"
+description: "Aria's tools, routed straight into Cursor, Codex, VS Code, and any MCP-compatible AI client. Your catalog, roster, releases, playlists, and music data become callable tools — OAuth 2.0 with PKCE, one command to install."
+icon: "plug"
+keywords:
+  - aria mcp
+  - patchline mcp
+  - music mcp server
+  - cursor music tools
+---
+
+import { AICallout } from "/snippets/ai-callout.mdx"
+import { TierBadge } from "/snippets/tier-badge.mdx"
+
+If your AI tool speaks **MCP** — Cursor, Codex, VS Code, or any
+MCP-compatible client — Aria's tools plug straight in. Your catalog,
+roster, releases, playlists, smart links, and music data become
+callable functions your AI can use without leaving its window.
+
+<TierBadge tier="all" /> &nbsp; Free to install on every tier. Tool calls consume your AI credit pool.
+
+## What you get via MCP
+
+- **Your music infrastructure as tools** — `find_playlists`,
+  `get_artist_intelligence`, `create_smart_link`, `analyze_url`, and the
+  rest of the Patchline tool surface.
+- **Your data, in your AI** — paste a Spotify link in Cursor and it
+  resolves the track, finds playlists, and drafts a pitch, all inline.
+- **Secure by design** — OAuth 2.0 with PKCE; your credentials never
+  touch the AI client.
+
+## Install
+
+The endpoint is the same for every client:
+
+```text
+https://www.patchline.ai/api/mcp/v1
+```
+
+Cursor example — Settings → MCP → **+ Add new MCP server**:
+
+```json
+{
+  "mcpServers": {
+    "aria": {
+      "url": "https://www.patchline.ai/api/mcp/v1"
+    }
+  }
+}
+```
+
+First tool call opens browser-based OAuth and you're connected.
+
+**Full per-client install, the tool reference, and auth details →
+[MCP overview](/for-agents/mcp-overview)** and
+**[Install the MCP server](/for-agents/mcp-install).**
+
+## Same Aria, everywhere else
+
+- [Aria on the Web App](/aria/web-app) — the full dashboard
+- [Aria on Slack](/aria/slack) — chat with Aria in your team channels
+- [Aria on Claude](/aria/claude) — the higher-level Claude plugin
+
+<AICallout page="/aria/mcp" />
