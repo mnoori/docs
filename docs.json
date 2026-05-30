@@ -136,6 +136,10 @@
     {
       "source": "/",
       "destination": "/get-started/welcome"
+    },
+    {
+      "source": "/aria/telegram",
+      "destination": "/aria/overview"
     }
   ],
   "navigation": {
@@ -157,8 +161,7 @@
             "icon": "sparkles",
             "pages": [
               "aria/overview",
-              "aria/prompts",
-              "aria/telegram"
+              "aria/prompts"
             ]
           },
           {
