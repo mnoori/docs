@@ -32,7 +32,6 @@ Sidebar → **Catalog** → search bar at top. Type any query:
 ```text
 "melancholy dreampop for late-night listening"
 "tracks like 'Sleeper'"
-"F minor 4/4"
 "sad and slow"
 "ISRC GBUM71029604"
 ```
@@ -44,7 +43,6 @@ recency.
 
 <AriaPromptCard prompt="Search my catalog for melancholy ballads for a late-night playlist" />
 <AriaPromptCard prompt="Find tracks similar to 'Sleeper' in my catalog" />
-<AriaPromptCard prompt="Which of my tracks are in F minor?" />
 
 ### Via MCP
 
@@ -64,9 +62,8 @@ catalog without a query.
 | **Artist** | `"Mira"` | Tracks by that artist |
 | **ISRC** | `GBUM71029604` | The single matching track |
 | **Genre / mood tags** | `"dreampop"`, `"melancholy"` | Tracks tagged with those |
-| **Key** | `"F minor"`, `"D major"` | Tracks in that key |
-| **Time signature** | `"3/4"`, `"7/8"` | Tracks in that meter |
-| **Sonic similarity** | `"like [track ID]"` | Tracks with cosine-similar audio embeddings |
+| **Natural-language vibe** | `"slow sad ballad"`, `"late-night"` | Tracks whose AI caption matches the feel |
+| **Sonic similarity** | `"like [track ID]"` | Tracks with similar audio to a reference track |
 
 The semantic layer means natural language works — *"slow sad ballads
 for late night"* returns the right tracks even if those exact words
@@ -100,7 +97,7 @@ Aria: That's "Bohemian Rhapsody" by Queen. Already in your catalog
 ```text
 You: I'm building a chill playlist — find me 10 tracks in my catalog
      that fit
-Aria: 10 best fits (low energy + acoustic-leaning + slow tempo):
+Aria: 10 best fits (mellow, acoustic-leaning, slow):
 
   1. Sleeper (Mira) — melancholy dreampop, acoustic, low energy
   2. Long Way (Tessa) — drifting indie folk, soft vocals
@@ -136,8 +133,8 @@ Aria: 47 tracks total. Showing first 10:
 
 - **Search is only as good as the indexed data.** Tracks without
   completed sonic analysis won't match audio-feature queries.
-- **Embeddings are catalog-only.** "Find similar tracks" works within
-  your catalog.
+- **Similarity is catalog-only.** "Find similar tracks" works within
+  your own catalog.
 - **Index lag is ~30 seconds.** A freshly imported track is searchable
   within ~30 seconds of import completing.
 
@@ -156,7 +153,7 @@ the search counts as 1 credit.
 
 - [Catalog import](/catalog/import) — what goes into the index
 - [Catalog upload](/catalog/upload) — file path
-- [Sonic analysis](/catalog/sonic-analysis) — populates audio-feature filters
+- [AI-discoverable tracks](/catalog/sonic-analysis) — the captions search ranks against
 - [Playlists](/playlists/overview) — match tracks to playlist targets
 
 ## FAQ

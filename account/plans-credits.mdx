@@ -54,7 +54,7 @@ not roll over**.
 | Sonic analysis | **5 credits / track** | Runs on uploaded audio; re-analysis also = 5 |
 | Image generation | **5 credits / image** | Cover art, banners, social cards |
 | Video generation | **20 credits / video** | Short-form / canvas videos |
-| AI campaign planner | **10 credits / plan** | Each new release plan generation |
+| AI Campaign Planner | **10 credits / plan** | Each campaign generation inside a Project |
 | Similar artist discovery | **2 credits / search** | A&R Scout queries |
 | MCP tool call (read) | **0–1 credit** | Most read tools are 0 — they hit cache. `get_song_intelligence` and similar enrichment tools are 1. |
 | MCP tool call (write / enrichment) | **1–5 credits** | Artist-intelligence refresh = 3; `create_smart_link` = 1; `generate_pitch` = 2 |
@@ -68,6 +68,7 @@ A few notes:
 - **Cached reads are free.** Asking Aria "describe my latest track"
   when sonic analysis has already run = 0 credits (cached lookup) + 1
   credit (the chat conversation). Net: 1 credit.
+
 ## Monthly allocation by tier
 
 | Tier | AI credits / month |
@@ -97,7 +98,7 @@ Realistic monthly profiles by user type:
 | Aria chats | 60 | 60 |
 | Sonic analysis | 5 tracks | 25 |
 | Image generation | 8 covers | 40 |
-| Campaign planner | 2 plans | 20 |
+| AI Campaign Planner | 2 plans | 20 |
 | Similar artist searches | 5 | 10 |
 | Total | | **165 credits** of 1,000 |
 
@@ -109,7 +110,7 @@ Realistic monthly profiles by user type:
 | Sonic analysis | 30 tracks | 150 |
 | Image generation | 20 | 100 |
 | Video generation | 5 | 100 |
-| Campaign planner | 10 plans | 100 |
+| AI Campaign Planner | 10 plans | 100 |
 | Similar artist searches | 30 | 60 |
 | MCP tool calls (Cursor / Claude) | 200 | 200 |
 | Total | | **935 credits** of 5,000 |
@@ -122,7 +123,7 @@ Realistic monthly profiles by user type:
 | Sonic analysis | 80 tracks | 400 |
 | Image generation | 50 | 250 |
 | Video generation | 15 | 300 |
-| Campaign planner | 30 plans | 300 |
+| AI Campaign Planner | 30 plans | 300 |
 | Similar artist searches | 100 | 200 |
 | MCP tool calls | 800 | 800 |
 | Total | | **2,950 credits** of 20,000 |
