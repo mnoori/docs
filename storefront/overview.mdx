@@ -23,11 +23,10 @@ import { SurfaceMatrix } from "/snippets/surface-matrix.mdx"
 
 Patchline storefronts let you sell music direct to fans from a
 branded page — `patchline.ai/store/<your-slug>`. Stripe handles the
-checkout and payouts. Patchline takes a **0% platform fee** on every
-paid tier; **10% on Free**. You keep 100% of revenue after Stripe
-processing (typically 2.9% + $0.30/transaction).
+checkout and payouts. Patchline takes a **0% platform fee** on storefront sales on paid
+plans — you keep your revenue after standard Stripe processing.
 
-<TierBadge tier="all" /> &nbsp; 0% platform fee on Starter, Pro, Scale, Enterprise. 10% on Free.
+<TierBadge tier="all" /> &nbsp; 0% platform fee on storefront sales on paid plans.
 
 ## What's included
 
@@ -58,33 +57,18 @@ processing (typically 2.9% + $0.30/transaction).
   </Card>
 </CardGroup>
 
-## The 0% platform fee — what it actually means
+## Keep your revenue
 
-This is the storefront's headline. Specifics:
-
-- **Free tier:** Patchline takes **10%** of every storefront sale,
-  before payout.
-- **Every paid tier (Starter, Pro, Scale, Enterprise):** Patchline takes
-  **0%**. You keep 100% of the sale.
-- **Stripe processing** (typically 2.9% + $0.30 per transaction) applies on every tier, separate from Patchline's fee.
-
-Worked example — selling an album for $10:
-
-| Tier | Gross sale | Patchline fee | Stripe fee | You keep |
-|---|---|---|---|---|
-| Free | $10.00 | $1.00 (10%) | $0.59 | **$8.41** |
-| Starter+ | $10.00 | **$0.00** | $0.59 | **$9.41** |
-
-If you sell more than ~$100/month direct, **Starter ($9.99/mo) pays for
-itself just from the dropped platform fee**, ignoring everything else
-Starter unlocks.
+Patchline takes a **0% platform fee** on storefront sales on paid
+plans — you keep what you earn after standard Stripe processing. The
+exact fee breakdown by plan lives on the
+[pricing page](https://patchline.ai/pricing).
 
 ## When to use it
 
 - **You have superfans willing to pay direct.** Bandcamp-style audience.
-- **You want margins streaming can't match.** $10 album direct = $9.41
-  to you. Same album on streaming = ~$0.003 × thousands of plays before
-  you net the same.
+- **You want margins streaming can't match.** A direct sale pays far
+  more per fan than fractions-of-a-cent streaming payouts.
 - **You're selling more than standard releases** — demos, instrumentals,
   lossless files, or bonus downloads from your catalog.
 - **You want a Bandcamp alternative** that integrates with the rest of
@@ -135,7 +119,7 @@ See [Set up your store](/storefront/setup) for the full setup walkthrough.
 
 ## Prerequisites
 
-- **Starter+ subscription** (recommended) — Free works but 10% fee.
+- **A paid plan** (recommended) for the 0% platform fee.
 - **Stripe Connect account** — created during setup if you don't have
   one. Takes 5 minutes.
 - **At least one asset in your catalog** to sell.
@@ -168,17 +152,7 @@ subscriptions.
 
 ## Pricing
 
-| Tier | Storefront platform fee | Stripe processing |
-|---|---|---|
-| <TierBadge tier="free" /> | **10%** | Stripe: typically 2.9% + $0.30/txn |
-| <TierBadge tier="starter" /> | **0%** | Stripe: 2.9% + $0.30/txn |
-| <TierBadge tier="pro" /> | **0%** | Stripe: 2.9% + $0.30/txn |
-| <TierBadge tier="scale" /> | **0%** | Stripe: 2.9% + $0.30/txn |
-| <TierBadge tier="enterprise" /> | **0%** | Stripe: 2.9% + $0.30/txn |
-
-Stripe rates vary by country and card type — check
-[stripe.com/pricing](https://stripe.com/pricing) for your jurisdiction.
-The above is US-standard.
+Plans, AI credits, and limits live on the [pricing page](https://patchline.ai/pricing) — we keep them there so they're always current.
 
 ## Related features
 
@@ -191,9 +165,9 @@ The above is US-standard.
 
 <AccordionGroup>
   <Accordion title="Is the 0% platform fee really 0%?">
-    Yes on paid Patchline tiers. Patchline keeps nothing of the sale.
-    Stripe processing (typically 2.9% + $0.30) is separate and goes
-    to Stripe, not Patchline.
+    Yes — on paid plans Patchline keeps nothing of the sale. Standard
+    Stripe processing applies separately. See
+    [pricing](https://patchline.ai/pricing) for the full fee breakdown.
   </Accordion>
   <Accordion title="How fast are payouts?">
     Stripe's standard payout schedule: 2 business days in the US, 5–7

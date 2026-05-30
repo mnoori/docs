@@ -40,7 +40,7 @@ your AI can use without leaving its window.
 **Auth:** OAuth 2.0 with PKCE — your credentials never touch the AI client.
 **Install:** one command or one config snippet.
 
-<TierBadge tier="all" /> &nbsp; Free to install on every tier. Tool calls consume your AI credit pool.
+<TierBadge tier="all" /> &nbsp; Free to install on every tier.
 
 ## Why this matters
 
@@ -205,27 +205,6 @@ What happens:
 4. 10 ranked matches return inline, each with a reason.
 
 Total time: ~5 seconds + first-run OAuth (~30 seconds).
-
-## Tier gating
-
-Every tier can install and connect. Tool calls consume your AI credit
-pool — the same pool as Aria chat:
-
-| Tier | AI credits / month |
-|---|---|
-| <TierBadge tier="free" /> | 100 |
-| <TierBadge tier="starter" /> | 1,000 |
-| <TierBadge tier="pro" /> | 5,000 |
-| <TierBadge tier="scale" /> | 20,000 |
-| <TierBadge tier="enterprise" /> | Unlimited |
-
-Some tools have **tier requirements** beyond credit cost:
-
-- `find_playlists`, `inspect_playlist` — **Pro+** (matches the web feature gate)
-- `add_artist` beyond your roster limit — gated by tier roster cap
-
-If a call hits a tier gate, the server returns a `403` with the upgrade
-path. Your client surfaces it.
 
 ## Rules of engagement for AI agents
 

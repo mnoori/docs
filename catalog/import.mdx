@@ -28,7 +28,7 @@ streaming platform exposes — title, artist, cover art, ISRC, release
 date, duration. That's it. **Audio doesn't come over via import** —
 streaming platforms only give us metadata, not the master file.
 
-<TierBadge tier="all" /> &nbsp; Catalog import limits scale with your tier.
+<TierBadge tier="all" /> &nbsp; Import limits vary by plan — see [pricing](https://patchline.ai/pricing).
 
 ## Import vs upload
 
@@ -100,8 +100,7 @@ your catalog. The metadata import + audio upload paths combine into
 one catalog row per ISRC.
 
 For an album/EP URL, Patchline imports the metadata for **every
-track** in the release (counts as several catalog imports against
-your tier limit).
+track** in the release (counts as several catalog imports).
 
 ## Supported URL types
 
@@ -116,7 +115,7 @@ your tier limit).
 
 **Artist URLs** add the artist to your [roster](/artists/roster) and
 trigger an artist-intelligence refresh — they don't import all of the
-artist's catalog automatically (that would blow through your import limit).
+artist's catalog automatically.
 
 ## Deduplication
 
@@ -135,20 +134,6 @@ augments it with the streaming-platform identifiers.
   Streaming-platform metadata is added but the master remains the source
   of truth.
 </Warning>
-
-## Import limits
-
-| Tier | Catalog imports | What counts |
-|---|---|---|
-| <TierBadge tier="free" /> | 10 lifetime | Each track imported = 1. Album with 12 tracks = 12. |
-| <TierBadge tier="starter" /> | 100 lifetime | Same |
-| <TierBadge tier="pro" /> | 500 lifetime | Same |
-| <TierBadge tier="scale" /> | Unlimited | n/a |
-| <TierBadge tier="enterprise" /> | Unlimited | n/a |
-
-Lifetime caps mean if you've used 8/10 on Free, you have 2 imports left
-ever — until you upgrade. The cap is generous for paid tiers and most
-users never hit it.
 
 ## Examples
 
@@ -174,7 +159,7 @@ https://open.spotify.com/album/4LH4d3cOWNNsVw41Gqt2kv
 
 ```text
 Aria: Imported metadata for 12 tracks from "The Dark Side of the
-Moon" by Pink Floyd. That used 12/500 of your Pro catalog imports.
+Moon" by Pink Floyd. It's now in your catalog.
 Want me to walk you through uploading the audio for one of them so
 you can list it on your Music Store?
 ```
@@ -188,11 +173,10 @@ https://open.spotify.com/artist/...
 
 ```text
 Aria: Mira has 24 releases (3 albums, 2 EPs, 19 singles) = 47 tracks
-total. That's a big chunk of your import allowance — Pro tier has 500
-lifetime. Want me to:
-  1. Import everything (uses 47/500)
-  2. Import just the 3 albums (uses 36/500)
-  3. Import just the most recent 12 singles (uses 12/500)
+total. That's a lot of imports. Want me to:
+  1. Import everything
+  2. Import just the 3 albums
+  3. Import just the most recent 12 singles
 ```
 
 ## How it works
