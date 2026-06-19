@@ -1,7 +1,7 @@
 ---
 title: "Claude plugin"
 sidebarTitle: "Claude plugin"
-description: "The official Patchline plugin for Claude Code and Claude Desktop. Adds a progressive interview workflow for music release planning on top of the Patchline MCP tools. Install with /plugin marketplace add Patchline-AI/aria."
+description: "The official Patchline plugin for Claude Code and Claude Desktop. Wraps the Patchline MCP with the Aria moment skills — drop a track, make a smart link, know your fans, run your day. Install with /plugin marketplace add Patchline-AI/aria."
 icon: "message"
 keywords:
   - patchline claude plugin
@@ -19,32 +19,32 @@ schema:
 import { AICallout } from "/snippets/ai-callout.mdx"
 import { TierBadge } from "/snippets/tier-badge.mdx"
 
-The official Patchline plugin for **Claude** (Code + Desktop). Wraps
-the [MCP server](/for-agents/mcp-overview) with a
-Patchline-specific **progressive-interview workflow** for music release
-planning — Claude asks structured questions, drafts each rollout phase,
-and saves outputs back to your Patchline catalog.
+The official Patchline plugin for **Claude** (Code + Desktop). It wraps
+the [MCP server](/for-agents/mcp-overview) with the **Aria moment
+skills** — lean, single-job flows for the moments that matter in a
+release. Install once, reload, then just say what you want.
 
-<TierBadge tier="all" /> &nbsp; Free to install.
+<TierBadge tier="all" /> &nbsp; Free to install. Tool calls consume your AI credit pool.
 
 ## Why use the plugin vs. raw MCP
 
 The MCP server gives Claude access to Patchline's product tools. The
-Claude plugin adds:
+Claude plugin adds a thin skill layer on top:
 
-- **Progressive interview workflow** — Claude walks you through 8
-  lifecycle phases (Creative Brief → Release Plan → Pitch Kit →
-  Visual Assets → Smart Links → Release Day → Post-Release → Catalog
-  Integration), asking only the questions needed at each phase.
-- **Lifecycle-phase skills** — each phase has a dedicated skill (e.g.,
-  `aria:release-plan`, `aria:pitch-kit`, `aria:rollout`) that knows
-  the right tools to call and the right output format.
-- **Project state in Patchline** — outputs auto-save back to your
-  Patchline project anchor.
-- **Slash commands** for common actions.
+- **Moment skills** — four guided flows, each triggered by a natural
+  phrase, that know which tools to call and in what order:
+  - `drop` — take a track from upload to a live store listing and a
+    shareable release page.
+  - `link` — one smart link routing fans to every platform.
+  - `fans` — your audience overview, geography, and segments.
+  - `operator` — a prioritized to-do list across your catalog and campaigns.
+- **A get-started floor** — say "get started" and Aria reads your
+  workspace and names the single best next move.
+- **Grounded in your catalog** — every skill reads and writes your real
+  Patchline data; nothing is invented.
 
 If you're using Claude for music work, the plugin is the right start.
-For pure tool access (no workflow), use [raw MCP](/for-agents/mcp-install).
+For pure tool access (no skills), use [raw MCP](/for-agents/mcp-install).
 
 ## Install on Claude Code
 
@@ -67,12 +67,15 @@ For pure tool access (no workflow), use [raw MCP](/for-agents/mcp-install).
 
     Then authenticate `plugin:aria:aria`. Browser opens for OAuth.
   </Step>
-  <Step title="Start a project">
-    ```bash
-    /aria:start
+  <Step title="Say get started">
+    Just type:
+
+    ```text
+    get started
     ```
 
-    The plugin walks you through bootstrapping a music project workspace.
+    Aria reports your workspace and the best next move. From there, say
+    things like "drop my new single" or "make a smart link for my release".
   </Step>
 </Steps>
 
@@ -91,66 +94,43 @@ Add to your `claude_desktop_config.json`:
 }
 ```
 
-Restart Claude Desktop. The plugin's slash commands surface in the
-chat input.
+Restart Claude Desktop, then say "get started" to begin.
 
-## Slash commands
+## The moment skills
 
-Once installed, the plugin exposes these slash commands inside Claude:
+You don't run commands — you say what you want, and the matching skill
+takes over. The four moments:
 
-| Command | What it does |
-|---|---|
-| `/aria:start` | Bootstrap a new project workspace |
-| `/aria:next` | Advance to the next lifecycle phase |
-| `/aria:audio-intake` | Upload + analyze a finished track |
-| `/aria:creative-brief` | Capture vision, audience, success metric |
-| `/aria:vision-story` | Define sonic identity + narrative |
-| `/aria:songwriting-brief` | Pre-recording: concept + references |
-| `/aria:moodboard` | Build sonic + visual references |
-| `/aria:release-plan` | Generate the full rollout |
-| `/aria:pitch-kit` | Per-track DSP pitches |
-| `/aria:smart-link` | Routing links + pre-saves |
-| `/aria:rollout` | Week-by-week content calendar |
+| Say this | Skill | What it does |
+|---|---|---|
+| "drop my new single" | `drop` | Upload to a live store listing and a shareable release page. |
+| "make a smart link for my release" | `link` | One link routing fans to every platform, resolved from your catalog. |
+| "who are my fans" | `fans` | Audience overview, geography, and segments from your live surfaces. |
+| "what should I do today" | `operator` | A prioritized to-do list across your catalog and campaigns. |
+| "get started" | — | Orients you and names the single best next action. |
 
-Each command knows which MCP tools to call and which Patchline data to
-read.
-
-## How a project flows
-
-The plugin enforces a **lifecycle**:
-
-```text
-start → audio-intake (if track exists) ─┐
-       └→ songwriting-brief (if no track) ┴→ creative-brief →
-                                              vision-story →
-                                              moodboard →
-                                              release-plan →
-                                              pitch-kit →
-                                              smart-link →
-                                              rollout →
-                                              [release day] →
-                                              [post-release]
-```
-
-Each phase produces a markdown deliverable saved to your
-`.patchline/` workspace AND back to the Patchline project anchor.
+Each skill knows which MCP tools to call and which Patchline data to
+read, so one phrase runs the whole flow.
 
 ## Pricing
 
-Plans, AI credits, and limits live on the [pricing page](https://patchline.ai/pricing) — we keep them there so they're always current.
+| Tier | Plugin access | Per-tool credit costs |
+|---|---|---|
+| All tiers | Free | Standard tool credit costs apply |
+
+The plugin itself is free. It's a thin skill layer over the MCP server.
 
 ## Repo & support
 
 - **Plugin source:** [github.com/Patchline-AI/aria](https://github.com/Patchline-AI/aria)
 - **Issues:** [github.com/Patchline-AI/aria/issues](https://github.com/Patchline-AI/aria/issues)
-- **Discussions:** [github.com/Patchline-AI/aria/discussions](https://github.com/Patchline-AI/aria/discussions)
 
 ## Related pages
 
 - [MCP overview](/for-agents/mcp-overview) — the underlying tool surface
 - [MCP install](/for-agents/mcp-install) — raw MCP if you don't use Claude
+- [MCP tools reference](/for-agents/mcp-tools-reference) — every tool, by family
 - [Aria overview](/aria/overview) — Aria in general
-- [AGENTS.md explained](/for-agents/agents-md-explained) — rules of engagement
 
 ## FAQ
 
@@ -164,13 +144,14 @@ Plans, AI credits, and limits live on the [pricing page](https://patchline.ai/pr
     No. The plugin connects to your Patchline workspace. You need a
     free account at minimum.
   </Accordion>
-  <Accordion title="Are the slash commands documented inside Claude?">
-    Yes — `/aria:start` and the plugin's own help system walk you
-    through every command in context.
+  <Accordion title="How do I trigger a skill?">
+    Just say what you want in plain language — "drop my new single",
+    "make a smart link", "who are my fans", "what should I do today".
+    There are no slash commands to memorize.
   </Accordion>
-  <Accordion title="What if a phase doesn't fit my workflow?">
-    The lifecycle is a default, not a requirement. You can skip phases
-    or run them out of order. Each phase skill works standalone.
+  <Accordion title="Do I have to follow a fixed order?">
+    No. Each skill is a standalone, single-job action. Use whichever
+    moment you're in; say "get started" any time you're unsure.
   </Accordion>
 </AccordionGroup>
 

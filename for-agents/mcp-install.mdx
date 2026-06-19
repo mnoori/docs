@@ -157,8 +157,8 @@ use `mcp-remote` to bridge:
 <Note>
   **Recommended for Claude users:** use the official
   [Patchline Claude plugin](/for-agents/claude-plugin) instead. It
-  wraps the same MCP server with a progressive-interview workflow
-  built for music release planning.
+  wraps the same MCP server with the Aria moment skills (drop a track,
+  make a smart link, know your fans, run your day) for music release work.
 </Note>
 
 ## Claude Code
@@ -189,8 +189,8 @@ Claude Code has its own plugin command. Three steps:
 </Steps>
 
 This is the recommended path for Claude Code. The plugin ships with
-extra context: progressive interview workflow, lifecycle phase skills,
-and Patchline-specific slash commands.
+extra context: the Aria moment skills (drop, link, fans, operator) and
+a get-started flow grounded in your real catalog.
 
 ## ChatGPT / OpenAI ChatGPT app
 
@@ -234,6 +234,25 @@ Paste a Spotify URL → AI calls analyze_url → returns track identity.
 
 If the first call fails with `unauthenticated`, your client may have
 skipped the OAuth flow — disconnect and reconnect, the browser should open.
+
+## What to try first
+
+Once you're connected, you don't call tools by name — you just say what you
+want and the AI picks the right tool. Try these:
+
+| Say this | What happens |
+|---|---|
+| "get started" | Aria reports your workspace and the single best next move. |
+| Paste a Spotify track URL | `analyze_url` resolves it and suggests the next steps. |
+| "make a smart link for my latest release" | `create_smart_link` returns one link routing fans to every platform. |
+| "drop my new single" | Takes a track to a live store listing and a shareable release page. |
+| "who are my fans and where are they" | Aggregate audience overview plus city-level geography. |
+| "find playlists for my track" | Ranked playlist opportunities by sonic fit (Pro+ required). |
+| "what should I do this week" | A prioritized roster digest of cleanup and next actions. |
+
+In Claude, the [Aria plugin](/for-agents/claude-plugin) packages these as
+guided **moment skills** — `drop`, `link`, `fans`, and `operator` — so one
+phrase runs a whole flow, grounded in your real catalog.
 
 ## Pricing
 
