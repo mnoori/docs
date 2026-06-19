@@ -1,79 +1,205 @@
+export const MCP_TOOLS = {
+  get_started: {
+    category: "Onboarding",
+    summary: "Orient a new or returning user: reports the workspace (artists, tracks, releases) and the single best next action — connect an artist, add music, get a release out, or grow the audience. Works with no prior context.",
+    callFirst: true,
+  },
+  analyze_url: {
+    category: "Dispatch",
+    summary: "Universal dispatcher for Spotify URLs (track, artist, album, playlist) and YouTube URLs (video, channel). Paste a link, get the canonical identity plus a ranked list of next MCP tools to call with exact arguments. Call this FIRST when a user shares a Spotify or YouTube link.",
+    callFirst: true,
+  },
+  browse_catalog: {
+    category: "Catalog",
+    summary: "List tracks in the user catalog with pagination — title, ISRC, BPM, key, status. Optional artistId scopes to one roster artist (manager accounts).",
+  },
+  catalog_search: {
+    category: "Catalog",
+    summary: "Search across the user catalog by title, artist, ISRC, and metadata. Defaults to music/audio assets; set includeNonAudio for cover art, images, or documents.",
+  },
+  get_asset: {
+    category: "Catalog",
+    summary: "Full metadata for a single track by asset ID — covers, audio features, version history, distribution status.",
+  },
+  import_track_from_url: {
+    category: "Catalog",
+    summary: "Import a track's metadata into the catalog from a Spotify track URL — title, artist, ISRC, and platform link (no audio; pair with get_asset_upload_link for audio). Dedup-safe; a provider-resolved artist that can't be corroborated is refused (fail-closed).",
+  },
+  manage_catalog_asset: {
+    category: "Catalog",
+    summary: "Operator actions for owned catalog assets: duplicate-candidate scan, reversible archive/restore, dry-run reattribution preview, confirmed canonical-recording repair, and set_cover_art. No hard delete, no roster deletion.",
+  },
+  get_audience_overview: {
+    category: "Audience",
+    summary: "Aggregate fan-graph overview: total fans, captures (7/30d), repeat and active fans, buyers, store revenue, capture rate, and identity stats. Aggregates only — no fan names or emails.",
+  },
+  get_audience_geo: {
+    category: "Audience",
+    summary: "City-level fan geography: hubs with fan counts, total countries/cities, configurable lookback. For tour routing and geo-targeted promotion. Aggregates only.",
+  },
+  get_artist_intelligence: {
+    category: "Artists",
+    summary: "Cached roster intelligence for a single artist: streaming, social audience, genres, recent activity. Run add_artist first if the artist is missing.",
+  },
+  search_artists: {
+    category: "Artists",
+    summary: "Search artists by name within the user roster.",
+  },
+  get_trending_artists: {
+    category: "Artists",
+    summary: "Top artists by streaming reach. Optional genre and ISO2 market filters return Aria artist ids that can be passed directly to add_artist.",
+  },
+  refresh_artist_intelligence: {
+    category: "Artists",
+    summary: "Queue a refresh for one roster artist through the artist-intelligence refresh pipeline. Stale-only by default; skips fresh or already-pending rows.",
+  },
+  refresh_roster_intelligence: {
+    category: "Artists",
+    summary: "Queue bounded stale-only intelligence refreshes for up to 10 roster artists. Returns queued/skipped/failed counts.",
+  },
+  add_artist: {
+    category: "Roster",
+    summary: "Add an artist to the user roster from a platform URL or an ariaArtistId returned by search_artists/get_trending_artists. Name-only is rejected unless explicitly creating a manual profile. Triggers background audience enrichment.",
+  },
+  remove_artist: {
+    category: "Roster",
+    summary: "Remove an artist from the user roster by patchlineArtistId.",
+  },
+  browse_roster: {
+    category: "Roster",
+    summary: "List or filter the authenticated user roster — artists with IDs, platform IDs, enrichment status, genres, and metrics. No query required.",
+  },
+  get_roster_digest: {
+    category: "Roster",
+    summary: "Read-only Monday brief for a serious artist or label: roster health, missing identity fields, catalog counts, live surfaces, release/campaign summary, audience highlights, cleanup candidates, and next actions. No raw fan data.",
+  },
+  get_releases: {
+    category: "Releases",
+    summary: "Release plans, schedules, and campaign details for the authenticated user.",
+  },
+  find_playlists: {
+    category: "Playlists",
+    summary: "Playlist match opportunities ranked by sonic fit and curator responsiveness for a given track.",
+  },
+  inspect_playlist: {
+    category: "Playlists",
+    summary: "Full Spotify playlist intelligence: curator identity, genres, freshness, followers, track turnover, recent additions, submission status.",
+  },
+  create_smart_link: {
+    category: "Smart Links",
+    summary: "Smart link landing page for an owned catalog track — server-side resolves ISRC, DSP URLs, and cover art. For pre-release campaigns use create_drop_link instead.",
+  },
+  create_drop_link: {
+    category: "Smart Links",
+    summary: "Create a public release/drop link for an owned release. Returns the share URL plus normalized section config.",
+  },
+  create_asset_share: {
+    category: "Smart Links",
+    summary: "Create a public asset share link for an owned catalog asset without changing the asset itself. Returns a share URL and normalized section config.",
+  },
+  create_briefing: {
+    category: "Smart Links",
+    summary: "Create a public briefing/report microsite from markdown, validated structured modules, and optional Patchline source references. Template-driven only.",
+  },
+  list_share_surfaces: {
+    category: "Smart Links",
+    summary: "List owner-safe focused link surfaces for the authenticated user: drops, smart links, asset shares, plus report/briefing microsites.",
+  },
+  get_share_surface: {
+    category: "Smart Links",
+    summary: "Read owner-safe metadata, normalized section config, source refs, and analytics for a public share surface by URL or shareId.",
+  },
+  manage_share_surface: {
+    category: "Smart Links",
+    summary: "Update briefing/report microsite metadata or revoke a public share surface. Revoke unpublishes the surface and is destructive.",
+  },
+  get_surface_analytics: {
+    category: "Smart Links",
+    summary: "Aggregate analytics for an owned public share surface: views, captures, downloads, plays, last viewed, and linked asset/project/campaign IDs.",
+  },
+  read_public_surface: {
+    category: "Smart Links",
+    summary: "Read owner-safe metadata and section config for a public surface by URL or shareId.",
+  },
+  list_store_listings: {
+    category: "Storefront",
+    summary: "List authenticated-user store inventory and listing readiness. Read-only; reports seller agreement, payout, rights, AI-policy, audio, and marketplace blockers.",
+  },
+  manage_store_listing: {
+    category: "Storefront",
+    summary: "Validate, list, unlist, price, reorder, or update metadata for store inventory. Mutations inherit all commerce safety checks.",
+  },
+  create_store_link: {
+    category: "Storefront",
+    summary: "Create or return the authenticated user's public store surface. Returns a store share URL and normalized section config.",
+  },
+  get_store_analytics: {
+    category: "Storefront",
+    summary: "Aggregate store analytics: views, revenue, orders, conversion, and recent sales with buyer emails redacted from MCP output.",
+  },
+  get_fan_segments: {
+    category: "Storefront",
+    summary: "Aggregate store fan segments and engagement stats for the user-owned store surface. No raw fan emails, names, or per-fan journeys.",
+  },
+  get_audio_features: {
+    category: "Music Data",
+    summary: "BPM, key, mood, danceability, and genre tags for a track. Accepts assetId or ISRC.",
+  },
+  get_song_intelligence: {
+    category: "Music Data",
+    summary: "Full track intelligence: ISRC, audio analysis, playlist matches, streaming stats, collaborators. Accepts a Spotify track URL.",
+  },
+  get_work_metadata: {
+    category: "Music Data",
+    summary: "Coverage-limited musical-work lookup for writers, publishers, and ISWC. Requires Spotify track ID/URL or ISRC; unresolved works return WORK_NOT_RESOLVED with do-not-retry guidance.",
+  },
+  find_similar_tracks: {
+    category: "Music Data",
+    summary: "Find tracks with similar audio characteristics (vibe, instrumentation, production) to a given catalog asset, ranked by audio-embedding similarity. Restricted to the caller-owned catalog.",
+  },
+  get_bio: {
+    category: "AI Generation",
+    summary: "Returns the AI-generated bio for an artist from intelligence cache. Populated during enrichment — no live LLM call.",
+  },
+  generate_pitch: {
+    category: "AI Generation",
+    summary: "Playlist curator pitch for a specific track. Standard mode is grounded in real track/audio/audience data; cold_start requires verified_context and returns INSUFFICIENT_DATA instead of ungrounded copy.",
+  },
+  generate_image: {
+    category: "AI Generation",
+    summary: "Generate release cover art or a promo flyer only when the user explicitly asks for generated artwork. Uploads remain the preferred path when the user already has visual assets.",
+  },
+  get_asset_upload_link: {
+    category: "Asset Upload",
+    summary: "Create a new Asset Hub record and return a short-lived presigned S3 URL so the client PUTs bytes directly to storage. Audio masters (→ track analysis) or image covers. Bytes do NOT pass through the MCP server. Then call confirm_asset_upload.",
+  },
+  create_upload_link: {
+    category: "Asset Upload",
+    summary: "Create a short-lived secure browser upload link for a human handoff when the MCP client cannot upload bytes directly. The user opens it while signed in to Patchline.",
+  },
+  confirm_asset_upload: {
+    category: "Asset Upload",
+    summary: "Confirm a direct-to-S3 upload created by get_asset_upload_link. Marks the asset ready; for audio it triggers track analysis (audio fingerprinting, aiMetadata extraction).",
+  },
+  create_project: {
+    category: "Projects",
+    summary: "Create a real Patchline project for the signed-in user, linking the local workspace to the Patchline dashboard. Requires artistId from add_artist.",
+  },
+  get_artist_context: {
+    category: "Projects",
+    summary: "Best-effort read of safe artist/account context for planning: connected platforms, distributor preference, email-list bucket, recent releases, defaults. Unknown fields return null.",
+  },
+  create_campaign: {
+    category: "Projects",
+    summary: "Start async campaign planning for a Patchline project. Requires projectId from create_project and returns polling guidance; read tasks with get_campaign.",
+  },
+  get_campaign: {
+    category: "Projects",
+    summary: "Read campaign generation progress and generated marketing tasks for a Patchline project. Poll with a bounded retry loop until completed or failed.",
+  },
+};
+
 export const MCPToolCard = ({ name }) => {
-  const MCP_TOOLS = {
-    analyze_url: {
-      category: "Dispatch",
-      summary: "Universal dispatcher for Spotify, YouTube, TikTok, SoundCloud, Apple Music, and Instagram URLs. Paste any link, get the canonical identity plus a ranked list of next MCP tools to call with exact arguments. Call this FIRST when a user shares a streaming-platform URL.",
-      callFirst: true,
-    },
-    browse_catalog: {
-      category: "Catalog",
-      summary: "List tracks in the user catalog with pagination — title, ISRC, AI caption, status.",
-    },
-    catalog_search: {
-      category: "Catalog",
-      summary: "Search across the user catalog by title, artist, ISRC, genre, mood, and similar-track signals. Relevance-ranked results.",
-    },
-    get_asset: {
-      category: "Catalog",
-      summary: "Full metadata for a single track by asset ID — covers, audio features, version history, distribution status.",
-    },
-    get_artist_intelligence: {
-      category: "Artists",
-      summary: "Cached roster intelligence for a single artist: streaming, social audience, genres, recent activity. Run add_artist first if the artist is missing.",
-    },
-    search_artists: {
-      category: "Artists",
-      summary: "Search artists by name within the user roster.",
-    },
-    get_trending_artists: {
-      category: "Artists",
-      summary: "Trending artists from Patchline music intelligence. Optional genre filter and listener range.",
-    },
-    add_artist: {
-      category: "Roster",
-      summary: "Add an artist to the user roster. REQUIRES a platform URL (Spotify, YouTube, TikTok, SoundCloud, Apple Music, or Instagram). Name-only is rejected. Triggers background artist-intelligence refresh.",
-    },
-    remove_artist: {
-      category: "Roster",
-      summary: "Remove an artist from the user roster by patchlineArtistId.",
-    },
-    get_releases: {
-      category: "Releases",
-      summary: "Release plans, schedules, and campaign details for the authenticated user.",
-    },
-    find_playlists: {
-      category: "Playlists",
-      summary: "Playlist match opportunities ranked by sonic fit and curator responsiveness for a given track.",
-    },
-    inspect_playlist: {
-      category: "Playlists",
-      summary: "Full Spotify playlist intelligence: curator identity, genres, freshness, followers, track turnover, recent additions, submission status.",
-    },
-    create_smart_link: {
-      category: "Smart Links",
-      summary: "Smart links and pre-save pages — server-side resolves ISRC, DSP URLs, and cover art.",
-    },
-    get_audio_features: {
-      category: "Music Data",
-      summary: "AI-readable caption + audio features for a track. Accepts assetId or ISRC.",
-    },
-    get_song_intelligence: {
-      category: "Music Data",
-      summary: "Full track intelligence: ISRC, audio analysis, playlist matches, streaming stats, collaborators. Accepts a Spotify track URL.",
-    },
-    get_work_metadata: {
-      category: "Music Data",
-      summary: "Writers, publishers, and ISWC for a musical work.",
-    },
-    get_bio: {
-      category: "AI Generation",
-      summary: "Returns the AI-generated bio for an artist from intelligence cache. Populated during enrichment — no live LLM call.",
-    },
-    generate_pitch: {
-      category: "AI Generation",
-      summary: "Playlist curator pitch for a specific track. Grounded in the track's real audio analysis and audience data.",
-    },
-  };
   const t = MCP_TOOLS[name];
   if (!t) {
     return (
@@ -83,15 +209,20 @@ export const MCPToolCard = ({ name }) => {
     );
   }
   const badges = {
+    Onboarding:      "#00E6E2",
     Dispatch:        "#818CF8",
     Catalog:         "#22D3EE",
+    Audience:        "#2DD4BF",
     Artists:         "#60A5FA",
     Roster:          "#60A5FA",
     Releases:        "#C084FC",
     Playlists:       "#4ADE80",
     "Smart Links":   "#FACC15",
+    Storefront:      "#F59E0B",
     "Music Data":    "#FB923C",
     "AI Generation": "#F472B6",
+    "Asset Upload":  "#A78BFA",
+    Projects:        "#E879F9",
   };
   const color = badges[t.category] ?? "#A1A1AA";
   return (
